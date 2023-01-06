@@ -1,13 +1,12 @@
-﻿using Playnite.SDK;
-using Playnite.SDK.Events;
-using Playnite.SDK.Models;
-using Playnite.SDK.Plugins;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using PlayNext.ViewModels;
+using PlayNext.Views;
+using Playnite.SDK;
+using Playnite.SDK.Events;
+using Playnite.SDK.Plugins;
 
 namespace PlayNext
 {
@@ -24,7 +23,23 @@ namespace PlayNext
             settings = new PlayNextSettingsViewModel(this);
             Properties = new GenericPluginProperties
             {
-                HasSettings = true
+                HasSettings = true,
+            };
+        }
+
+        public override IEnumerable<SidebarItem> GetSidebarItems()
+        {
+            //new PlayNextSidebarItem()
+            yield return new SidebarItem
+            {
+                Title = "Play Next",
+                Icon = new TextBlock()
+                {
+                    Text = "\u23ED",
+                    FontFamily = ResourceProvider.GetResource("FontIcoFont") as FontFamily
+                },
+                Type = SiderbarItemType.View,
+                Opened = () => new PlayNextMainView()
             };
         }
 
@@ -66,6 +81,11 @@ namespace PlayNext
         public override void OnLibraryUpdated(OnLibraryUpdatedEventArgs args)
         {
             // Add code to be executed when library is updated.
+        }
+
+        public override IEnumerable<MainMenuItem> GetMainMenuItems(GetMainMenuItemsArgs args)
+        {
+            return base.GetMainMenuItems(args);
         }
 
         public override ISettings GetSettings(bool firstRunSettings)

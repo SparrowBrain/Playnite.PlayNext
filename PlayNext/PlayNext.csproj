@@ -49,9 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\RecentlyPlayedFilter.cs" />
+    <Compile Include="Filters\WithPlaytimeFilter.cs" />
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
-    <Compile Include="PlayNextSettingsView.xaml.cs">
+    <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
+    <Compile Include="Views\PlayNextMainView.xaml.cs">
+      <DependentUpon>PlayNextMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayNextSettingsView.xaml.cs">
       <DependentUpon>PlayNextSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,7 +78,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PlayNextSettingsView.xaml">
+    <Page Include="Views\PlayNextMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayNextSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
