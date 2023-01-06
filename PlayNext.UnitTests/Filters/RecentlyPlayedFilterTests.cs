@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
 using Moq;
+using PlayNext.Filters;
+using PlayNext.Services;
 using Playnite.SDK.Models;
 using Xunit;
 
-namespace PlayNext.UnitTests
+namespace PlayNext.UnitTests.Filters
 {
     public class RecentlyPlayedFilterTests
     {
@@ -32,26 +33,6 @@ namespace PlayNext.UnitTests
             // Assert
             var recentGame = Assert.Single(recentGames);
             Assert.Equal(games[0], recentGame);
-        }
-    }
-
-    public interface IDateTimeProvider
-    {
-        DateTime GetNow();
-    }
-
-    public class RecentlyPlayedFilter
-    {
-        private readonly IDateTimeProvider _dateTimeProvider;
-
-        public RecentlyPlayedFilter(IDateTimeProvider dateTimeProvider)
-        {
-            _dateTimeProvider = dateTimeProvider;
-        }
-
-        public IEnumerable<Game> Filter(IEnumerable<Game> games, int recentDayCount)
-        {
-            return games.Where(x => x.LastActivity >= _dateTimeProvider.GetNow() - TimeSpan.FromDays(recentDayCount));
         }
     }
 }
