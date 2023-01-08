@@ -76,7 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeScoreTests.cs" />
+    <Compile Include="AttributeScoreCalculatorTests.cs" />
     <Compile Include="AutoMoqData.cs" />
     <Compile Include="Filters\RecentlyPlayedFilterTests.cs" />
     <Compile Include="Filters\WithPlaytimeFilterTests.cs" />

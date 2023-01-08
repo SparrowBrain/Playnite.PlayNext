@@ -83,11 +83,7 @@ namespace PlayNext
             // Add code to be executed when library is updated.
         }
 
-        public override IEnumerable<MainMenuItem> GetMainMenuItems(GetMainMenuItemsArgs args)
-        {
-            return base.GetMainMenuItems(args);
-        }
-
+      
         public override ISettings GetSettings(bool firstRunSettings)
         {
             return settings;
