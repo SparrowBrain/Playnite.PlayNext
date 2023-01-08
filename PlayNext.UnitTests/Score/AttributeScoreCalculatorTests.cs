@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoFixture.Xunit2;
+using PlayNext.Score;
 using Playnite.SDK.Models;
 using Xunit;
 
-namespace PlayNext.UnitTests
+namespace PlayNext.UnitTests.Score
 {
     public class AttributeScoreCalculatorTests
     {
@@ -83,6 +83,78 @@ namespace PlayNext.UnitTests
             Assert.Equal(25, result[attributeId]);
         }
 
+        [Theory]
+        [InlineAutoData(nameof(Game.GenreIds))]
+        [InlineAutoData(nameof(Game.CategoryIds))]
+        [InlineAutoData(nameof(Game.DeveloperIds))]
+        [InlineAutoData(nameof(Game.PublisherIds))]
+        [InlineAutoData(nameof(Game.TagIds))]
+        public void CalculateByPlaytime_ReturnsAttributeWithScore50_When_2GamesAndAttributeInGameWithHalfThePlaytimeWith1Weight(
+            string attributeIdsName,
+            Game maxPlaytimeGame,
+            Game ourGame,
+            Guid attributeId,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            var games = new[] { maxPlaytimeGame, ourGame };
+            maxPlaytimeGame.Playtime = ourGame.Playtime * 2;
+            ClearAttributes(ourGame);
+            SetAttributes(attributeIdsName, ourGame, attributeId);
+
+            var result = sut.CalculateByPlaytime(games, weight);
+
+            Assert.Equal(50, result[attributeId]);
+        }
+
+        [Theory]
+        [InlineAutoData(nameof(Game.GenreIds))]
+        [InlineAutoData(nameof(Game.CategoryIds))]
+        [InlineAutoData(nameof(Game.DeveloperIds))]
+        [InlineAutoData(nameof(Game.PublisherIds))]
+        [InlineAutoData(nameof(Game.TagIds))]
+        public void CalculateByRecent_Returns1AttributeWithScore100_When_1Game1AttributeWith1Weight(
+            string attributeIdsName,
+            Game game,
+            Guid attributeId,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            var games = new[] { game };
+            ClearAttributes(game);
+            SetAttributes(attributeIdsName, game, attributeId);
+
+            var result = sut.CalculateByRecent(games, weight);
+
+            Assert.NotNull(result);
+            Assert.Equal(1, result.Keys.Count);
+            Assert.Equal(100, result[attributeId]);
+        }
+
+        [Theory]
+        [InlineAutoData(nameof(Game.GenreIds))]
+        [InlineAutoData(nameof(Game.CategoryIds))]
+        [InlineAutoData(nameof(Game.DeveloperIds))]
+        [InlineAutoData(nameof(Game.PublisherIds))]
+        [InlineAutoData(nameof(Game.TagIds))]
+        public void CalculateByPlaytime_ReturnsAttributeWithScore50_When_2GamesAndAttributeInLessRecentGameWith1Weight(
+            string attributeIdsName,
+            Game mostRecentGame,
+            Game ourGame,
+            Guid attributeId,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            var games = new[] { mostRecentGame, ourGame };
+            mostRecentGame.LastActivity = ourGame.LastActivity + TimeSpan.FromHours(1);
+            ClearAttributes(ourGame);
+            SetAttributes(attributeIdsName, ourGame, attributeId);
+
+            var result = sut.CalculateByRecent(games, weight);
+
+            Assert.Equal(50, result[attributeId]);
+        }
+
         private static void ClearAttributes(Game game)
         {
             game.GenreIds = new List<Guid>();
@@ -95,42 +167,6 @@ namespace PlayNext.UnitTests
         private static void SetAttributes(string attributeIdsName, Game game, params Guid[] attributeIds)
         {
             game.GetType().GetProperty(attributeIdsName).SetValue(game, new List<Guid>(attributeIds));
-        }
-    }
-
-    public class AttributeScoreCalculator
-    {
-        public Dictionary<Guid, float> CalculateByPlaytime(IEnumerable<Game> games, float weight)
-        {
-            var maxTime = games.Max(x => x.Playtime);
-            var scores = new Dictionary<Guid, float>();
-
-            foreach (var game in games)
-            {
-                CalculateAttributeScore(game, game.GenreIds, weight, maxTime, scores);
-                CalculateAttributeScore(game, game.CategoryIds, weight, maxTime, scores);
-                CalculateAttributeScore(game, game.DeveloperIds, weight, maxTime, scores);
-                CalculateAttributeScore(game, game.PublisherIds, weight, maxTime, scores);
-                CalculateAttributeScore(game, game.TagIds, weight, maxTime, scores);
-            }
-
-            return scores;
-        }
-
-        private static void CalculateAttributeScore(Game game, List<Guid> attributeIds, float weight, ulong maxTime, Dictionary<Guid, float> scores)
-        {
-            var genreScore = game.Playtime * 100 * weight / attributeIds.Count / maxTime;
-            foreach (var genreId in attributeIds)
-            {
-                if (scores.ContainsKey(genreId))
-                {
-                    scores[genreId] += genreScore;
-                }
-                else
-                {
-                    scores[genreId] = genreScore;
-                }
-            }
         }
     }
 }
