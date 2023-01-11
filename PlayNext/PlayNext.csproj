@@ -53,6 +53,7 @@
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
     <Compile Include="Score\AttributeScoreCalculator.cs" />
+    <Compile Include="Score\GameScoreByAttributeCalculator.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
     <Compile Include="Views\PlayNextMainView.xaml.cs">
       <DependentUpon>PlayNextMainView.xaml</DependentUpon>
