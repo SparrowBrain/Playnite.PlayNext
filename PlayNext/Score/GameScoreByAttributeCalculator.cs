@@ -8,7 +8,7 @@ namespace PlayNext.Score
     {
         public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Func<Game, IEnumerable<Guid>> attributeSelector, Dictionary<Guid, float> attributeScore)
         {
-            var gamesWithScore = new Dictionary<Guid, float>();
+            var gameScoreForAttribute = new Dictionary<Guid, float>();
             foreach (var game in games)
             {
                 var score = 0f;
@@ -20,10 +20,10 @@ namespace PlayNext.Score
                     }
                 }
 
-                gamesWithScore.Add(game.Id, score);
+                gameScoreForAttribute.Add(game.Id, score);
             }
 
-            return gamesWithScore;
+            return gameScoreForAttribute;
         }
     }
 }

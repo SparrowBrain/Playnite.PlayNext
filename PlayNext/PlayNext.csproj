@@ -55,6 +55,7 @@
     <Compile Include="Score\AttributeScoreCalculator.cs" />
     <Compile Include="Score\GameScoreByAttributeCalculator.cs" />
     <Compile Include="Score\ScoreNormalizer.cs" />
+    <Compile Include="Score\Summator.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
     <Compile Include="Views\PlayNextMainView.xaml.cs">
       <DependentUpon>PlayNextMainView.xaml</DependentUpon>
