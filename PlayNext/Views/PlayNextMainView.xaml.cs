@@ -1,4 +1,5 @@
-﻿using Playnite.SDK.Controls;
+﻿using PlayNext.ViewModels;
+using Playnite.SDK.Controls;
 
 namespace PlayNext.Views
 {
@@ -7,9 +8,10 @@ namespace PlayNext.Views
     /// </summary>
     public partial class PlayNextMainView : PluginUserControl
     {
-        public PlayNextMainView()
+        public PlayNextMainView(PlayNextMainViewModel mainViewModel)
         {
             InitializeComponent();
+            DataContext = mainViewModel;
         }
     }
 }

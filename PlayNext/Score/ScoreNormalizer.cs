@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PlayNext.Score
 {
-    public class ScoreNormalizer : IScoreNormalizer
+    public class ScoreNormalizer
     {
         public IDictionary<Guid, float> Normalize(IDictionary<Guid, float> scores)
         {

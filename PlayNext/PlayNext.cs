@@ -39,7 +39,7 @@ namespace PlayNext
                     FontFamily = ResourceProvider.GetResource("FontIcoFont") as FontFamily
                 },
                 Type = SiderbarItemType.View,
-                Opened = () => new PlayNextMainView()
+                Opened = () => new PlayNextMainView(new PlayNextMainViewModel(this))
             };
         }
 

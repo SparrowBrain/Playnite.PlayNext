@@ -4,7 +4,7 @@ using Playnite.SDK.Models;
 
 namespace PlayNext.Score
 {
-    public class GameScoreByAttributeCalculator : IGameScoreByAttributeCalculator
+    public class GameScoreByAttributeCalculator
     {
         public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Func<Game, IEnumerable<Guid>> attributeSelector, Dictionary<Guid, float> attributeScore)
         {
