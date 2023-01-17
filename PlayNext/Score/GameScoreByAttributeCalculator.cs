@@ -12,7 +12,7 @@ namespace PlayNext.Score
             foreach (var game in games)
             {
                 var score = 0f;
-                foreach (var attributeId in attributeSelector.Invoke(game))
+                foreach (var attributeId in attributeSelector.Invoke(game) ?? Array.Empty<Guid>())
                 {
                     if (attributeScore.ContainsKey(attributeId))
                     {

@@ -1,12 +1,20 @@
-﻿namespace PlayNext.Models
+﻿using System;
+using Playnite.SDK.Models;
+
+namespace PlayNext.Models
 {
     public class GameToPlay
     {
-        public GameToPlay(string name)
+        public GameToPlay(Game game, float score)
         {
-            Name = name;
+            Score = score;
+            Id = game.Id;
+            Name = game.Name;
         }
 
+
+        public Guid Id { get; set; }
         public string Name { get; set; }
+        public float Score { get; }
     }
 }

@@ -46,16 +46,21 @@ namespace PlayNext.Score
 
         private static void CalculateAttributeScore(List<Guid> attributeIds, ulong valueInGame, ulong maxValue, float weight, Dictionary<Guid, float> scores)
         {
-            var genreScore = valueInGame * 100 * weight / attributeIds.Count / maxValue;
-            foreach (var genreId in attributeIds)
+            if (attributeIds == null)
             {
-                if (scores.ContainsKey(genreId))
+                return;
+            }
+
+            var attributeScore = valueInGame * 100 * weight / attributeIds.Count / maxValue;
+            foreach (var attributeId in attributeIds)
+            {
+                if (scores.ContainsKey(attributeId))
                 {
-                    scores[genreId] += genreScore;
+                    scores[attributeId] += attributeScore;
                 }
                 else
                 {
-                    scores[genreId] = genreScore;
+                    scores[attributeId] = attributeScore;
                 }
             }
         }

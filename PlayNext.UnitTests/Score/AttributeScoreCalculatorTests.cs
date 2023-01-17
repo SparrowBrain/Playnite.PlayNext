@@ -157,11 +157,11 @@ namespace PlayNext.UnitTests.Score
 
         private static void ClearAttributes(Game game)
         {
-            game.GenreIds = new List<Guid>();
-            game.CategoryIds = new List<Guid>();
-            game.DeveloperIds = new List<Guid>();
-            game.PublisherIds = new List<Guid>();
-            game.TagIds = new List<Guid>();
+            game.GenreIds = null;
+            game.CategoryIds = null;
+            game.DeveloperIds = null;
+            game.PublisherIds = null;
+            game.TagIds = null;
         }
 
         private static void SetAttributes(string attributeIdsName, Game game, params Guid[] attributeIds)

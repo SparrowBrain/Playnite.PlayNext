@@ -63,6 +63,25 @@ namespace PlayNext.UnitTests.Score
             Assert.Equal(game.Id, gameWithScore.Key);
         }
 
+        [Theory, AutoData]
+        public void Calculate_Zero_When_AttributeIdsIsNull(
+            Dictionary<Guid, float> attributeScore,
+            Game game,
+            GameScoreByAttributeCalculator sut)
+        {
+            // Arrange
+            var games = new[] { game };
+            var attributeSelector = new Func<Game, IEnumerable<Guid>>(x => null);
+
+            // Act
+            var result = sut.Calculate(games, attributeSelector, attributeScore);
+
+            // Assert
+            var gameWithScore = Assert.Single(result);
+            Assert.Equal(game.Id, gameWithScore.Key);
+            Assert.Equal(0, gameWithScore.Value);
+        }
+
         private static void SetAttributes(string attributeIdsName, Game game, params Guid[] attributeIds)
         {
             game.GetType().GetProperty(attributeIdsName).SetValue(game, new List<Guid>(attributeIds));

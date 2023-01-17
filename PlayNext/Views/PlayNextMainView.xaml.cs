@@ -1,4 +1,5 @@
-﻿using PlayNext.ViewModels;
+﻿using System;
+using PlayNext.ViewModels;
 using Playnite.SDK.Controls;
 
 namespace PlayNext.Views
@@ -8,10 +9,21 @@ namespace PlayNext.Views
     /// </summary>
     public partial class PlayNextMainView : PluginUserControl
     {
+        private readonly PlayNextMainViewModel _mainViewModel;
+
         public PlayNextMainView(PlayNextMainViewModel mainViewModel)
         {
-            InitializeComponent();
+            _mainViewModel = mainViewModel;
             DataContext = mainViewModel;
+
+            InitializeComponent();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            _mainViewModel.LoadData();
         }
     }
 }

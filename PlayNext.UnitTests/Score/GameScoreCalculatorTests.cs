@@ -53,6 +53,12 @@ namespace PlayNext.UnitTests.Score
 
         private static void SetAttributes(string attributeIdsName, Game game, params Guid[] attributeIds)
         {
+            game.GenreIds = null;
+            game.CategoryIds = null;
+            game.DeveloperIds = null;
+            game.PublisherIds = null;
+            game.TagIds = null;
+
             game.GetType().GetProperty(attributeIdsName).SetValue(game, new List<Guid>(attributeIds));
         }
 
