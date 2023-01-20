@@ -27,6 +27,8 @@ namespace PlayNext.ViewModels
         private readonly AttributeScoreCalculator _attributeScoreCalculator = new AttributeScoreCalculator();
         private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
         private readonly FinalAttributeScoreCalculator _finalAttributeScoreCalculator;
+        private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
+        private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
 
         public PlayNextMainViewModel(PlayNext plugin)
         {
@@ -34,7 +36,7 @@ namespace PlayNext.ViewModels
 
             // Load saved settings.
             //var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
-            _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _scoreNormalizer, _summator);
+            _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
         }
 

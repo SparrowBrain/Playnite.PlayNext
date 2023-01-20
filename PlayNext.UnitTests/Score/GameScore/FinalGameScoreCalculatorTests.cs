@@ -13,7 +13,7 @@ namespace PlayNext.UnitTests.Score.GameScore
     {
         [Theory]
         [InlineAutoData(nameof(Game.GenreIds))]
-        [InlineAutoData(nameof(Game.CategoryIds))]
+        [InlineAutoData(nameof(Game.FeatureIds))]
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
@@ -44,7 +44,7 @@ namespace PlayNext.UnitTests.Score.GameScore
             return new GameScoreWeights
             {
                 Genre = 0,
-                Category = 0,
+                Feature = 0,
                 Developer = 0,
                 Publisher = 0,
                 Tag = 0,

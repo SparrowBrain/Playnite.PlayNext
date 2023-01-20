@@ -11,7 +11,7 @@ namespace PlayNext.UnitTests.Score.GameScore
     {
         [Theory]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.GenreIds))]
-        [InlineAutoData(nameof(Playnite.SDK.Models.Game.CategoryIds))]
+        [InlineAutoData(nameof(Playnite.SDK.Models.Game.FeatureIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.DeveloperIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.PublisherIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.TagIds))]
@@ -38,7 +38,7 @@ namespace PlayNext.UnitTests.Score.GameScore
 
         [Theory]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.GenreIds))]
-        [InlineAutoData(nameof(Playnite.SDK.Models.Game.CategoryIds))]
+        [InlineAutoData(nameof(Playnite.SDK.Models.Game.FeatureIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.DeveloperIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.PublisherIds))]
         [InlineAutoData(nameof(Playnite.SDK.Models.Game.TagIds))]
