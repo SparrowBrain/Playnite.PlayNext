@@ -50,15 +50,18 @@
   <ItemGroup>
     <Compile Include="Filters\RecentlyPlayedFilter.cs" />
     <Compile Include="Filters\WithPlaytimeFilter.cs" />
+    <Compile Include="Models\AttributeCalculationWeights.cs" />
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
-    <Compile Include="Score\AttributeScoreCalculator.cs" />
-    <Compile Include="Score\GameScoreByAttributeCalculator.cs" />
-    <Compile Include="Score\GameScoreCalculator.cs" />
+    <Compile Include="Score\Attribute\AttributeScoreCalculator.cs" />
+    <Compile Include="Score\Attribute\FinalAttributeScoreCalculator.cs" />
+    <Compile Include="Score\GameScore\GameScoreByAttributeCalculator.cs" />
+    <Compile Include="Score\GameScore\FinalGameScoreCalculator.cs" />
     <Compile Include="Score\ScoreNormalizer.cs" />
     <Compile Include="Score\Summator.cs" />
-    <Compile Include="Settings\GameScoreCalculationWeights.cs" />
+    <Compile Include="Models\GameScoreWeights.cs" />
     <Compile Include="Models\GameToPlay.cs" />
+    <Compile Include="Services\DateTimeProvider.cs" />
     <Compile Include="ViewModels\PlayNextMainViewModel.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
     <Compile Include="Views\PlayNextMainView.xaml.cs">

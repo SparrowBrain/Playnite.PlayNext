@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Playnite.SDK.Models;
 
-namespace PlayNext.Score
+namespace PlayNext.Score.GameScore
 {
     public class GameScoreByAttributeCalculator
     {
-        public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Func<Game, IEnumerable<Guid>> attributeSelector, Dictionary<Guid, float> attributeScore)
+        public IDictionary<Guid, float> Calculate(IEnumerable<Playnite.SDK.Models.Game> games, Func<Playnite.SDK.Models.Game, IEnumerable<Guid>> attributeSelector, Dictionary<Guid, float> attributeScore)
         {
             var gameScoreForAttribute = new Dictionary<Guid, float>();
             foreach (var game in games)

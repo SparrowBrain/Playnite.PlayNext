@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
-using PlayNext.Score;
-using PlayNext.Settings;
+using PlayNext.Models;
+using PlayNext.Score.GameScore;
 using Playnite.SDK.Models;
 using Xunit;
 
-namespace PlayNext.UnitTests.Score
+namespace PlayNext.UnitTests.Score.GameScore
 {
-    public class GameScoreCalculatorTests
+    public class FinalGameScoreCalculatorTests
     {
         [Theory]
         [InlineAutoData(nameof(Game.GenreIds))]
@@ -21,7 +21,7 @@ namespace PlayNext.UnitTests.Score
             string attributeIdsName,
             Game[] games,
             Dictionary<Guid, float> attributeScore,
-            GameScoreCalculator sut)
+            FinalGameScoreCalculator sut)
         {
             // Arrange
             var gameScoreCalculationWeights = GetEmptyWeights();
@@ -39,9 +39,9 @@ namespace PlayNext.UnitTests.Score
             Assert.Equal(100, result.First().Value);
         }
 
-        private GameScoreCalculationWeights GetEmptyWeights()
+        private GameScoreWeights GetEmptyWeights()
         {
-            return new GameScoreCalculationWeights
+            return new GameScoreWeights
             {
                 Genre = 0,
                 Category = 0,
@@ -62,7 +62,7 @@ namespace PlayNext.UnitTests.Score
             game.GetType().GetProperty(attributeIdsName).SetValue(game, new List<Guid>(attributeIds));
         }
 
-        private static void SetWeight(string attributeIdsName, GameScoreCalculationWeights weights, float value)
+        private static void SetWeight(string attributeIdsName, GameScoreWeights weights, float value)
         {
             weights.GetType().GetProperty(attributeIdsName.Substring(0, attributeIdsName.Length - 3)).SetValue(weights, value);
         }

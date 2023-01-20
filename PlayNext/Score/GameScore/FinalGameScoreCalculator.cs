@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayNext.Settings;
-using Playnite.SDK.Models;
+using PlayNext.Models;
 
-namespace PlayNext.Score
+namespace PlayNext.Score.GameScore
 {
-    public class GameScoreCalculator
+    public class FinalGameScoreCalculator
     {
         private readonly GameScoreByAttributeCalculator _gameScoreByAttributeCalculator;
         private readonly ScoreNormalizer _scoreNormalizer;
         private readonly Summator _summator;
 
-        public GameScoreCalculator(
+        public FinalGameScoreCalculator(
             GameScoreByAttributeCalculator gameScoreByAttributeCalculator,
             ScoreNormalizer scoreNormalizer,
             Summator summator)
@@ -22,7 +21,7 @@ namespace PlayNext.Score
             _summator = summator;
         }
 
-        public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore, GameScoreCalculationWeights gameScoreCalculationWeights)
+        public IDictionary<Guid, float> Calculate(IEnumerable<Playnite.SDK.Models.Game> games, Dictionary<Guid, float> attributeScore, GameScoreWeights gameScoreCalculationWeights)
         {
             var weightedScoreByGenre = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.GenreIds);
             var weightedScoreByCategory = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.CategoryIds);
@@ -42,8 +41,8 @@ namespace PlayNext.Score
             return ordered;
         }
 
-        private Dictionary<Guid, float> CalculateWeightedGameScoreByAttribute(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore,
-            GameScoreCalculationWeights gameScoreCalculationWeights, Func<Game, IEnumerable<Guid>> attributeSelector)
+        private Dictionary<Guid, float> CalculateWeightedGameScoreByAttribute(IEnumerable<Playnite.SDK.Models.Game> games, Dictionary<Guid, float> attributeScore,
+            GameScoreWeights gameScoreCalculationWeights, Func<Playnite.SDK.Models.Game, IEnumerable<Guid>> attributeSelector)
         {
             var gameScoreByGenre = _gameScoreByAttributeCalculator.Calculate(games, attributeSelector, attributeScore);
             var normalizedGameScoresByGenre = _scoreNormalizer.Normalize(gameScoreByGenre);

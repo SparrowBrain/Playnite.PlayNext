@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
-using PlayNext.Score;
+using PlayNext.Score.Attribute;
 using Playnite.SDK.Models;
 using Xunit;
 
-namespace PlayNext.UnitTests.Score
+namespace PlayNext.UnitTests.Score.Attribute
 {
     public class AttributeScoreCalculatorTests
     {
@@ -124,7 +124,7 @@ namespace PlayNext.UnitTests.Score
             ClearAttributes(game);
             SetAttributes(attributeIdsName, game, attributeId);
 
-            var result = sut.CalculateByRecent(games, weight);
+            var result = sut.CalculateByRecentOrder(games, weight);
 
             Assert.NotNull(result);
             Assert.Equal(1, result.Keys.Count);
@@ -150,7 +150,7 @@ namespace PlayNext.UnitTests.Score
             ClearAttributes(ourGame);
             SetAttributes(attributeIdsName, ourGame, attributeId);
 
-            var result = sut.CalculateByRecent(games, weight);
+            var result = sut.CalculateByRecentOrder(games, weight);
 
             Assert.Equal(50, result[attributeId]);
         }

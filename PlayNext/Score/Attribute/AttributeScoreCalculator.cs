@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Playnite.SDK.Models;
 
-namespace PlayNext.Score
+namespace PlayNext.Score.Attribute
 {
     public class AttributeScoreCalculator
     {
@@ -24,7 +24,7 @@ namespace PlayNext.Score
             return scores;
         }
 
-        public Dictionary<Guid, float> CalculateByRecent(IEnumerable<Game> games, float weight)
+        public Dictionary<Guid, float> CalculateByRecentOrder(IEnumerable<Game> games, float weight)
         {
             var orderedGames = games.OrderByDescending(x => x.LastActivity).ToArray();
             var gameCount = (ulong)orderedGames.Count();
