@@ -29,14 +29,15 @@ namespace PlayNext.ViewModels
         private readonly FinalAttributeScoreCalculator _finalAttributeScoreCalculator;
         private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
         private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
+        private readonly ReleaseYearCalculator _releaseYearCalculator = new ReleaseYearCalculator();
 
         public PlayNextMainViewModel(PlayNext plugin)
         {
             _plugin = plugin;
 
             // Load saved settings.
-            //var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
-            _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _scoreNormalizer, _summator);
+
+            _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
         }
 
@@ -57,12 +58,21 @@ namespace PlayNext.ViewModels
             {
                 try
                 {
+                    var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
+
+                    var attributeCalculationWeights = new AttributeCalculationWeights()
+                    {
+                        TotalPlaytime = savedSettings.TotalPlaytime,
+                        RecentPlaytime = savedSettings.RecentPlaytime,
+                        RecentOrder = savedSettings.RecentOrder
+                    };
+
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
                     var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, 14);
                     var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
-                    var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, AttributeCalculationWeights.Flat);
+                    var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);
                     var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, GameScoreWeights.Flat);
 
                     Application.Current.Dispatcher.Invoke(() =>

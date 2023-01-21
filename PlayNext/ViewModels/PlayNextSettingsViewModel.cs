@@ -6,16 +6,17 @@ namespace PlayNext.ViewModels
 {
     public class PlayNextSettingsViewModel : ObservableObject, ISettings
     {
-        private readonly PlayNext plugin;
-        private PlayNextSettings editingClone { get; set; }
+        private readonly PlayNext _plugin;
+        private PlayNextSettings EditingClone { get; set; }
 
-        private PlayNextSettings settings;
+        private PlayNextSettings _settings;
+
         public PlayNextSettings Settings
         {
-            get => settings;
+            get => _settings;
             set
             {
-                settings = value;
+                _settings = value;
                 OnPropertyChanged();
             }
         }
@@ -23,7 +24,7 @@ namespace PlayNext.ViewModels
         public PlayNextSettingsViewModel(PlayNext plugin)
         {
             // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
-            this.plugin = plugin;
+            _plugin = plugin;
 
             // Load saved settings.
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
@@ -42,21 +43,21 @@ namespace PlayNext.ViewModels
         public void BeginEdit()
         {
             // Code executed when settings view is opened and user starts editing values.
-            editingClone = Serialization.GetClone(Settings);
+            EditingClone = Serialization.GetClone(Settings);
         }
 
         public void CancelEdit()
         {
             // Code executed when user decides to cancel any changes made since BeginEdit was called.
             // This method should revert any changes made to Option1 and Option2.
-            Settings = editingClone;
+            Settings = EditingClone;
         }
 
         public void EndEdit()
         {
             // Code executed when user decides to confirm changes made since BeginEdit was called.
             // This method should save settings made to Option1 and Option2.
-            plugin.SavePluginSettings(Settings);
+            _plugin.SavePluginSettings(Settings);
         }
 
         public bool VerifySettings(out List<string> errors)
