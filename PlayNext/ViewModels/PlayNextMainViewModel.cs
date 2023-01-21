@@ -62,9 +62,9 @@ namespace PlayNext.ViewModels
 
                     var attributeCalculationWeights = new AttributeCalculationWeights()
                     {
-                        TotalPlaytime = savedSettings.TotalPlaytime,
-                        RecentPlaytime = savedSettings.RecentPlaytime,
-                        RecentOrder = savedSettings.RecentOrder
+                        TotalPlaytime = savedSettings.TotalPlaytime / 100,
+                        RecentPlaytime = savedSettings.RecentPlaytime / 100,
+                        RecentOrder = savedSettings.RecentOrder / 100,
                     };
 
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
@@ -80,7 +80,16 @@ namespace PlayNext.ViewModels
                         Games = new ObservableCollection<GameToPlay>(gameScore.Select(score =>
                         {
                             var game = unPlayedGames.First(x => x.Id == score.Key);
-                            return new GameToPlay(game, score.Value);
+
+                            var gameToPlay = new GameToPlay(game, score.Value);
+                            Task.Run(() =>
+                            {
+                                var coverImage = game.CoverImage == null
+                                    ? null
+                                    : _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage);
+                                gameToPlay.CoverImage = coverImage;
+                            });
+                            return gameToPlay;
                         }).ToArray());
                     });
                 }

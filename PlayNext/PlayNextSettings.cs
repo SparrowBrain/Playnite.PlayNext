@@ -26,7 +26,7 @@ namespace PlayNext
                 var difference = (value - _totalPlaytime) / 2;
                 _totalPlaytime = value;
                 _recentPlaytime -= difference;
-                _recentOrder = 1 - _totalPlaytime - _recentPlaytime;
+                _recentOrder = 100 - _totalPlaytime - _recentPlaytime;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(RecentPlaytime));
                 OnPropertyChanged(nameof(RecentOrder));
@@ -41,7 +41,7 @@ namespace PlayNext
                 var difference = (value - _recentPlaytime) / 2;
                 _recentPlaytime = value;
                 _totalPlaytime -= difference;
-                _recentOrder = 1 - _totalPlaytime - _recentPlaytime;
+                _recentOrder = 100 - _totalPlaytime - _recentPlaytime;
                 OnPropertyChanged(nameof(TotalPlaytime));
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(RecentOrder));
@@ -56,7 +56,7 @@ namespace PlayNext
                 var difference = (value - _recentOrder) / 2;
                 _recentOrder = value;
                 _totalPlaytime -= difference;
-                _recentPlaytime = 1 - _totalPlaytime - _recentOrder;
+                _recentPlaytime = 100 - _totalPlaytime - _recentOrder;
                 OnPropertyChanged(nameof(TotalPlaytime));
                 OnPropertyChanged(nameof(RecentPlaytime));
                 OnPropertyChanged();
@@ -65,7 +65,7 @@ namespace PlayNext
 
         private void RebalanceWeights(ref float caller)
         {
-            new 
+            //new 
         }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.

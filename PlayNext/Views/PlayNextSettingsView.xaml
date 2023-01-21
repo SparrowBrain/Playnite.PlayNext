@@ -11,10 +11,10 @@
         <TextBlock Text="Description for Option2:"/>
         <CheckBox IsChecked="{Binding Settings.Option2}"/>
         <TextBlock Text="Total Playtime"></TextBlock>
-        <Slider Minimum="0" Maximum="1" Value="{Binding Settings.TotalPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> </Slider>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TotalPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> </Slider>
         <TextBlock Text="Recent Playtime"></TextBlock>
-        <Slider Minimum="0" Maximum="1" Value="{Binding Settings.RecentPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
         <TextBlock Text="RecentOrder"></TextBlock>
-        <Slider Minimum="0" Maximum="1" Value="{Binding Settings.RecentOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
     </StackPanel>
 </UserControl>
