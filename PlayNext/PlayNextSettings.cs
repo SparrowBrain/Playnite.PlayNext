@@ -24,12 +24,10 @@ namespace PlayNext
             set
             {
                 var difference = (value - _totalPlaytime) / 2;
+                RebalanceAttributeScoreSourceWeights(difference);
                 _totalPlaytime = value;
-                _recentPlaytime -= difference;
                 _recentOrder = 100 - _totalPlaytime - _recentPlaytime;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(RecentPlaytime));
-                OnPropertyChanged(nameof(RecentOrder));
+                NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
@@ -39,12 +37,10 @@ namespace PlayNext
             set
             {
                 var difference = (value - _recentPlaytime) / 2;
+                RebalanceAttributeScoreSourceWeights(difference);
                 _recentPlaytime = value;
-                _totalPlaytime -= difference;
                 _recentOrder = 100 - _totalPlaytime - _recentPlaytime;
-                OnPropertyChanged(nameof(TotalPlaytime));
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(RecentOrder));
+                NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
@@ -54,18 +50,25 @@ namespace PlayNext
             set
             {
                 var difference = (value - _recentOrder) / 2;
+                RebalanceAttributeScoreSourceWeights(difference);
                 _recentOrder = value;
-                _totalPlaytime -= difference;
                 _recentPlaytime = 100 - _totalPlaytime - _recentOrder;
-                OnPropertyChanged(nameof(TotalPlaytime));
-                OnPropertyChanged(nameof(RecentPlaytime));
-                OnPropertyChanged();
+                NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
-        private void RebalanceWeights(ref float caller)
+        private void RebalanceAttributeScoreSourceWeights(float difference)
         {
-            //new 
+            _totalPlaytime -= difference;
+            _recentPlaytime -= difference;
+            _recentOrder -= difference;
+        }
+
+        private void NotifyAttributeScoreSourcePropertiesChanged()
+        {
+            OnPropertyChanged(nameof(TotalPlaytime));
+            OnPropertyChanged(nameof(RecentPlaytime));
+            OnPropertyChanged(nameof(RecentOrder));
         }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.
