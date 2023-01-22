@@ -62,9 +62,21 @@ namespace PlayNext.ViewModels
 
                     var attributeCalculationWeights = new AttributeCalculationWeights()
                     {
-                        TotalPlaytime = savedSettings.TotalPlaytime / 100,
-                        RecentPlaytime = savedSettings.RecentPlaytime / 100,
-                        RecentOrder = savedSettings.RecentOrder / 100,
+                        TotalPlaytime = savedSettings.TotalPlaytimeSerialized / 100,
+                        RecentPlaytime = savedSettings.RecentPlaytimeSerialized / 100,
+                        RecentOrder = savedSettings.RecentOrderSerialized / 100,
+                    };
+
+                    var gameScoreCalculationWeights = new GameScoreWeights()
+                    {
+                        Genre = savedSettings.GenreSerialized / 100,
+                        Feature = savedSettings.FeatureSerialized / 100,
+                        Developer = savedSettings.DeveloperSerialized / 100,
+                        Publisher = savedSettings.PublisherSerialized / 100,
+                        Tag = savedSettings.TagSerialized / 100,
+                        CriticScore = savedSettings.CriticScoreSerialized / 100,
+                        CommunityScore = savedSettings.CommunityScoreSerialized / 100,
+                        ReleaseYear = savedSettings.ReleaseYearSerialized / 100,
                     };
 
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
@@ -73,7 +85,8 @@ namespace PlayNext.ViewModels
                     var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
                     var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);
-                    var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, GameScoreWeights.Flat);
+
+                    var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights);
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {

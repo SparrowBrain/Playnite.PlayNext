@@ -10,11 +10,29 @@
         <TextBox Text="{Binding Settings.Option1}"/>
         <TextBlock Text="Description for Option2:"/>
         <CheckBox IsChecked="{Binding Settings.Option2}"/>
+        <TextBlock Text="Attribute Calculation Weights"></TextBlock>
         <TextBlock Text="Total Playtime"></TextBlock>
-        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TotalPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> </Slider>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TotalPlaytimeUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> </Slider>
         <TextBlock Text="Recent Playtime"></TextBlock>
-        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentPlaytime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-        <TextBlock Text="RecentOrder"></TextBlock>
-        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentPlaytimeUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Recent Order"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentOrderUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Game Score Calculation Weights"></TextBlock>
+        <TextBlock Text="Genre"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.GenreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Feature"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.FeatureUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Developer"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.DeveloperUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Publisher"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.PublisherUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Tag"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TagUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Critic Score"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.CriticScoreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Community Score"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.CommunityScoreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+        <TextBlock Text="Release Year"></TextBlock>
+        <Slider Minimum="0" Maximum="100" Value="{Binding Settings.ReleaseYearUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
     </StackPanel>
 </UserControl>

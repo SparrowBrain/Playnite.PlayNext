@@ -2,7 +2,7 @@
 {
     public class GameScoreWeights
     {
-        private const float Number = 8;
+        public const float Number = 8;
 
         public float Genre { get; set; }
         public float Feature { get; set; }

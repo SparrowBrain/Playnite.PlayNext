@@ -2,7 +2,7 @@
 {
     public class AttributeCalculationWeights
     {
-        private const float Number = 3;
+        public const float Number = 3;
 
         public static AttributeCalculationWeights Flat { get; } = new AttributeCalculationWeights
         {
