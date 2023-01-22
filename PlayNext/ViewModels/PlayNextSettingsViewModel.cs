@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PlayNext.Models;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 
@@ -36,7 +37,7 @@ namespace PlayNext.ViewModels
             }
             else
             {
-                Settings = new PlayNextSettings();
+                Settings = new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
             }
         }
 

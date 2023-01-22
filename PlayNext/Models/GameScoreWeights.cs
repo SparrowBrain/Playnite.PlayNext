@@ -24,5 +24,7 @@
             CommunityScore = 1 / Number,
             ReleaseYear = 1 / Number,
         };
+
+        public static GameScoreWeights Default => Flat;
     }
 }

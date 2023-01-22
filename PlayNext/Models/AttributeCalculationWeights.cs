@@ -11,10 +11,13 @@
             RecentOrder = 1 / Number
         };
 
+        public static AttributeCalculationWeights Default => Flat;
+
         public float TotalPlaytime { get; set; }
 
         public float RecentPlaytime { get; set; }
 
         public float RecentOrder { get; set; }
+        
     }
 }

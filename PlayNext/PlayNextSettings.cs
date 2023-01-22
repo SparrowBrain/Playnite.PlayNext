@@ -27,6 +27,26 @@ namespace PlayNext
         private float _communityScore;
         private float _releaseYear;
 
+        public PlayNextSettings()
+        {
+        }
+
+        public PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
+        {
+            _totalPlaytime = attributeCalculationWeights.TotalPlaytime;
+            _recentPlaytime = attributeCalculationWeights.RecentPlaytime;
+            _recentOrder = attributeCalculationWeights.RecentOrder;
+
+            _genre = gameScoreWeights.Genre;
+            _feature = gameScoreWeights.Feature;
+            _developer = gameScoreWeights.Developer;
+            _publisher = gameScoreWeights.Publisher;
+            _tag = gameScoreWeights.Tag;
+            _criticScore = gameScoreWeights.CriticScore;
+            _communityScore = gameScoreWeights.CommunityScore;
+            _releaseYear = gameScoreWeights.ReleaseYear;
+        }
+
         public string Option1 { get => _option1; set => SetValue(ref _option1, value); }
         public bool Option2 { get => _option2; set => SetValue(ref _option2, value); }
 
