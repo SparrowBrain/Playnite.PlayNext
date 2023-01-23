@@ -40,7 +40,7 @@ namespace PlayNext.Score.GameScore
             var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.TagIds);
             var weightedScoreByCriticsScore = _criticScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CriticScore);
             var weightedScoreByCommunityScore = _communityScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
-            var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, DateTime.Now.Year).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
+            var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, DateTime.Now.Year).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
 
             var sum = _summator.AddUp(
                 weightedScoreByGenre,

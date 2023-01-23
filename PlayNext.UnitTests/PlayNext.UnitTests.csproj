@@ -83,6 +83,7 @@
     <Compile Include="Filters\WithPlaytimeFilterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Score\Attribute\FinalAttributeScoreCalculatorTests.cs" />
+    <Compile Include="Score\Attribute\ReleaseYearCalculatorTests.cs" />
     <Compile Include="Score\GameScore\GameScoreByAttributeCalculatorTests.cs" />
     <Compile Include="Score\GameScore\FinalGameScoreCalculatorTests.cs" />
     <Compile Include="Score\ScoreNormalizerTests.cs" />
