@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PlayNext.Models;
 using PlayNext.Score.Attribute;
+using Playnite.SDK.Models;
 
 namespace PlayNext.Score.GameScore
 {
@@ -31,13 +32,13 @@ namespace PlayNext.Score.GameScore
             _summator = summator;
         }
 
-        public IDictionary<Guid, float> Calculate(IEnumerable<Playnite.SDK.Models.Game> games, Dictionary<Guid, float> attributeScore, GameScoreWeights gameScoreCalculationWeights)
+        public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore, GameScoreWeights gameScoreCalculationWeights)
         {
-            var weightedScoreByGenre = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.GenreIds);
-            var weightedScoreByFeature = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.FeatureIds);
-            var weightedScoreByDeveloper = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.DeveloperIds);
-            var weightedScoreByPublisher = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.PublisherIds);
-            var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, gameScoreCalculationWeights, x => x.TagIds);
+            var weightedScoreByGenre = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.GenreIds, gameScoreCalculationWeights.Genre);
+            var weightedScoreByFeature = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.FeatureIds, gameScoreCalculationWeights.Feature);
+            var weightedScoreByDeveloper = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.DeveloperIds, gameScoreCalculationWeights.Developer);
+            var weightedScoreByPublisher = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.PublisherIds, gameScoreCalculationWeights.Publisher);
+            var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.TagIds, gameScoreCalculationWeights.Tag);
             var weightedScoreByCriticsScore = _criticScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CriticScore);
             var weightedScoreByCommunityScore = _communityScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
             var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, DateTime.Now.Year).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
@@ -57,13 +58,16 @@ namespace PlayNext.Score.GameScore
             return ordered;
         }
 
-        private Dictionary<Guid, float> CalculateWeightedGameScoreByAttribute(IEnumerable<Playnite.SDK.Models.Game> games, Dictionary<Guid, float> attributeScore,
-            GameScoreWeights gameScoreCalculationWeights, Func<Playnite.SDK.Models.Game, IEnumerable<Guid>> attributeSelector)
+        private Dictionary<Guid, float> CalculateWeightedGameScoreByAttribute(
+            IEnumerable<Game> games,
+            Dictionary<Guid, float> attributeScore, 
+            Func<Game, IEnumerable<Guid>> attributeSelector, 
+            float weight)
         {
             var gameScoreByGenre = _gameScoreByAttributeCalculator.Calculate(games, attributeSelector, attributeScore);
             var normalizedGameScoresByGenre = _scoreNormalizer.Normalize(gameScoreByGenre);
             var weightedGameScoreByGenre =
-                normalizedGameScoresByGenre.ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.Genre);
+                normalizedGameScoresByGenre.ToDictionary(x => x.Key, x => x.Value * weight);
             return weightedGameScoreByGenre;
         }
     }

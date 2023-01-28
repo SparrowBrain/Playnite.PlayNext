@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayNext.Models;
+using Playnite.SDK.Models;
 
 namespace PlayNext.Score.Attribute
 {
@@ -15,7 +16,7 @@ namespace PlayNext.Score.Attribute
             _summator = summator;
         }
 
-        public Dictionary<Guid, float> Calculate(IEnumerable<Playnite.SDK.Models.Game> allGames, IEnumerable<Playnite.SDK.Models.Game> recentGames, AttributeCalculationWeights attributeCalculationWeights)
+        public Dictionary<Guid, float> Calculate(IEnumerable<Game> allGames, IEnumerable<Game> recentGames, AttributeCalculationWeights attributeCalculationWeights)
         {
             var weightedTotalPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(allGames, attributeCalculationWeights.TotalPlaytime);
             var weightedRecentPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(recentGames, attributeCalculationWeights.RecentPlaytime);

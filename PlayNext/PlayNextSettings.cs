@@ -8,8 +8,8 @@ namespace PlayNext
 {
     public class PlayNextSettings : ObservableObject
     {
+        public const int MaxWeightValue = 100;
         private const int MinWeightValue = 0;
-        private const int MaxWeightValue = 100;
         private static readonly ILogger Logger = LogManager.GetLogger();
 
         private string _option1 = string.Empty;
