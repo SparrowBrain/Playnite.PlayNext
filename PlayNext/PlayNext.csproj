@@ -53,6 +53,7 @@
     <Compile Include="Models\AttributeCalculationWeights.cs" />
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
+    <Compile Include="Models\ReleaseYearChoice.cs" />
     <Compile Include="Score\Attribute\AttributeScoreCalculator.cs" />
     <Compile Include="Score\Attribute\CommunityScoreCalculator.cs" />
     <Compile Include="Score\Attribute\CriticScoreCalculator.cs" />

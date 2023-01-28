@@ -13,8 +13,7 @@ namespace PlayNext
         private static readonly ILogger Logger = LogManager.GetLogger();
 
         private string _option1 = string.Empty;
-        private bool _option2 = false;
-        private bool _optionThatWontBeSaved = false;
+        private bool _option2;
         private float _totalPlaytime;
         private float _recentPlaytime;
         private float _recentOrder;
@@ -26,6 +25,8 @@ namespace PlayNext
         private float _criticScore;
         private float _communityScore;
         private float _releaseYear;
+        private int _desiredReleaseYear;
+        private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
 
         public PlayNextSettings()
         {
@@ -33,18 +34,23 @@ namespace PlayNext
 
         public PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
         {
-            _totalPlaytime = attributeCalculationWeights.TotalPlaytime;
-            _recentPlaytime = attributeCalculationWeights.RecentPlaytime;
-            _recentOrder = attributeCalculationWeights.RecentOrder;
+            _totalPlaytime = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
+            _recentPlaytime = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
+            _recentOrder = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+            NotifyAttributeScoreSourcePropertiesChanged();
 
-            _genre = gameScoreWeights.Genre;
-            _feature = gameScoreWeights.Feature;
-            _developer = gameScoreWeights.Developer;
-            _publisher = gameScoreWeights.Publisher;
-            _tag = gameScoreWeights.Tag;
-            _criticScore = gameScoreWeights.CriticScore;
-            _communityScore = gameScoreWeights.CommunityScore;
-            _releaseYear = gameScoreWeights.ReleaseYear;
+            _genre = gameScoreWeights.Genre * MaxWeightValue;
+            _feature = gameScoreWeights.Feature * MaxWeightValue;
+            _developer = gameScoreWeights.Developer * MaxWeightValue;
+            _publisher = gameScoreWeights.Publisher * MaxWeightValue;
+            _tag = gameScoreWeights.Tag * MaxWeightValue;
+            _criticScore = gameScoreWeights.CriticScore * MaxWeightValue;
+            _communityScore = gameScoreWeights.CommunityScore * MaxWeightValue;
+            _releaseYear = gameScoreWeights.ReleaseYear * MaxWeightValue;
+            NotifyGameScoreSourcePropertiesChanged();
+
+            DesiredReleaseYear = 2000;
+            ReleaseYearChoice = ReleaseYearChoice.Current;
         }
 
         public string Option1 { get => _option1; set => SetValue(ref _option1, value); }
@@ -270,6 +276,30 @@ namespace PlayNext
             }
         }
 
+        public int DesiredReleaseYear
+        {
+            get => _desiredReleaseYear;
+            set => SetValue(ref _desiredReleaseYear, value);
+        }
+
+        [DontSerialize]
+        public bool[] ReleaseYearChoices
+        {
+            get => _releaseYearChoices;
+        }
+
+        public ReleaseYearChoice ReleaseYearChoice
+        {
+            get => (ReleaseYearChoice)Array.IndexOf(_releaseYearChoices, true);
+            set
+            {
+                _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
+                _releaseYearChoices[(int)value] = true;
+                OnPropertyChanged();
+                //SetValue(ref _releaseYearChoice, value);
+            }
+        }
+
         private void RebalanceAttributeScoreSourceWeights(float difference)
         {
             _totalPlaytime = ContainInMinMax(_totalPlaytime - difference);
@@ -322,10 +352,5 @@ namespace PlayNext
         {
             return Math.Max(MinWeightValue, Math.Min(MaxWeightValue, newValue));
         }
-
-        // Playnite serializes settings object to a JSON object and saves it as text file.
-        // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
-        [DontSerialize]
-        public bool OptionThatWontBeSaved { get => _optionThatWontBeSaved; set => SetValue(ref _optionThatWontBeSaved, value); }
     }
 }

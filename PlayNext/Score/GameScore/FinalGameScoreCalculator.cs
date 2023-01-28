@@ -35,7 +35,7 @@ namespace PlayNext.Score.GameScore
             _summator = summator;
         }
 
-        public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore, GameScoreWeights gameScoreCalculationWeights)
+        public IDictionary<Guid, float> Calculate(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore, GameScoreWeights gameScoreCalculationWeights, int desiredReleaseYear)
         {
             var weightedScoreByGenre = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.GenreIds, gameScoreCalculationWeights.Genre);
             var weightedScoreByFeature = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.FeatureIds, gameScoreCalculationWeights.Feature);
@@ -44,7 +44,7 @@ namespace PlayNext.Score.GameScore
             var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.TagIds, gameScoreCalculationWeights.Tag);
             var weightedScoreByCriticsScore = _criticScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CriticScore);
             var weightedScoreByCommunityScore = _communityScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
-            var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, DateTime.Now.Year).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
+            var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, desiredReleaseYear).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
 
             var sum = _summator.AddUp(
                 weightedScoreByGenre,
@@ -57,7 +57,7 @@ namespace PlayNext.Score.GameScore
                 weightedScoreByReleaseYear);
 
             var normalizedSum = _scoreNormalizer.Normalize(sum);
-            var ordered = sum.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            var ordered = normalizedSum.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
             return ordered;
         }
 

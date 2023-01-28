@@ -79,13 +79,15 @@ namespace PlayNext.ViewModels
                         ReleaseYear = savedSettings.ReleaseYearSerialized / PlayNextSettings.MaxWeightValue,
                     };
 
+                    var desiredReleaseYear = GetDesiredReleaseYear(savedSettings);
+
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
                     var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, 14);
                     var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
                     var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);
-                    var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights);
+                    var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, desiredReleaseYear);
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -110,6 +112,22 @@ namespace PlayNext.ViewModels
                     _logger.Error(ex, "Error while trying to calculate game scores.");
                 }
             }).Start();
+        }
+
+        private int GetDesiredReleaseYear(PlayNextSettings savedSettings)
+        {
+            switch (savedSettings.ReleaseYearChoice)
+            {
+                case ReleaseYearChoice.Current:
+                    return DateTime.Now.Year;
+
+                case ReleaseYearChoice.Specific:
+                    return savedSettings.DesiredReleaseYear;
+
+                default:
+                    _logger.Error("Unknown release year choice");
+                    return DateTime.Now.Year;
+            }
         }
     }
 }

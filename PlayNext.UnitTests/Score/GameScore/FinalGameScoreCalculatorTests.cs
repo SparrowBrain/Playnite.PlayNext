@@ -20,6 +20,7 @@ namespace PlayNext.UnitTests.Score.GameScore
         public void Calculate(
             string attributeIdsName,
             Game[] games,
+            int releaseYear,
             Dictionary<Guid, float> attributeScore,
             FinalGameScoreCalculator sut)
         {
@@ -32,7 +33,7 @@ namespace PlayNext.UnitTests.Score.GameScore
             SetWeight(attributeIdsName, gameScoreCalculationWeights, 1);
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);
