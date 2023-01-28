@@ -106,5 +106,28 @@ namespace PlayNext.UnitTests.Score.Attribute
             Assert.Contains(result.Keys, x => x == centerGame.Id);
             Assert.Equal(50, result[centerGame.Id]);
         }
+
+        [Theory, AutoData]
+        public void Calculate_ReturnsScore0_WhenGameIsAtMaxDifferenceAndThereIsNullYearGame(
+            Game topGame,
+            Game bottomGame,
+            Game nullGame,
+            int desiredReleaseYear,
+            int yearDifference,
+            ReleaseYearCalculator sut)
+        {
+            // Arrange
+            topGame.ReleaseDate = new ReleaseDate(desiredReleaseYear);
+            bottomGame.ReleaseDate = new ReleaseDate(desiredReleaseYear + yearDifference);
+            nullGame.ReleaseDate = null;
+            var games = new[] { topGame, bottomGame, nullGame };
+
+            // Act
+            var result = sut.Calculate(games, desiredReleaseYear);
+
+            // Assert
+            Assert.Contains(result.Keys, x => x == bottomGame.Id);
+            Assert.Equal(0, result[bottomGame.Id]);
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PlayNext.Models;
 using PlayNext.Score.Attribute;
+using Playnite.SDK;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Score.GameScore
@@ -15,6 +16,8 @@ namespace PlayNext.Score.GameScore
         private readonly ReleaseYearCalculator _releaseYearCalculator;
         private readonly ScoreNormalizer _scoreNormalizer;
         private readonly Summator _summator;
+
+        private ILogger _logger = LogManager.GetLogger();
 
         public FinalGameScoreCalculator(
             GameScoreByAttributeCalculator gameScoreByAttributeCalculator,
@@ -54,21 +57,20 @@ namespace PlayNext.Score.GameScore
                 weightedScoreByReleaseYear);
 
             var normalizedSum = _scoreNormalizer.Normalize(sum);
-            var ordered = normalizedSum.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            var ordered = sum.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
             return ordered;
         }
 
         private Dictionary<Guid, float> CalculateWeightedGameScoreByAttribute(
             IEnumerable<Game> games,
-            Dictionary<Guid, float> attributeScore, 
-            Func<Game, IEnumerable<Guid>> attributeSelector, 
+            Dictionary<Guid, float> attributeScore,
+            Func<Game, IEnumerable<Guid>> attributeSelector,
             float weight)
         {
-            var gameScoreByGenre = _gameScoreByAttributeCalculator.Calculate(games, attributeSelector, attributeScore);
-            var normalizedGameScoresByGenre = _scoreNormalizer.Normalize(gameScoreByGenre);
-            var weightedGameScoreByGenre =
-                normalizedGameScoresByGenre.ToDictionary(x => x.Key, x => x.Value * weight);
-            return weightedGameScoreByGenre;
+            var scoreByAttribute = _gameScoreByAttributeCalculator.Calculate(games, attributeSelector, attributeScore);
+            var normalizedScoreByAttribute = _scoreNormalizer.Normalize(scoreByAttribute);
+            var weightedGameScoreByAttribute = normalizedScoreByAttribute.ToDictionary(x => x.Key, x => x.Value * weight);
+            return weightedGameScoreByAttribute;
         }
     }
 }
