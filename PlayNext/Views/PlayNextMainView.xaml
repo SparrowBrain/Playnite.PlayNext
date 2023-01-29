@@ -37,32 +37,49 @@
     </PluginUserControl.Resources>
 
     <Grid>
-        <ListBox ItemsSource="{Binding Games}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"></RowDefinition>
+            <RowDefinition Height="50px"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="50" Height="30">▋ ▋</Button>
+            <Button Width="50" Height="30">≡</Button>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+   
+            <TextBlock Grid.Column="1" Text="Score" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Text="Name" VerticalAlignment="Center"/>
+        </Grid>
+        <ListBox Grid.Row="3" ItemsSource="{Binding Games}" Background="Transparent">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <!--<Image Grid.Column="0" Width="200" Visibility="{Binding Path=ShowCoverImage, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Image Grid.Column="0" Width="25">
                             <Image.Source>
-                                --><!-- To save significant application memory, set the DecodePixelWidth or  
-     DecodePixelHeight of the BitmapImage value of the image source to the desired 
-     height and width of the rendered image. If you don't do this, the application will 
-     cache the image as though it were rendered as its normal size rather then just 
-     the size that is displayed. -->
-                                <!-- Note: In order to preserve aspect ratio, only set either DecodePixelWidth
-         or DecodePixelHeight but not both. --><!--
-                                <BitmapImage DecodePixelWidth="200"  
-                                             UriSource="{Binding CoverImage}" />
+                                <BitmapImage DecodePixelWidth="50"  UriSource="{Binding Icon}" />
                             </Image.Source>
-                        </Image>-->
-                        <TextBlock Grid.Column="0" Text="{Binding Id}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#.00}" />
-                        <TextBlock Grid.Column="2" Text="{Binding Name}" />
+                        </Image>
+                        <!--<TextBlock Grid.Column="0" Text="{Binding Id}" />-->
+                        <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center"/>
+                        <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="Details"></Button>
                         <!--<ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />-->
                     </Grid>
                 </DataTemplate>

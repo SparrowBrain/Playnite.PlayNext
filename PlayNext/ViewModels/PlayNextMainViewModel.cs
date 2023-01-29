@@ -18,7 +18,7 @@ namespace PlayNext.ViewModels
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNext _plugin;
-        private ObservableCollection<GameToPlay> _games = new ObservableCollection<GameToPlay>();
+        private ObservableCollection<GameToPlayViewModel> _games = new ObservableCollection<GameToPlayViewModel>();
 
         private readonly GameScoreByAttributeCalculator _gameScoreByAttributeCalculator = new GameScoreByAttributeCalculator();
         private readonly ScoreNormalizer _scoreNormalizer = new ScoreNormalizer();
@@ -41,7 +41,7 @@ namespace PlayNext.ViewModels
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
         }
 
-        public ObservableCollection<GameToPlay> Games
+        public ObservableCollection<GameToPlayViewModel> Games
         {
             get => _games;
             set
@@ -91,19 +91,10 @@ namespace PlayNext.ViewModels
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Games = new ObservableCollection<GameToPlay>(gameScore.Select(score =>
+                        Games = new ObservableCollection<GameToPlayViewModel>(gameScore.Select(score =>
                         {
                             var game = unPlayedGames.First(x => x.Id == score.Key);
-
-                            var gameToPlay = new GameToPlay(game, score.Value);
-                            Task.Run(() =>
-                            {
-                                var coverImage = game.CoverImage == null
-                                    ? null
-                                    : _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage);
-                                gameToPlay.CoverImage = coverImage;
-                            });
-                            return gameToPlay;
+                            return new GameToPlayViewModel(_plugin, game, score.Value);
                         }).ToArray());
                     });
                 }

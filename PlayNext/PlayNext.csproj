@@ -64,7 +64,7 @@
     <Compile Include="Score\ScoreNormalizer.cs" />
     <Compile Include="Score\Summator.cs" />
     <Compile Include="Models\GameScoreWeights.cs" />
-    <Compile Include="Models\GameToPlay.cs" />
+    <Compile Include="ViewModels\GameToPlayViewModel.cs" />
     <Compile Include="Services\DateTimeProvider.cs" />
     <Compile Include="ViewModels\PlayNextMainViewModel.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
