@@ -3,6 +3,8 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:converters="clr-namespace:PlayNext.Converters"
+                    xmlns:model="clr-namespace:PlayNext.Models"
                     mc:Ignorable="d"
                     d:DesignHeight="450" d:DesignWidth="800">
     <PluginUserControl.Resources>
@@ -40,50 +42,72 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50px"></RowDefinition>
             <RowDefinition Height="50px"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Width="50" Height="30">▋ ▋</Button>
-            <Button Width="50" Height="30">≡</Button>
+            <Button
+                Width="50"
+                Height="30"
+                Command="{Binding SwitchToCovers}"
+                IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
+                ▋ ▋
+            </Button>
+            <Button
+                Width="50"
+                Height="30"
+                Command="{Binding SwitchToList}"
+                IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+                ≡
+            </Button>
         </StackPanel>
 
-        <Grid Grid.Row="2" Margin="0,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-   
-            <TextBlock Grid.Column="1" Text="Score" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Text="Name" VerticalAlignment="Center"/>
+        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeTCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="1" Text="Score" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="Name" VerticalAlignment="Center" />
+            </Grid>
+            <ListBox Grid.Row="1"  ItemsSource="{Binding Games}" Background="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Setter Property="Focusable" Value="False" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="25">
+                                <Image.Source>
+                                    <BitmapImage DecodePixelWidth="50"  UriSource="{Binding Icon}" />
+                                </Image.Source>
+                            </Image>
+                            <!--<TextBlock Grid.Column="0" Text="{Binding Id}" />-->
+                            <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" />
+                            <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="Details"></Button>
+                            <!--<ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />-->
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
         </Grid>
-        <ListBox Grid.Row="3" ItemsSource="{Binding Games}" Background="Transparent">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Width="25">
-                            <Image.Source>
-                                <BitmapImage DecodePixelWidth="50"  UriSource="{Binding Icon}" />
-                            </Image.Source>
-                        </Image>
-                        <!--<TextBlock Grid.Column="0" Text="{Binding Id}" />-->
-                        <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center"/>
-                        <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="Details"></Button>
-                        <!--<ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />-->
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ListBox>
     </Grid>
 </PluginUserControl>

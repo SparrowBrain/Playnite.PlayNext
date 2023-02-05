@@ -296,7 +296,6 @@ namespace PlayNext
                 _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
                 _releaseYearChoices[(int)value] = true;
                 OnPropertyChanged();
-                //SetValue(ref _releaseYearChoice, value);
             }
         }
 

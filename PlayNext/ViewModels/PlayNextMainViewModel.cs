@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using PlayNext.Filters;
 using PlayNext.Models;
 using PlayNext.Score;
@@ -30,12 +31,11 @@ namespace PlayNext.ViewModels
         private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
         private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
         private readonly ReleaseYearCalculator _releaseYearCalculator = new ReleaseYearCalculator();
+        private ShowcaseType _activeShowcaseType;
 
         public PlayNextMainViewModel(PlayNext plugin)
         {
             _plugin = plugin;
-
-            // Load saved settings.
 
             _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
@@ -44,13 +44,20 @@ namespace PlayNext.ViewModels
         public ObservableCollection<GameToPlayViewModel> Games
         {
             get => _games;
-            set
-            {
-                if (Equals(value, _games)) return;
-                _games = value;
-                OnPropertyChanged();
-            }
+            set => SetValue(ref _games, value);
         }
+
+        public ShowcaseType ActiveShowcaseType
+        {
+            get => _activeShowcaseType;
+            set => SetValue(ref _activeShowcaseType, value);
+        }
+
+        // ReSharper disable once UnusedMember.Global
+        public ICommand SwitchToCovers => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.Covers; });
+
+        // ReSharper disable once UnusedMember.Global
+        public ICommand SwitchToList => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.List; });
 
         public void LoadData()
         {
