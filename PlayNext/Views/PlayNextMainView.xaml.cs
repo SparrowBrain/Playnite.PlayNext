@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Controls;
+using System.Windows.Input;
 using PlayNext.ViewModels;
 using Playnite.SDK.Controls;
 
@@ -24,6 +26,26 @@ namespace PlayNext.Views
             base.OnInitialized(e);
 
             _mainViewModel.LoadData();
+        }
+
+        private void OnCoversListBoxMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!(sender is VirtualizingStackPanel virtualizingStackPanel))
+            {
+                return;
+            }
+
+            for (var i = 0; i < Math.Abs(e.Delta); i++)
+            {
+                if (e.Delta < 0)
+                {
+                    virtualizingStackPanel.LineRight();
+                }
+                else
+                {
+                    virtualizingStackPanel.LineLeft();
+                }
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace PlayNext.ViewModels
             Name = game.Name;
             Score = score;
             Icon = game.Icon != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.Icon) : _defaultIconPath;
-            //CoverImage = _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage);
+            CoverImage = game.CoverImage != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage) : _defaultIconPath;
         }
 
         public Guid Id { get; set; }

@@ -44,8 +44,14 @@ namespace PlayNext.ViewModels
         public ObservableCollection<GameToPlayViewModel> Games
         {
             get => _games;
-            set => SetValue(ref _games, value);
+            set
+            {
+                SetValue(ref _games, value);
+                OnPropertyChanged(nameof(TopGames));
+            }
         }
+
+        public GameToPlayViewModel[] TopGames => Games.Take(30).ToArray();
 
         public ShowcaseType ActiveShowcaseType
         {
