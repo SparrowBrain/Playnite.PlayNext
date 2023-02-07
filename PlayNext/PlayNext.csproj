@@ -36,6 +36,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="StartPage.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StartPage.SDK.1.0.0\lib\net462\StartPage.SDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
@@ -51,27 +54,35 @@
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeTCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
-    <Compile Include="Filters\RecentlyPlayedFilter.cs" />
-    <Compile Include="Filters\WithPlaytimeFilter.cs" />
-    <Compile Include="Models\AttributeCalculationWeights.cs" />
+    <Compile Include="Converters\WidthToHeightMultiConverter.cs" />
+    <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />
+    <Compile Include="Model\Filters\WithPlaytimeFilter.cs" />
+    <Compile Include="Model\Data\AttributeCalculationWeights.cs" />
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
-    <Compile Include="Models\ReleaseYearChoice.cs" />
-    <Compile Include="Score\Attribute\AttributeScoreCalculator.cs" />
-    <Compile Include="Score\Attribute\CommunityScoreCalculator.cs" />
-    <Compile Include="Score\Attribute\CriticScoreCalculator.cs" />
-    <Compile Include="Score\Attribute\FinalAttributeScoreCalculator.cs" />
-    <Compile Include="Score\Attribute\ReleaseYearCalculator.cs" />
-    <Compile Include="Score\GameScore\GameScoreByAttributeCalculator.cs" />
-    <Compile Include="Score\GameScore\FinalGameScoreCalculator.cs" />
-    <Compile Include="Score\ScoreNormalizer.cs" />
-    <Compile Include="Score\Summator.cs" />
-    <Compile Include="Models\GameScoreWeights.cs" />
+    <Compile Include="Model\Data\ReleaseYearChoice.cs" />
+    <Compile Include="Model\Score\Attribute\AttributeScoreCalculator.cs" />
+    <Compile Include="Model\Score\Attribute\CommunityScoreCalculator.cs" />
+    <Compile Include="Model\Score\Attribute\CriticScoreCalculator.cs" />
+    <Compile Include="Model\Score\Attribute\FinalAttributeScoreCalculator.cs" />
+    <Compile Include="Model\Score\Attribute\ReleaseYearCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\GameScoreByAttributeCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\FinalGameScoreCalculator.cs" />
+    <Compile Include="Model\Score\ScoreNormalizer.cs" />
+    <Compile Include="Model\Score\Summator.cs" />
+    <Compile Include="Model\Data\GameScoreWeights.cs" />
+    <Compile Include="StartPage\LandingPageExtension.cs" />
+    <Compile Include="StartPage\Settings\LandingPageSettings.cs" />
+    <Compile Include="StartPage\Markup\LandingPageSettings.cs" />
+    <Compile Include="StartPage\StartPagePlayNextView.xaml.cs">
+      <DependentUpon>StartPagePlayNextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StartPage\StartPagePlayNextViewModel.cs" />
     <Compile Include="ViewModels\GameToPlayViewModel.cs" />
     <Compile Include="Services\DateTimeProvider.cs" />
     <Compile Include="ViewModels\PlayNextMainViewModel.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
-    <Compile Include="Models\ShowcaseType.cs" />
+    <Compile Include="Model\Data\ShowcaseType.cs" />
     <Compile Include="Views\PlayNextMainView.xaml.cs">
       <DependentUpon>PlayNextMainView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +107,10 @@
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StartPage\StartPagePlayNextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayNextMainView.xaml">
       <SubType>Designer</SubType>

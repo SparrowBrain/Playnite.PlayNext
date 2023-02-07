@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using PlayNext.ViewModels;
+using Playnite.SDK;
 using Playnite.SDK.Controls;
 
 namespace PlayNext.Views
@@ -11,6 +12,7 @@ namespace PlayNext.Views
     /// </summary>
     public partial class PlayNextMainView : PluginUserControl
     {
+        private readonly ILogger _logger = LogManager.GetLogger(nameof(PlayNextMainView));
         private readonly PlayNextMainViewModel _mainViewModel;
 
         public PlayNextMainView(PlayNextMainViewModel mainViewModel)
@@ -30,8 +32,9 @@ namespace PlayNext.Views
 
         private void OnCoversListBoxMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (!(sender is VirtualizingStackPanel virtualizingStackPanel))
+            if (!(sender is IScrollInfo scrollInfo))
             {
+                _logger.Warn("Mouse wheel scroll triggered from non-scrolling control.");
                 return;
             }
 
@@ -39,11 +42,11 @@ namespace PlayNext.Views
             {
                 if (e.Delta < 0)
                 {
-                    virtualizingStackPanel.LineRight();
+                    scrollInfo.LineRight();
                 }
                 else
                 {
-                    virtualizingStackPanel.LineLeft();
+                    scrollInfo.LineLeft();
                 }
             }
         }

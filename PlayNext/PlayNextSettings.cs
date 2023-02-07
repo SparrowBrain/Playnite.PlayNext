@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using PlayNext.Models;
+using PlayNext.Model.Data;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 

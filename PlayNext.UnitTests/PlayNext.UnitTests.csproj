@@ -76,18 +76,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filters\UnplayedFilterTests.cs" />
-    <Compile Include="Score\Attribute\AttributeScoreCalculatorTests.cs" />
+    <Compile Include="Model\Filters\UnplayedFilterTests.cs" />
+    <Compile Include="Model\Score\Attribute\AttributeScoreCalculatorTests.cs" />
     <Compile Include="AutoMoqData.cs" />
-    <Compile Include="Filters\RecentlyPlayedFilterTests.cs" />
-    <Compile Include="Filters\WithPlaytimeFilterTests.cs" />
+    <Compile Include="Model\Filters\RecentlyPlayedFilterTests.cs" />
+    <Compile Include="Model\Filters\WithPlaytimeFilterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Score\Attribute\FinalAttributeScoreCalculatorTests.cs" />
-    <Compile Include="Score\Attribute\ReleaseYearCalculatorTests.cs" />
-    <Compile Include="Score\GameScore\GameScoreByAttributeCalculatorTests.cs" />
-    <Compile Include="Score\GameScore\FinalGameScoreCalculatorTests.cs" />
-    <Compile Include="Score\ScoreNormalizerTests.cs" />
-    <Compile Include="Score\SummatorTests.cs" />
+    <Compile Include="Model\Score\Attribute\FinalAttributeScoreCalculatorTests.cs" />
+    <Compile Include="Model\Score\Attribute\ReleaseYearCalculatorTests.cs" />
+    <Compile Include="Model\Score\GameScore\GameScoreByAttributeCalculatorTests.cs" />
+    <Compile Include="Model\Score\GameScore\FinalGameScoreCalculatorTests.cs" />
+    <Compile Include="Model\Score\ScoreNormalizerTests.cs" />
+    <Compile Include="Model\Score\SummatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

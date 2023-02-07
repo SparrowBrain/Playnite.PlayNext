@@ -4,7 +4,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:converters="clr-namespace:PlayNext.Converters"
-                    xmlns:model="clr-namespace:PlayNext.Models"
+                    xmlns:model="clr-namespace:PlayNext.Model.Data"
                     mc:Ignorable="d"
                     d:DesignHeight="450" d:DesignWidth="800">
     <PluginUserControl.Resources>
@@ -44,6 +44,7 @@
             <RowDefinition Height="50px"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Play Next"></TextBlock>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button
                 Margin="0,0,10,0"
@@ -117,7 +118,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent">
+            <ListBox Grid.Row="1"  ItemsSource="{Binding Games}" Background="Transparent" >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <Setter Property="Focusable" Value="False" />
@@ -162,8 +163,7 @@
                 </ListBox.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="5,5,5,5" >
-
+                        <Grid>
                             <Grid.RenderTransform>
                                 <ScaleTransform  x:Name="HoverTransform" CenterX="150" CenterY="200" ScaleX="1" ScaleY="1" />
                             </Grid.RenderTransform>
@@ -206,11 +206,11 @@
                             </Grid.Triggers>
 
 
-                            <Button Command="{Binding OpenDetails}" Background="Transparent">
+                            <Button Command="{Binding OpenDetails}" Background="Transparent" >
                                 
                                 <Image Height="400" >
                                     <Image.Source>
-                                        <BitmapImage DecodePixelHeight="400"  UriSource="{Binding CoverImage}" />
+                                        <BitmapImage DecodePixelHeight="400"  UriSource="{Binding CoverImage, FallbackValue={StaticResource DefaultGameCover}}" />
                                     </Image.Source>
                                 </Image>
                             </Button>

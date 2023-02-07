@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using PlayNext.Model.Data;
-using PlayNext.Model.Filters;
-using PlayNext.Model.Score;
 using PlayNext.Model.Score.Attribute;
 using PlayNext.Model.Score.GameScore;
+using PlayNext.Model.Score;
 using PlayNext.Services;
+using PlayNext.ViewModels;
+using System.Collections.ObjectModel;
+using System.Windows;
+using PlayNext.Model.Data;
+using PlayNext.Model.Filters;
 using Playnite.SDK;
 
-namespace PlayNext.ViewModels
+namespace PlayNext.StartPage
 {
-    public class PlayNextMainViewModel : ObservableObject
+    public class StartPagePlayNextViewModel: ObservableObject
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNext _plugin;
+
         private ObservableCollection<GameToPlayViewModel> _games = new ObservableCollection<GameToPlayViewModel>();
 
         private readonly GameScoreByAttributeCalculator _gameScoreByAttributeCalculator = new GameScoreByAttributeCalculator();
@@ -31,39 +33,19 @@ namespace PlayNext.ViewModels
         private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
         private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
         private readonly ReleaseYearCalculator _releaseYearCalculator = new ReleaseYearCalculator();
-        private ShowcaseType _activeShowcaseType;
 
-        public PlayNextMainViewModel(PlayNext plugin)
+        public StartPagePlayNextViewModel(PlayNext plugin)
         {
             _plugin = plugin;
-
             _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
+
+
+
+
+
+          
         }
-
-        public ObservableCollection<GameToPlayViewModel> Games
-        {
-            get => _games;
-            set
-            {
-                SetValue(ref _games, value);
-                OnPropertyChanged(nameof(TopGames));
-            }
-        }
-
-        public GameToPlayViewModel[] TopGames => Games.Take(30).ToArray();
-
-        public ShowcaseType ActiveShowcaseType
-        {
-            get => _activeShowcaseType;
-            set => SetValue(ref _activeShowcaseType, value);
-        }
-
-        // ReSharper disable once UnusedMember.Global
-        public ICommand SwitchToCovers => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.Covers; });
-
-        // ReSharper disable once UnusedMember.Global
-        public ICommand SwitchToList => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.List; });
 
         public void LoadData()
         {
@@ -108,7 +90,7 @@ namespace PlayNext.ViewModels
                         {
                             var game = unPlayedGames.First(x => x.Id == score.Key);
                             return new GameToPlayViewModel(_plugin, game, score.Value);
-                        }).ToArray());
+                        }).Take(30).ToArray());
                     });
                 }
                 catch (Exception ex)
@@ -116,6 +98,12 @@ namespace PlayNext.ViewModels
                     _logger.Error(ex, "Error while trying to calculate game scores.");
                 }
             }).Start();
+        }
+
+        public ObservableCollection<GameToPlayViewModel> Games
+        {
+            get => _games;
+            set => SetValue(ref _games, value);
         }
 
         private int GetDesiredReleaseYear(PlayNextSettings savedSettings)

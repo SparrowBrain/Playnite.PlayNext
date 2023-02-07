@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using PlayNext.Models;
+using PlayNext.Model.Data;
 
 namespace PlayNext.Converters
 {
