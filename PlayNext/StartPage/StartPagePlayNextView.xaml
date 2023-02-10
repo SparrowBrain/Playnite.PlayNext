@@ -74,7 +74,8 @@
                                             RenderOptions.BitmapScalingMode="Fant"
                            x:Name="CoverImage"/>
                     
-                    <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage" />
+                    <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage" 
+                           RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
                     <TextBlock x:Name="NameTextBlock"
                                Text="{Binding Name}" 
                                Style="{StaticResource BaseTextBlockStyle}" 

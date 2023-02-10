@@ -44,7 +44,7 @@ namespace PlayNext.StartPage
             {
                 if (item.DataContext is GameToPlayViewModel model)
                 {
-                    //model.OpenCommand?.Execute(null);
+                    model.OpenDetails.Execute(null);
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace PlayNext.StartPage
 
             var coverWidth = LandingPageExtension.Instance.Settings.MaxCoverWidth;
 
-            var textHeight = 2*25;
+            var textHeight = 2 * 25;
             var coverMargin = 2 * 7;
             var newWidth = (Math.Floor((dock.ActualWidth - textHeight) / (coverWidth + coverMargin)) * (coverWidth + coverMargin));
 
