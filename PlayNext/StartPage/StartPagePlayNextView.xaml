@@ -265,12 +265,22 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True">
-        <ListBox ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
-                 BorderThickness="0" Background="Transparent" Padding="0"
-                 ItemTemplate="{DynamicResource GameCoverDataTemplate}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <!--<ColumnDefinition Width="*"></ColumnDefinition>-->
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Play Next">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="-90"></RotateTransform>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
+            <ListBox Grid.Column="1" ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
+                     BorderThickness="0" Background="Transparent" Padding="0"
+                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0"/>
@@ -289,5 +299,6 @@
                 </Style>
             </ListBox.Resources>
         </ListBox>
+        </Grid>
     </DockPanel>
 </UserControl>
