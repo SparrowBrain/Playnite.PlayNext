@@ -6,10 +6,6 @@
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
     <StackPanel>
-        <TextBlock Text="Description for Option1:" />
-        <TextBox Text="{Binding Settings.Option1}" />
-        <TextBlock Text="Description for Option2:" />
-        <CheckBox IsChecked="{Binding Settings.Option2}" />
         <TextBlock Text="Attribute Calculation Weights"></TextBlock>
         <TextBlock Text="Total Playtime"></TextBlock>
         <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TotalPlaytimeUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>

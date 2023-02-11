@@ -53,9 +53,6 @@ namespace PlayNext
             ReleaseYearChoice = ReleaseYearChoice.Current;
         }
 
-        public string Option1 { get => _option1; set => SetValue(ref _option1, value); }
-        public bool Option2 { get => _option2; set => SetValue(ref _option2, value); }
-
         public float TotalPlaytimeSerialized
         {
             get => _totalPlaytime;

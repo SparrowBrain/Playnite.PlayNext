@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Playnite.SDK;
 using Playnite.SDK.Models;
 
@@ -10,7 +12,19 @@ namespace PlayNext.ViewModels
     public class GameToPlayViewModel
     {
         private readonly PlayNext _plugin;
-        private readonly string _defaultIconPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "icon.png");
+        private static readonly string DefaultIconPath;
+        private static readonly string DefaultCoverImagePath;
+
+        static GameToPlayViewModel()
+        {
+            DefaultCoverImagePath = Application.Current.Resources["DefaultGameCover"] is BitmapImage image
+                ? image.UriSource.AbsolutePath
+                : Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "icon.png");
+
+            DefaultIconPath = Application.Current.Resources["DefaultGameIcon"] is BitmapImage icon
+                ? icon.UriSource.AbsolutePath
+                : Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "icon.png");
+        }
 
         public GameToPlayViewModel(PlayNext plugin, Game game, float score)
         {
@@ -18,8 +32,9 @@ namespace PlayNext.ViewModels
             Id = game.Id;
             Name = game.Name;
             Score = score;
-            Icon = game.Icon != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.Icon) : _defaultIconPath;
-            CoverImage = game.CoverImage != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage) : null;
+            Icon = game.Icon != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.Icon) : DefaultIconPath;
+
+            CoverImage = game.CoverImage != null ? _plugin.PlayniteApi.Database.GetFullFilePath(game.CoverImage) : DefaultCoverImagePath;
         }
 
         public Guid Id { get; set; }
