@@ -284,7 +284,7 @@
                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0"/>
+                    <VirtualizingStackPanel Orientation="Horizontal" Margin="0" MouseWheel="OnCoverListMouseWheel"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.Resources>
