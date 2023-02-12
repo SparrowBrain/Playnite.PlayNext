@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using PlayNext.StartPage;
-using PlayNext.StartPage.Markup;
 using PlayNext.ViewModels;
 using PlayNext.Views;
 using Playnite.SDK;
@@ -16,6 +15,9 @@ namespace PlayNext
     public class PlayNext : GenericPlugin, IStartPageExtension
     {
         private static readonly ILogger logger = LogManager.GetLogger();
+        private StartPagePlayNextViewModel _startPagePlayNextViewModel;
+        private PlayNextMainViewModel _playNextMainViewModel;
+        private PlayNextMainView _playNextMainView;
 
         private PlayNextSettingsViewModel settings { get; set; }
 
@@ -44,7 +46,16 @@ namespace PlayNext
                     FontFamily = ResourceProvider.GetResource("FontIcoFont") as FontFamily
                 },
                 Type = SiderbarItemType.View,
-                Opened = () => new PlayNextMainView(new PlayNextMainViewModel(this))
+                Opened = () =>
+                {
+                    if (_playNextMainView == null || _playNextMainViewModel == null)
+                    {
+                        _playNextMainViewModel = new PlayNextMainViewModel(this);
+                        _playNextMainView = new PlayNextMainView(_playNextMainViewModel);
+                    }
+
+                    return _playNextMainView;
+                }
             };
         }
 
@@ -120,7 +131,8 @@ namespace PlayNext
             switch (viewId)
             {
                 case "TopRecommendations":
-                    return new StartPagePlayNextView(new StartPagePlayNextViewModel(this));
+                    _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
+                    return new StartPagePlayNextView(_startPagePlayNextViewModel);
             }
 
             return null;
@@ -133,6 +145,12 @@ namespace PlayNext
 
         public void OnViewRemoved(string viewId, Guid instanceId)
         {
+        }
+
+        public void OnPlayNextSettingsSaved()
+        {
+            _playNextMainViewModel?.LoadData();
+            _startPagePlayNextViewModel?.LoadData();
         }
     }
 }

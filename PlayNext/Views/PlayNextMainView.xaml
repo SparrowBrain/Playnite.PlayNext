@@ -118,7 +118,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <ListBox Grid.Row="1"  ItemsSource="{Binding Games}" Background="Transparent" >
+            <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent" >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <Setter Property="Focusable" Value="False" />
@@ -207,10 +207,9 @@
 
 
                             <Button Command="{Binding OpenDetails}" Background="Transparent" >
-                                
                                 <Image Height="400" >
                                     <Image.Source>
-                                        <BitmapImage DecodePixelHeight="400"  UriSource="{Binding CoverImage, FallbackValue={StaticResource DefaultGameCover}}" />
+                                        <BitmapImage DecodePixelHeight="400"  UriSource="{Binding CoverImage}" />
                                     </Image.Source>
                                 </Image>
                             </Button>

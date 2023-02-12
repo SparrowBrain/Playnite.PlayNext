@@ -12,8 +12,6 @@ namespace PlayNext
         private const int MinWeightValue = 0;
         private static readonly ILogger Logger = LogManager.GetLogger();
 
-        private string _option1 = string.Empty;
-        private bool _option2;
         private float _totalPlaytime;
         private float _recentPlaytime;
         private float _recentOrder;
@@ -27,6 +25,8 @@ namespace PlayNext
         private float _releaseYear;
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
+        private int _numberOfTopGames;
+        private int _recentDays;
 
         public PlayNextSettings()
         {
@@ -34,23 +34,14 @@ namespace PlayNext
 
         public PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
         {
-            _totalPlaytime = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
-            _recentPlaytime = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
-            _recentOrder = attributeCalculationWeights.RecentOrder * MaxWeightValue;
-            NotifyAttributeScoreSourcePropertiesChanged();
-
-            _genre = gameScoreWeights.Genre * MaxWeightValue;
-            _feature = gameScoreWeights.Feature * MaxWeightValue;
-            _developer = gameScoreWeights.Developer * MaxWeightValue;
-            _publisher = gameScoreWeights.Publisher * MaxWeightValue;
-            _tag = gameScoreWeights.Tag * MaxWeightValue;
-            _criticScore = gameScoreWeights.CriticScore * MaxWeightValue;
-            _communityScore = gameScoreWeights.CommunityScore * MaxWeightValue;
-            _releaseYear = gameScoreWeights.ReleaseYear * MaxWeightValue;
-            NotifyGameScoreSourcePropertiesChanged();
+            SetAttributeWeights(attributeCalculationWeights);
+            SetGameWeights(gameScoreWeights);
 
             DesiredReleaseYear = 2000;
             ReleaseYearChoice = ReleaseYearChoice.Current;
+
+            NumberOfTopGames = 30;
+            RecentDays = 14;
         }
 
         public float TotalPlaytimeSerialized
@@ -294,6 +285,39 @@ namespace PlayNext
                 _releaseYearChoices[(int)value] = true;
                 OnPropertyChanged();
             }
+        }
+
+        public int NumberOfTopGames
+        {
+            get => _numberOfTopGames;
+            set => SetValue(ref _numberOfTopGames, value);
+        }
+
+        public int RecentDays
+        {
+            get => _recentDays;
+            set => SetValue(ref _recentDays, value);
+        }
+
+        public void SetAttributeWeights(AttributeCalculationWeights attributeCalculationWeights)
+        {
+            _totalPlaytime = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
+            _recentPlaytime = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
+            _recentOrder = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+            NotifyAttributeScoreSourcePropertiesChanged();
+        }
+
+        public void SetGameWeights(GameScoreWeights gameScoreWeights)
+        {
+            _genre = gameScoreWeights.Genre * MaxWeightValue;
+            _feature = gameScoreWeights.Feature * MaxWeightValue;
+            _developer = gameScoreWeights.Developer * MaxWeightValue;
+            _publisher = gameScoreWeights.Publisher * MaxWeightValue;
+            _tag = gameScoreWeights.Tag * MaxWeightValue;
+            _criticScore = gameScoreWeights.CriticScore * MaxWeightValue;
+            _communityScore = gameScoreWeights.CommunityScore * MaxWeightValue;
+            _releaseYear = gameScoreWeights.ReleaseYear * MaxWeightValue;
+            NotifyGameScoreSourcePropertiesChanged();
         }
 
         private void RebalanceAttributeScoreSourceWeights(float difference)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Input;
 using PlayNext.Model.Data;
 using Playnite.SDK;
 using Playnite.SDK.Data;
@@ -41,6 +42,14 @@ namespace PlayNext.ViewModels
             }
         }
 
+        public ICommand SetAttributeWeightsToFlat => new RelayCommand(() => Settings.SetAttributeWeights(AttributeCalculationWeights.Flat));
+
+        public ICommand SetGameWeightsToFlat => new RelayCommand(() => Settings.SetGameWeights(GameScoreWeights.Flat));
+
+        public ICommand SetAttributeWeightsToDefault => new RelayCommand(() => Settings.SetAttributeWeights(AttributeCalculationWeights.Default));
+
+        public ICommand SetGameWeightsToDefault => new RelayCommand(() => Settings.SetGameWeights(GameScoreWeights.Default));
+
         public void BeginEdit()
         {
             // Code executed when settings view is opened and user starts editing values.
@@ -59,6 +68,7 @@ namespace PlayNext.ViewModels
             // Code executed when user decides to confirm changes made since BeginEdit was called.
             // This method should save settings made to Option1 and Option2.
             _plugin.SavePluginSettings(Settings);
+            _plugin.OnPlayNextSettingsSaved();
         }
 
         public bool VerifySettings(out List<string> errors)
@@ -69,5 +79,6 @@ namespace PlayNext.ViewModels
             errors = new List<string>();
             return true;
         }
+
     }
 }

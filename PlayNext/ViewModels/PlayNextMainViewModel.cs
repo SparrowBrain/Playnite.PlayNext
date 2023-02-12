@@ -32,6 +32,7 @@ namespace PlayNext.ViewModels
         private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
         private readonly ReleaseYearCalculator _releaseYearCalculator = new ReleaseYearCalculator();
         private ShowcaseType _activeShowcaseType;
+        private int _numberOfGames = 30;
 
         public PlayNextMainViewModel(PlayNext plugin)
         {
@@ -51,7 +52,7 @@ namespace PlayNext.ViewModels
             }
         }
 
-        public GameToPlayViewModel[] TopGames => Games.Take(30).ToArray();
+        public GameToPlayViewModel[] TopGames => Games.Take(_numberOfGames).ToArray();
 
         public ShowcaseType ActiveShowcaseType
         {
@@ -72,6 +73,8 @@ namespace PlayNext.ViewModels
                 try
                 {
                     var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
+                    _numberOfGames = savedSettings.NumberOfTopGames;
+                    var recentDayCount = savedSettings.RecentDays;
 
                     var attributeCalculationWeights = new AttributeCalculationWeights()
                     {
@@ -96,7 +99,7 @@ namespace PlayNext.ViewModels
 
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
-                    var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, 14);
+                    var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
                     var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
                     var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);

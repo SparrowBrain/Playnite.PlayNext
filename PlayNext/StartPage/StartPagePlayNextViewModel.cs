@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PlayNext.Model.Score.Attribute;
-using PlayNext.Model.Score.GameScore;
-using PlayNext.Model.Score;
-using PlayNext.Services;
-using PlayNext.ViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using PlayNext.Model.Data;
 using PlayNext.Model.Filters;
+using PlayNext.Model.Score;
+using PlayNext.Model.Score.Attribute;
+using PlayNext.Model.Score.GameScore;
+using PlayNext.Services;
+using PlayNext.ViewModels;
 using Playnite.SDK;
 
 namespace PlayNext.StartPage
 {
-    public class StartPagePlayNextViewModel: ObservableObject
+    public class StartPagePlayNextViewModel : ObservableObject
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNext _plugin;
@@ -39,12 +38,6 @@ namespace PlayNext.StartPage
             _plugin = plugin;
             _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
-
-
-
-
-
-          
         }
 
         public void LoadData()
@@ -54,6 +47,8 @@ namespace PlayNext.StartPage
                 try
                 {
                     var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
+                    var numberOfGames = savedSettings.NumberOfTopGames;
+                    var recentDayCount = savedSettings.RecentDays;
 
                     var attributeCalculationWeights = new AttributeCalculationWeights()
                     {
@@ -78,7 +73,8 @@ namespace PlayNext.StartPage
 
                     var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
-                    var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, 14);
+
+                    var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
                     var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
                     var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);
@@ -90,7 +86,7 @@ namespace PlayNext.StartPage
                         {
                             var game = unPlayedGames.First(x => x.Id == score.Key);
                             return new GameToPlayViewModel(_plugin, game, score.Value);
-                        }).Take(30).ToArray());
+                        }).Take(numberOfGames).ToArray());
                     });
                 }
                 catch (Exception ex)
