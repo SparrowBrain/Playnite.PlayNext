@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using PlayNext.Model.Data;
 using Playnite.SDK;
@@ -77,8 +79,13 @@ namespace PlayNext.ViewModels
             // Executed before EndEdit is called and EndEdit is not called if false is returned.
             // List of errors is presented to user if verification fails.
             errors = new List<string>();
-            return true;
-        }
 
+            if (!DateTime.TryParse($"{Settings.DesiredReleaseYear}-01-01", out var year))
+            {
+                errors.Add("Could not parse year");
+            }
+
+            return errors.Any();
+        }
     }
 }

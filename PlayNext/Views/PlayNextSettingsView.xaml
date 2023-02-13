@@ -8,6 +8,7 @@
     <UserControl.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" >
             <Setter Property="Margin" Value="0,5,5,0" />
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Margin" Value="5,0,5,0"></Setter>
@@ -50,7 +51,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Number of Top Games"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Games Count"></TextBlock>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.NumberOfTopGames}"></TextBox>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Recent Days"></TextBlock>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.RecentDays}"></TextBox>

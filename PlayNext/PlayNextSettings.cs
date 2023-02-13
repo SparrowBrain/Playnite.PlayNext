@@ -281,8 +281,9 @@ namespace PlayNext
             get => (ReleaseYearChoice)Array.IndexOf(_releaseYearChoices, true);
             set
             {
-                _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
-                _releaseYearChoices[(int)value] = true;
+                var newValue = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
+                newValue[(int)value] = true;
+                _releaseYearChoices = newValue;
                 OnPropertyChanged();
             }
         }
