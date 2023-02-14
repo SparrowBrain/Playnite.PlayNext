@@ -205,7 +205,6 @@
                                 </EventTrigger>
                             </Grid.Triggers>
 
-
                             <Button Command="{Binding OpenDetails}" Background="Transparent" >
                                 <Image Height="400" >
                                     <Image.Source>

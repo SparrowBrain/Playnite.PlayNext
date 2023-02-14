@@ -85,7 +85,7 @@ namespace PlayNext.ViewModels
                 errors.Add("Could not parse year");
             }
 
-            return errors.Any();
+            return !errors.Any();
         }
     }
 }

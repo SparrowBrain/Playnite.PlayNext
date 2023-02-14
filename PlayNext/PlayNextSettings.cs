@@ -119,7 +119,7 @@ namespace PlayNext
                 var difference = (value - _totalPlaytime) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
                 _totalPlaytime = value;
-                _recentOrder = ContainInMinMax(_recentOrder + GetMissingAttributeWeightToTotal());
+                PushAttributeWeightsToTotal(nameof(_totalPlaytime));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
@@ -133,7 +133,7 @@ namespace PlayNext
                 var difference = (value - _recentPlaytime) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
                 _recentPlaytime = value;
-                _recentOrder = ContainInMinMax(_recentOrder + GetMissingAttributeWeightToTotal());
+                PushAttributeWeightsToTotal(nameof(_recentPlaytime));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
@@ -147,7 +147,7 @@ namespace PlayNext
                 var difference = (value - _recentOrder) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
                 _recentOrder = value;
-                _recentPlaytime = ContainInMinMax(_recentPlaytime + GetMissingAttributeWeightToTotal());
+                PushAttributeWeightsToTotal(nameof(_recentOrder));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
@@ -161,7 +161,7 @@ namespace PlayNext
                 var difference = (value - _genre) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _genre = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_genre));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -175,7 +175,7 @@ namespace PlayNext
                 var difference = (value - _feature) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _feature = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_feature));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -189,7 +189,7 @@ namespace PlayNext
                 var difference = (value - _developer) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _developer = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_developer));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -203,7 +203,7 @@ namespace PlayNext
                 var difference = (value - _publisher) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _publisher = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_publisher));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -217,7 +217,7 @@ namespace PlayNext
                 var difference = (value - _tag) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _tag = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_tag));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -231,7 +231,7 @@ namespace PlayNext
                 var difference = (value - _criticScore) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _criticScore = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_criticScore));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -245,7 +245,7 @@ namespace PlayNext
                 var difference = (value - _communityScore) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _communityScore = value;
-                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_communityScore));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -259,7 +259,7 @@ namespace PlayNext
                 var difference = (value - _releaseYear) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
                 _releaseYear = value;
-                _genre = ContainInMinMax(_genre + GetMissingGameWeightToTotal());
+                PushGameScoreWeightsToTotal(nameof(_releaseYear));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -278,7 +278,16 @@ namespace PlayNext
 
         public ReleaseYearChoice ReleaseYearChoice
         {
-            get => (ReleaseYearChoice)Array.IndexOf(_releaseYearChoices, true);
+            get
+            {
+                var choice = Array.IndexOf(_releaseYearChoices, true);
+                if (choice == -1)
+                {
+                    choice = 0;
+                }
+
+                return (ReleaseYearChoice)choice;
+            }
             set
             {
                 var newValue = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
@@ -328,18 +337,6 @@ namespace PlayNext
             _recentOrder = ContainInMinMax(_recentOrder - difference);
         }
 
-        private float GetMissingAttributeWeightToTotal()
-        {
-            return MaxWeightValue - _totalPlaytime - _recentPlaytime - _recentOrder;
-        }
-
-        private void NotifyAttributeScoreSourcePropertiesChanged()
-        {
-            OnPropertyChanged(nameof(TotalPlaytimeUi));
-            OnPropertyChanged(nameof(RecentPlaytimeUi));
-            OnPropertyChanged(nameof(RecentOrderUi));
-        }
-
         private void RebalanceGameScoreWeights(float difference)
         {
             _genre = ContainInMinMax(_genre - difference);
@@ -352,9 +349,72 @@ namespace PlayNext
             _releaseYear = ContainInMinMax(_releaseYear - difference);
         }
 
-        private float GetMissingGameWeightToTotal()
+        private void PushGameScoreWeightsToTotal(string ignore)
         {
-            return MaxWeightValue - _genre - _feature - _developer - _publisher - _tag - _criticScore - _communityScore - _releaseYear;
+            if (ignore != nameof(_genre))
+            {
+                _genre = ContainInMinMax(_genre + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_feature))
+            {
+                _feature = ContainInMinMax(_feature + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_developer))
+            {
+                _developer = ContainInMinMax(_developer + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_publisher))
+            {
+                _publisher = ContainInMinMax(_publisher + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_tag))
+            {
+                _tag = ContainInMinMax(_tag + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_criticScore))
+            {
+                _criticScore = ContainInMinMax(_criticScore + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_communityScore))
+            {
+                _communityScore = ContainInMinMax(_communityScore + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(_releaseYear))
+            {
+                _releaseYear = ContainInMinMax(_releaseYear + GetMissingGameWeightToTotal());
+            }
+        }
+
+        private void PushAttributeWeightsToTotal(string ignore)
+        {
+            if (ignore != nameof(_totalPlaytime))
+            {
+                _totalPlaytime = ContainInMinMax(_totalPlaytime + GetMissingAttributeWeightToTotal());
+            }
+
+            if (ignore != nameof(_recentOrder))
+            {
+                _recentOrder = ContainInMinMax(_recentOrder + GetMissingAttributeWeightToTotal());
+            }
+
+            if (ignore != nameof(_recentPlaytime))
+            {
+                _recentPlaytime = ContainInMinMax(_recentPlaytime + GetMissingAttributeWeightToTotal());
+            }
+        }
+
+        private void NotifyAttributeScoreSourcePropertiesChanged()
+        {
+            OnPropertyChanged(nameof(TotalPlaytimeUi));
+            OnPropertyChanged(nameof(RecentPlaytimeUi));
+            OnPropertyChanged(nameof(RecentOrderUi));
         }
 
         private void NotifyGameScoreSourcePropertiesChanged()
@@ -372,6 +432,16 @@ namespace PlayNext
         private float ContainInMinMax(float newValue)
         {
             return Math.Max(MinWeightValue, Math.Min(MaxWeightValue, newValue));
+        }
+
+        private float GetMissingAttributeWeightToTotal()
+        {
+            return MaxWeightValue - _totalPlaytime - _recentPlaytime - _recentOrder;
+        }
+
+        private float GetMissingGameWeightToTotal()
+        {
+            return MaxWeightValue - _genre - _feature - _developer - _publisher - _tag - _criticScore - _communityScore - _releaseYear;
         }
     }
 }
