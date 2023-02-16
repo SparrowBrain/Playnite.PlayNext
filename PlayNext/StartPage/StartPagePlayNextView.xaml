@@ -273,7 +273,7 @@
                 <ColumnDefinition Name="CoverListWidth" Width="300"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Play Next" HorizontalAlignment="Right" Margin="0,0,0,30">
+            <TextBlock Text="{DynamicResource LOC_PlayNext_PluginName}" HorizontalAlignment="Right" Margin="0,0,0,30">
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="-90"></RotateTransform>
                 </TextBlock.LayoutTransform>

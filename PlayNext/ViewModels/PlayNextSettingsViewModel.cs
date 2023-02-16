@@ -82,7 +82,7 @@ namespace PlayNext.ViewModels
 
             if (!DateTime.TryParse($"{Settings.DesiredReleaseYear}-01-01", out var year))
             {
-                errors.Add("Could not parse year");
+                errors.Add(ResourceProvider.GetString("LOC_PlayNext_SettingsValidationFailureToParseYear"));
             }
 
             return !errors.Any();

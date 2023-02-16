@@ -44,7 +44,7 @@
             <RowDefinition Height="50px"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Play Next" Margin="10,30,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Text="{DynamicResource LOC_PlayNext_PluginName}" Margin="10,30,0,0"></TextBlock>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button
                 Margin="0,0,10,0"
@@ -78,10 +78,10 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Text="Score" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="2" Text="Name" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="{DynamicResource LOC_PlayNext_MainScoreColumn}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="{DynamicResource LOC_PlayNext_MainNameColumn}" VerticalAlignment="Center" />
             </Grid>
-            <ListBox Grid.Row="1"  ItemsSource="{Binding Games}" Background="Transparent">
+            <ListBox Grid.Row="1" ItemsSource="{Binding Games}" Background="Transparent">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <Setter Property="Focusable" Value="False" />
@@ -104,7 +104,7 @@
                             </Image>
                             <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" />
-                            <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="Details"></Button>
+                            <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="{DynamicResource LOC_PlayNext_MainDetailsButton}"></Button>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

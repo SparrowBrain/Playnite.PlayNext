@@ -15,17 +15,17 @@ namespace PlayNext
     public class PlayNext : GenericPlugin, IStartPageExtension
     {
         private static readonly ILogger logger = LogManager.GetLogger();
+        private readonly PlayNextSettingsViewModel _settings;
+
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
         private PlayNextMainView _playNextMainView;
-
-        private PlayNextSettingsViewModel settings { get; set; }
 
         public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
 
         public PlayNext(IPlayniteAPI api) : base(api)
         {
-            settings = new PlayNextSettingsViewModel(this);
+            _settings = new PlayNextSettingsViewModel(this);
             Properties = new GenericPluginProperties
             {
                 HasSettings = true,
@@ -39,7 +39,7 @@ namespace PlayNext
             //new PlayNextSidebarItem()
             yield return new SidebarItem
             {
-                Title = "Play Next",
+                Title = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
                 Icon = new TextBlock()
                 {
                     Text = "\u23ED",
@@ -101,7 +101,7 @@ namespace PlayNext
 
         public override ISettings GetSettings(bool firstRunSettings)
         {
-            return settings;
+            return _settings;
         }
 
         public override UserControl GetSettingsView(bool firstRunSettings)
@@ -113,14 +113,14 @@ namespace PlayNext
         {
             return new StartPageExtensionArgs()
             {
-                ExtensionName = "Play Next",
+                ExtensionName = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
                 Views = new[]
                 {
                     new StartPageViewArgsBase
                     {
                         ViewId = "TopRecommendations",
-                        Name = ResourceProvider.GetString("LOCPlayNextStartPageTopRecommendationsViewName"),
-                        Description = ResourceProvider.GetString("LOCPlayNextStartPageTopRecommendationsDescription")
+                        Name = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsViewName"),
+                        Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription")
                     }
                 }
             };

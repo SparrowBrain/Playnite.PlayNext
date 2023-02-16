@@ -23,25 +23,25 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <GroupBox Grid.Column="0" Header="Attribute Calculation Weights">
+            <GroupBox Grid.Column="0" Header="{DynamicResource LOC_PlayNext_SettingsAttributeGroupTitle}">
                 <StackPanel>
-                    <TextBlock Text="Total Playtime"></TextBlock>
+                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsTotalPlaytime}"></TextBlock>
                     <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TotalPlaytimeUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                    <TextBlock Text="Recent Playtime"></TextBlock>
+                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRecentPlaytime}"></TextBlock>
                     <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentPlaytimeUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                    <TextBlock Text="Recent Order"></TextBlock>
+                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRecentOrder}"></TextBlock>
                     <Slider Minimum="0" Maximum="100" Value="{Binding Settings.RecentOrderUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                     <Grid Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Default" Command="{Binding SetAttributeWeightsToDefault}"></Button>
-                        <Button Grid.Column="1" Content="Flat" Command="{Binding SetAttributeWeightsToFlat}"></Button>
+                        <Button Grid.Column="0" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetAttributeWeightsToDefault}"></Button>
+                        <Button Grid.Column="1" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetAttributeWeightsToFlat}"></Button>
                     </Grid>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Other">
+            <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsOtherGroupTitle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -51,33 +51,33 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Games Count"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsNumberOfTopGames}"></TextBlock>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.NumberOfTopGames}"></TextBox>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Recent Days"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsRecentDays}"></TextBlock>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.RecentDays}"></TextBox>
                 </Grid>
             </GroupBox>
         </StackPanel>
 
-        <GroupBox Grid.Column="1" Header="Game Score Calculation Weights">
+        <GroupBox Grid.Column="1" Header="{DynamicResource LOC_PlayNext_SettingsGameGroupTitle}">
             <StackPanel>
-                <TextBlock Text="Genre"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsGenre}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.GenreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Feature"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsFeature}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.FeatureUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Developer"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsDeveloper}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.DeveloperUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Publisher"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPublisher}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.PublisherUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Tag"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsTag}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.TagUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Critic Score"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCriticScore}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.CriticScoreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Community Score"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCommunityScore}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.CommunityScoreUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Release Year"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYear}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding Settings.ReleaseYearUi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                <TextBlock Text="Release Year Should Be"></TextBlock>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYearTypeTitle}"></TextBlock>
                 <Grid Margin="10,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -87,8 +87,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <RadioButton GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="Current" ></RadioButton>
-                    <RadioButton Grid.Row="1" Grid.Column="0" GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="Specific" ></RadioButton>
+                    <RadioButton GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="0" GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.DesiredReleaseYear}" ></TextBox>
                 </Grid>
                 <Grid Margin="0,10,0,0">
@@ -96,8 +96,8 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Default" Command="{Binding SetGameWeightsToDefault}"></Button>
-                    <Button Grid.Column="1" Content="Flat" Command="{Binding SetGameWeightsToFlat}"></Button>
+                    <Button Grid.Column="0" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
+                    <Button Grid.Column="1" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
                 </Grid>
             </StackPanel>
         </GroupBox>
