@@ -36,8 +36,8 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetAttributeWeightsToDefault}"></Button>
-                        <Button Grid.Column="1" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetAttributeWeightsToFlat}"></Button>
+                        <Button Grid.Column="0" Height="30" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetAttributeWeightsToDefault}"></Button>
+                        <Button Grid.Column="1" Height="30" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetAttributeWeightsToFlat}"></Button>
                     </Grid>
                 </StackPanel>
             </GroupBox>
@@ -96,8 +96,8 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
-                    <Button Grid.Column="1" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
+                    <Button Grid.Column="0" Height="30" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
+                    <Button Grid.Column="1" Height="30" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
                 </Grid>
             </StackPanel>
         </GroupBox>
