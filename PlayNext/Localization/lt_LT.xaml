@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOC_PlayNext_PluginName">Rekomenduojami þaidimai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Balas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainNameColumn">Pavadinimas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Daugiau</sys:String>
+
+    <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Poþymiø balo skaièiavimo svoriai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Visas þaidimo laikas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Paskutiniø dienø þaidimo laikas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Paskutiniø þaistø þaidimø eilë</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Numatyta</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Plokðèia</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Kita</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Þaidimø skaièius</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Paskutiniø dienø skaièius</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Þaidimø balo skaièiavimo svoriai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGenre">Þanras</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybë</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Kûrëjas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Leidëjas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTag">Þyma</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Kritikø ávertinimas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Þaidëjø ávertinimas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Iðleidimo metai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Iðleidimo metai turëtø bûti</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Ðie</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Konkretûs</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko </sys:String>
+
+    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Geriausios rekomendacijos</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Rekomenduoti þaidimus pagal nustatymus.</sys:String>
+
+</ResourceDictionary>
