@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_PlayNext_PluginName">Rekomenduojami þaidimai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_PluginName">Kas toliau?</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Balas</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Pavadinimas</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Daugiau</sys:String>
