@@ -58,6 +58,7 @@
     <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />
     <Compile Include="Model\Filters\WithPlaytimeFilter.cs" />
     <Compile Include="Model\Data\AttributeCalculationWeights.cs" />
+    <Compile Include="Model\Score\TotalScoreCalculator.cs" />
     <Compile Include="PlayNext.cs" />
     <Compile Include="PlayNextSettings.cs" />
     <Compile Include="Model\Data\ReleaseYearChoice.cs" />
@@ -108,11 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <None Include="Localization\lt_LT.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Page Include="StartPage\StartPagePlayNextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
