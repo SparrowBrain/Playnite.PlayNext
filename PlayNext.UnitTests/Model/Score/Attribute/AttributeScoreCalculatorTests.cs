@@ -108,12 +108,24 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         }
 
         [Theory]
+        [AutoData]
+        public void CalculateByPlaytime_ReturnsEmptyEnumerable_When_NoGames(AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            var games = new Game[] { };
+
+            var result = sut.CalculateByPlaytime(games, weight);
+
+            Assert.Empty(result);
+        }
+
+        [Theory]
         [InlineAutoData(nameof(Game.GenreIds))]
         [InlineAutoData(nameof(Game.CategoryIds))]
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
-        public void CalculateByRecent_Returns1AttributeWithScore100_When_1Game1AttributeWith1Weight(
+        public void CalculateByRecentOrder_Returns1AttributeWithScore100_When_1Game1AttributeWith1Weight(
             string attributeIdsName,
             Game game,
             Guid attributeId,
@@ -137,7 +149,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
-        public void CalculateByPlaytime_ReturnsAttributeWithScore50_When_2GamesAndAttributeInLessRecentGameWith1Weight(
+        public void CalculateByRecentOrder_ReturnsAttributeWithScore50_When_2GamesAndAttributeInLessRecentGameWith1Weight(
             string attributeIdsName,
             Game mostRecentGame,
             Game ourGame,
@@ -153,6 +165,18 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             var result = sut.CalculateByRecentOrder(games, weight);
 
             Assert.Equal(50, result[attributeId]);
+        }
+
+        [Theory]
+        [AutoData]
+        public void CalculateByRecentOrder_ReturnsEmptyEnumerable_When_NoGames(AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            var games = new Game[] { };
+
+            var result = sut.CalculateByRecentOrder(games, weight);
+
+            Assert.Empty(result);
         }
 
         private static void ClearAttributes(Game game)

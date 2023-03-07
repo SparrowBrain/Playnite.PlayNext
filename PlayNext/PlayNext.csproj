@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Playnite.SDK, Version=6.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PlayniteSDK.6.8.0\lib\net462\Playnite.SDK.dll</HintPath>
     </Reference>
@@ -55,6 +58,10 @@
     <Compile Include="Converters\ShowcaseTypeTCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
     <Compile Include="Converters\WidthToHeightMultiConverter.cs" />
+    <Compile Include="GameActivity\Activity.cs" />
+    <Compile Include="GameActivity\Helpers\EnumerableExtensions.cs" />
+    <Compile Include="GameActivity\GameActivityExtension.cs" />
+    <Compile Include="GameActivity\Session.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />
     <Compile Include="Model\Filters\WithPlaytimeFilter.cs" />
     <Compile Include="Model\Data\AttributeCalculationWeights.cs" />

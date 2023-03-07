@@ -1,6 +1,7 @@
 ﻿using AutoFixture.Xunit2;
 using PlayNext.Model.Data;
 using PlayNext.Model.Score.Attribute;
+using Playnite.SDK.Models;
 using Xunit;
 
 namespace PlayNext.UnitTests.Model.Score.Attribute
@@ -9,13 +10,14 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
     {
         [Theory, AutoData]
         public void Calculate(
-            Playnite.SDK.Models.Game[] allGames,
-            Playnite.SDK.Models.Game[] recentGames,
+            Game[] allGames,
+            Game[] recentGames,
+            Game[] gamesWithRecentPlaytime,
             FinalAttributeScoreCalculator sut)
         {
             var attributeCalculationWeights = AttributeCalculationWeights.Flat;
 
-            var result = sut.Calculate(allGames, recentGames, attributeCalculationWeights);
+            var result = sut.Calculate(allGames, recentGames, gamesWithRecentPlaytime, attributeCalculationWeights);
         }
     }
 }

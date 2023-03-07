@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using PlayNext.GameActivity;
+using PlayNext.Model.Filters;
+using PlayNext.Services;
 using PlayNext.StartPage;
 using PlayNext.ViewModels;
 using PlayNext.Views;
@@ -14,14 +19,17 @@ namespace PlayNext
 {
     public class PlayNext : GenericPlugin, IStartPageExtension
     {
-        private static readonly ILogger logger = LogManager.GetLogger();
+        private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNextSettingsViewModel _settings;
+        private readonly GameActivityExtension _gameActivities;
 
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
         private PlayNextMainView _playNextMainView;
 
         public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
+
+        public GameActivityExtension GameActivityExtension => _gameActivities;
 
         public PlayNext(IPlayniteAPI api) : base(api)
         {
@@ -31,12 +39,13 @@ namespace PlayNext
                 HasSettings = true,
             };
 
-            var startPage = new LandingPageExtension(api);
+            LandingPageExtension.CreateInstance(api);
+            _gameActivities = GameActivityExtension.Create(api);
+            _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
         }
 
         public override IEnumerable<SidebarItem> GetSidebarItems()
         {
-            //new PlayNextSidebarItem()
             yield return new SidebarItem
             {
                 Title = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
@@ -76,7 +85,7 @@ namespace PlayNext
 
         public override void OnGameStopped(OnGameStoppedEventArgs args)
         {
-            // Add code to be executed when game is preparing to be started.
+            RefreshPlayNextData();
         }
 
         public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
@@ -86,7 +95,7 @@ namespace PlayNext
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
-            // Add code to be executed when Playnite is initialized.
+            RefreshPlayNextData();
         }
 
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -118,7 +127,7 @@ namespace PlayNext
                 {
                     new StartPageViewArgsBase
                     {
-                        ViewId = "TopRecommendations",
+                        ViewId = "PlayNext_TopRecommendations",
                         Name = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsViewName"),
                         Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription")
                     }
@@ -130,7 +139,7 @@ namespace PlayNext
         {
             switch (viewId)
             {
-                case "TopRecommendations":
+                case "PlayNext_TopRecommendations":
                     _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
                     return new StartPagePlayNextView(_startPagePlayNextViewModel);
             }
@@ -149,8 +158,42 @@ namespace PlayNext
 
         public void OnPlayNextSettingsSaved()
         {
+            RefreshPlayNextData();
+        }
+
+        private void OnActivitiesRefreshed()
+        {
             _playNextMainViewModel?.LoadData();
             _startPagePlayNextViewModel?.LoadData();
+        }
+
+        private void RefreshPlayNextData()
+        {
+            ParseRecentActivities();
+        }
+
+        private void ParseRecentActivities()
+        {
+            new Task(() =>
+            {
+                try
+                {
+                    var savedSettings = LoadPluginSettings<PlayNextSettings>();
+                    var recentDayCount = savedSettings.RecentDays;
+                    _logger.Debug($"Recent days: {recentDayCount}");
+                    var allGames = PlayniteApi.Database.Games.ToArray();
+                    _logger.Debug($"All games: {allGames.Length}");
+                    var playedGames = new WithPlaytimeFilter().Filter(allGames);
+                    var recentGames = new RecentlyPlayedFilter(new DateTimeProvider()).Filter(playedGames, recentDayCount);
+
+                    _logger.Debug($"Recent games: {recentGames.Count()}");
+                    _gameActivities.StartParsingActivity(recentGames);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, "Failure while parsing activities");
+                }
+            }).Start();
         }
     }
 }

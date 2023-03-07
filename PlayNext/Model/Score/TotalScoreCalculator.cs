@@ -65,7 +65,8 @@ namespace PlayNext.Model.Score
             var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
             var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
 
-            var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, recentGames, attributeCalculationWeights);
+            var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
+            var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);
             var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, desiredReleaseYear);
 
             return gameScore.Select(score =>

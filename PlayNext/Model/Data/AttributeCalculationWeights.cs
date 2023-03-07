@@ -13,9 +13,9 @@
 
         public static AttributeCalculationWeights Default { get; } = new AttributeCalculationWeights
         {
-            TotalPlaytime = 0.8f,
-            RecentPlaytime = 0,
-            RecentOrder = 0.2f,
+            TotalPlaytime = 0.7f,
+            RecentPlaytime = 0.2f,
+            RecentOrder = 0.1f,
         };
 
         public float TotalPlaytime { get; set; }

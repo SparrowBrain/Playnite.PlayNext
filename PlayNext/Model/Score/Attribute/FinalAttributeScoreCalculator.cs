@@ -16,10 +16,10 @@ namespace PlayNext.Model.Score.Attribute
             _summator = summator;
         }
 
-        public Dictionary<Guid, float> Calculate(IEnumerable<Game> allGames, IEnumerable<Game> recentGames, AttributeCalculationWeights attributeCalculationWeights)
+        public Dictionary<Guid, float> Calculate(IEnumerable<Game> allGames, IEnumerable<Game> gamesWithRecentPlaytime, IEnumerable<Game> recentGames, AttributeCalculationWeights attributeCalculationWeights)
         {
             var weightedTotalPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(allGames, attributeCalculationWeights.TotalPlaytime);
-            var weightedRecentPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(recentGames, attributeCalculationWeights.RecentPlaytime);
+            var weightedRecentPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(gamesWithRecentPlaytime, attributeCalculationWeights.RecentPlaytime);
             var weightedRecentOrderScore = _attributeScoreCalculator.CalculateByRecentOrder(recentGames, attributeCalculationWeights.RecentOrder);
 
             var sum = _summator.AddUp(

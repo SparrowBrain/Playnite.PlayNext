@@ -9,8 +9,13 @@ namespace PlayNext.Model.Score.Attribute
     {
         public Dictionary<Guid, float> CalculateByPlaytime(IEnumerable<Game> games, float weight)
         {
-            var maxTime = games.Max(x => x.Playtime);
             var scores = new Dictionary<Guid, float>();
+            if (!games.Any())
+            {
+                return scores;
+            }
+
+            var maxTime = games.Max(x => x.Playtime);
 
             foreach (var game in games)
             {
