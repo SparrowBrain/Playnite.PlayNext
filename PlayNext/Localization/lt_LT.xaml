@@ -7,30 +7,30 @@
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Pavadinimas</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Daugiau</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Poşymiø balo skaièiavimo svoriai</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Visas şaidimo laikas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Paskutiniø dienø şaidimo laikas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Paskutiniø şaistø şaidimø eilë</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">PoÅ¾ymiÅ³ balo skaiÄiavimo svoriai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Visas Å¾aidimo laikas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">PaskutiniÅ³ dienÅ³ Å¾aidimo laikas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">PaskutiniÅ³ Å¾aistÅ³ Å¾aidimÅ³ eilÄ—</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Numatyta</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Plokğèia</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">PlokÅ¡Äia</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Kita</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Şaidimø skaièius</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Paskutiniø dienø skaièius</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Şaidimø balo skaièiavimo svoriai</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGenre">Şanras</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybë</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Kûrëjas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Leidëjas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsTag">Şyma</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Kritikø ávertinimas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Şaidëjø ávertinimas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Iğleidimo metai</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Iğleidimo metai turëtø bûti</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Ğie</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Konkretûs</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Å½aidimÅ³ skaiÄius</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">PaskutiniÅ³ dienÅ³ skaiÄius</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Å½aidimÅ³ balo skaiÄiavimo svoriai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGenre">Å½anras</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFeature">SavybÄ—</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">KÅ«rÄ—jas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPublisher">LeidÄ—jas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTag">Å½yma</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">KritikÅ³ Ä¯vertinimas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Å½aidÄ—jÅ³ Ä¯vertinimas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">IÅ¡leidimo metai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">IÅ¡leidimo metai turÄ—tÅ³ bÅ«ti</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Å ie</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">KonkretÅ«s</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko </sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Geriausios rekomendacijos</sys:String>
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Rekomenduoti şaidimus pagal nustatymus.</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Rekomenduoti Å¾aidimus pagal nustatymus.</sys:String>
 
 </ResourceDictionary>

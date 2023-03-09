@@ -34,14 +34,7 @@ namespace PlayNext.ViewModels
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
 
             // LoadPluginSettings returns null if no saved data is available.
-            if (savedSettings != null)
-            {
-                Settings = savedSettings;
-            }
-            else
-            {
-                Settings = new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
-            }
+            Settings = savedSettings ?? PlayNextSettings.Default;
         }
 
         public ICommand SetAttributeWeightsToFlat => new RelayCommand(() => Settings.SetAttributeWeights(AttributeCalculationWeights.Flat));

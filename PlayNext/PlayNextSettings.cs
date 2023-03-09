@@ -32,7 +32,7 @@ namespace PlayNext
         {
         }
 
-        public PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
+        private PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
         {
             SetAttributeWeights(attributeCalculationWeights);
             SetGameWeights(gameScoreWeights);
@@ -43,6 +43,8 @@ namespace PlayNext
             NumberOfTopGames = 30;
             RecentDays = 14;
         }
+
+        public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
         public float TotalPlaytimeSerialized
         {

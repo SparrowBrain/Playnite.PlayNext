@@ -94,6 +94,7 @@ namespace PlayNext
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
+            EnsureSettingsExist();
             LandingPageExtension.CreateInstance(PlayniteApi);
             RefreshPlayNextData();
         }
@@ -170,6 +171,15 @@ namespace PlayNext
         private void RefreshPlayNextData()
         {
             ParseRecentActivities();
+        }
+
+        private void EnsureSettingsExist()
+        {
+            var savedSettings = LoadPluginSettings<PlayNextSettings>();
+            if (savedSettings == null)
+            {
+                SavePluginSettings(PlayNextSettings.Default);
+            }
         }
 
         private void ParseRecentActivities()
