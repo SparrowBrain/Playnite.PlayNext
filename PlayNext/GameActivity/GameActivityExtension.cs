@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using Newtonsoft.Json;
 using PlayNext.GameActivity.Helpers;
 using Playnite.SDK;
@@ -14,9 +13,7 @@ namespace PlayNext.GameActivity
     {
         private readonly ILogger _logger = LogManager.GetLogger(nameof(GameActivityExtension));
         private readonly string _activityPath;
-        private readonly SemaphoreSlim _readingFilesSemaphore = new SemaphoreSlim(1);
         private List<Activity> _recentActivities = new List<Activity>();
-        private bool _initialized;
 
         public GameActivityExtension(string activityPath)
         {
@@ -39,15 +36,15 @@ namespace PlayNext.GameActivity
 
         public event Action ActivityRefreshed;
 
-        public void StartParsingActivity(IEnumerable<Game> recentGames)
+        public void ParseGameActivity(IEnumerable<Game> recentGames)
         {
-            if (string.IsNullOrEmpty(_activityPath) || !Directory.Exists(_activityPath))
-            {
-                return;
-            }
-
             try
             {
+                if (string.IsNullOrEmpty(_activityPath) || !Directory.Exists(_activityPath))
+                {
+                    return;
+                }
+
                 var files = Directory.GetFiles(_activityPath);
                 var validFiles = files
                     .AsParallel()
@@ -76,13 +73,8 @@ namespace PlayNext.GameActivity
         {
             if (_activityPath == null)
             {
-                _logger.Info("Game Activity extension not loaded. Returning zeroed playtime.");
-                return recentGames.Select(x =>
-                {
-                    var game = x.GetCopy();
-                    game.Playtime = 0;
-                    return game;
-                });
+                _logger.Info("Game Activity extension not loaded. Returning empty list.");
+                return Array.Empty<Game>();
             }
 
             var recentPlaytime = recentGames.Select(x =>

@@ -8,7 +8,6 @@ namespace PlayNext.StartPage
 {
     public class LandingPageExtension
     {
-        private const int SecondsToTryLoadPlugin = 30;
         private static readonly ILogger Logger = LogManager.GetLogger(nameof(LandingPageExtension));
 
         private LandingPageExtension(LandingPageSettings settings)
@@ -27,24 +26,20 @@ namespace PlayNext.StartPage
             {
                 try
                 {
-                    while (Instance == null && DateTime.Now < startTime.AddSeconds(SecondsToTryLoadPlugin))
+                    var plugin = api.Addons.Plugins.FirstOrDefault(x =>
+                        x.Id == Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"));
+
+                    if (plugin == null)
                     {
-                        var plugin = api.Addons.Plugins.FirstOrDefault(x =>
-                            x.Id == Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"));
-
-                        if (plugin == null)
-                        {
-                            await Task.Delay(1000);
-                            Logger.Debug("Did not find start page plugin");
-                            continue;
-                        }
-
-                        var settings = plugin.LoadPluginSettings<LandingPageSettings>();
-
-                        var landingPageExtension = new LandingPageExtension(settings);
-                        Instance = landingPageExtension;
-                        Logger.Debug("Settings loaded: " + settings);
+                        Logger.Debug("Did not find start page plugin");
+                        return;
                     }
+
+                    var settings = plugin.LoadPluginSettings<LandingPageSettings>();
+
+                    var landingPageExtension = new LandingPageExtension(settings);
+                    Instance = landingPageExtension;
+                    Logger.Debug("Settings loaded: " + settings);
                 }
                 catch (Exception ex)
                 {

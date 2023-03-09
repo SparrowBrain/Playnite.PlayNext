@@ -120,6 +120,23 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         }
 
         [Theory]
+        [AutoData]
+        public void CalculateByPlaytime_ReturnsGamesWithScoreZero_When_AllGamesWithZeroPlaytime(
+            Game[] games,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 1f;
+            foreach (var game in games)
+            {
+                game.Playtime = 0;
+            }
+
+            var result = sut.CalculateByPlaytime(games, weight);
+
+            Assert.All(result, (gameScore, index) => Assert.Equal(0, gameScore.Value));
+        }
+
+        [Theory]
         [InlineAutoData(nameof(Game.GenreIds))]
         [InlineAutoData(nameof(Game.CategoryIds))]
         [InlineAutoData(nameof(Game.DeveloperIds))]

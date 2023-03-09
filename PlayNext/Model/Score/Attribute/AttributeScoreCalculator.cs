@@ -56,7 +56,10 @@ namespace PlayNext.Model.Score.Attribute
                 return;
             }
 
-            var attributeScore = valueInGame * 100 * weight / attributeIds.Count / maxValue;
+            var attributeScore = maxValue == 0
+                ? 0
+                : valueInGame * 100 * weight / attributeIds.Count / maxValue;
+
             foreach (var attributeId in attributeIds)
             {
                 if (scores.ContainsKey(attributeId))

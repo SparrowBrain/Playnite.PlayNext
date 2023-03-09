@@ -39,7 +39,6 @@ namespace PlayNext
                 HasSettings = true,
             };
 
-            LandingPageExtension.CreateInstance(api);
             _gameActivities = GameActivityExtension.Create(api);
             _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
         }
@@ -95,6 +94,7 @@ namespace PlayNext
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
+            LandingPageExtension.CreateInstance(PlayniteApi);
             RefreshPlayNextData();
         }
 
@@ -180,14 +180,11 @@ namespace PlayNext
                 {
                     var savedSettings = LoadPluginSettings<PlayNextSettings>();
                     var recentDayCount = savedSettings.RecentDays;
-                    _logger.Debug($"Recent days: {recentDayCount}");
                     var allGames = PlayniteApi.Database.Games.ToArray();
-                    _logger.Debug($"All games: {allGames.Length}");
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
                     var recentGames = new RecentlyPlayedFilter(new DateTimeProvider()).Filter(playedGames, recentDayCount);
 
-                    _logger.Debug($"Recent games: {recentGames.Count()}");
-                    _gameActivities.StartParsingActivity(recentGames);
+                    _gameActivities.ParseGameActivity(recentGames);
                 }
                 catch (Exception ex)
                 {
