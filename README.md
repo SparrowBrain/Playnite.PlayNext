@@ -33,7 +33,7 @@ Attribute score depends on your activity:
 | Recent Order | Order of games played in recend days |
 
 ## Installation
-You can install it either from Playnite's addon browser, or by clicking this link:[playnite://playnite/installaddon/SparrowBrain_PlayNext](playnite://playnite/installaddon/SparrowBrain_PlayNext).
+You can install it either from Playnite's addon browser, or from [the web addon browser](https://playnite.link/addons.html#SparrowBrain_PlayNext).
 
 ## Other Addons Integration
 ### StartPage
