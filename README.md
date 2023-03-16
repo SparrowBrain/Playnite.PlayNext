@@ -8,8 +8,6 @@ Since we don't have big data like Steam, the recommendations are based on your a
 ![Main NextPlay view screenshot](/ci/screenshots/02.jpg)
 The recommendation score algorithm is highly customizable to your personal taste.
 
-
-
 ## Settings
 ![Main NextPlay view screenshot](/ci/screenshots/03.jpg)
 
@@ -33,6 +31,9 @@ Attribute score depends on your activity:
 | Total Playtime | All playtime |
 | Recent Playtime | Playtime within recent days, requires GameActivity addon ⚠️ |
 | Recent Order | Order of games played in recend days |
+
+## Installation
+You can install it either from Playnite's addon browser, or by clicking this [link](playnite://playnite/installaddon/SparrowBrain_PlayNext).
 
 ## Other Addons Integration
 ### StartPage
