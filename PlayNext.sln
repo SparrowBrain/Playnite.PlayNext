@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Item", "Solution I
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{C6BAC238-7131-4472-8413-B7232A26977C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{B2C802E3-396F-4981-B5C3-CB0F337C957A}"
 	ProjectSection(SolutionItems) = preProject
-		addonDatabase\installer_manifest.yaml = addonDatabase\installer_manifest.yaml
+		ci\installer_manifest.yaml = ci\installer_manifest.yaml
 	EndProjectSection
 EndProject
 Global
