@@ -55,8 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\BaseConverter.cs" />
-    <Compile Include="Converters\ShowcaseTypeTCollapsedVisibilityConverter.cs" />
+    <Compile Include="Converters\ShowcaseTypeToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
+    <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\WidthToHeightMultiConverter.cs" />
     <Compile Include="GameActivity\Activity.cs" />
     <Compile Include="GameActivity\Helpers\EnumerableExtensions.cs" />

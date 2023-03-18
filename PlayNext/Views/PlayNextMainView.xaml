@@ -35,6 +35,7 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource PopupBorderBrush}" />
                 <Setter Property="BorderThickness" Value="{DynamicResource PopupBorderThickness}" />
             </Style>
+            <converters:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter" />
         </ResourceDictionary>
     </PluginUserControl.Resources>
 
@@ -64,7 +65,7 @@
             </Button>
         </StackPanel>
 
-        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeTCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -97,10 +98,12 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Width="25">
-                                <Image.Source>
-                                    <BitmapImage DecodePixelWidth="50"  UriSource="{Binding Icon}" />
-                                </Image.Source>
+                            <Image Grid.Column="0" Width="25" Source="{Binding Icon,
+                                Converter={StaticResource UriToBitmapImageConverter},
+                                ConverterParameter=25,
+                                Mode=OneWay,
+                                FallbackValue={StaticResource DefaultGameIcon},
+                                TargetNullValue={StaticResource DefaultGameIcon}}">
                             </Image>
                             <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" />
@@ -111,14 +114,14 @@
             </ListBox>
         </Grid>
 
-        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeTCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
+        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent" >
+            <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <Setter Property="Focusable" Value="False" />
@@ -126,35 +129,32 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                     <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsSelected" Value="true">
-                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
                                         </Trigger>
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
-                                                <Condition Property="IsSelected" Value="true"/>
-                                                <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                                <Condition Property="IsSelected" Value="true" />
+                                                <Condition Property="Selector.IsSelectionActive" Value="false" />
                                             </MultiTrigger.Conditions>
-                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" />
                                         </MultiTrigger>
                                         <Trigger Property="IsEnabled" Value="false">
-                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Background" Value="Transparent" />
                                         </Trigger>
-
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-              
                     </Style>
-                    
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -174,13 +174,13 @@
                                         <StopStoryboard BeginStoryboardName="hoverStopStoryboard"></StopStoryboard>
                                         <BeginStoryboard Name="hoverStartStoryboard">
                                             <Storyboard>
-                                                <DoubleAnimation 
-                                                    Storyboard.TargetName="HoverTransform" 
-                                                    Storyboard.TargetProperty="ScaleX" 
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HoverTransform"
+                                                    Storyboard.TargetProperty="ScaleX"
                                                     From="1" To="1.05" Duration="0:0:0.1" />
-                                                <DoubleAnimation 
-                                                    Storyboard.TargetName="HoverTransform" 
-                                                    Storyboard.TargetProperty="ScaleY" 
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HoverTransform"
+                                                    Storyboard.TargetProperty="ScaleY"
                                                     From="1" To="1.05" Duration="0:0:0.1" />
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -191,13 +191,13 @@
                                         <StopStoryboard BeginStoryboardName="hoverStartStoryboard"></StopStoryboard>
                                         <BeginStoryboard Name="hoverStopStoryboard">
                                             <Storyboard>
-                                                <DoubleAnimation 
-                                                    Storyboard.TargetName="HoverTransform" 
-                                                    Storyboard.TargetProperty="ScaleX" 
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HoverTransform"
+                                                    Storyboard.TargetProperty="ScaleX"
                                                     From="1.05" To="1" Duration="0:0:0.05" />
-                                                <DoubleAnimation 
-                                                    Storyboard.TargetName="HoverTransform" 
-                                                    Storyboard.TargetProperty="ScaleY" 
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HoverTransform"
+                                                    Storyboard.TargetProperty="ScaleY"
                                                     From="1.05" To="1" Duration="0:0:0.05" />
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -205,11 +205,13 @@
                                 </EventTrigger>
                             </Grid.Triggers>
 
-                            <Button Command="{Binding OpenDetails}" Background="Transparent" >
-                                <Image Height="400" >
-                                    <Image.Source>
-                                        <BitmapImage DecodePixelHeight="400"  UriSource="{Binding CoverImage}" />
-                                    </Image.Source>
+                            <Button Command="{Binding OpenDetails}" Background="Transparent">
+                                <Image Height="400" Source="{Binding CoverImage,
+                                    Converter={StaticResource UriToBitmapImageConverter},
+                                    ConverterParameter=400,
+                                    Mode=OneWay,
+                                    FallbackValue={StaticResource DefaultGameCover},
+                                    TargetNullValue={StaticResource DefaultGameCover}}">
                                 </Image>
                             </Button>
                         </Grid>

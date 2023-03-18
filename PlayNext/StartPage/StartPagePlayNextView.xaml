@@ -16,6 +16,7 @@
         <!--<conv:MultiplyConverter x:Key="MultiplyConverter"/>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
         <conv:HeightToWidthMultiConverter x:Key="HeightToWidthMultiConverter"/>-->
+        <converters:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter" />
         <converters:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
         <!--<conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
         <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
@@ -27,11 +28,7 @@
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
         <system:Boolean x:Key="True">True</system:Boolean>
         <system:Boolean x:Key="False">False</system:Boolean>
-       
-      
-     
-      
-       
+        
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type viewModels:GameToPlayViewModel}">
             <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 <Grid ClipToBounds="True"
@@ -69,11 +66,16 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding CoverImage, Mode=OneWay}" Stretch="UniformToFill" 
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            RenderOptions.BitmapScalingMode="Fant"
-                           x:Name="CoverImage"/>
-                    
+                    <Image Stretch="UniformToFill" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           x:Name="CoverImage"
+                           Source="{Binding CoverImage,
+                                    Converter={StaticResource UriToBitmapImageConverter},
+                                    Mode=OneWay,
+                                    FallbackValue={StaticResource DefaultGameCover},
+                                    TargetNullValue={StaticResource DefaultGameCover}}">
+                    </Image>
                     <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage" 
                            RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
                     <TextBlock x:Name="NameTextBlock"

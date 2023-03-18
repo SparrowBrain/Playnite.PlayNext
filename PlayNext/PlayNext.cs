@@ -33,6 +33,7 @@ namespace PlayNext
 
         public PlayNext(IPlayniteAPI api) : base(api)
         {
+            Api = api;
             _settings = new PlayNextSettingsViewModel(this);
             Properties = new GenericPluginProperties
             {
@@ -42,6 +43,8 @@ namespace PlayNext
             _gameActivities = GameActivityExtension.Create(api);
             _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
         }
+
+        public static IPlayniteAPI Api { get; private set; }
 
         public override IEnumerable<SidebarItem> GetSidebarItems()
         {

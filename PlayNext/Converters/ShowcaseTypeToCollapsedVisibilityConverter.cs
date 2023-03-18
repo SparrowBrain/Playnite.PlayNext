@@ -6,7 +6,7 @@ using PlayNext.Model.Data;
 
 namespace PlayNext.Converters
 {
-    internal class ShowcaseTypeTCollapsedVisibilityConverter : BaseConverter, IValueConverter
+    internal class ShowcaseTypeToCollapsedVisibilityConverter : BaseConverter, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
