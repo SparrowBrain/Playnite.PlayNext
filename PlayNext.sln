@@ -15,6 +15,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ci", "ci", "{B2C802E3-396F-4981-B5C3-CB0F337C957A}"
 	ProjectSection(SolutionItems) = preProject
 		ci\installer_manifest.yaml = ci\installer_manifest.yaml
+		ci\release.sh = ci\release.sh
 	EndProjectSection
 EndProject
 Global
