@@ -126,11 +126,11 @@
                     </Grid>
                 </Popup>-->
             </StackPanel>
-            <!--<DataTemplate.Triggers>
-                <DataTrigger Binding="{mu:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{markup:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
+                <!--<DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
                 </DataTrigger>
                 <MultiTrigger>
@@ -215,8 +215,8 @@
                 </MultiDataTrigger>
                 <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
                     <Setter Property="Text" Value="" TargetName="PlayIcon"/>
-                </DataTrigger>
-            </DataTemplate.Triggers>-->
+                </DataTrigger>-->
+            </DataTemplate.Triggers>
         </DataTemplate>
         <Style x:Key="GameListItem" TargetType="ListBoxItem">
             <EventSetter Event="MouseUp" Handler="ListBoxItem_MouseUp"/>
