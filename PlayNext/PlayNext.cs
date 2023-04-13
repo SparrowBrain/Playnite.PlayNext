@@ -72,7 +72,7 @@ namespace PlayNext
 
         public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
-            // Add code to be executed when game is finished installing.
+            RefreshPlayNextData();
         }
 
         public override void OnGameStarted(OnGameStartedEventArgs args)
@@ -92,7 +92,7 @@ namespace PlayNext
 
         public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
         {
-            // Add code to be executed when game is uninstalled.
+            RefreshPlayNextData();
         }
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
