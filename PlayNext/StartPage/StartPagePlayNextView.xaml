@@ -89,7 +89,7 @@
                                Visibility="Hidden" />
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="5">
-                            <Button Background="{x:Null}" Command="{Binding Path = RunGame}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
+                            <Button Background="{x:Null}" Command="{Binding Path = RunGame}" Padding="4" x:Name="PlayButton" BorderThickness="0">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon" />
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -150,10 +150,10 @@
                 <DataTrigger Binding="{markup:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock" />
                 </DataTrigger>
-                <!--<DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
+                <DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock" />
                 </DataTrigger>
-                <MultiTrigger>
+                <!--<MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsMouseOver" Value="True" />
                         <Condition Property="IsVisible" Value="True" SourceName="Proxy" />
@@ -300,7 +300,7 @@
                     <RotateTransform Angle="-90"></RotateTransform>
                 </TextBlock.LayoutTransform>
             </TextBlock>
-            <ListBox Grid.Column="1" ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
+            <ListBox Grid.Column="1" ItemsSource="{Binding Path = Games}" ItemContainerStyle="{DynamicResource GameListItem}"
                      BorderThickness="0" Background="Transparent" Padding="0"
                      ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                      ScrollViewer.VerticalScrollBarVisibility="Disabled">

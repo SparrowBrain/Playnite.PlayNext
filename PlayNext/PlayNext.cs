@@ -72,7 +72,7 @@ namespace PlayNext
 
         public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
-            RefreshPlayNextData();
+            _startPagePlayNextViewModel?.UpdateGame(args.Game);
         }
 
         public override void OnGameStarted(OnGameStartedEventArgs args)
@@ -92,7 +92,7 @@ namespace PlayNext
 
         public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
         {
-            RefreshPlayNextData();
+            _startPagePlayNextViewModel?.UpdateGame(args.Game);
         }
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)

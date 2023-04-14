@@ -7,6 +7,7 @@ using System.Windows;
 using PlayNext.Model.Score;
 using PlayNext.ViewModels;
 using Playnite.SDK;
+using Playnite.SDK.Models;
 
 namespace PlayNext.StartPage
 {
@@ -50,6 +51,22 @@ namespace PlayNext.StartPage
         {
             get => _games;
             set => SetValue(ref _games, value);
+        }
+
+        public void UpdateGame(Game game)
+        {
+            var gameToUpdate = Games.FirstOrDefault(x => x.Id == game.Id);
+            if (gameToUpdate == null)
+            {
+                return;
+            }
+
+            var index = Games.IndexOf(gameToUpdate);
+            var newGame = new GameToPlayViewModel(_plugin, game, gameToUpdate.Score);
+            var newGames = new ObservableCollection<GameToPlayViewModel>(Games);
+            newGames.RemoveAt(index);
+            newGames.Insert(index, newGame);
+            Games = newGames;
         }
     }
 }
