@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using PlayNext.Model.Data;
 using PlayNext.Model.Score;
+using PlayNext.Settings;
 using Playnite.SDK;
 
 namespace PlayNext.ViewModels

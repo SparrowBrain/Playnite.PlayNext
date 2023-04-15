@@ -7,6 +7,7 @@ using System.Windows.Media;
 using PlayNext.GameActivity;
 using PlayNext.Model.Filters;
 using PlayNext.Services;
+using PlayNext.Settings;
 using PlayNext.StartPage;
 using PlayNext.ViewModels;
 using PlayNext.Views;
@@ -22,6 +23,7 @@ namespace PlayNext
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNextSettingsViewModel _settings;
         private readonly GameActivityExtension _gameActivities;
+        private readonly StartupSettingsValidator _startupSettingsValidator;
 
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
@@ -42,6 +44,9 @@ namespace PlayNext
 
             _gameActivities = GameActivityExtension.Create(api);
             _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
+
+            var pluginSettingsPersistence = new PluginSettingsPersistence(this);
+            _startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, new SettingsMigrator(pluginSettingsPersistence));
         }
 
         public static IPlayniteAPI Api { get; private set; }
@@ -97,7 +102,7 @@ namespace PlayNext
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
-            EnsureSettingsExist();
+            _startupSettingsValidator.EnsureCorrectVersionSettingsExist();
             LandingPageExtension.CreateInstance(PlayniteApi);
             RefreshPlayNextData();
         }
@@ -174,15 +179,6 @@ namespace PlayNext
         private void RefreshPlayNextData()
         {
             ParseRecentActivities();
-        }
-
-        private void EnsureSettingsExist()
-        {
-            var savedSettings = LoadPluginSettings<PlayNextSettings>();
-            if (savedSettings == null)
-            {
-                SavePluginSettings(PlayNextSettings.Default);
-            }
         }
 
         private void ParseRecentActivities()

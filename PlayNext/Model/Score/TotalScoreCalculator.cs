@@ -6,6 +6,7 @@ using PlayNext.Model.Filters;
 using PlayNext.Model.Score.Attribute;
 using PlayNext.Model.Score.GameScore;
 using PlayNext.Services;
+using PlayNext.Settings;
 using PlayNext.ViewModels;
 using Playnite.SDK;
 
@@ -41,21 +42,21 @@ namespace PlayNext.Model.Score
 
             var attributeCalculationWeights = new AttributeCalculationWeights()
             {
-                TotalPlaytime = savedSettings.TotalPlaytimeSerialized / PlayNextSettings.MaxWeightValue,
-                RecentPlaytime = savedSettings.RecentPlaytimeSerialized / PlayNextSettings.MaxWeightValue,
-                RecentOrder = savedSettings.RecentOrderSerialized / PlayNextSettings.MaxWeightValue,
+                TotalPlaytime = savedSettings.TotalPlaytime / PlayNextSettings.MaxWeightValue,
+                RecentPlaytime = savedSettings.RecentPlaytime / PlayNextSettings.MaxWeightValue,
+                RecentOrder = savedSettings.RecentOrder / PlayNextSettings.MaxWeightValue,
             };
 
             var gameScoreCalculationWeights = new GameScoreWeights()
             {
-                Genre = savedSettings.GenreSerialized / PlayNextSettings.MaxWeightValue,
-                Feature = savedSettings.FeatureSerialized / PlayNextSettings.MaxWeightValue,
-                Developer = savedSettings.DeveloperSerialized / PlayNextSettings.MaxWeightValue,
-                Publisher = savedSettings.PublisherSerialized / PlayNextSettings.MaxWeightValue,
-                Tag = savedSettings.TagSerialized / PlayNextSettings.MaxWeightValue,
-                CriticScore = savedSettings.CriticScoreSerialized / PlayNextSettings.MaxWeightValue,
-                CommunityScore = savedSettings.CommunityScoreSerialized / PlayNextSettings.MaxWeightValue,
-                ReleaseYear = savedSettings.ReleaseYearSerialized / PlayNextSettings.MaxWeightValue,
+                Genre = savedSettings.Genre / PlayNextSettings.MaxWeightValue,
+                Feature = savedSettings.Feature / PlayNextSettings.MaxWeightValue,
+                Developer = savedSettings.Developer / PlayNextSettings.MaxWeightValue,
+                Publisher = savedSettings.Publisher / PlayNextSettings.MaxWeightValue,
+                Tag = savedSettings.Tag / PlayNextSettings.MaxWeightValue,
+                CriticScore = savedSettings.CriticScore / PlayNextSettings.MaxWeightValue,
+                CommunityScore = savedSettings.CommunityScore / PlayNextSettings.MaxWeightValue,
+                ReleaseYear = savedSettings.ReleaseYear / PlayNextSettings.MaxWeightValue,
             };
 
             var desiredReleaseYear = GetDesiredReleaseYear(savedSettings);

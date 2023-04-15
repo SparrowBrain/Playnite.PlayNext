@@ -68,7 +68,11 @@
     <Compile Include="Model\Data\AttributeCalculationWeights.cs" />
     <Compile Include="Model\Score\TotalScoreCalculator.cs" />
     <Compile Include="PlayNext.cs" />
-    <Compile Include="PlayNextSettings.cs" />
+    <Compile Include="Settings\IPluginSettingsPersistence.cs" />
+    <Compile Include="Settings\ISettingsMigrator.cs" />
+    <Compile Include="Settings\IVersionedSettings.cs" />
+    <Compile Include="Settings\Old\SettinvsV0.cs" />
+    <Compile Include="Settings\PlayNextSettings.cs" />
     <Compile Include="Model\Data\ReleaseYearChoice.cs" />
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculator.cs" />
     <Compile Include="Model\Score\Attribute\CommunityScoreCalculator.cs" />
@@ -80,6 +84,10 @@
     <Compile Include="Model\Score\ScoreNormalizer.cs" />
     <Compile Include="Model\Score\Summator.cs" />
     <Compile Include="Model\Data\GameScoreWeights.cs" />
+    <Compile Include="Settings\PluginSettingsPersistence.cs" />
+    <Compile Include="Settings\SettingsMigrator.cs" />
+    <Compile Include="Settings\StartupSettingsValidator.cs" />
+    <Compile Include="Settings\VersionedSettings.cs" />
     <Compile Include="StartPage\LandingPageExtension.cs" />
     <Compile Include="StartPage\Settings\LandingPageSettings.cs" />
     <Compile Include="StartPage\Markup\LandingPageSettings.cs" />

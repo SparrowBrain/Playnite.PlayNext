@@ -29,7 +29,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             var result = sut.CalculateByPlaytime(games, weight);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.Keys.Count);
+            Assert.Single( result.Keys);
             Assert.Equal(100, result[attributeId]);
         }
 

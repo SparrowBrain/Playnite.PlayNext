@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MemberAutoMoqDataAttribute.cs" />
     <Compile Include="Model\Filters\UnplayedFilterTests.cs" />
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculatorTests.cs" />
     <Compile Include="AutoMoqData.cs" />
@@ -88,6 +89,9 @@
     <Compile Include="Model\Score\GameScore\FinalGameScoreCalculatorTests.cs" />
     <Compile Include="Model\Score\ScoreNormalizerTests.cs" />
     <Compile Include="Model\Score\SummatorTests.cs" />
+    <Compile Include="Settings\PlayNextSettingsTests.cs" />
+    <Compile Include="Settings\SettingsMigratorTests.cs" />
+    <Compile Include="Settings\StartupSettingsValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using PlayNext.Model.Score;
+using PlayNext.Settings;
 using PlayNext.ViewModels;
 using Playnite.SDK;
 using Playnite.SDK.Models;

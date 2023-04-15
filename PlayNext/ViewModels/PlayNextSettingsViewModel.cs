@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using PlayNext.Model.Data;
+using PlayNext.Settings;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 
@@ -58,143 +59,143 @@ namespace PlayNext.ViewModels
 
         public float TotalPlaytimeUi
         {
-            get => Settings.TotalPlaytimeSerialized;
+            get => Settings.TotalPlaytime;
             set
             {
-                var difference = (value - Settings.TotalPlaytimeSerialized) / (AttributeCalculationWeights.Number - 1);
+                var difference = (value - Settings.TotalPlaytime) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
-                Settings.TotalPlaytimeSerialized = value;
-                PushAttributeWeightsToTotal(nameof(Settings.TotalPlaytimeSerialized));
+                Settings.TotalPlaytime = value;
+                PushAttributeWeightsToTotal(nameof(Settings.TotalPlaytime));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
         public float RecentPlaytimeUi
         {
-            get => Settings.RecentPlaytimeSerialized;
+            get => Settings.RecentPlaytime;
             set
             {
-                var difference = (value - Settings.RecentPlaytimeSerialized) / (AttributeCalculationWeights.Number - 1);
+                var difference = (value - Settings.RecentPlaytime) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
-                Settings.RecentPlaytimeSerialized = value;
-                PushAttributeWeightsToTotal(nameof(Settings.RecentPlaytimeSerialized));
+                Settings.RecentPlaytime = value;
+                PushAttributeWeightsToTotal(nameof(Settings.RecentPlaytime));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
         public float RecentOrderUi
         {
-            get => Settings.RecentOrderSerialized;
+            get => Settings.RecentOrder;
             set
             {
-                var difference = (value - Settings.RecentOrderSerialized) / (AttributeCalculationWeights.Number - 1);
+                var difference = (value - Settings.RecentOrder) / (AttributeCalculationWeights.Number - 1);
                 RebalanceAttributeScoreSourceWeights(difference);
-                Settings.RecentOrderSerialized = value;
-                PushAttributeWeightsToTotal(nameof(Settings.RecentOrderSerialized));
+                Settings.RecentOrder = value;
+                PushAttributeWeightsToTotal(nameof(Settings.RecentOrder));
                 NotifyAttributeScoreSourcePropertiesChanged();
             }
         }
 
         public float GenreUi
         {
-            get => Settings.GenreSerialized;
+            get => Settings.Genre;
             set
             {
-                var difference = (value - Settings.GenreSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.Genre) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.GenreSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.GenreSerialized));
+                Settings.Genre = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.Genre));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float FeatureUi
         {
-            get => Settings.FeatureSerialized;
+            get => Settings.Feature;
             set
             {
-                var difference = (value - Settings.FeatureSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.Feature) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.FeatureSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.FeatureSerialized));
+                Settings.Feature = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.Feature));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float DeveloperUi
         {
-            get => Settings.DeveloperSerialized;
+            get => Settings.Developer;
             set
             {
-                var difference = (value - Settings.DeveloperSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.Developer) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.DeveloperSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.DeveloperSerialized));
+                Settings.Developer = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.Developer));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float PublisherUi
         {
-            get => Settings.PublisherSerialized;
+            get => Settings.Publisher;
             set
             {
-                var difference = (value - Settings.PublisherSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.Publisher) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.PublisherSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.PublisherSerialized));
+                Settings.Publisher = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.Publisher));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float TagUi
         {
-            get => Settings.TagSerialized;
+            get => Settings.Tag;
             set
             {
-                var difference = (value - Settings.TagSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.Tag) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.TagSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.TagSerialized));
+                Settings.Tag = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.Tag));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float CriticScoreUi
         {
-            get => Settings.CriticScoreSerialized;
+            get => Settings.CriticScore;
             set
             {
-                var difference = (value - Settings.CriticScoreSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.CriticScore) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.CriticScoreSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.CriticScoreSerialized));
+                Settings.CriticScore = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.CriticScore));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float CommunityScoreUi
         {
-            get => Settings.CommunityScoreSerialized;
+            get => Settings.CommunityScore;
             set
             {
-                var difference = (value - Settings.CommunityScoreSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.CommunityScore) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.CommunityScoreSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.CommunityScoreSerialized));
+                Settings.CommunityScore = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.CommunityScore));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
 
         public float ReleaseYearUi
         {
-            get => Settings.ReleaseYearSerialized;
+            get => Settings.ReleaseYear;
             set
             {
-                var difference = (value - Settings.ReleaseYearSerialized) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.ReleaseYear) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.ReleaseYearSerialized = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.ReleaseYearSerialized));
+                Settings.ReleaseYear = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.ReleaseYear));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -237,81 +238,81 @@ namespace PlayNext.ViewModels
 
         private void RebalanceAttributeScoreSourceWeights(float difference)
         {
-            Settings.TotalPlaytimeSerialized = ContainInMinMax(Settings.TotalPlaytimeSerialized - difference);
-            Settings.RecentPlaytimeSerialized = ContainInMinMax(Settings.RecentPlaytimeSerialized - difference);
-            Settings.RecentOrderSerialized = ContainInMinMax(Settings.RecentOrderSerialized - difference);
+            Settings.TotalPlaytime = ContainInMinMax(Settings.TotalPlaytime - difference);
+            Settings.RecentPlaytime = ContainInMinMax(Settings.RecentPlaytime - difference);
+            Settings.RecentOrder = ContainInMinMax(Settings.RecentOrder - difference);
         }
 
         private void RebalanceGameScoreWeights(float difference)
         {
-            Settings.GenreSerialized = ContainInMinMax(Settings.GenreSerialized - difference);
-            Settings.FeatureSerialized = ContainInMinMax(Settings.FeatureSerialized - difference);
-            Settings.DeveloperSerialized = ContainInMinMax(Settings.DeveloperSerialized - difference);
-            Settings.PublisherSerialized = ContainInMinMax(Settings.PublisherSerialized - difference);
-            Settings.TagSerialized = ContainInMinMax(Settings.TagSerialized - difference);
-            Settings.CriticScoreSerialized = ContainInMinMax(Settings.CriticScoreSerialized - difference);
-            Settings.CommunityScoreSerialized = ContainInMinMax(Settings.CommunityScoreSerialized - difference);
-            Settings.ReleaseYearSerialized = ContainInMinMax(Settings.ReleaseYearSerialized - difference);
+            Settings.Genre = ContainInMinMax(Settings.Genre - difference);
+            Settings.Feature = ContainInMinMax(Settings.Feature - difference);
+            Settings.Developer = ContainInMinMax(Settings.Developer - difference);
+            Settings.Publisher = ContainInMinMax(Settings.Publisher - difference);
+            Settings.Tag = ContainInMinMax(Settings.Tag - difference);
+            Settings.CriticScore = ContainInMinMax(Settings.CriticScore - difference);
+            Settings.CommunityScore = ContainInMinMax(Settings.CommunityScore - difference);
+            Settings.ReleaseYear = ContainInMinMax(Settings.ReleaseYear - difference);
         }
 
         private void PushGameScoreWeightsToTotal(string ignore)
         {
-            if (ignore != nameof(Settings.GenreSerialized))
+            if (ignore != nameof(Settings.Genre))
             {
-                Settings.GenreSerialized = ContainInMinMax(Settings.GenreSerialized + GetMissingGameWeightToTotal());
+                Settings.Genre = ContainInMinMax(Settings.Genre + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.FeatureSerialized))
+            if (ignore != nameof(Settings.Feature))
             {
-                Settings.FeatureSerialized = ContainInMinMax(Settings.FeatureSerialized + GetMissingGameWeightToTotal());
+                Settings.Feature = ContainInMinMax(Settings.Feature + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.DeveloperSerialized))
+            if (ignore != nameof(Settings.Developer))
             {
-                Settings.DeveloperSerialized = ContainInMinMax(Settings.DeveloperSerialized + GetMissingGameWeightToTotal());
+                Settings.Developer = ContainInMinMax(Settings.Developer + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.PublisherSerialized))
+            if (ignore != nameof(Settings.Publisher))
             {
-                Settings.PublisherSerialized = ContainInMinMax(Settings.PublisherSerialized + GetMissingGameWeightToTotal());
+                Settings.Publisher = ContainInMinMax(Settings.Publisher + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.TagSerialized))
+            if (ignore != nameof(Settings.Tag))
             {
-                Settings.TagSerialized = ContainInMinMax(Settings.TagSerialized + GetMissingGameWeightToTotal());
+                Settings.Tag = ContainInMinMax(Settings.Tag + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.CriticScoreSerialized))
+            if (ignore != nameof(Settings.CriticScore))
             {
-                Settings.CriticScoreSerialized = ContainInMinMax(Settings.CriticScoreSerialized + GetMissingGameWeightToTotal());
+                Settings.CriticScore = ContainInMinMax(Settings.CriticScore + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.CommunityScoreSerialized))
+            if (ignore != nameof(Settings.CommunityScore))
             {
-                Settings.CommunityScoreSerialized = ContainInMinMax(Settings.CommunityScoreSerialized + GetMissingGameWeightToTotal());
+                Settings.CommunityScore = ContainInMinMax(Settings.CommunityScore + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.ReleaseYearSerialized))
+            if (ignore != nameof(Settings.ReleaseYear))
             {
-                Settings.ReleaseYearSerialized = ContainInMinMax(Settings.ReleaseYearSerialized + GetMissingGameWeightToTotal());
+                Settings.ReleaseYear = ContainInMinMax(Settings.ReleaseYear + GetMissingGameWeightToTotal());
             }
         }
 
         private void PushAttributeWeightsToTotal(string ignore)
         {
-            if (ignore != nameof(Settings.TotalPlaytimeSerialized))
+            if (ignore != nameof(Settings.TotalPlaytime))
             {
-                Settings.TotalPlaytimeSerialized = ContainInMinMax(Settings.TotalPlaytimeSerialized + GetMissingAttributeWeightToTotal());
+                Settings.TotalPlaytime = ContainInMinMax(Settings.TotalPlaytime + GetMissingAttributeWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.RecentOrderSerialized))
+            if (ignore != nameof(Settings.RecentOrder))
             {
-                Settings.RecentOrderSerialized = ContainInMinMax(Settings.RecentOrderSerialized + GetMissingAttributeWeightToTotal());
+                Settings.RecentOrder = ContainInMinMax(Settings.RecentOrder + GetMissingAttributeWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.RecentPlaytimeSerialized))
+            if (ignore != nameof(Settings.RecentPlaytime))
             {
-                Settings.RecentPlaytimeSerialized = ContainInMinMax(Settings.RecentPlaytimeSerialized + GetMissingAttributeWeightToTotal());
+                Settings.RecentPlaytime = ContainInMinMax(Settings.RecentPlaytime + GetMissingAttributeWeightToTotal());
             }
         }
 
@@ -341,12 +342,12 @@ namespace PlayNext.ViewModels
 
         private float GetMissingAttributeWeightToTotal()
         {
-            return PlayNextSettings.MaxWeightValue - Settings.TotalPlaytimeSerialized - Settings.RecentPlaytimeSerialized - Settings.RecentOrderSerialized;
+            return PlayNextSettings.MaxWeightValue - Settings.TotalPlaytime - Settings.RecentPlaytime - Settings.RecentOrder;
         }
 
         private float GetMissingGameWeightToTotal()
         {
-            return PlayNextSettings.MaxWeightValue - Settings.GenreSerialized - Settings.FeatureSerialized - Settings.DeveloperSerialized - Settings.PublisherSerialized - Settings.TagSerialized - Settings.CriticScoreSerialized - Settings.CommunityScoreSerialized - Settings.ReleaseYearSerialized;
+            return PlayNextSettings.MaxWeightValue - Settings.Genre - Settings.Feature - Settings.Developer - Settings.Publisher - Settings.Tag - Settings.CriticScore - Settings.CommunityScore - Settings.ReleaseYear;
         }
     }
 }

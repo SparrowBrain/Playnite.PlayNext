@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using PlayNext.GameActivity.Helpers;
+using PlayNext.Settings;
 using Playnite.SDK;
 using Playnite.SDK.Models;
 
