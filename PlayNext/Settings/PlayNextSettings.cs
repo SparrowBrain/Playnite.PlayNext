@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayNext.Model.Data;
-using PlayNext.Settings.Old;
 using Playnite.SDK.Data;
 
 namespace PlayNext.Settings
@@ -37,35 +36,6 @@ namespace PlayNext.Settings
         }
 
         public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
-
-        public static PlayNextSettings Migrate(SettingsV0 oldSettings)
-        {
-            if (oldSettings.Version != CurrentVersion - 1)
-            {
-                throw new ArgumentException($"Cannot migrate v{oldSettings.Version} settings to v{CurrentVersion}");
-            }
-
-            var settings = Default;
-            settings.TotalPlaytime = oldSettings.TotalPlaytimeSerialized;
-            settings.RecentPlaytime = oldSettings.RecentPlaytimeSerialized;
-            settings.RecentOrder = oldSettings.RecentOrderSerialized;
-
-            settings.Genre = oldSettings.GenreSerialized;
-            settings.Feature = oldSettings.FeatureSerialized;
-            settings.Developer = oldSettings.DeveloperSerialized;
-            settings.Publisher = oldSettings.PublisherSerialized;
-            settings.Tag = oldSettings.TagSerialized;
-            settings.CriticScore = oldSettings.CriticScoreSerialized;
-            settings.CommunityScore = oldSettings.CommunityScoreSerialized;
-            settings.ReleaseYear = oldSettings.ReleaseYearSerialized;
-            settings.ReleaseYearChoice = oldSettings.ReleaseYearChoice;
-            settings.DesiredReleaseYear = oldSettings.DesiredReleaseYear;
-
-            settings.RecentDays = oldSettings.RecentDays;
-            settings.NumberOfTopGames = oldSettings.NumberOfTopGames;
-
-            return settings;
-        }
 
         public float TotalPlaytime { get; set; }
 

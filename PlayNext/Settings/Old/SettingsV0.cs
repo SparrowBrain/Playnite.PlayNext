@@ -3,7 +3,7 @@ using PlayNext.Model.Data;
 
 namespace PlayNext.Settings.Old
 {
-    public class SettingsV0 : IVersionedSettings
+    public class SettingsV0 : IMigratableSettings
     {
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
 
@@ -56,5 +56,29 @@ namespace PlayNext.Settings.Old
         public int RecentDays { get; set; }
 
         public int Version { get; set; }
+
+        public virtual IVersionedSettings Migrate()
+        {
+            var settings = PlayNextSettings.Default;
+            settings.TotalPlaytime = TotalPlaytimeSerialized;
+            settings.RecentPlaytime = RecentPlaytimeSerialized;
+            settings.RecentOrder = RecentOrderSerialized;
+
+            settings.Genre = GenreSerialized;
+            settings.Feature = FeatureSerialized;
+            settings.Developer = DeveloperSerialized;
+            settings.Publisher = PublisherSerialized;
+            settings.Tag = TagSerialized;
+            settings.CriticScore = CriticScoreSerialized;
+            settings.CommunityScore = CommunityScoreSerialized;
+            settings.ReleaseYear = ReleaseYearSerialized;
+            settings.ReleaseYearChoice = ReleaseYearChoice;
+            settings.DesiredReleaseYear = DesiredReleaseYear;
+
+            settings.RecentDays = RecentDays;
+            settings.NumberOfTopGames = NumberOfTopGames;
+
+            return settings;
+        }
     }
 }

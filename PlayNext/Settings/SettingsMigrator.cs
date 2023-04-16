@@ -14,14 +14,32 @@ namespace PlayNext.Settings
 
         public PlayNextSettings LoadAndMigrateToNewest(int version)
         {
+            IVersionedSettings versionedSettings;
             switch (version)
             {
                 case 0:
-                    var settingsV0 = _pluginSettingsPersistence.LoadPluginSettings<SettingsV0>();
-                    return PlayNextSettings.Migrate(settingsV0);
+                    versionedSettings = _pluginSettingsPersistence.LoadPluginSettings<SettingsV0>();
+                    break;
 
                 default:
                     throw new ArgumentException($"Version v{version} not configured in the migrator");
+            }
+
+            while (true)
+            {
+                if (versionedSettings is PlayNextSettings newestSettings)
+                {
+                    return newestSettings;
+                }
+
+                var oldSettings = versionedSettings as IMigratableSettings;
+                var newSettings = oldSettings.Migrate();
+                if (newSettings.Version != oldSettings.Version + 1)
+                {
+                    throw new Exception($"Invalid migration in v{oldSettings.Version} - version changed to v{newSettings.Version}, but only allowed to increment by one.");
+                }
+
+                versionedSettings = newSettings;
             }
         }
     }

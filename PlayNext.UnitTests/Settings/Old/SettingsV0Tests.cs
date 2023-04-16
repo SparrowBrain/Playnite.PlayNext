@@ -1,24 +1,21 @@
-﻿using System;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using PlayNext.Settings;
 using PlayNext.Settings.Old;
 using Xunit;
 
-namespace PlayNext.UnitTests.Settings
+namespace PlayNext.UnitTests.Settings.Old
 {
-    public class PlayNextSettingsTests
+    public class SettingsV0Tests
     {
         [Theory, AutoData]
-        public void Migrate_MigratesToV1_WhenV0IsSupplied(
+        public void Migrate_MigratesToV1(
             SettingsV0 settingsV0)
         {
-            // Arrange
-            settingsV0.Version = 0;
-
             // Act
-            var result = PlayNextSettings.Migrate(settingsV0);
+            var result = settingsV0.Migrate() as PlayNextSettings;
 
             // Assert
+            Assert.NotNull(result);
             Assert.Equal(settingsV0.RecentDays, result.RecentDays);
             Assert.Equal(settingsV0.NumberOfTopGames, result.NumberOfTopGames);
 
@@ -36,24 +33,8 @@ namespace PlayNext.UnitTests.Settings
             Assert.Equal(settingsV0.ReleaseYearSerialized, result.ReleaseYear);
             Assert.Equal(settingsV0.ReleaseYearChoice, result.ReleaseYearChoice);
             Assert.Equal(settingsV0.DesiredReleaseYear, result.DesiredReleaseYear);
-        }
 
-        [Theory]
-        [InlineAutoData(-1)]
-        [InlineAutoData(1)]
-        [InlineAutoData(2)]
-        public void Migrate_ThrowsException_WhenNonV0IsSupplied(
-            int oldVersion,
-            SettingsV0 settingsV0)
-        {
-            // Arrange
-            settingsV0.Version = oldVersion;
-
-            // Act
-            var act = new Action(() => PlayNextSettings.Migrate(settingsV0));
-
-            // Assert
-            Assert.ThrowsAny<ArgumentException>(act);
+            Assert.Equal(1, result.Version);
         }
     }
 }

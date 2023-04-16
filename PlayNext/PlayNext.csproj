@@ -68,10 +68,11 @@
     <Compile Include="Model\Data\AttributeCalculationWeights.cs" />
     <Compile Include="Model\Score\TotalScoreCalculator.cs" />
     <Compile Include="PlayNext.cs" />
+    <Compile Include="Settings\IMigratableSettings.cs" />
     <Compile Include="Settings\IPluginSettingsPersistence.cs" />
     <Compile Include="Settings\ISettingsMigrator.cs" />
     <Compile Include="Settings\IVersionedSettings.cs" />
-    <Compile Include="Settings\Old\SettinvsV0.cs" />
+    <Compile Include="Settings\Old\SettingsV0.cs" />
     <Compile Include="Settings\PlayNextSettings.cs" />
     <Compile Include="Model\Data\ReleaseYearChoice.cs" />
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculator.cs" />

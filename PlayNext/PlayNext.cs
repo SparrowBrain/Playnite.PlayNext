@@ -21,10 +21,10 @@ namespace PlayNext
     public class PlayNext : GenericPlugin, IStartPageExtension
     {
         private readonly ILogger _logger = LogManager.GetLogger();
-        private readonly PlayNextSettingsViewModel _settings;
         private readonly GameActivityExtension _gameActivities;
         private readonly StartupSettingsValidator _startupSettingsValidator;
 
+        private PlayNextSettingsViewModel _settings;
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
         private PlayNextMainView _playNextMainView;
@@ -36,7 +36,6 @@ namespace PlayNext
         public PlayNext(IPlayniteAPI api) : base(api)
         {
             Api = api;
-            _settings = new PlayNextSettingsViewModel(this);
             Properties = new GenericPluginProperties
             {
                 HasSettings = true,
@@ -119,7 +118,7 @@ namespace PlayNext
 
         public override ISettings GetSettings(bool firstRunSettings)
         {
-            return _settings;
+            return _settings ?? (_settings = new PlayNextSettingsViewModel(this));
         }
 
         public override UserControl GetSettingsView(bool firstRunSettings)
