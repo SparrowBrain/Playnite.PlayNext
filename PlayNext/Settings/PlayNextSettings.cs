@@ -37,27 +37,27 @@ namespace PlayNext.Settings
 
         public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
-        public float TotalPlaytime { get; set; }
+        public float TotalPlaytimeWeight { get; set; }
 
-        public float RecentPlaytime { get; set; }
+        public float RecentPlaytimeWeight { get; set; }
 
-        public float RecentOrder { get; set; }
+        public float RecentOrderWeight { get; set; }
 
-        public float Genre { get; set; }
+        public float GenreWeight { get; set; }
 
-        public float Feature { get; set; }
+        public float FeatureWeight { get; set; }
 
-        public float Developer { get; set; }
+        public float DeveloperWeight { get; set; }
 
-        public float Publisher { get; set; }
+        public float PublisherWeight { get; set; }
 
-        public float Tag { get; set; }
+        public float TagWeight { get; set; }
 
-        public float CriticScore { get; set; }
+        public float CriticScoreWeight { get; set; }
 
-        public float CommunityScore { get; set; }
+        public float CommunityScoreWeight { get; set; }
 
-        public float ReleaseYear { get; set; }
+        public float ReleaseYearWeight { get; set; }
 
         public int DesiredReleaseYear
         {
@@ -108,21 +108,21 @@ namespace PlayNext.Settings
 
         public void SetAttributeWeights(AttributeCalculationWeights attributeCalculationWeights)
         {
-            TotalPlaytime = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
-            RecentPlaytime = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
-            RecentOrder = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+            TotalPlaytimeWeight = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
+            RecentPlaytimeWeight = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
+            RecentOrderWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
         }
 
         public void SetGameWeights(GameScoreWeights gameScoreWeights)
         {
-            Genre = gameScoreWeights.Genre * MaxWeightValue;
-            Feature = gameScoreWeights.Feature * MaxWeightValue;
-            Developer = gameScoreWeights.Developer * MaxWeightValue;
-            Publisher = gameScoreWeights.Publisher * MaxWeightValue;
-            Tag = gameScoreWeights.Tag * MaxWeightValue;
-            CriticScore = gameScoreWeights.CriticScore * MaxWeightValue;
-            CommunityScore = gameScoreWeights.CommunityScore * MaxWeightValue;
-            ReleaseYear = gameScoreWeights.ReleaseYear * MaxWeightValue;
+            GenreWeight = gameScoreWeights.Genre * MaxWeightValue;
+            FeatureWeight = gameScoreWeights.Feature * MaxWeightValue;
+            DeveloperWeight = gameScoreWeights.Developer * MaxWeightValue;
+            PublisherWeight = gameScoreWeights.Publisher * MaxWeightValue;
+            TagWeight = gameScoreWeights.Tag * MaxWeightValue;
+            CriticScoreWeight = gameScoreWeights.CriticScore * MaxWeightValue;
+            CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
+            ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
         }
     }
 }

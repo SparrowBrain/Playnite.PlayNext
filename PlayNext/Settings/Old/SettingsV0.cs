@@ -60,18 +60,18 @@ namespace PlayNext.Settings.Old
         public virtual IVersionedSettings Migrate()
         {
             var settings = PlayNextSettings.Default;
-            settings.TotalPlaytime = TotalPlaytimeSerialized;
-            settings.RecentPlaytime = RecentPlaytimeSerialized;
-            settings.RecentOrder = RecentOrderSerialized;
+            settings.TotalPlaytimeWeight = TotalPlaytimeSerialized;
+            settings.RecentPlaytimeWeight = RecentPlaytimeSerialized;
+            settings.RecentOrderWeight = RecentOrderSerialized;
 
-            settings.Genre = GenreSerialized;
-            settings.Feature = FeatureSerialized;
-            settings.Developer = DeveloperSerialized;
-            settings.Publisher = PublisherSerialized;
-            settings.Tag = TagSerialized;
-            settings.CriticScore = CriticScoreSerialized;
-            settings.CommunityScore = CommunityScoreSerialized;
-            settings.ReleaseYear = ReleaseYearSerialized;
+            settings.GenreWeight = GenreSerialized;
+            settings.FeatureWeight = FeatureSerialized;
+            settings.DeveloperWeight = DeveloperSerialized;
+            settings.PublisherWeight = PublisherSerialized;
+            settings.TagWeight = TagSerialized;
+            settings.CriticScoreWeight = CriticScoreSerialized;
+            settings.CommunityScoreWeight = CommunityScoreSerialized;
+            settings.ReleaseYearWeight = ReleaseYearSerialized;
             settings.ReleaseYearChoice = ReleaseYearChoice;
             settings.DesiredReleaseYear = DesiredReleaseYear;
 

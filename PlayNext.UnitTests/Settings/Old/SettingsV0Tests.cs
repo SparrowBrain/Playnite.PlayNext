@@ -19,18 +19,18 @@ namespace PlayNext.UnitTests.Settings.Old
             Assert.Equal(settingsV0.RecentDays, result.RecentDays);
             Assert.Equal(settingsV0.NumberOfTopGames, result.NumberOfTopGames);
 
-            Assert.Equal(settingsV0.TotalPlaytimeSerialized, result.TotalPlaytime);
-            Assert.Equal(settingsV0.RecentPlaytimeSerialized, result.RecentPlaytime);
-            Assert.Equal(settingsV0.RecentOrderSerialized, result.RecentOrder);
+            Assert.Equal(settingsV0.TotalPlaytimeSerialized, result.TotalPlaytimeWeight);
+            Assert.Equal(settingsV0.RecentPlaytimeSerialized, result.RecentPlaytimeWeight);
+            Assert.Equal(settingsV0.RecentOrderSerialized, result.RecentOrderWeight);
 
-            Assert.Equal(settingsV0.GenreSerialized, result.Genre);
-            Assert.Equal(settingsV0.FeatureSerialized, result.Feature);
-            Assert.Equal(settingsV0.DeveloperSerialized, result.Developer);
-            Assert.Equal(settingsV0.PublisherSerialized, result.Publisher);
-            Assert.Equal(settingsV0.TagSerialized, result.Tag);
-            Assert.Equal(settingsV0.CriticScoreSerialized, result.CriticScore);
-            Assert.Equal(settingsV0.CommunityScoreSerialized, result.CommunityScore);
-            Assert.Equal(settingsV0.ReleaseYearSerialized, result.ReleaseYear);
+            Assert.Equal(settingsV0.GenreSerialized, result.GenreWeight);
+            Assert.Equal(settingsV0.FeatureSerialized, result.FeatureWeight);
+            Assert.Equal(settingsV0.DeveloperSerialized, result.DeveloperWeight);
+            Assert.Equal(settingsV0.PublisherSerialized, result.PublisherWeight);
+            Assert.Equal(settingsV0.TagSerialized, result.TagWeight);
+            Assert.Equal(settingsV0.CriticScoreSerialized, result.CriticScoreWeight);
+            Assert.Equal(settingsV0.CommunityScoreSerialized, result.CommunityScoreWeight);
+            Assert.Equal(settingsV0.ReleaseYearSerialized, result.ReleaseYearWeight);
             Assert.Equal(settingsV0.ReleaseYearChoice, result.ReleaseYearChoice);
             Assert.Equal(settingsV0.DesiredReleaseYear, result.DesiredReleaseYear);
 
