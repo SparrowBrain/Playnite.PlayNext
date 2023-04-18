@@ -16,6 +16,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Kita</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Žaidimų skaičius</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Paskutinių dienų skaičius</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Nežaisti žaidimai tai</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Žaidimai be laiko</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Užbaigtumo statusas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Žaidimų balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Žanras</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybė</sys:String>

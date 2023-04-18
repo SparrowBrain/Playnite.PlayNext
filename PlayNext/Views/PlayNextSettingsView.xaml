@@ -50,11 +50,36 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsNumberOfTopGames}"></TextBlock>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.NumberOfTopGames}"></TextBox>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsRecentDays}"></TextBlock>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.RecentDays}"></TextBox>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource LOC_PlayNext_SettingsUnplayedGameTypeTitle}"></TextBlock>
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <RadioButton GroupName="unplayedGameDefinition" IsChecked="{Binding Settings.UnplayedGameDefinitions[0]}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" ></RadioButton>
+                        <RadioButton Grid.Row="1" Grid.Column="0" GroupName="unplayedGameDefinition" IsChecked="{Binding Settings.UnplayedGameDefinitions[1]}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" ></RadioButton>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
+                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                  TextSearch.TextPath="Name">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
                 </Grid>
             </GroupBox>
         </StackPanel>

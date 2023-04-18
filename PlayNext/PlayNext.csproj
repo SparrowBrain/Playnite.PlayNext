@@ -63,6 +63,9 @@
     <Compile Include="GameActivity\Helpers\EnumerableExtensions.cs" />
     <Compile Include="GameActivity\GameActivityExtension.cs" />
     <Compile Include="GameActivity\Session.cs" />
+    <Compile Include="Model\Filters\UnplayedFilter.cs" />
+    <Compile Include="ViewModels\CompletionStatusItem.cs" />
+    <Compile Include="Model\Data\UnplayedGameChoice.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />
     <Compile Include="Model\Filters\WithPlaytimeFilter.cs" />
     <Compile Include="Model\Data\AttributeCalculationWeights.cs" />

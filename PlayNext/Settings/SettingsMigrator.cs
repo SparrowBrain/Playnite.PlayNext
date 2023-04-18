@@ -33,6 +33,11 @@ namespace PlayNext.Settings
                 }
 
                 var oldSettings = versionedSettings as IMigratableSettings;
+                if (oldSettings == null)
+                {
+                    throw new Exception($"Somehow v{oldSettings.Version} settings are not migratable. This should have never happened. What have you done?");
+                }
+
                 var newSettings = oldSettings.Migrate();
                 if (newSettings.Version != oldSettings.Version + 1)
                 {

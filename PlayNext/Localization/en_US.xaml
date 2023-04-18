@@ -16,6 +16,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Other</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Games Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Recent Days</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Unplayed Game Means</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero playtime</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion status</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Game Score Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genre</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Feature</sys:String>

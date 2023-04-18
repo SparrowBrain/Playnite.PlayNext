@@ -8,6 +8,11 @@ namespace PlayNext.Model.Score
     {
         public IDictionary<Guid, float> Normalize(IDictionary<Guid, float> scores)
         {
+            if (scores == null || scores.Count == 0)
+            {
+                return new Dictionary<Guid, float>();
+            }
+
             var max = scores.Max(x => x.Value);
             if (max == 0)
             {

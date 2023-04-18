@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoFixture.Xunit2;
 using PlayNext.Model.Score.Attribute;
 using Playnite.SDK.Models;
@@ -128,6 +129,21 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             // Assert
             Assert.Contains(result.Keys, x => x == bottomGame.Id);
             Assert.Equal(0, result[bottomGame.Id]);
+        }
+
+        [Theory, AutoData]
+        public void Calculate_ReturnsEmptyScoreList_WhenInputListIsEmpty(
+            int desiredReleaseYear,
+            ReleaseYearCalculator sut)
+        {
+            // Arrange
+            var games = Array.Empty<Game>();
+
+            // Act
+            var result = sut.Calculate(games, desiredReleaseYear);
+
+            // Assert
+            Assert.Empty(result);
         }
     }
 }

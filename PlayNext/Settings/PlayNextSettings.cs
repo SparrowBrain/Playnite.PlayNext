@@ -13,6 +13,7 @@ namespace PlayNext.Settings
 
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
+        private bool[] _unplayedGameDefinitions = new bool[Enum.GetValues(typeof(UnplayedGameDefinition)).Length];
         private int _numberOfTopGames;
         private int _recentDays;
 
@@ -31,6 +32,8 @@ namespace PlayNext.Settings
 
             NumberOfTopGames = 30;
             RecentDays = 14;
+            UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
+            UnplayedCompletionStatuses = Array.Empty<Guid>();
 
             Version = CurrentVersion;
         }
@@ -88,7 +91,7 @@ namespace PlayNext.Settings
                 var newValue = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
                 newValue[(int)value] = true;
                 _releaseYearChoices = newValue;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(ReleaseYearChoices));
             }
         }
 
@@ -103,6 +106,35 @@ namespace PlayNext.Settings
             get => _recentDays;
             set => SetValue(ref _recentDays, value);
         }
+
+        [DontSerialize]
+        public bool[] UnplayedGameDefinitions
+        {
+            get => _unplayedGameDefinitions;
+        }
+
+        public UnplayedGameDefinition UnplayedGameDefinition
+        {
+            get
+            {
+                var choice = Array.IndexOf(_unplayedGameDefinitions, true);
+                if (choice == -1)
+                {
+                    choice = 0;
+                }
+
+                return (UnplayedGameDefinition)choice;
+            }
+            set
+            {
+                var newValue = new bool[Enum.GetValues(typeof(UnplayedGameDefinition)).Length];
+                newValue[(int)value] = true;
+                _unplayedGameDefinitions = newValue;
+                OnPropertyChanged(nameof(UnplayedGameDefinitions));
+            }
+        }
+
+        public Guid[] UnplayedCompletionStatuses { get; set; }
 
         public int Version { get; set; }
 

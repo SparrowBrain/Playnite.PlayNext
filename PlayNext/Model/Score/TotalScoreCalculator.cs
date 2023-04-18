@@ -64,7 +64,7 @@ namespace PlayNext.Model.Score
             var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
             var playedGames = new WithPlaytimeFilter().Filter(allGames);
             var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
-            var unPlayedGames = allGames.Where(x => x.Playtime == 0 && !x.Hidden).ToArray();
+            var unPlayedGames = new UnplayedFilter().Filter(allGames, savedSettings).ToArray();
 
             var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
             var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);

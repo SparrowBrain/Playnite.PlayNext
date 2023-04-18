@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using PlayNext.Model.Data;
@@ -31,6 +32,9 @@ namespace PlayNext.ViewModels
             _plugin = plugin;
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
             Settings = savedSettings ?? PlayNextSettings.Default;
+
+            UnplayedCompletionStatuses = _plugin.PlayniteApi.Database.CompletionStatuses
+                .Select(item => new CompletionStatusItem(item.Id, item.Name, this, Settings.UnplayedCompletionStatuses?.Contains(item.Id) ?? false)).OrderBy(x => x.Name).ToObservable();
         }
 
         public ICommand SetAttributeWeightsToFlat => new RelayCommand(() =>
@@ -199,6 +203,8 @@ namespace PlayNext.ViewModels
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
+
+        public ObservableCollection<CompletionStatusItem> UnplayedCompletionStatuses { get; }
 
         public void BeginEdit()
         {

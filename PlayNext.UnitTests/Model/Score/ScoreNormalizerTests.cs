@@ -46,5 +46,30 @@ namespace PlayNext.UnitTests.Model.Score
             Assert.Equal(halfScoredGame.Key, halfScoredNormalized.Key);
             Assert.Equal(50, halfScoredNormalized.Value);
         }
+
+        [Theory, AutoData]
+        public void Normalize_EmptyList_When_GivenScoreListIsEmpty(
+            ScoreNormalizer sut)
+        {
+            // Arrange
+            var scores = new Dictionary<Guid, float>();
+
+            // Act
+            var result = sut.Normalize(scores);
+
+            // Assert
+            Assert.Empty(result);
+        }
+
+        [Theory, AutoData]
+        public void Normalize_EmptyList_When_GivenScoreListIsNull(
+            ScoreNormalizer sut)
+        {
+            // Act
+            var result = sut.Normalize(null);
+
+            // Assert
+            Assert.Empty(result);
+        }
     }
 }
