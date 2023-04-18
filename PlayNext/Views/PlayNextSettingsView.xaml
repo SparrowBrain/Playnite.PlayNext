@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600">
     <UserControl.Resources>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" >
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
             <Setter Property="Margin" Value="0,5,5,0" />
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
@@ -61,21 +61,22 @@
                     <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <RadioButton GroupName="unplayedGameDefinition" IsChecked="{Binding Settings.UnplayedGameDefinitions[0]}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" ></RadioButton>
-                        <RadioButton Grid.Row="1" Grid.Column="0" GroupName="unplayedGameDefinition" IsChecked="{Binding Settings.UnplayedGameDefinitions[1]}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" ></RadioButton>
-                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
+                        <RadioButton IsChecked="{Binding Settings.UnplayedGameIsWithZeroTime}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" ></RadioButton>
+                        <RadioButton Grid.Row="1" IsChecked="{Binding Settings.UnplayedGameIsWithCompletionStatus}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" ></RadioButton>
+                        <ComboBox Grid.Row="2" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
+                                  IsEnabled="{Binding Path=Settings.UnplayedGameIsWithCompletionStatus}"
                                   StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
                                   IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
                                   TextSearch.TextPath="Name">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -112,8 +113,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <RadioButton GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
-                    <RadioButton Grid.Row="1" Grid.Column="0" GroupName="releaseYearChoice" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
+                    <RadioButton IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="0" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.DesiredReleaseYear}" ></TextBox>
                 </Grid>
                 <Grid Margin="0,10,0,0">

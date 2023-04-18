@@ -13,16 +13,18 @@ namespace PlayNext.Settings
 
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
-        private bool[] _unplayedGameDefinitions = new bool[Enum.GetValues(typeof(UnplayedGameDefinition)).Length];
         private int _numberOfTopGames;
+
         private int _recentDays;
+        private bool _unplayedGameIsWithCompletionStatus;
+        private bool _unplayedGameIsWithZeroTime;
 
         public PlayNextSettings()
         {
             Version = CurrentVersion;
         }
 
-        private PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights)
+        private PlayNextSettings(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights) : this()
         {
             SetAttributeWeights(attributeCalculationWeights);
             SetGameWeights(gameScoreWeights);
@@ -34,8 +36,6 @@ namespace PlayNext.Settings
             RecentDays = 14;
             UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
             UnplayedCompletionStatuses = Array.Empty<Guid>();
-
-            Version = CurrentVersion;
         }
 
         public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
@@ -108,29 +108,51 @@ namespace PlayNext.Settings
         }
 
         [DontSerialize]
-        public bool[] UnplayedGameDefinitions
+        public bool UnplayedGameIsWithZeroTime
         {
-            get => _unplayedGameDefinitions;
+            get => _unplayedGameIsWithZeroTime;
+            set => SetValue(ref _unplayedGameIsWithZeroTime, value);
+        }
+
+        [DontSerialize]
+        public bool UnplayedGameIsWithCompletionStatus
+        {
+            get => _unplayedGameIsWithCompletionStatus;
+            set => SetValue(ref _unplayedGameIsWithCompletionStatus, value);
         }
 
         public UnplayedGameDefinition UnplayedGameDefinition
         {
             get
             {
-                var choice = Array.IndexOf(_unplayedGameDefinitions, true);
-                if (choice == -1)
+                if (UnplayedGameIsWithZeroTime)
                 {
-                    choice = 0;
+                    return UnplayedGameDefinition.ZeroPlaytime;
                 }
 
-                return (UnplayedGameDefinition)choice;
+                if (UnplayedGameIsWithCompletionStatus)
+                {
+                    return UnplayedGameDefinition.SelectedCompletionStatuses;
+                }
+
+                return UnplayedGameDefinition.ZeroPlaytime;
             }
             set
             {
-                var newValue = new bool[Enum.GetValues(typeof(UnplayedGameDefinition)).Length];
-                newValue[(int)value] = true;
-                _unplayedGameDefinitions = newValue;
-                OnPropertyChanged(nameof(UnplayedGameDefinitions));
+                switch (value)
+                {
+                    case UnplayedGameDefinition.ZeroPlaytime:
+                        UnplayedGameIsWithZeroTime = true;
+                        break;
+
+                    case UnplayedGameDefinition.SelectedCompletionStatuses:
+                        UnplayedGameIsWithCompletionStatus = true;
+                        break;
+
+                    default:
+                        UnplayedGameIsWithZeroTime = true;
+                        break;
+                }
             }
         }
 
