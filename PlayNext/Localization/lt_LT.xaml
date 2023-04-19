@@ -31,6 +31,8 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Išleidimo metai turėtų būti</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Šie</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Konkretūs</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Bendri</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Atstatyti visus nustatymus į numatytuosius</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko </sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Geriausios rekomendacijos</sys:String>

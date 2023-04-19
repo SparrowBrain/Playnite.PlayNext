@@ -1,5 +1,5 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:String x:Key="LOC_PlayNext_PluginName">Play Next</sys:String>
@@ -17,8 +17,8 @@
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Games Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Recent Days</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Unplayed Game Means</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero playtime</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion status</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero Playtime</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion Status</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Game Score Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genre</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Feature</sys:String>
@@ -31,6 +31,8 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Release Year Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Current</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Specific</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Top Recommendations</sys:String>

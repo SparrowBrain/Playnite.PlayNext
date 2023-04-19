@@ -13,9 +13,19 @@ namespace PlayNext.ViewModels
     public class PlayNextSettingsViewModel : ObservableObject, ISettings
     {
         private readonly PlayNext _plugin;
-        private PlayNextSettings EditingClone { get; set; }
 
+        private PlayNextSettings _editingClone;
         private PlayNextSettings _settings;
+        private ObservableCollection<CompletionStatusItem> _unplayedCompletionStatuses;
+
+        public PlayNextSettingsViewModel(PlayNext plugin)
+        {
+            _plugin = plugin;
+            var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
+            Settings = savedSettings ?? PlayNextSettings.Default;
+
+            InitializeUnplayedCompletionStatuses();
+        }
 
         public PlayNextSettings Settings
         {
@@ -25,16 +35,6 @@ namespace PlayNext.ViewModels
                 _settings = value;
                 OnPropertyChanged();
             }
-        }
-
-        public PlayNextSettingsViewModel(PlayNext plugin)
-        {
-            _plugin = plugin;
-            var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
-            Settings = savedSettings ?? PlayNextSettings.Default;
-
-            UnplayedCompletionStatuses = _plugin.PlayniteApi.Database.CompletionStatuses
-                .Select(item => new CompletionStatusItem(item.Id, item.Name, this, Settings.UnplayedCompletionStatuses?.Contains(item.Id) ?? false)).OrderBy(x => x.Name).ToObservable();
         }
 
         public ICommand SetAttributeWeightsToFlat => new RelayCommand(() =>
@@ -58,6 +58,14 @@ namespace PlayNext.ViewModels
         public ICommand SetGameWeightsToDefault => new RelayCommand(() =>
         {
             Settings.SetGameWeights(GameScoreWeights.Default);
+            NotifyGameScoreSourcePropertiesChanged();
+        });
+
+        public ICommand SetAllToDefault => new RelayCommand(() =>
+        {
+            Settings = PlayNextSettings.Default;
+            InitializeUnplayedCompletionStatuses();
+            NotifyAttributeScoreSourcePropertiesChanged();
             NotifyGameScoreSourcePropertiesChanged();
         });
 
@@ -204,25 +212,25 @@ namespace PlayNext.ViewModels
             }
         }
 
-        public ObservableCollection<CompletionStatusItem> UnplayedCompletionStatuses { get; }
+        public ObservableCollection<CompletionStatusItem> UnplayedCompletionStatuses
+        {
+            get => _unplayedCompletionStatuses;
+            set => SetValue(ref _unplayedCompletionStatuses, value);
+        }
 
         public void BeginEdit()
         {
-            // Code executed when settings view is opened and user starts editing values.
-            EditingClone = Serialization.GetClone(Settings);
+            _editingClone = Serialization.GetClone(Settings);
         }
 
         public void CancelEdit()
         {
-            // Code executed when user decides to cancel any changes made since BeginEdit was called.
-            // This method should revert any changes made to Option1 and Option2.
-            Settings = EditingClone;
+            Settings = _editingClone;
+            InitializeUnplayedCompletionStatuses();
         }
 
         public void EndEdit()
         {
-            // Code executed when user decides to confirm changes made since BeginEdit was called.
-            // This method should save settings made to Option1 and Option2.
             _plugin.SavePluginSettings(Settings);
             _plugin.OnPlayNextSettingsSaved();
         }
@@ -240,6 +248,13 @@ namespace PlayNext.ViewModels
             }
 
             return !errors.Any();
+        }
+
+        private void InitializeUnplayedCompletionStatuses()
+        {
+            UnplayedCompletionStatuses = _plugin.PlayniteApi.Database.CompletionStatuses
+                .Select(item => new CompletionStatusItem(item.Id, item.Name, this,
+                    Settings.UnplayedCompletionStatuses?.Contains(item.Id) ?? false)).OrderBy(x => x.Name).ToObservable();
         }
 
         private void RebalanceAttributeScoreSourceWeights(float difference)
