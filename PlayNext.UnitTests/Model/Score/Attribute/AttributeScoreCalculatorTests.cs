@@ -29,7 +29,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             var result = sut.CalculateByPlaytime(games, weight);
 
             Assert.NotNull(result);
-            Assert.Single( result.Keys);
+            Assert.Single(result.Keys);
             Assert.Equal(100, result[attributeId]);
         }
 
@@ -79,7 +79,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             var result = sut.CalculateByPlaytime(games, weight);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.Keys.Count);
+            Assert.Single(result);
             Assert.Equal(25, result[attributeId]);
         }
 
@@ -156,7 +156,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             var result = sut.CalculateByRecentOrder(games, weight);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.Keys.Count);
+            Assert.Single(result);
             Assert.Equal(100, result[attributeId]);
         }
 

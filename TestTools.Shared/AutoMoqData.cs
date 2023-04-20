@@ -2,7 +2,7 @@
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 
-namespace PlayNext.UnitTests
+namespace TestTools.Shared
 {
     public class AutoMoqDataAttribute : AutoDataAttribute
     {

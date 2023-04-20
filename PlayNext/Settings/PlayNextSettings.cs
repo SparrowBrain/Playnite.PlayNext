@@ -141,16 +141,15 @@ namespace PlayNext.Settings
             {
                 switch (value)
                 {
-                    case UnplayedGameDefinition.ZeroPlaytime:
-                        UnplayedGameIsWithZeroTime = true;
-                        break;
-
                     case UnplayedGameDefinition.SelectedCompletionStatuses:
+                        UnplayedGameIsWithZeroTime = false;
                         UnplayedGameIsWithCompletionStatus = true;
                         break;
 
+                    case UnplayedGameDefinition.ZeroPlaytime:
                     default:
                         UnplayedGameIsWithZeroTime = true;
+                        UnplayedGameIsWithCompletionStatus = false;
                         break;
                 }
             }

@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 
-namespace PlayNext.UnitTests
+namespace TestTools.Shared
 {
     public class InlineAutoMoqDataAttribute : InlineAutoDataAttribute
     {

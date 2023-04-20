@@ -5,6 +5,7 @@ using AutoFixture.Xunit2;
 using Moq;
 using PlayNext.Settings;
 using PlayNext.Settings.Old;
+using TestTools.Shared;
 using Xunit;
 
 namespace PlayNext.UnitTests.Settings

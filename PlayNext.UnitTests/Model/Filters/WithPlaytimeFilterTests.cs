@@ -2,6 +2,7 @@
 using System.Linq;
 using PlayNext.Model.Filters;
 using Playnite.SDK.Models;
+using TestTools.Shared;
 using Xunit;
 
 namespace PlayNext.UnitTests.Model.Filters

@@ -1,0 +1,13 @@
+v1.1.0
+- Added an ability to filter for unplayed games with completion statuses
+- Added a button to reset all settings to default
+- Added buttons to start page game covers
+- Added titles to start page game covers
+- Fixed an issue with an empty game collection
+- Fixed an issue with radio buttons not updaing in settings on load
+
+v1.0.1
+- Fixed missing game cover/icon handling
+
+v1.0.0
+- Initial release

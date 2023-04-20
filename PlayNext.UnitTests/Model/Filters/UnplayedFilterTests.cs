@@ -4,6 +4,7 @@ using PlayNext.Model.Data;
 using PlayNext.Model.Filters;
 using PlayNext.Settings;
 using Playnite.SDK.Models;
+using TestTools.Shared;
 using Xunit;
 
 namespace PlayNext.UnitTests.Model.Filters

@@ -5,6 +5,7 @@ using Moq;
 using PlayNext.Model.Filters;
 using PlayNext.Services;
 using Playnite.SDK.Models;
+using TestTools.Shared;
 using Xunit;
 
 namespace PlayNext.UnitTests.Model.Filters
