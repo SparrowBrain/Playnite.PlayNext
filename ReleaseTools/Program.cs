@@ -23,76 +23,133 @@ namespace ReleaseTools
             var testRunner = @"""C:\Users\Qwx\Documents\src\Playnite.PlayNext\packages\xunit.runner.console.2.4.2\tools\net462\xunit.console.exe""";
             var toolbox = @"""C:\Users\Qwx\AppData\Local\Playnite\Toolbox.exe""";
 
-            var changelogReader = new ChangelogReader();
-            var changelogParser = new ChangelogParser();
-            var extensionYamlUpdater = new ExtensionYamlUpdater();
-            var releaseChangelogWriter = new ReleaseChangelogWriter();
             var extensionPackageNameGuesser = new ExtensionPackageNameGuesser();
 
+            var releaseArtifactsDir = CleanUpReleaseArtifacts(pathToSolution);
+
+            var changeEntry = await ParseChangelog(pathToSolution);
+
+            var releaseChangelog = CreateReleaseChangelog(releaseArtifactsDir, changeEntry);
+            var releasePackage = CreateReleasePackagePath(extensionPackageNameGuesser, changeEntry, releaseArtifactsDir);
+
+            UpdateExtensionManifest(pathToSolution, changeEntry);
+
+            var addonBuildDir = Build(msBuild, pathToSolution);
+            RunTests(testRunner, pathToSolution);
+            PackageExtension(toolbox, addonBuildDir, releaseArtifactsDir);
+
+            CommitAndPush($@"v{changeEntry.Version} extension.yaml update");
+
+            CreateRelease(changeEntry, releaseChangelog, releasePackage);
+
+            UpdateInstallerManifest(pathToSolution, extensionPackageNameGuesser, changeEntry);
+            CommitAndPush($@"v{changeEntry.Version} installer-manifest.yaml update");
+        }
+
+        private static string CleanUpReleaseArtifacts(string pathToSolution)
+        {
             var releaseArtifactsDir = Path.Combine(pathToSolution, @"ci\release_artifacts");
             if (Directory.Exists(releaseArtifactsDir))
             {
                 Directory.Delete(releaseArtifactsDir, true);
             }
 
-            var changes = await changelogReader.Read(Path.Combine(pathToSolution, @"ci\Changelog.txt"));
-            var changeEntry = changelogParser.Parse(changes);
-
-            var releaseChangelog = Path.Combine(releaseArtifactsDir, "changelog.md");
-            var packageName = extensionPackageNameGuesser.GetName(changeEntry.Version);
-            var releasePackage = Path.Combine(releaseArtifactsDir, packageName);
-
-            extensionYamlUpdater.Update(Path.Combine(pathToSolution, @"PlayNext\extension.yaml"), changeEntry.Version);
-            releaseChangelogWriter.Write(releaseChangelog, changeEntry);
-
-            var tasks = new List<Tuple<string, string>>();
-            var build = CreateCommand(msBuild, $"{Path.Combine(pathToSolution, "PlayNext.sln")} -property:Configuration=Release");
-
-            tasks.Add(build);
-            tasks.AddRange(from projectDirectory in Directory.GetDirectories(pathToSolution)
-                           select Path.Combine(projectDirectory, "bin", "Release")
-                into buildDir
-                           where Directory.Exists(buildDir)
-                           from testAssembly in Directory.EnumerateFiles(buildDir, "*Tests.dll")
-                           select CreateCommand(testRunner, testAssembly));
-
-            var addonBuildDir = Path.Combine(pathToSolution, "PlayNext", "bin", "Release");
-            tasks.Add(CreateCommand(toolbox, $@"pack {addonBuildDir} {releaseArtifactsDir}"));
-
-            tasks.Add(CreateCommand("git", $@"commit -am ""v{changeEntry.Version} extension.yaml update"""));
-            tasks.Add(CreateCommand("git", $@"push origin main"));
-
-            tasks.Add(CreateCommand("gh", $@"release create v{changeEntry.Version} -t ""Release v{changeEntry.Version}"" -F {releaseChangelog} {releasePackage}"));
-
-            // Commit + push
-            // Create release
-            // Update installer manifest
-            // Commit + push
-
-            foreach (var task in tasks)
+            if (!Directory.Exists(releaseArtifactsDir))
             {
-                Console.WriteLine($"{task.Item1} {task.Item2}");
-                var info = Process.Start(task.Item1, task.Item2);
-                info.WaitForExit();
-                if (info.ExitCode != 0)
-                {
-                    throw new Exception($"Task fail: {task}");
-                }
+                Directory.CreateDirectory(releaseArtifactsDir);
             }
 
+            return releaseArtifactsDir;
+        }
 
+        private static async Task<ChangelogEntry> ParseChangelog(string pathToSolution)
+        {
+            var changelogReader = new ChangelogReader();
+            var changelogParser = new ChangelogParser();
+
+            var changes = await changelogReader.Read(Path.Combine(pathToSolution, @"ci\Changelog.txt"));
+            var changeEntry = changelogParser.Parse(changes);
+            return changeEntry;
+        }
+
+        private static string CreateReleaseChangelog(string releaseArtifactsDir, ChangelogEntry changeEntry)
+        {
+            var releaseChangelogWriter = new ReleaseChangelogWriter();
+            var releaseChangelog = Path.Combine(releaseArtifactsDir, "changelog.md");
+            releaseChangelogWriter.Write(releaseChangelog, changeEntry);
+            return releaseChangelog;
+        }
+
+        private static string CreateReleasePackagePath(ExtensionPackageNameGuesser extensionPackageNameGuesser, ChangelogEntry changeEntry, string releaseArtifactsDir)
+        {
+            var packageName = extensionPackageNameGuesser.GetName(changeEntry.Version);
+            var releasePackage = Path.Combine(releaseArtifactsDir, packageName);
+            return releasePackage;
+        }
+
+        private static void UpdateExtensionManifest(string pathToSolution, ChangelogEntry changeEntry)
+        {
+            var extensionYamlUpdater = new ExtensionYamlUpdater();
+            extensionYamlUpdater.Update(Path.Combine(pathToSolution, @"PlayNext\extension.yaml"), changeEntry.Version);
+        }
+
+        private static string Build(string msBuild, string pathToSolution)
+        {
+            RunCommand(msBuild, $"{Path.Combine(pathToSolution, "PlayNext.sln")} -property:Configuration=Release");
+            return Path.Combine(pathToSolution, "PlayNext", "bin", "Release");
+        }
+
+        private static void RunTests(string testRunner, string pathToSolution)
+        {
+            var testTasks = new List<Tuple<string, string>>();
+            testTasks.AddRange(from projectDirectory in Directory.GetDirectories(pathToSolution)
+                               select Path.Combine(projectDirectory, "bin", "Release")
+                into buildDir
+                               where Directory.Exists(buildDir)
+                               from testAssembly in Directory.EnumerateFiles(buildDir, "*Tests.dll")
+                               select CreateCommand(testRunner, testAssembly));
+            foreach (var task in testTasks)
+            {
+                RunCommand(task.Item1, task.Item2);
+            }
+        }
+
+        private static void PackageExtension(string toolbox, string addonBuildDir, string releaseArtifactsDir)
+        {
+            RunCommand(toolbox, $@"pack {addonBuildDir} {releaseArtifactsDir}");
+        }
+
+        private static void CommitAndPush(string message)
+        {
+            RunCommand("git", $@"commit -am ""{message}""");
+            RunCommand("git", $@"push origin main");
+        }
+
+        private static void CreateRelease(ChangelogEntry changeEntry, string releaseChangelog, string releasePackage)
+        {
+            RunCommand("gh", $@"release create v{changeEntry.Version} -t ""Release v{changeEntry.Version}"" -F {releaseChangelog} {releasePackage}");
+        }
+
+        private static void UpdateInstallerManifest(string pathToSolution, ExtensionPackageNameGuesser extensionPackageNameGuesser, ChangelogEntry changeEntry)
+        {
             var installerManifestUpdater = new InstallerManifestUpdater();
             var playniteSdkVersionParser = new PlayniteSdkVersionParser(Path.Combine(pathToSolution, @"PlayNext\PlayNext.csproj"));
             var dateTimeProvider = new DateTimeProvider();
             var installerManifestEntryGenerator = new InstallerManifestEntryGenerator(playniteSdkVersionParser, dateTimeProvider, extensionPackageNameGuesser);
 
-
-
             var manifestEntry = installerManifestEntryGenerator.Generate(changeEntry);
             installerManifestUpdater.Update(Path.Combine(pathToSolution, @"ci\installer_manifest.yaml"), manifestEntry);
+        }
 
-
-
+        private static void RunCommand(string command, string arguments)
+        {
+            Console.WriteLine($"{command} {arguments}");
+            var info = Process.Start(command, arguments);
+            info.WaitForExit();
+            if (info.ExitCode != 0)
+            {
+                throw new Exception($"Failed with exit code: {info.ExitCode}");
+            }
         }
 
         private static Tuple<string, string> CreateCommand(string command, string arguments)
