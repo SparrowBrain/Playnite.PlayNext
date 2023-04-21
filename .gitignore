@@ -518,4 +518,7 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,windows,rider
 
 # CI
-ci/pack
+ci/release_artifacts
+
+# Config
+.env

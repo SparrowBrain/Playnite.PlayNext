@@ -8,13 +8,15 @@ namespace ReleaseTools.IntegrationTests.ExtensionYaml
 {
     public class ExtensionYamlUpdaterTests : IDisposable
     {
-        private const string ExtensionYaml = "ExtensionYaml\\TestData\\extension.yaml";
         private const string ExpectedExtensionYaml = "ExtensionYaml\\TestData\\extension_after.yaml";
         private const string ExtensionYamlBefore = "ExtensionYaml\\TestData\\extension_before.yaml";
+        private readonly string _installerManifest;
 
         public ExtensionYamlUpdaterTests()
         {
-            File.Copy(ExtensionYamlBefore, ExtensionYaml);
+            _installerManifest = Path.GetTempFileName();
+            File.Delete(_installerManifest);
+            File.Copy(ExtensionYamlBefore, _installerManifest);
         }
 
         [Theory, AutoData]
@@ -25,16 +27,16 @@ namespace ReleaseTools.IntegrationTests.ExtensionYaml
             var expectedYaml = File.ReadAllText(ExpectedExtensionYaml);
 
             // Act
-            sut.Update(ExtensionYaml, "1.2.3");
+            sut.Update(_installerManifest, "1.2.3");
 
             // Assert
-            var actual = File.ReadAllText(ExtensionYaml);
+            var actual = File.ReadAllText(_installerManifest);
             Assert.Equal(expectedYaml, actual);
         }
 
         public void Dispose()
         {
-            File.Delete(ExtensionYaml);
+            File.Delete(_installerManifest);
         }
     }
 }

@@ -46,11 +46,25 @@
     <Compile Include="Changelog\ChangelogEntry.cs" />
     <Compile Include="Changelog\ChangelogParser.cs" />
     <Compile Include="Changelog\ChangelogReader.cs" />
+    <Compile Include="Changelog\ReleaseChangelogWriter.cs" />
+    <Compile Include="DateTimeProvider.cs" />
+    <Compile Include="DotEnv.cs" />
     <Compile Include="ExtensionYaml\ExtensionYamlUpdater.cs" />
+    <Compile Include="IDateTimeProvider.cs" />
+    <Compile Include="InstallerManifestYaml\InstallerManifestEntryGenerator.cs" />
+    <Compile Include="InstallerManifestYaml\InstallerManifestUpdater.cs" />
+    <Compile Include="InstallerManifestYaml\IPlayniteSdkVersionParser.cs" />
+    <Compile Include="InstallerManifestYaml\PlayniteSdkVersionParser.cs" />
+    <Compile Include="Package\ExtensionPackageNameGuesser.cs" />
+    <Compile Include="Package\IExtensionPackageNameGuesser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include=".env_example" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />

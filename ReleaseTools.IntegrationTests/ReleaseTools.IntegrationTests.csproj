@@ -74,15 +74,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Changelog\ChangelogReaderTests.cs" />
+    <Compile Include="Changelog\ReleaseChangelogWriterTests.cs" />
     <Compile Include="ExtensionYaml\ExtensionYamlUpdaterTests.cs" />
+    <Compile Include="InstallerManifestYaml\InstallerManifestUpdaterTests.cs" />
+    <Compile Include="InstallerManifestYaml\PlayniteSdkVersionParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Changelog\TestData\expected_release_changelog.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ExtensionYaml\TestData\extension_after.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="ExtensionYaml\TestData\extension_before.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="InstallerManifestYaml\TestData\after_installer_manifest.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="InstallerManifestYaml\TestData\before_installer_manifest.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="InstallerManifestYaml\TestData\PlayNext.csproj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
