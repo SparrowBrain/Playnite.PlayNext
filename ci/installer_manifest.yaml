@@ -1,5 +1,16 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.1.0
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2023-04-21
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.1.0/SparrowBrain_PlayNext_1_1_0.pext
+    Changelog:
+      - Added an ability to filter for unplayed games with completion statuses
+      - Added a button to reset all settings to default
+      - Added buttons to start page game covers
+      - Added titles to start page game covers
+      - Fixed an issue with an empty game collection
+      - Fixed an issue with radio buttons not updaing in settings on load
   - Version: 1.0.1
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2023-03-18
