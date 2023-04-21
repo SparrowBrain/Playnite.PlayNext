@@ -24,8 +24,6 @@ namespace ReleaseTools
 
             var extensionPackageNameGuesser = new ExtensionPackageNameGuesser();
 
-            GithubLogin();
-
             var releaseArtifactsDir = CleanUpReleaseArtifacts(pathToSolution);
 
             var changeEntry = await ParseChangelog(pathToSolution);
@@ -45,11 +43,6 @@ namespace ReleaseTools
 
             UpdateInstallerManifest(pathToSolution, extensionPackageNameGuesser, changeEntry);
             CommitAndPush($@"v{changeEntry.Version} installer-manifest.yaml update");
-        }
-
-        private static void GithubLogin()
-        {
-            RunCommand("gh", "auth login");
         }
 
         private static string CleanUpReleaseArtifacts(string pathToSolution)
