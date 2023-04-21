@@ -519,6 +519,3 @@ FodyWeavers.xsd
 
 # CI
 ci/release_artifacts
-
-# Config
-.env

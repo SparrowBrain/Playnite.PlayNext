@@ -15,7 +15,6 @@ namespace ReleaseTools
     {
         private static async Task Main(string[] args)
         {
-            DotEnv.Load(".env");
             // Assuming we're calling from /ci path
             var pathToSolution = "..";
 
@@ -24,6 +23,8 @@ namespace ReleaseTools
             var toolbox = @"""C:\Users\Qwx\AppData\Local\Playnite\Toolbox.exe""";
 
             var extensionPackageNameGuesser = new ExtensionPackageNameGuesser();
+
+            GithubLogin();
 
             var releaseArtifactsDir = CleanUpReleaseArtifacts(pathToSolution);
 
@@ -44,6 +45,11 @@ namespace ReleaseTools
 
             UpdateInstallerManifest(pathToSolution, extensionPackageNameGuesser, changeEntry);
             CommitAndPush($@"v{changeEntry.Version} installer-manifest.yaml update");
+        }
+
+        private static void GithubLogin()
+        {
+            RunCommand("gh", "auth login");
         }
 
         private static string CleanUpReleaseArtifacts(string pathToSolution)

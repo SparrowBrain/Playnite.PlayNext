@@ -48,7 +48,6 @@
     <Compile Include="Changelog\ChangelogReader.cs" />
     <Compile Include="Changelog\ReleaseChangelogWriter.cs" />
     <Compile Include="DateTimeProvider.cs" />
-    <Compile Include="DotEnv.cs" />
     <Compile Include="ExtensionYaml\ExtensionYamlUpdater.cs" />
     <Compile Include="IDateTimeProvider.cs" />
     <Compile Include="InstallerManifestYaml\InstallerManifestEntryGenerator.cs" />
@@ -61,10 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".env">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include=".env_example" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
