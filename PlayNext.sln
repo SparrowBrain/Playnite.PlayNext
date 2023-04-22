@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Item", "Solution Item", "{0CA4AAC0-52E8-4883-A7A2-2517AF64FE6E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		crowdin.yml = crowdin.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -28,6 +29,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTools.Shared", "TestTools.Shared\TestTools.Shared.csproj", "{DD7EA41C-5EB6-442E-980D-13024EA8C054}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReleaseTools.IntegrationTests", "ReleaseTools.IntegrationTests\ReleaseTools.IntegrationTests.csproj", "{A751BF7A-3F85-4ACC-8524-ADB7A61AD22F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CCE9B388-ECAF-48CE-8721-7BC24BDF176A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\crowdin.yml = .github\workflows\crowdin.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
