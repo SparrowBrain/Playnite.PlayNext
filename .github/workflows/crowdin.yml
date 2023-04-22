@@ -22,7 +22,6 @@ jobs:
       - name: crowdin action
         uses: crowdin/github-action@v1
         with:
-          dryrun_action: true
           upload_sources: true
           upload_translations: true
           download_translations: true
