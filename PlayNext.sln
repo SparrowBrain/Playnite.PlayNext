@@ -33,6 +33,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{CCE9B388-ECAF-48CE-8721-7BC24BDF176A}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\crowdin.yml = .github\workflows\crowdin.yml
+		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
 	EndProjectSection
 EndProject
 Global

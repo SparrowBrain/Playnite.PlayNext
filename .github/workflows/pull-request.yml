@@ -1,0 +1,30 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [ master ]
+
+env:
+  SOLUTION_NAME: PlayNext.sln
+  XUNIT_PATH: packages\xunit.runner.console.2.4.2\tools\net462\xunit.console.exe
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Nuget.exe
+      uses: nuget/setup-nuget@v1
+    - name: Restore packages
+      run: nuget restore ${{ env.SOLUTION_NAME }}
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Build with MSBuild
+      run: msbuild  ${{ env.SOLUTION_NAME }} -p:Configuration=Release
+    - name: Run xUnit # very fragile
+      run: > 
+        ${{ github.workspace }}\${{ env.XUNIT_PATH }} 
+        ${{ github.workspace }}\PlayNext.UnitTests\bin\Release\PlayNext.UnitTests.dll 
+        ${{ github.workspace }}\ReleaseTools.IntegrationTests\bin\Release\ReleaseTools.IntegrationTests.dll 
+        ${{ github.workspace }}\ReleaseTools.UnitTests\bin\Release\ReleaseTools.UnitTests.dll 
