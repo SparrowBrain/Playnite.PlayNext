@@ -5,6 +5,7 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 files: [
   {
     "source": "/PlayNext/Localization/en_US.xaml",
+    "dest": "Playnite.PlayNext/PlayNext/Localization/en_US.xaml",
     "translation": "/PlayNext/Localization/%locale_with_underscore%.xaml",
     "escape_quotes": 3,
     "escape_special_characters": 0,
