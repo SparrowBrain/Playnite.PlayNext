@@ -1,6 +1,5 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+﻿<?xml version="1.0"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:String x:Key="LOC_PlayNext_PluginName">Kas toliau?</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Balas</sys:String>
@@ -18,7 +17,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Paskutinių dienų skaičius</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Nežaisti žaidimai tai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Žaidimai be laiko</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Užbaigtumo statusas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Baigtumo būsena</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Žaidimų balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Žanras</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybė</sys:String>
@@ -33,7 +32,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Konkretūs</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Bendri</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Atstatyti visus nustatymus į numatytuosius</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko </sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Geriausios rekomendacijos</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Rekomenduoti žaidimus pagal nustatymus.</sys:String>
