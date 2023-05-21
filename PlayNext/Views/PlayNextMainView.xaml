@@ -65,7 +65,7 @@
             </Button>
         </StackPanel>
 
-        <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+        <Grid Grid.Row="2" Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -73,19 +73,20 @@
             <Grid Grid.Row="0" Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="75" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Text="{DynamicResource LOC_PlayNext_MainScoreColumn}" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="{DynamicResource LOC_PlayNext_MainScoreColumn}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <TextBlock Grid.Column="2" Text="{DynamicResource LOC_PlayNext_MainNameColumn}" VerticalAlignment="Center" />
             </Grid>
-            <ListBox Grid.Row="1" ItemsSource="{Binding Games}" Background="Transparent">
+            <ListBox Grid.Row="1" ItemsSource="{Binding Games}" Margin="0,0,0,0" Background="Transparent">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                         <Setter Property="Focusable" Value="False" />
+                        <Setter Property="Padding" Value="0"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
@@ -93,7 +94,7 @@
                         <Grid Margin="0,2.5,0,2.5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="75" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="2*" />
@@ -105,7 +106,7 @@
                                 FallbackValue={StaticResource DefaultGameIcon},
                                 TargetNullValue={StaticResource DefaultGameIcon}}">
                             </Image>
-                            <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" />
                             <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="{DynamicResource LOC_PlayNext_MainDetailsButton}"></Button>
                         </Grid>

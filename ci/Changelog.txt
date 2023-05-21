@@ -1,8 +1,9 @@
 v1.2.0 DRAFT
 - Added German translations (thanks HerrKnarz!)
+- Fixed score column spacing in main view for German language
 // - Add warning for recent activity
 // - Fix spacing in settings
-// - Do the crowding bot thing https://github.com/hawkeye116477/playnite-legendary-plugin/actions
+// - Add start page label option support
 
 v1.1.0
 - Added an ability to filter for unplayed games with completion statuses
