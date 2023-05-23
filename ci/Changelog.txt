@@ -1,10 +1,11 @@
 v1.2.0 DRAFT
 - Added German translations (thanks HerrKnarz!)
+- Added Italian translations (thanks lordbender!)
 - Fixed score column spacing in main view for German language
 - Fixed radiobutton spacing in settings
 // - Add warning for recent activity
 // - Add start page label option support
-// - Added Italian translations ()
+
 
 v1.1.0
 - Added an ability to filter for unplayed games with completion statuses
