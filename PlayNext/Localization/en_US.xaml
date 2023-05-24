@@ -10,6 +10,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Attribute Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Total Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Recent Playtime</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Recent Order</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Default</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Flat</sys:String>

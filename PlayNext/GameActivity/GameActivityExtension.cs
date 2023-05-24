@@ -41,7 +41,7 @@ namespace PlayNext.GameActivity
         {
             try
             {
-                if (string.IsNullOrEmpty(_activityPath) || !Directory.Exists(_activityPath))
+                if (!GameActivityPathExists())
                 {
                     return;
                 }
@@ -68,6 +68,11 @@ namespace PlayNext.GameActivity
             {
                 OnActivityRefreshed();
             }
+        }
+
+        public bool GameActivityPathExists()
+        {
+            return !string.IsNullOrEmpty(_activityPath) && Directory.Exists(_activityPath);
         }
 
         public IEnumerable<Game> GetRecentPlaytime(IEnumerable<Game> recentGames, PlayNextSettings settings)

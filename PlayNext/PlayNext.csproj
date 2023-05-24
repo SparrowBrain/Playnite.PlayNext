@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Converters\InvertedBooleanToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
     <Compile Include="Converters\UriToBitmapImageConverter.cs" />

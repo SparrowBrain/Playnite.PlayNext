@@ -16,6 +16,7 @@ namespace PlayNext.ViewModels
 
         private PlayNextSettings _editingClone;
         private PlayNextSettings _settings;
+        private bool _gameActivityExtensionFound;
         private ObservableCollection<CompletionStatusItem> _unplayedCompletionStatuses;
 
         public PlayNextSettingsViewModel(PlayNext plugin)
@@ -23,6 +24,7 @@ namespace PlayNext.ViewModels
             _plugin = plugin;
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
             Settings = savedSettings ?? PlayNextSettings.Default;
+            GameActivityExtensionFound = _plugin.GameActivityExtension.GameActivityPathExists();
 
             InitializeUnplayedCompletionStatuses();
         }
@@ -35,6 +37,12 @@ namespace PlayNext.ViewModels
                 _settings = value;
                 OnPropertyChanged();
             }
+        }
+
+        public bool GameActivityExtensionFound
+        {
+            get => _gameActivityExtensionFound;
+            set => SetValue(ref _gameActivityExtensionFound, value);
         }
 
         public ICommand SetAttributeWeightsToFlat => new RelayCommand(() =>
