@@ -9,6 +9,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Gewichtung der Attribute</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Gesamte Spielzeit</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Letzte Spielzeit</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Neueste zuerst</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Standard</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Flach</sys:String>

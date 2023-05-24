@@ -9,6 +9,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Požymių balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Visas žaidimo laikas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Paskutinių dienų žaidimo laikas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Paskutinių žaistų žaidimų eilė</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Numatyta</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Plokščia</sys:String>
