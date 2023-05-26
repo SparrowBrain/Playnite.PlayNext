@@ -9,7 +9,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Požymių balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Visas žaidimo laikas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Paskutinių dienų žaidimo laikas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Reikalingas GameActivity plėtinys</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Paskutinių žaistų žaidimų eilė</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Numatyta</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Plokščia</sys:String>
@@ -19,6 +19,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Nežaisti žaidimai tai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Žaidimai be laiko</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Baigtumo būsena</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Start Page</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Horizontal Label</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Žaidimų balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Žanras</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybė</sys:String>
