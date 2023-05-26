@@ -1,12 +1,9 @@
-﻿using System;
-using PlayNext.Model.Data;
+﻿using PlayNext.Model.Data;
 
 namespace PlayNext.Settings.Old
 {
     public class SettingsV0 : IMigratableSettings
     {
-        private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
-
         public float TotalPlaytimeSerialized { get; set; }
 
         public float RecentPlaytimeSerialized { get; set; }
@@ -31,25 +28,7 @@ namespace PlayNext.Settings.Old
 
         public int DesiredReleaseYear { get; set; }
 
-        public ReleaseYearChoice ReleaseYearChoice
-        {
-            get
-            {
-                var choice = Array.IndexOf(_releaseYearChoices, true);
-                if (choice == -1)
-                {
-                    choice = 0;
-                }
-
-                return (ReleaseYearChoice)choice;
-            }
-            set
-            {
-                var newValue = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
-                newValue[(int)value] = true;
-                _releaseYearChoices = newValue;
-            }
-        }
+        public ReleaseYearChoice ReleaseYearChoice { get; set; }
 
         public int NumberOfTopGames { get; set; }
 
@@ -59,7 +38,7 @@ namespace PlayNext.Settings.Old
 
         public virtual IVersionedSettings Migrate()
         {
-            var settings = PlayNextSettings.Default;
+            var settings = SettingsV1.Default;
             settings.TotalPlaytimeWeight = TotalPlaytimeSerialized;
             settings.RecentPlaytimeWeight = RecentPlaytimeSerialized;
             settings.RecentOrderWeight = RecentOrderSerialized;

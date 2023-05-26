@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using PlayNext.Model.Data;
 using PlayNext.Settings;
+using PlayNext.StartPage;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 
@@ -16,7 +17,6 @@ namespace PlayNext.ViewModels
 
         private PlayNextSettings _editingClone;
         private PlayNextSettings _settings;
-        private bool _gameActivityExtensionFound;
         private ObservableCollection<CompletionStatusItem> _unplayedCompletionStatuses;
 
         public PlayNextSettingsViewModel(PlayNext plugin)
@@ -25,6 +25,7 @@ namespace PlayNext.ViewModels
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
             Settings = savedSettings ?? PlayNextSettings.Default;
             GameActivityExtensionFound = _plugin.GameActivityExtension.GameActivityPathExists();
+            StartPageExtensionFound = LandingPageExtension.Instance != null;
 
             InitializeUnplayedCompletionStatuses();
         }
@@ -39,11 +40,9 @@ namespace PlayNext.ViewModels
             }
         }
 
-        public bool GameActivityExtensionFound
-        {
-            get => _gameActivityExtensionFound;
-            set => SetValue(ref _gameActivityExtensionFound, value);
-        }
+        public bool GameActivityExtensionFound { get; }
+
+        public bool StartPageExtensionFound { get; }
 
         public ICommand SetAttributeWeightsToFlat => new RelayCommand(() =>
         {

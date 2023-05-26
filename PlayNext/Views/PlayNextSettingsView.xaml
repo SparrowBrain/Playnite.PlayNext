@@ -37,7 +37,7 @@
                     <Slider Minimum="0" Maximum="100" Value="{Binding TotalPlaytimeWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRecentPlaytime}"></TextBlock>
-                        <TextBlock Text="⚠️" Visibility="{Binding GameActivityExtensionFound, Converter={converters:InvertedBooleanToCollapsedVisibilityConverter}}" ToolTip="{DynamicResource LOC_PlayNext_SettingsGameActivityExtensionNotFound}"></TextBlock>
+                        <TextBlock Text="⚠️" FontSize="10" VerticalAlignment="Center" Visibility="{Binding GameActivityExtensionFound, Converter={converters:InvertedBooleanToCollapsedVisibilityConverter}}" ToolTip="{DynamicResource LOC_PlayNext_SettingsGameActivityExtensionNotFound}"></TextBlock>
                     </StackPanel>
                     <Slider Minimum="0" Maximum="100" Value="{Binding RecentPlaytimeWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                     <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRecentOrder}"></TextBlock>
@@ -93,6 +93,16 @@
                         </ComboBox>
                     </Grid>
                 </Grid>
+            </GroupBox>
+            <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsStartPageGroupTitle}" Visibility="{Binding StartPageExtensionFound, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
+                <StackPanel>
+                    <CheckBox IsChecked="{Binding Settings.StartPageShowLabel}">
+                        <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageShowLabel}"></TextBlock>
+                    </CheckBox>
+                    <CheckBox IsChecked="{Binding Settings.StartPageLabelIsHorizontal}">
+                        <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageLabelIsHorizontal}"></TextBlock>
+                    </CheckBox>
+                </StackPanel>
             </GroupBox>
         </StackPanel>
 

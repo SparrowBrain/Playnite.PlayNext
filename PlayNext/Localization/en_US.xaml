@@ -20,6 +20,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Unplayed Game Means</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion Status</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Start Page</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Horizontal Label</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Game Score Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genre</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Feature</sys:String>

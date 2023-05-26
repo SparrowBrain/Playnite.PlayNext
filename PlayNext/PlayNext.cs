@@ -166,6 +166,7 @@ namespace PlayNext
 
         public void OnPlayNextSettingsSaved()
         {
+            _startPagePlayNextViewModel?.UpdateLabelDisplay();
             RefreshPlayNextData();
         }
 

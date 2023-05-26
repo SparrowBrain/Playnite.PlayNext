@@ -113,7 +113,7 @@ namespace PlayNext.StartPage
             var coverWidth = LandingPageExtension.Instance.Settings.MaxCoverWidth;
 
             var textHeight = 2 * 25;
-            var coverMargin = 2 * 7;
+            var coverMargin = 2 * 8;
             var newWidth = (Math.Floor((dock.ActualWidth - textHeight) / (coverWidth + coverMargin)) * (coverWidth + coverMargin));
 
             column.Width = new GridLength(newWidth, GridUnitType.Pixel);

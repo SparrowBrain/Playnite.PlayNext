@@ -19,11 +19,34 @@ namespace PlayNext.StartPage
         private readonly TotalScoreCalculator _totalScoreCalculator;
 
         private ObservableCollection<GameToPlayViewModel> _games = new ObservableCollection<GameToPlayViewModel>();
+        private bool _showVerticalLabel;
+        private bool _showHorizontalLabel;
+        private string _labelText;
 
         public StartPagePlayNextViewModel(PlayNext plugin)
         {
             _plugin = plugin;
             _totalScoreCalculator = new TotalScoreCalculator(plugin);
+
+            UpdateLabelDisplay();
+        }
+
+        public bool ShowVerticalLabel
+        {
+            get => _showVerticalLabel;
+            set => SetValue(ref _showVerticalLabel, value);
+        }
+
+        public bool ShowHorizontalLabel
+        {
+            get => _showHorizontalLabel;
+            set => SetValue(ref _showHorizontalLabel, value);
+        }
+
+        public string LabelText
+        {
+            get => _labelText;
+            set => SetValue(ref _labelText, value);
         }
 
         public void LoadData()
@@ -68,6 +91,14 @@ namespace PlayNext.StartPage
             newGames.RemoveAt(index);
             newGames.Insert(index, newGame);
             Games = newGames;
+        }
+
+        public void UpdateLabelDisplay()
+        {
+            var settings = _plugin.LoadPluginSettings<PlayNextSettings>();
+            ShowVerticalLabel = !settings.StartPageLabelIsHorizontal;
+            ShowHorizontalLabel = settings.StartPageLabelIsHorizontal;
+            LabelText = settings.StartPageShowLabel ? ResourceProvider.GetString("LOC_PlayNext_PluginName") : string.Empty;
         }
     }
 }

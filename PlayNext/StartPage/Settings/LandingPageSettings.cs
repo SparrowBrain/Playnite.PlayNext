@@ -7,17 +7,11 @@ namespace PlayNext.StartPage.Settings
 {
     public class LandingPageSettings : ObservableObject
     {
-        // workaround to get this module to be loaded by Playnite
-        //private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
-
         private bool fixGridSize = false;
         public bool FixGridSize { get => fixGridSize; set => SetValue(ref fixGridSize, value); }
 
         private double fixedGridHeight = 1080;
         public double FixedGridHeight { get => fixedGridHeight; set => SetValue(ref fixedGridHeight, value); }
-
-        //private GridNode gridLayout = null;
-        //public GridNode GridLayout { get => gridLayout; set => SetValue(ref gridLayout, value); }
 
         private double padding = 0;
         public double Padding { get => padding; set => SetValue(ref padding, value); }
@@ -83,18 +77,22 @@ namespace PlayNext.StartPage.Settings
         public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
 
         private double blurAmount = 20;
+
         public double BlurAmount
         { get => blurAmount; set { SetValue(ref blurAmount, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
 
         private double coverAspectRatio = 0.71794;
+
         public double CoverAspectRatio
         { get => coverAspectRatio; set { SetValue(ref coverAspectRatio, value); } }
 
         private double maxCoverWidth = 140;
+
         public double MaxCoverWidth
         { get => maxCoverWidth; set { SetValue(ref maxCoverWidth, value); } }
 
         private int numberOfGames = 10;
+
         public int NumberOfGames
         { get => numberOfGames; set { SetValue(ref numberOfGames, value); } }
 
@@ -117,11 +115,9 @@ namespace PlayNext.StartPage.Settings
         public double NoiseOpacity { get => noiseOpacity; set => SetValue(ref noiseOpacity, value); }
 
         private double renderScale = 0.05;
+
         public double RenderScale
         { get => renderScale; set { SetValue(ref renderScale, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
-
-        //private LayoutProperties layoutSettings = new LayoutProperties();
-        //public LayoutProperties LayoutSettings { get => layoutSettings; set => SetValue(ref layoutSettings, value); }
 
         private bool moveToTopOfList = false;
         public bool MoveToTopOfList { get => moveToTopOfList; set => SetValue(ref moveToTopOfList, value); }
@@ -132,23 +128,8 @@ namespace PlayNext.StartPage.Settings
         private Uri backgroundImageUri = null;
         public Uri BackgroundImageUri { get => backgroundImageUri; set => SetValue(ref backgroundImageUri, value); }
 
-        //private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
-        //public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
-
         private Guid? lastRandomBackgroundId = null;
         public Guid? LastRandomBackgroundId { get => lastRandomBackgroundId; set => SetValue(ref lastRandomBackgroundId, value); }
-
-        //private ObservableCollection<ShelveProperties> shelveProperties = null;
-        //public ObservableCollection<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
-
-        //private Dictionary<Guid, ObservableCollection<ShelveProperties>> shelveInstances = new Dictionary<Guid, ObservableCollection<ShelveProperties>>();
-        //public Dictionary<Guid, ObservableCollection<ShelveProperties>> ShelveInstances { get => shelveInstances; set => SetValue(ref shelveInstances, value); }
-
-        //private Dictionary<Guid, Settings.ShelvesSettings> shelveInstanceSettings = null;
-        //public Dictionary<Guid, Settings.ShelvesSettings> ShelveInstanceSettings { get => shelveInstanceSettings; set => SetValue(ref shelveInstanceSettings, value); }
-
-        //private ObservableCollection<MostPlayedOptions> mostPlayedOptions = null;
-        //public ObservableCollection<MostPlayedOptions> MostPlayedOptions { get => mostPlayedOptions; set => SetValue(ref mostPlayedOptions, value); }
 
         private bool skipGamesInPreviousShelves = false;
         public bool SkipGamesInPreviousShelves { get => skipGamesInPreviousShelves; set => SetValue(ref skipGamesInPreviousShelves, value); }
@@ -177,9 +158,6 @@ namespace PlayNext.StartPage.Settings
         private double globalBackgroundOpacity = 0.8;
         public double GlobalBackgroundOpacity { get => globalBackgroundOpacity; set => SetValue(ref globalBackgroundOpacity, value); }
 
-        //private ObservableCollection<GridNodePreset> gridNodePresets = new ObservableCollection<GridNodePreset>();
-        //public ObservableCollection<GridNodePreset> GridNodePresets { get => gridNodePresets; set => SetValue(ref gridNodePresets, value); }
-
         private Guid ignoreTagId = Guid.Empty;
 
         public Guid IgnoreTagId
@@ -198,24 +176,5 @@ namespace PlayNext.StartPage.Settings
 
         private bool showHiddenInMostPlayed = false;
         public bool ShowHiddenInMostPlayed { get => showHiddenInMostPlayed; set => SetValue(ref showHiddenInMostPlayed, value); }
-
-        //// Playnite serializes settings object to a JSON object and saves it as text file.
-        //// If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
-        //[DontSerialize]
-        //public IEnumerable<string> StartPageOptions
-        //{
-        //    get
-        //    {
-        //        var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-        //        if (mainWindow is Window)
-        //        {
-        //            if (UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
-        //            {
-        //                return panel.Children.Cast<FrameworkElement>().Select(e => e.ToolTip?.ToString()).OfType<string>();
-        //            }
-        //        }
-        //        return new List<string>();
-        //    }
-        //}
     }
 }

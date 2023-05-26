@@ -1,11 +1,10 @@
-v1.2.0 DRAFT
+v1.2.0
+- Added start page label display options
 - Added German translations (thanks HerrKnarz!)
 - Added Italian translations (thanks lordbender!)
 - Added a warning in settings for missing recent activity extension
 - Fixed score column spacing in main view for German language
 - Fixed radiobutton spacing in settings
-// - Add start page label option support
-
 
 v1.1.0
 - Added an ability to filter for unplayed games with completion statuses

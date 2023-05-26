@@ -288,40 +288,44 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" SizeChanged="Dock_OnSizeChanged"  Margin="20,0,0,0">
+    <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" SizeChanged="Dock_OnSizeChanged"  Margin="10,0,0,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Name="CoverListWidth" Width="300"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{DynamicResource LOC_PlayNext_PluginName}" HorizontalAlignment="Right" Margin="0,0,0,30">
+            <TextBlock Grid.Column="1" Text="{Binding LabelText}" HorizontalAlignment="Right" Margin="5,0,5,30" Visibility="{Binding ShowVerticalLabel, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="-90"></RotateTransform>
                 </TextBlock.LayoutTransform>
             </TextBlock>
-            <ListBox Grid.Column="1" ItemsSource="{Binding Path = Games}" ItemContainerStyle="{DynamicResource GameListItem}"
-                     BorderThickness="0" Background="Transparent" Padding="0"
-                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
-                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Horizontal" Margin="0" MouseWheel="OnCoverListMouseWheel" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ItemsPresenter}">
-                        <Setter Property="Margin" Value="0" />
-                        <Setter Property="ItemsControl.Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <ContentPresenter Margin="0" />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.Resources>
-            </ListBox>
+            <StackPanel Grid.Column="2" Margin="0.5,0,5,0">
+                <TextBlock Text="{Binding LabelText}" HorizontalAlignment="Left" Margin="5,0,0,0" Visibility="{Binding ShowHorizontalLabel, Converter={converters:BooleanToCollapsedVisibilityConverter}}"></TextBlock>
+                <ListBox ItemsSource="{Binding Path = Games}" ItemContainerStyle="{DynamicResource GameListItem}"
+                         BorderThickness="0" Background="Transparent" Padding="0"
+                         ItemTemplate="{DynamicResource GameCoverDataTemplate}"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" Margin="0" MouseWheel="OnCoverListMouseWheel" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ItemsPresenter}">
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="ItemsControl.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter Margin="0" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </StackPanel>
         </Grid>
     </DockPanel>
 </UserControl>

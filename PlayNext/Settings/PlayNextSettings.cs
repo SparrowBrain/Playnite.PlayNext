@@ -9,7 +9,7 @@ namespace PlayNext.Settings
     {
         public const int MaxWeightValue = 100;
         public const int MinWeightValue = 0;
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 2;
 
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
@@ -18,6 +18,8 @@ namespace PlayNext.Settings
         private int _recentDays;
         private bool _unplayedGameIsWithCompletionStatus;
         private bool _unplayedGameIsWithZeroTime;
+        private bool _startPageShowLabel;
+        private bool _startPageLabelIsHorizontal;
 
         public PlayNextSettings()
         {
@@ -36,6 +38,9 @@ namespace PlayNext.Settings
             RecentDays = 14;
             UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
             UnplayedCompletionStatuses = Array.Empty<Guid>();
+
+            StartPageShowLabel = true;
+            StartPageLabelIsHorizontal = false;
         }
 
         public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
@@ -156,6 +161,18 @@ namespace PlayNext.Settings
         }
 
         public Guid[] UnplayedCompletionStatuses { get; set; }
+
+        public bool StartPageShowLabel
+        {
+            get => _startPageShowLabel;
+            set => SetValue(ref _startPageShowLabel, value);
+        }
+
+        public bool StartPageLabelIsHorizontal
+        {
+            get => _startPageLabelIsHorizontal;
+            set => SetValue(ref _startPageLabelIsHorizontal, value);
+        }
 
         public int Version { get; set; }
 

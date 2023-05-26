@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Converters\BooleanToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\InvertedBooleanToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToCollapsedVisibilityConverter.cs" />
     <Compile Include="Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="GameActivity\GameActivityExtension.cs" />
     <Compile Include="GameActivity\Session.cs" />
     <Compile Include="Model\Filters\UnplayedFilter.cs" />
+    <Compile Include="Settings\Old\SettingsV1.cs" />
     <Compile Include="ViewModels\CompletionStatusItem.cs" />
     <Compile Include="Model\Data\UnplayedGameChoice.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />

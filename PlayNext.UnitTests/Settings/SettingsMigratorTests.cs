@@ -63,14 +63,18 @@ namespace PlayNext.UnitTests.Settings
                 .Where(x => x.FullName.StartsWith("PlayNext"))
                 .SelectMany(s => s.GetTypes())
                 .Where(x => x.IsClass)
-                .Where(p => type.IsAssignableFrom(p));
+                .Where(p => type.IsAssignableFrom(p))
+                .Where(x => x != typeof(VersionedSettings))
+                .Where(x => x != typeof(SettingsV0Fake));
 
-            return types.Select(x =>
+            var allOldSettingsVersions = types.Select(x =>
             {
                 var ctor = x.GetConstructor(new Type[] { });
                 object instance = ctor.Invoke(new object[] { });
                 return new object[] { (instance as IVersionedSettings).Version };
             }).Where(x => (int)x[0] != PlayNextSettings.CurrentVersion);
+
+            return allOldSettingsVersions;
         }
 
         public class SettingsV0Fake : SettingsV0

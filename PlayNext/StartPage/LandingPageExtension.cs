@@ -21,8 +21,7 @@ namespace PlayNext.StartPage
 
         public static void CreateInstance(IPlayniteAPI api)
         {
-            var startTime = DateTime.Now;
-            new Task(async () =>
+            new Task(() =>
             {
                 try
                 {
