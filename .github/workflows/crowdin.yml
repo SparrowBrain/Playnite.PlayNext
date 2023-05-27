@@ -1,4 +1,5 @@
 name: Crowdin Action
+concurrency: crowdin
 
 on:
   push:
