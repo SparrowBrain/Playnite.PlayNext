@@ -9,7 +9,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Pesi per il calcolo degli attributi</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Tempo di Gioco Totale</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Ultimi Tempi di Gioco</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Richiede l'estensione GameActivity</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Ordine Recente</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Predefinito</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Piatto</sys:String>
@@ -19,6 +19,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Media Giochi non Giocati</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Nessun Tempo Di Gioco</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Stato di Completamento</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Start Page</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Horizontal Label</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Pesi per il Calcolo del Voto del Gioco</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genere</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Funzionalità</sys:String>
