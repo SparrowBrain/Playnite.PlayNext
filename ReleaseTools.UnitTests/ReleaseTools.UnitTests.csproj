@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Changelog\ChangelogParserTests.cs" />
+    <Compile Include="GitHubTools\AuthStatusParserTests.cs" />
     <Compile Include="InstallerManifestYaml\InstallerManifestEntryGeneratorTests.cs" />
     <Compile Include="Package\ExtensionPackageNameGuesserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

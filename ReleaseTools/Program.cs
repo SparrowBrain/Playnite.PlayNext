@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using ReleaseTools.Changelog;
 using ReleaseTools.ExtensionYaml;
+using ReleaseTools.GitHubTools;
 using ReleaseTools.InstallerManifestYaml;
 using ReleaseTools.Package;
 
@@ -21,6 +23,8 @@ namespace ReleaseTools
             var msBuild = @"""C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe""";
             var testRunner = @"""C:\Users\Qwx\Documents\src\Playnite.PlayNext\packages\xunit.runner.console.2.4.2\tools\net462\xunit.console.exe""";
             var toolbox = @"""C:\Users\Qwx\AppData\Local\Playnite\Toolbox.exe""";
+
+            await EnsureGitHubAuthentication();
 
             var extensionPackageNameGuesser = new ExtensionPackageNameGuesser();
 
@@ -43,6 +47,25 @@ namespace ReleaseTools
 
             UpdateInstallerManifest(pathToSolution, extensionPackageNameGuesser, changeEntry);
             CommitAndPush($@"v{changeEntry.Version} installer-manifest.yaml update");
+        }
+
+        private static async Task EnsureGitHubAuthentication()
+        {
+            var authStatusParser = new AuthStatusParser();
+            var p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.FileName = "gh";
+            p.StartInfo.Arguments = "auth status";
+            p.Start();
+            var output = await p.StandardError.ReadToEndAsync();
+            p.WaitForExit();
+
+            if (!authStatusParser.IsUserLoggedIn(output))
+            {
+                throw new AuthenticationException(
+                    "User not logged in to GitHub via CLI. Either run `gh auth login` or setup an environment variable `GITHUB_TOKEN`. More info: https://cli.github.com/manual/.");
+            }
         }
 
         private static string CleanUpReleaseArtifacts(string pathToSolution)

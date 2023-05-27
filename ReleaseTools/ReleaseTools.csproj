@@ -49,6 +49,7 @@
     <Compile Include="Changelog\ReleaseChangelogWriter.cs" />
     <Compile Include="DateTimeProvider.cs" />
     <Compile Include="ExtensionYaml\ExtensionYamlUpdater.cs" />
+    <Compile Include="GitHubTools\AuthStatusParser.cs" />
     <Compile Include="IDateTimeProvider.cs" />
     <Compile Include="InstallerManifestYaml\InstallerManifestEntryGenerator.cs" />
     <Compile Include="InstallerManifestYaml\InstallerManifestUpdater.cs" />
