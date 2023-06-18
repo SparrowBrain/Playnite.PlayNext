@@ -15,7 +15,8 @@ v0.0.0
 - Change 1
 - Change 2
 ``` 
-2. Run `release.bat`
+2. Build the solution in Debug mode
+3. Run `release.bat`
 
 
 In case GitHub authentication fails set it up. Either run `gh auth login` or setup an environment variable `GITHUB_TOKEN`. More info: https://cli.github.com/manual/.
