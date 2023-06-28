@@ -2,7 +2,7 @@
 {
     public class GameScoreWeights
     {
-        public const float Number = 8;
+        public const float Number = 9;
 
         public float Genre { get; set; }
         public float Feature { get; set; }
@@ -12,6 +12,7 @@
         public float CriticScore { get; set; }
         public float CommunityScore { get; set; }
         public float ReleaseYear { get; set; }
+        public float Length { get; set; }
 
         public static GameScoreWeights Flat { get; } = new GameScoreWeights()
         {
@@ -23,6 +24,7 @@
             CriticScore = 1 / Number,
             CommunityScore = 1 / Number,
             ReleaseYear = 1 / Number,
+            Length = 1 / Number,
         };
 
         public static GameScoreWeights Default { get; } = new GameScoreWeights()
@@ -35,6 +37,7 @@
             CriticScore = 0.4f,
             CommunityScore = 0.2f,
             ReleaseYear = 0.1f,
+            Length = 0f,
         };
     }
 }

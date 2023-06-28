@@ -20,6 +20,8 @@ namespace PlayNext.Settings
         private bool _unplayedGameIsWithZeroTime;
         private bool _startPageShowLabel;
         private bool _startPageLabelIsHorizontal;
+        private int _lengthHours;
+        private int _lengthMinutes;
 
         public PlayNextSettings()
         {
@@ -33,6 +35,9 @@ namespace PlayNext.Settings
 
             DesiredReleaseYear = 2000;
             ReleaseYearChoice = ReleaseYearChoice.Current;
+
+            LengthHours = 0;
+            LengthMinutes = 0;
 
             NumberOfTopGames = 30;
             RecentDays = 14;
@@ -97,6 +102,28 @@ namespace PlayNext.Settings
                 newValue[(int)value] = true;
                 _releaseYearChoices = newValue;
                 OnPropertyChanged(nameof(ReleaseYearChoices));
+            }
+        }
+
+        public float LengthWeight { get; set; }
+
+        public int LengthHours
+        {
+            get => _lengthHours;
+            set => SetValue(ref _lengthHours, value);
+        }
+
+        public int LengthMinutes
+        {
+            get => _lengthMinutes;
+            set
+            {
+                if (value > 59)
+                {
+                    value = 59;
+                }
+
+                SetValue(ref _lengthMinutes, value);
             }
         }
 

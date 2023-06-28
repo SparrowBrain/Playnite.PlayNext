@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Playnite.SDK;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Model.Score.Attribute
 {
     public class ReleaseYearCalculator
     {
-        private ILogger _logger = LogManager.GetLogger();
-
         public Dictionary<Guid, float> Calculate(IEnumerable<Game> games, int desiredReleaseYear)
         {
             if (games == null || !games.Any())

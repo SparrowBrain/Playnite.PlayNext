@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\tests.yml = .github\workflows\tests.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayNext.IntegrationTests", "PlayNext.IntegrationTests\PlayNext.IntegrationTests.csproj", "{C12FCC8C-164D-4AA3-AAD1-45E2D1C2D2F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{A751BF7A-3F85-4ACC-8524-ADB7A61AD22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A751BF7A-3F85-4ACC-8524-ADB7A61AD22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A751BF7A-3F85-4ACC-8524-ADB7A61AD22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C12FCC8C-164D-4AA3-AAD1-45E2D1C2D2F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12FCC8C-164D-4AA3-AAD1-45E2D1C2D2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12FCC8C-164D-4AA3-AAD1-45E2D1C2D2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12FCC8C-164D-4AA3-AAD1-45E2D1C2D2F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

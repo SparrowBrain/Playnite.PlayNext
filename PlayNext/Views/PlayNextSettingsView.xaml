@@ -124,6 +124,8 @@
                 <Slider Minimum="0" Maximum="100" Value="{Binding CommunityScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYear}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding ReleaseYearWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLength}"></TextBlock>
+                <Slider Minimum="0" Maximum="100" Value="{Binding LengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -145,6 +147,21 @@
                     <RadioButton IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
                     <RadioButton Grid.Row="1" Grid.Column="0" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.DesiredReleaseYear}" ></TextBox>
+                </Grid>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLengthTitle}"></TextBlock>
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsLengthHours}"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Settings.LengthHours}" ></TextBox>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource LOC_PlayNext_SettingsLengthMinutes}"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Settings.LengthMinutes}" ></TextBox>
                 </Grid>
             </StackPanel>
         </GroupBox>

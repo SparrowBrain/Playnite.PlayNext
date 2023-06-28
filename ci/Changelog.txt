@@ -1,3 +1,8 @@
+v1.3.0----------
+-- Added support for HowLongToBeat extension
+HLTB extension parser (integration tests)
+score calculator (unit tests)
+
 v1.2.0
 - Added start page label display options
 - Added German translations (thanks HerrKnarz!)
