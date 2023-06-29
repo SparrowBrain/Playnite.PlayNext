@@ -220,6 +220,7 @@ namespace PlayNext.Settings
             CriticScoreWeight = gameScoreWeights.CriticScore * MaxWeightValue;
             CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
             ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
+            LengthWeight = gameScoreWeights.Length * MaxWeightValue;
         }
     }
 }

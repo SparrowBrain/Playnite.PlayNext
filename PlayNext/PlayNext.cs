@@ -23,6 +23,7 @@ namespace PlayNext
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly GameActivityExtension _gameActivities;
         private readonly StartupSettingsValidator _startupSettingsValidator;
+        private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
 
         private PlayNextSettingsViewModel _settings;
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
@@ -41,7 +42,7 @@ namespace PlayNext
                 HasSettings = true,
             };
 
-            _gameActivities = GameActivityExtension.Create(api);
+            _gameActivities = GameActivityExtension.Create(_dateTimeProvider, api.Paths.ExtensionsDataPath);
             _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
 
             var pluginSettingsPersistence = new PluginSettingsPersistence(this);
@@ -191,7 +192,7 @@ namespace PlayNext
                     var recentDayCount = savedSettings.RecentDays;
                     var allGames = PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
-                    var recentGames = new RecentlyPlayedFilter(new DateTimeProvider()).Filter(playedGames, recentDayCount);
+                    var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
 
                     _gameActivities.ParseGameActivity(recentGames);
                 }

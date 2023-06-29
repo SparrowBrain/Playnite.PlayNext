@@ -55,6 +55,12 @@
     <Reference Include="Moq, Version=4.1.1308.2120, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.1.1308.2120\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Playnite.SDK, Version=6.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PlayniteSDK.6.8.0\lib\net462\Playnite.SDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -72,18 +78,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameActivity\GameActivityExtensionTests.cs" />
+    <Compile Include="HowLongToBeat\HowLongToBeatExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="GameActivity\TestData\afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4\GameActivity\f1044699-4b97-4968-868b-e871e37ae1f3.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="HowLongToBeat\TestData\e08cd51f-9c9a-4ee3-a094-fde03b55492f\HowLongToBeat\80e0983b-9855-4d1a-b801-53084aabd7a9.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.1.1.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
     <Analyzer Include="..\packages\xunit.analyzers.1.1.0\analyzers\dotnet\cs\xunit.analyzers.fixes.dll" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="HowLongToBeat\" />
+    <ProjectReference Include="..\PlayNext\PlayNext.csproj">
+      <Project>{4FDF1E89-5BC3-4C72-8FDA-0D580E7A5D5F}</Project>
+      <Name>PlayNext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestTools.Shared\TestTools.Shared.csproj">
+      <Project>{DD7EA41C-5EB6-442E-980D-13024EA8C054}</Project>
+      <Name>TestTools.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

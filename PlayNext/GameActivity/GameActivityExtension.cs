@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using PlayNext.GameActivity.Helpers;
+using PlayNext.Services;
 using PlayNext.Settings;
 using Playnite.SDK;
 using Playnite.SDK.Models;
@@ -13,26 +14,23 @@ namespace PlayNext.GameActivity
     public class GameActivityExtension
     {
         private readonly ILogger _logger = LogManager.GetLogger(nameof(GameActivityExtension));
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly string _activityPath;
         private List<Activity> _recentActivities = new List<Activity>();
 
-        public GameActivityExtension(string activityPath)
+        public GameActivityExtension(IDateTimeProvider dateTimeProvider, string activityPath)
         {
+            _dateTimeProvider = dateTimeProvider;
             _activityPath = activityPath;
         }
 
-        public static GameActivityExtension Create(IPlayniteAPI api)
+        public static GameActivityExtension Create(IDateTimeProvider dateTimeProvider, string extensionsDataPath)
         {
-            var gameActivityPath = Directory.GetDirectories(api.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-            if (!string.IsNullOrEmpty(gameActivityPath))
-            {
-                var gameActivity = new GameActivityExtension(gameActivityPath);
-                return gameActivity;
-            }
-            else
-            {
-                return new GameActivityExtension(null);
-            }
+            var gameActivityPath = Directory.GetDirectories(extensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
+            
+            return !string.IsNullOrEmpty(gameActivityPath)
+                ? new GameActivityExtension(dateTimeProvider, gameActivityPath)
+                : new GameActivityExtension(dateTimeProvider, null);
         }
 
         public event Action ActivityRefreshed;
@@ -87,7 +85,7 @@ namespace PlayNext.GameActivity
             {
                 var game = x.GetCopy();
                 game.Playtime = _recentActivities.FirstOrDefault(activity => activity.Id == game.Id)?
-                    .Items?.Where(session => session.DateSession > DateTime.Now.AddDays(-settings.RecentDays))
+                    .Items?.Where(session => session.DateSession > _dateTimeProvider.GetNow().AddDays(-settings.RecentDays))
                     .Sum(session => session.ElapsedSeconds) ?? 0;
                 return game;
             });
