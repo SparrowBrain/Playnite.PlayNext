@@ -55,12 +55,12 @@ namespace PlayNext.HowLongToBeat
                     .ToDictionary(x => x.Id, x =>
                         x.Items.Sum(i => (i.GameHltbData.MainStory + i.GameHltbData.MainExtra + i.GameHltbData.Completionist) / 3) / x.Items.Count);
 
-                _logger.Info($"{hltbData.Count} games with how long to beat data found");
+                _logger.Info($"{hltbData.Count} games with HowLongToBeat data found");
                 return hltbData;
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Failure reading how long to beat files");
+                _logger.Error(ex, "Failure reading HowLongToBeat files");
                 return new Dictionary<Guid, int>();
             }
         }

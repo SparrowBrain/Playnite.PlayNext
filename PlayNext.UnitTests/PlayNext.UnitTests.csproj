@@ -81,6 +81,7 @@
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculatorTests.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilterTests.cs" />
     <Compile Include="Model\Filters\WithPlaytimeFilterTests.cs" />
+    <Compile Include="Model\Score\Attribute\GameLengthCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Score\Attribute\FinalAttributeScoreCalculatorTests.cs" />
     <Compile Include="Model\Score\Attribute\ReleaseYearCalculatorTests.cs" />
