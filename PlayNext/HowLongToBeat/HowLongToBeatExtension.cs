@@ -12,6 +12,7 @@ namespace PlayNext.HowLongToBeat
 {
     public class HowLongToBeatExtension
     {
+        private static Guid _extensionId = Guid.Parse("e08cd51f-9c9a-4ee3-a094-fde03b55492f");
         private readonly ILogger _logger = LogManager.GetLogger(nameof(HowLongToBeatExtension));
 
         private readonly string _dataPath;
@@ -24,9 +25,8 @@ namespace PlayNext.HowLongToBeat
 
         public static HowLongToBeatExtension Create(string extensionsDataPath)
         {
-            var dataPath = Directory.GetDirectories(extensionsDataPath, "HowLongToBeat", SearchOption.AllDirectories).FirstOrDefault();
-
-            return !string.IsNullOrEmpty(dataPath)
+            var dataPath = Path.Combine(extensionsDataPath, _extensionId.ToString(), "HowLongToBeat");
+            return Directory.Exists(dataPath)
                 ? new HowLongToBeatExtension(dataPath)
                 : new HowLongToBeatExtension(null);
         }

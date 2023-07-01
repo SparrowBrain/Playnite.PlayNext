@@ -25,6 +25,7 @@ namespace PlayNext.ViewModels
             var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
             Settings = savedSettings ?? PlayNextSettings.Default;
             GameActivityExtensionFound = _plugin.GameActivityExtension.GameActivityPathExists();
+            HowLongToBeatExtensionFound = _plugin.HowLongToBeatExtension.DoesDataExist();
             StartPageExtensionFound = LandingPageExtension.Instance != null;
 
             InitializeUnplayedCompletionStatuses();
@@ -41,6 +42,8 @@ namespace PlayNext.ViewModels
         }
 
         public bool GameActivityExtensionFound { get; }
+
+        public bool HowLongToBeatExtensionFound { get; }
 
         public bool StartPageExtensionFound { get; }
 

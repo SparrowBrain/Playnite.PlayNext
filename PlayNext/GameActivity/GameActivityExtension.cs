@@ -14,6 +14,7 @@ namespace PlayNext.GameActivity
 {
     public class GameActivityExtension
     {
+        private static Guid _extensionId = Guid.Parse("afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4");
         private readonly ILogger _logger = LogManager.GetLogger(nameof(GameActivityExtension));
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly string _activityPath;
@@ -27,10 +28,9 @@ namespace PlayNext.GameActivity
 
         public static GameActivityExtension Create(IDateTimeProvider dateTimeProvider, string extensionsDataPath)
         {
-            var gameActivityPath = Directory.GetDirectories(extensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-
-            return !string.IsNullOrEmpty(gameActivityPath)
-                ? new GameActivityExtension(dateTimeProvider, gameActivityPath)
+            var dataPath = Path.Combine(extensionsDataPath, _extensionId.ToString(), "GameActivity");
+            return Directory.Exists(dataPath)
+                ? new GameActivityExtension(dateTimeProvider, dataPath)
                 : new GameActivityExtension(dateTimeProvider, null);
         }
 
