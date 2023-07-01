@@ -219,15 +219,15 @@ namespace PlayNext.ViewModels
             }
         }
 
-        public float LengthWeight
+        public float GameLengthWeight
         {
-            get => Settings.LengthWeight;
+            get => Settings.GameLengthWeight;
             set
             {
-                var difference = (value - Settings.LengthWeight) / (GameScoreWeights.Number - 1);
+                var difference = (value - Settings.GameLengthWeight) / (GameScoreWeights.Number - 1);
                 RebalanceGameScoreWeights(difference);
-                Settings.LengthWeight = value;
-                PushGameScoreWeightsToTotal(nameof(Settings.LengthWeight));
+                Settings.GameLengthWeight = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.GameLengthWeight));
                 NotifyGameScoreSourcePropertiesChanged();
             }
         }
@@ -294,7 +294,7 @@ namespace PlayNext.ViewModels
             Settings.CriticScoreWeight = ContainInMinMax(Settings.CriticScoreWeight - difference);
             Settings.CommunityScoreWeight = ContainInMinMax(Settings.CommunityScoreWeight - difference);
             Settings.ReleaseYearWeight = ContainInMinMax(Settings.ReleaseYearWeight - difference);
-            Settings.LengthWeight = ContainInMinMax(Settings.LengthWeight - difference);
+            Settings.GameLengthWeight = ContainInMinMax(Settings.GameLengthWeight - difference);
         }
 
         private void PushGameScoreWeightsToTotal(string ignore)
@@ -339,9 +339,9 @@ namespace PlayNext.ViewModels
                 Settings.ReleaseYearWeight = ContainInMinMax(Settings.ReleaseYearWeight + GetMissingGameWeightToTotal());
             }
 
-            if (ignore != nameof(Settings.LengthWeight))
+            if (ignore != nameof(Settings.GameLengthWeight))
             {
-                Settings.LengthWeight = ContainInMinMax(Settings.LengthWeight + GetMissingGameWeightToTotal());
+                Settings.GameLengthWeight = ContainInMinMax(Settings.GameLengthWeight + GetMissingGameWeightToTotal());
             }
         }
 
@@ -380,7 +380,7 @@ namespace PlayNext.ViewModels
             OnPropertyChanged(nameof(CriticScoreWeight));
             OnPropertyChanged(nameof(CommunityScoreWeight));
             OnPropertyChanged(nameof(ReleaseYearWeight));
-            OnPropertyChanged(nameof(LengthWeight));
+            OnPropertyChanged(nameof(GameLengthWeight));
         }
 
         private float ContainInMinMax(float newValue)
@@ -395,7 +395,7 @@ namespace PlayNext.ViewModels
 
         private float GetMissingGameWeightToTotal()
         {
-            return PlayNextSettings.MaxWeightValue - Settings.GenreWeight - Settings.FeatureWeight - Settings.DeveloperWeight - Settings.PublisherWeight - Settings.TagWeight - Settings.CriticScoreWeight - Settings.CommunityScoreWeight - Settings.ReleaseYearWeight - Settings.LengthWeight;
+            return PlayNextSettings.MaxWeightValue - Settings.GenreWeight - Settings.FeatureWeight - Settings.DeveloperWeight - Settings.PublisherWeight - Settings.TagWeight - Settings.CriticScoreWeight - Settings.CommunityScoreWeight - Settings.ReleaseYearWeight - Settings.GameLengthWeight;
         }
     }
 }

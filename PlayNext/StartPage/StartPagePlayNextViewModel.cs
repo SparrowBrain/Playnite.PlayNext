@@ -49,7 +49,7 @@ namespace PlayNext.StartPage
             set => SetValue(ref _labelText, value);
         }
 
-        public void LoadData()
+        public void LoadData(ICollection<GameToPlayViewModel> games)
         {
             new Task(() =>
             {
@@ -57,7 +57,6 @@ namespace PlayNext.StartPage
                 {
                     var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
                     var numberOfGames = savedSettings.NumberOfTopGames;
-                    var games = _totalScoreCalculator.Calculate(savedSettings);
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {

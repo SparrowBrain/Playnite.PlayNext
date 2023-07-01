@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PlayNext.GameActivity.Helpers;
 using PlayNext.Services;
@@ -27,15 +28,13 @@ namespace PlayNext.GameActivity
         public static GameActivityExtension Create(IDateTimeProvider dateTimeProvider, string extensionsDataPath)
         {
             var gameActivityPath = Directory.GetDirectories(extensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-            
+
             return !string.IsNullOrEmpty(gameActivityPath)
                 ? new GameActivityExtension(dateTimeProvider, gameActivityPath)
                 : new GameActivityExtension(dateTimeProvider, null);
         }
 
-        public event Action ActivityRefreshed;
-
-        public void ParseGameActivity(IEnumerable<Game> recentGames)
+        public async Task ParseGameActivity(IEnumerable<Game> recentGames)
         {
             try
             {
@@ -46,13 +45,15 @@ namespace PlayNext.GameActivity
 
                 var files = Directory.GetFiles(_activityPath);
                 var validFiles = files
-                    .AsParallel()
                     .Where(path =>
                         Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) &&
                         recentGames.Any(x => x.Id == id));
                 var deserializedFiles = validFiles
                     .Select(DeserializeActivityFile);
-                var withSessions = deserializedFiles
+
+                var activities = await Task.WhenAll(deserializedFiles);
+
+                var withSessions = activities
                     .Where(activity => (activity?.Items?.Count() ?? 0) > 0);
 
                 _recentActivities = new List<Activity>(withSessions);
@@ -61,10 +62,6 @@ namespace PlayNext.GameActivity
             catch (Exception ex)
             {
                 _logger.Error(ex, "Failure reading game activities files");
-            }
-            finally
-            {
-                OnActivityRefreshed();
             }
         }
 
@@ -94,19 +91,17 @@ namespace PlayNext.GameActivity
             return recentPlaytime;
         }
 
-        private Activity DeserializeActivityFile(string file)
+        private async Task<Activity> DeserializeActivityFile(string file)
         {
             try
             {
-                var json = File.ReadAllText(file);
-                return JsonConvert.DeserializeObject<Activity>(json);
+                using (var reader = new StreamReader(file))
+                {
+                    var json = await reader.ReadToEndAsync();
+                    return JsonConvert.DeserializeObject<Activity>(json);
+                }
             }
             catch { return null; }
-        }
-
-        protected virtual void OnActivityRefreshed()
-        {
-            ActivityRefreshed?.Invoke();
         }
     }
 }

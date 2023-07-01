@@ -13,21 +13,11 @@ namespace PlayNext.Views
     public partial class PlayNextMainView : PluginUserControl
     {
         private readonly ILogger _logger = LogManager.GetLogger(nameof(PlayNextMainView));
-        private readonly PlayNextMainViewModel _mainViewModel;
 
         public PlayNextMainView(PlayNextMainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
             DataContext = mainViewModel;
-
             InitializeComponent();
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            _mainViewModel.LoadData();
         }
 
         private void OnCoversListBoxMouseWheel(object sender, MouseWheelEventArgs e)

@@ -29,7 +29,7 @@
         <system:Boolean x:Key="False">False</system:Boolean>
 
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type viewModels:GameToPlayViewModel}">
-            <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+            <StackPanel Orientation="Horizontal">
                 <Grid ClipToBounds="True"
                       MaxWidth="{markup:LandingPageSettings Settings.MaxCoverWidth}"
                       x:Name="ImageGrid">
@@ -240,7 +240,6 @@
         </DataTemplate>
         <Style x:Key="GameListItem" TargetType="ListBoxItem">
             <EventSetter Event="MouseUp" Handler="ListBoxItem_MouseUp" />
-            <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Margin" Value="7" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />

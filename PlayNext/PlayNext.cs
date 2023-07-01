@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using PlayNext.GameActivity;
+using PlayNext.HowLongToBeat;
 using PlayNext.Model.Filters;
+using PlayNext.Model.Score;
 using PlayNext.Services;
 using PlayNext.Settings;
 using PlayNext.StartPage;
@@ -22,6 +24,7 @@ namespace PlayNext
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly GameActivityExtension _gameActivities;
+        private readonly HowLongToBeatExtension _howLongToBeatExtension;
         private readonly StartupSettingsValidator _startupSettingsValidator;
         private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
 
@@ -29,10 +32,13 @@ namespace PlayNext
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
         private PlayNextMainView _playNextMainView;
+        private TotalScoreCalculator _totalScoreCalculator;
+        private StartPagePlayNextView _startPageView;
 
         public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
 
         public GameActivityExtension GameActivityExtension => _gameActivities;
+        public HowLongToBeatExtension HowLongToBeatExtension => _howLongToBeatExtension;
 
         public PlayNext(IPlayniteAPI api) : base(api)
         {
@@ -43,7 +49,9 @@ namespace PlayNext
             };
 
             _gameActivities = GameActivityExtension.Create(_dateTimeProvider, api.Paths.ExtensionsDataPath);
-            _gameActivities.ActivityRefreshed += OnActivitiesRefreshed;
+            _howLongToBeatExtension = HowLongToBeatExtension.Create(api.Paths.ExtensionsDataPath);
+
+            _totalScoreCalculator = new TotalScoreCalculator(this);
 
             var pluginSettingsPersistence = new PluginSettingsPersistence(this);
             _startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, new SettingsMigrator(pluginSettingsPersistence));
@@ -68,6 +76,7 @@ namespace PlayNext
                     {
                         _playNextMainViewModel = new PlayNextMainViewModel(this);
                         _playNextMainView = new PlayNextMainView(_playNextMainViewModel);
+                        RefreshPlayNextData();
                     }
 
                     return _playNextMainView;
@@ -149,8 +158,14 @@ namespace PlayNext
             switch (viewId)
             {
                 case "PlayNext_TopRecommendations":
-                    _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
-                    return new StartPagePlayNextView(_startPagePlayNextViewModel);
+                    if (_startPagePlayNextViewModel == null || _startPageView == null)
+                    {
+                        _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
+                        _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel);
+                        RefreshPlayNextData();
+                    }
+
+                    return _startPageView;
             }
 
             return null;
@@ -171,30 +186,37 @@ namespace PlayNext
             RefreshPlayNextData();
         }
 
-        private void OnActivitiesRefreshed()
+        private void OnPlayNextViewInitialized(object sender, EventArgs e)
         {
-            _playNextMainViewModel?.LoadData();
-            _startPagePlayNextViewModel?.LoadData();
+            RefreshPlayNextData();
         }
 
         private void RefreshPlayNextData()
         {
-            ParseRecentActivities();
-        }
-
-        private void ParseRecentActivities()
-        {
-            new Task(() =>
+            new Task<Task>(async () =>
             {
                 try
                 {
                     var savedSettings = LoadPluginSettings<PlayNextSettings>();
                     var recentDayCount = savedSettings.RecentDays;
+                    var gameLengthWeight = savedSettings.GameLengthWeight;
+
                     var allGames = PlayniteApi.Database.Games.ToArray();
                     var playedGames = new WithPlaytimeFilter().Filter(allGames);
                     var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
+                    var unPlayedGames = new UnplayedFilter().Filter(allGames, savedSettings).ToArray();
 
-                    _gameActivities.ParseGameActivity(recentGames);
+                    var activitiesTask = _gameActivities.ParseGameActivity(recentGames);
+                    var howLongToBeatTask = gameLengthWeight > 0
+                        ? _howLongToBeatExtension.ParseFiles(unPlayedGames)
+                        : Task.CompletedTask;
+
+                    await Task.WhenAll(activitiesTask, howLongToBeatTask);
+
+                    var games = _totalScoreCalculator.Calculate(savedSettings);
+
+                    _playNextMainViewModel?.LoadData(games);
+                    _startPagePlayNextViewModel?.LoadData(games);
                 }
                 catch (Exception ex)
                 {

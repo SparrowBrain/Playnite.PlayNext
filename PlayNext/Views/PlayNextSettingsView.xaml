@@ -125,7 +125,7 @@
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYear}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding ReleaseYearWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLength}"></TextBlock>
-                <Slider Minimum="0" Maximum="100" Value="{Binding LengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                <Slider Minimum="0" Maximum="100" Value="{Binding GameLengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

@@ -27,13 +27,14 @@ namespace PlayNext.Model.Score
         private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
         private readonly CommunityScoreCalculator _communityScoreCalculator = new CommunityScoreCalculator();
         private readonly ReleaseYearCalculator _releaseYearCalculator = new ReleaseYearCalculator();
+        private readonly GameLengthCalculator _gameLengthCalculator = new GameLengthCalculator();
 
         public TotalScoreCalculator(PlayNext plugin)
         {
             _plugin = plugin;
 
-            _finalGameScoreCalculator = new FinalGameScoreCalculator(_gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _scoreNormalizer, _summator);
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
+            _finalGameScoreCalculator = new FinalGameScoreCalculator(plugin.HowLongToBeatExtension, _gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _gameLengthCalculator, _scoreNormalizer, _summator);
         }
 
         public ICollection<GameToPlayViewModel> Calculate(PlayNextSettings savedSettings)
@@ -57,9 +58,11 @@ namespace PlayNext.Model.Score
                 CriticScore = savedSettings.CriticScoreWeight / PlayNextSettings.MaxWeightValue,
                 CommunityScore = savedSettings.CommunityScoreWeight / PlayNextSettings.MaxWeightValue,
                 ReleaseYear = savedSettings.ReleaseYearWeight / PlayNextSettings.MaxWeightValue,
+                GameLength = savedSettings.GameLengthWeight / PlayNextSettings.MaxWeightValue,
             };
 
             var desiredReleaseYear = GetDesiredReleaseYear(savedSettings);
+            var desiredGameLength = GetDesiredGameLength(savedSettings);
 
             var allGames = _plugin.PlayniteApi.Database.Games.ToArray();
             var playedGames = new WithPlaytimeFilter().Filter(allGames);
@@ -68,7 +71,7 @@ namespace PlayNext.Model.Score
 
             var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
             var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);
-            var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, desiredReleaseYear);
+            var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, desiredReleaseYear, desiredGameLength);
 
             return gameScore.Select(score =>
             {
@@ -91,6 +94,11 @@ namespace PlayNext.Model.Score
                     _logger.Error("Unknown release year choice");
                     return DateTime.Now.Year;
             }
+        }
+
+        private static TimeSpan GetDesiredGameLength(PlayNextSettings savedSettings)
+        {
+            return TimeSpan.FromHours(savedSettings.LengthHours).Add(TimeSpan.FromMinutes(savedSettings.LengthMinutes));
         }
     }
 }

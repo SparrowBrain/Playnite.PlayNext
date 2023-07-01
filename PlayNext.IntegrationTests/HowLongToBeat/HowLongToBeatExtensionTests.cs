@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using PlayNext.HowLongToBeat;
 using Playnite.SDK.Models;
 using TestTools.Shared;
@@ -47,21 +48,22 @@ namespace PlayNext.IntegrationTests.HowLongToBeat
         }
 
         [Theory, AutoMoqData]
-        public void GetTimeToPlay_ReturnsEmptyDictionary_WhenGamesHaveNoData(
+        public async Task GetTimeToPlay_ReturnsEmptyDictionary_WhenGamesHaveNoData(
             List<Game> games)
         {
             // Arrange
             var sut = HowLongToBeatExtension.Create(ExtensionsDataPath);
 
             // Act
-            var result = sut.GetTimeToPlay(games);
+            await sut.ParseFiles(games);
+            var result = sut.GetTimeToPlay();
 
             // Assert
             Assert.Empty(result);
         }
 
         [Theory, AutoMoqData]
-        public void GetTimeToPlay_ReturnsAverageTime_WhenGamesHasData(
+        public async Task GetTimeToPlay_ReturnsAverageTime_WhenGamesHasData(
             List<Game> games)
         {
             // Arrange
@@ -71,7 +73,8 @@ namespace PlayNext.IntegrationTests.HowLongToBeat
             gameWithData.Id = gameId;
 
             // Act
-            var result = sut.GetTimeToPlay(games);
+            await sut.ParseFiles(games);
+            var result = sut.GetTimeToPlay();
 
             // Assert
             var single = Assert.Single(result);

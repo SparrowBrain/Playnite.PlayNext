@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Moq;
 using PlayNext.GameActivity;
 using PlayNext.Services;
@@ -52,7 +53,7 @@ namespace PlayNext.IntegrationTests.GameActivity
         }
 
         [Theory, AutoMoqData]
-        public void GetRecentPlaytime_ReturnsTrue_WhenPathExists(
+        public async Task GetRecentPlaytime_ReturnsTrue_WhenPathExists(
             Mock<IDateTimeProvider> dateTimeProviderMock)
         {
             // Arrange
@@ -66,7 +67,7 @@ namespace PlayNext.IntegrationTests.GameActivity
         }
 
         [Theory, AutoMoqData]
-        public void GetRecentPlaytime_ReturnsAllGamesWithZeroTime_WhenNoActivityFilesExistsForGames(
+        public async Task GetRecentPlaytime_ReturnsAllGamesWithZeroTime_WhenNoActivityFilesExistsForGames(
             IEnumerable<Game> games,
             PlayNextSettings settings,
             Mock<IDateTimeProvider> dateTimeProviderMock)
@@ -75,7 +76,7 @@ namespace PlayNext.IntegrationTests.GameActivity
             var sut = GameActivityExtension.Create(dateTimeProviderMock.Object, ExtensionsDataPath);
 
             // Act
-            sut.ParseGameActivity(games);
+            await sut.ParseGameActivity(games);
             var gamesWithRecentPlaytime = sut.GetRecentPlaytime(games, settings);
 
             // Assert
@@ -84,7 +85,7 @@ namespace PlayNext.IntegrationTests.GameActivity
         }
 
         [Theory, AutoMoqData]
-        public void GetRecentPlaytime_ReturnsGameWithPlaytime_WhenActivityWasWithinRecentTime(
+        public async Task GetRecentPlaytime_ReturnsGameWithPlaytime_WhenActivityWasWithinRecentTime(
             int recentDays,
             IEnumerable<Game> games,
             PlayNextSettings settings,
@@ -101,7 +102,7 @@ namespace PlayNext.IntegrationTests.GameActivity
                 .Returns(DateTime.Parse("2023-02-12T13:40:18.2429471Z") + TimeSpan.FromDays(recentDays / 2));
 
             // Act
-            sut.ParseGameActivity(games);
+            await sut.ParseGameActivity(games);
             var gamesWithRecentPlaytime = sut.GetRecentPlaytime(games, settings);
 
             // Assert
@@ -110,7 +111,7 @@ namespace PlayNext.IntegrationTests.GameActivity
         }
 
         [Theory, AutoMoqData]
-        public void GetRecentPlaytime_ReturnsGameWithZeroTime_WhenActivityWasNotWithinRecentTime(
+        public async Task GetRecentPlaytime_ReturnsGameWithZeroTime_WhenActivityWasNotWithinRecentTime(
             int recentDays,
             IEnumerable<Game> games,
             PlayNextSettings settings,
@@ -127,7 +128,7 @@ namespace PlayNext.IntegrationTests.GameActivity
                 .Returns(DateTime.Parse("2023-02-12T13:40:18.2429471Z") + TimeSpan.FromDays(recentDays * 2));
 
             // Act
-            sut.ParseGameActivity(games);
+            await sut.ParseGameActivity(games);
             var gamesWithRecentPlaytime = sut.GetRecentPlaytime(games, settings);
 
             // Assert

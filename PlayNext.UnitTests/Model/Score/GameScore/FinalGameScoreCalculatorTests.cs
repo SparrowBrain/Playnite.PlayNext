@@ -21,6 +21,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             string attributeIdsName,
             Game[] games,
             int releaseYear,
+            TimeSpan gameLength,
             Dictionary<Guid, float> attributeScore,
             FinalGameScoreCalculator sut)
         {
@@ -33,7 +34,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             SetWeight(attributeIdsName, gameScoreCalculationWeights, 1);
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, gameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);

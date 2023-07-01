@@ -105,7 +105,7 @@ namespace PlayNext.Settings
             }
         }
 
-        public float LengthWeight { get; set; }
+        public float GameLengthWeight { get; set; }
 
         public int LengthHours
         {
@@ -220,7 +220,7 @@ namespace PlayNext.Settings
             CriticScoreWeight = gameScoreWeights.CriticScore * MaxWeightValue;
             CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
             ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
-            LengthWeight = gameScoreWeights.Length * MaxWeightValue;
+            GameLengthWeight = gameScoreWeights.GameLength * MaxWeightValue;
         }
     }
 }
