@@ -38,7 +38,6 @@
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Length</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Game Length Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Hours</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsLengthMinutes">Minutes</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>

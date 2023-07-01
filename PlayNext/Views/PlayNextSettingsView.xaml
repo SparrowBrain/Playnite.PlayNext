@@ -160,8 +160,6 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsLengthHours}"></TextBlock>
                     <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Settings.LengthHours}" ></TextBox>
-                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource LOC_PlayNext_SettingsLengthMinutes}"></TextBlock>
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Settings.LengthMinutes}" ></TextBox>
                 </Grid>
             </StackPanel>
         </GroupBox>

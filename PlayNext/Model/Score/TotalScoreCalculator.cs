@@ -98,7 +98,7 @@ namespace PlayNext.Model.Score
 
         private static TimeSpan GetDesiredGameLength(PlayNextSettings savedSettings)
         {
-            return TimeSpan.FromHours(savedSettings.LengthHours).Add(TimeSpan.FromMinutes(savedSettings.LengthMinutes));
+            return TimeSpan.FromHours(savedSettings.GameLengthHours);
         }
     }
 }
