@@ -55,9 +55,7 @@ namespace PlayNext.HowLongToBeat
 
                 _hltbData = datas.Where(x => x != null)
                     .ToDictionary(x => x.Id, x =>
-                        x.Items.Sum(i =>
-                            (i.GameHltbData.MainStory + i.GameHltbData.MainExtra + i.GameHltbData.Completionist) / 3) /
-                        x.Items.Count)
+                        x.Items.Sum(i => AverageTimes(i.GameHltbData)) / x.Items.Count)
                     .Where(x => x.Value > 0)
                     .ToDictionary(x => x.Key, x => x.Value);
 
@@ -67,6 +65,27 @@ namespace PlayNext.HowLongToBeat
             {
                 _logger.Error(ex, "Failure reading HowLongToBeat files");
             }
+        }
+
+        private static int AverageTimes(GameHltbData data)
+        {
+            var nonZeroTimes = 0;
+            if (data.MainStory > 0)
+            {
+                nonZeroTimes++;
+            }
+
+            if (data.MainExtra > 0)
+            {
+                nonZeroTimes++;
+            }
+
+            if (data.Completionist > 0)
+            {
+                nonZeroTimes++;
+            }
+
+            return (data.MainStory + data.MainExtra + data.Completionist) / nonZeroTimes;
         }
 
         public Dictionary<Guid, int> GetTimeToPlay()

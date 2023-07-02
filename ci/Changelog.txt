@@ -1,7 +1,6 @@
 v1.3.0----------
--- Added support for HowLongToBeat extension
-HLTB extension parser (integration tests)
-score calculator (unit tests)
+- Added score calculation by game length (requires HowLongToBeat extension)
+- Fixed small spacing issues in settings
 
 v1.2.0
 - Added start page label display options

@@ -82,6 +82,26 @@ namespace PlayNext.IntegrationTests.HowLongToBeat
             Assert.Equal(21777, single.Value);
         }
 
+        [Theory, AutoMoqData]
+        public async Task GetTimeToPlay_ReturnsMainStoryTime_WhenGamesHasOnlyMainStoryTime(
+            List<Game> games)
+        {
+            // Arrange
+            var sut = HowLongToBeatExtension.Create(ExtensionsDataPath);
+            var gameId = Guid.Parse("90a89c58-5205-421f-9853-3fe20b783b48");
+            var gameWithData = games.First();
+            gameWithData.Id = gameId;
+
+            // Act
+            await sut.ParseFiles(games);
+            var result = sut.GetTimeToPlay();
+
+            // Assert
+            var single = Assert.Single(result);
+            Assert.Equal(gameId, single.Key);
+            Assert.Equal(3626, single.Value);
+        }
+
         private static void CleanUpExtensionsDataPath()
         {
             foreach (var dir in Directory.GetDirectories(ExtensionsDataPath))
