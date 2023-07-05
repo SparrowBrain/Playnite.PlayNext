@@ -34,6 +34,10 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Išleidimo metai turėtų būti</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Šie</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Konkretūs</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsLength">Game Length</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Requires HowLongToBeat extension</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Game Length Should Be</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Hours</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Bendri</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Atstatyti visus nustatymus į numatytuosius</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Nepavyko</sys:String>
