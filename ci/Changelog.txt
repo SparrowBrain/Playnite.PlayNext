@@ -1,4 +1,4 @@
-v1.3.0----------
+v1.3.0
 - Added score calculation by game length (requires HowLongToBeat extension)
 - Fixed small spacing issues in settings
 
