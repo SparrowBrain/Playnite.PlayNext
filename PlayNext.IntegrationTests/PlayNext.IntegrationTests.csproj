@@ -88,6 +88,9 @@
     <None Include="GameActivity\TestData\afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4\GameActivity\f1044699-4b97-4968-868b-e871e37ae1f3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="HowLongToBeat\TestData\e08cd51f-9c9a-4ee3-a094-fde03b55492f\HowLongToBeat\1a1f204c-3106-4bf9-9d78-311a83501b77.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="HowLongToBeat\TestData\e08cd51f-9c9a-4ee3-a094-fde03b55492f\HowLongToBeat\80e0983b-9855-4d1a-b801-53084aabd7a9.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -85,7 +85,9 @@ namespace PlayNext.HowLongToBeat
                 nonZeroTimes++;
             }
 
-            return (data.MainStory + data.MainExtra + data.Completionist) / nonZeroTimes;
+            return nonZeroTimes > 0
+                ? (data.MainStory + data.MainExtra + data.Completionist) / nonZeroTimes
+                : 0;
         }
 
         public Dictionary<Guid, int> GetTimeToPlay()
