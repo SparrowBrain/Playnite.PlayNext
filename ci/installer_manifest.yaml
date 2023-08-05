@@ -1,5 +1,12 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.4.0
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2023-08-05
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.4.0/SparrowBrain_PlayNext_1_4_0.pext
+    Changelog:
+      - Added minimum cover count for use with start page alignments
+      - Fixed Playnite crash when using start page alignment
   - Version: 1.3.0
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2023-07-06
