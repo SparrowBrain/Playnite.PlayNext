@@ -22,6 +22,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Pagina Iniziale</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Mostra Etichetta</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Etichetta Orizzontale</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Min Cover Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Pesi per il Calcolo del Voto del Gioco</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genere</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Funzionalità</sys:String>
