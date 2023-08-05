@@ -22,7 +22,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Pradžios puslapis</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Rodyti pavadinimą</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Horizontalus pavadinimas</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Min Cover Count</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Min. žaidimų skaičius</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Žaidimų balo skaičiavimo svoriai</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Žanras</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Savybė</sys:String>
