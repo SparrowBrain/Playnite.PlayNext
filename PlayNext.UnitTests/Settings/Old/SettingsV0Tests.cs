@@ -1,5 +1,4 @@
 ﻿using AutoFixture.Xunit2;
-using PlayNext.Settings;
 using PlayNext.Settings.Old;
 using Xunit;
 

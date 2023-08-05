@@ -90,6 +90,7 @@
     <Compile Include="Model\Score\ScoreNormalizerTests.cs" />
     <Compile Include="Model\Score\SummatorTests.cs" />
     <Compile Include="Settings\Old\SettingsV0Tests.cs" />
+    <Compile Include="Settings\Old\SettingsV2Tests.cs" />
     <Compile Include="Settings\Old\SettingsV1Tests.cs" />
     <Compile Include="Settings\SettingsMigratorTests.cs" />
     <Compile Include="Settings\StartupSettingsValidatorTests.cs" />

@@ -1,17 +1,18 @@
 ﻿using AutoFixture.Xunit2;
+using PlayNext.Settings;
 using PlayNext.Settings.Old;
 using Xunit;
 
 namespace PlayNext.UnitTests.Settings.Old
 {
-    public class SettingsV1Tests
+    public class SettingsV2Tests
     {
         [Theory, AutoData]
-        public void Migrate_MigratesToV2(
-            SettingsV1 oldSettings)
+        public void Migrate_MigratesToV3(
+            SettingsV2 oldSettings)
         {
             // Act
-            var result = oldSettings.Migrate() as SettingsV2;
+            var result = oldSettings.Migrate() as PlayNextSettings;
 
             // Assert
             Assert.NotNull(result);
@@ -32,11 +33,16 @@ namespace PlayNext.UnitTests.Settings.Old
             Assert.Equal(oldSettings.ReleaseYearWeight, result.ReleaseYearWeight);
             Assert.Equal(oldSettings.ReleaseYearChoice, result.ReleaseYearChoice);
             Assert.Equal(oldSettings.DesiredReleaseYear, result.DesiredReleaseYear);
+            Assert.Equal(oldSettings.GameLengthWeight, result.GameLengthWeight);
+            Assert.Equal(oldSettings.GameLengthHours, result.GameLengthHours);
 
             Assert.Equal(oldSettings.UnplayedGameDefinition, result.UnplayedGameDefinition);
             Assert.Equal(oldSettings.UnplayedCompletionStatuses, result.UnplayedCompletionStatuses);
 
-            Assert.Equal(2, result.Version);
+            Assert.Equal(oldSettings.StartPageShowLabel, result.StartPageShowLabel);
+            Assert.Equal(oldSettings.StartPageLabelIsHorizontal, result.StartPageLabelIsHorizontal);
+
+            Assert.Equal(3, result.Version);
         }
     }
 }

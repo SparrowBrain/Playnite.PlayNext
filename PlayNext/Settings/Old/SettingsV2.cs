@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using PlayNext.Model.Data;
 
 namespace PlayNext.Settings.Old
 {
-    public class SettingsV1 : IMigratableSettings
+    public class SettingsV2 : ObservableObject, IMigratableSettings
     {
         public const int MaxWeightValue = 100;
 
-        public SettingsV1()
+        public SettingsV2()
         {
-            Version = 1;
+            Version = 2;
         }
 
-        private SettingsV1(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights) : this()
+        private SettingsV2(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights) : this()
         {
             SetAttributeWeights(attributeCalculationWeights);
             SetGameWeights(gameScoreWeights);
@@ -20,13 +21,18 @@ namespace PlayNext.Settings.Old
             DesiredReleaseYear = 2000;
             ReleaseYearChoice = ReleaseYearChoice.Current;
 
+            GameLengthHours = 0;
+
             NumberOfTopGames = 30;
             RecentDays = 14;
             UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
             UnplayedCompletionStatuses = Array.Empty<Guid>();
+
+            StartPageShowLabel = true;
+            StartPageLabelIsHorizontal = false;
         }
 
-        public static SettingsV1 Default => new SettingsV1(AttributeCalculationWeights.Default, GameScoreWeights.Default);
+        public static SettingsV2 Default => new SettingsV2(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
         public float TotalPlaytimeWeight { get; set; }
 
@@ -54,6 +60,10 @@ namespace PlayNext.Settings.Old
 
         public ReleaseYearChoice ReleaseYearChoice { get; set; }
 
+        public float GameLengthWeight { get; set; }
+
+        public int GameLengthHours { get; set; }
+
         public int NumberOfTopGames { get; set; }
 
         public int RecentDays { get; set; }
@@ -62,11 +72,15 @@ namespace PlayNext.Settings.Old
 
         public Guid[] UnplayedCompletionStatuses { get; set; }
 
+        public bool StartPageShowLabel { get; set; }
+
+        public bool StartPageLabelIsHorizontal { get; set; }
+
         public int Version { get; set; }
 
         public IVersionedSettings Migrate()
         {
-            var settings = SettingsV2.Default;
+            var settings = PlayNextSettings.Default;
             settings.TotalPlaytimeWeight = TotalPlaytimeWeight;
             settings.RecentPlaytimeWeight = RecentPlaytimeWeight;
             settings.RecentOrderWeight = RecentOrderWeight;
@@ -81,12 +95,17 @@ namespace PlayNext.Settings.Old
             settings.ReleaseYearWeight = ReleaseYearWeight;
             settings.ReleaseYearChoice = ReleaseYearChoice;
             settings.DesiredReleaseYear = DesiredReleaseYear;
+            settings.GameLengthWeight = GameLengthWeight;
+            settings.GameLengthHours = GameLengthHours;
 
             settings.RecentDays = RecentDays;
             settings.NumberOfTopGames = NumberOfTopGames;
 
             settings.UnplayedGameDefinition = UnplayedGameDefinition;
             settings.UnplayedCompletionStatuses = UnplayedCompletionStatuses;
+
+            settings.StartPageShowLabel = StartPageShowLabel;
+            settings.StartPageLabelIsHorizontal = StartPageLabelIsHorizontal;
 
             return settings;
         }
@@ -108,6 +127,7 @@ namespace PlayNext.Settings.Old
             CriticScoreWeight = gameScoreWeights.CriticScore * MaxWeightValue;
             CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
             ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
+            GameLengthWeight = gameScoreWeights.GameLength * MaxWeightValue;
         }
     }
 }

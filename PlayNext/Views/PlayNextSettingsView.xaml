@@ -102,6 +102,14 @@
                     <CheckBox IsChecked="{Binding Settings.StartPageLabelIsHorizontal}">
                         <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageLabelIsHorizontal}"></TextBlock>
                     </CheckBox>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsStartPageMinCoverCount}"></TextBlock>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.StartPageMinCoverCount}"></TextBox>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

@@ -1,0 +1,2 @@
+﻿V3
+- StartPageMinCoverCount

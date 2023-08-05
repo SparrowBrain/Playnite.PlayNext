@@ -161,7 +161,7 @@ namespace PlayNext
                     if (_startPagePlayNextViewModel == null || _startPageView == null)
                     {
                         _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
-                        _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel);
+                        _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, this);
                         RefreshPlayNextData();
                     }
 
@@ -183,11 +183,7 @@ namespace PlayNext
         public void OnPlayNextSettingsSaved()
         {
             _startPagePlayNextViewModel?.UpdateLabelDisplay();
-            RefreshPlayNextData();
-        }
-
-        private void OnPlayNextViewInitialized(object sender, EventArgs e)
-        {
+            _startPageView?.UpdateMinCoverCount();
             RefreshPlayNextData();
         }
 

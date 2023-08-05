@@ -1,3 +1,7 @@
+v1.4.0
+- Added minimum cover count for use with start page alignments
+- Fixed Playnite crash when using start page alignment
+
 v1.3.0
 - Added score calculation by game length (requires HowLongToBeat extension)
 - Fixed small spacing issues in settings

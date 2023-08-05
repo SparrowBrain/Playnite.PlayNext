@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using PlayNext.Settings;
 using PlayNext.ViewModels;
 using Playnite.SDK;
 
@@ -13,12 +14,26 @@ namespace PlayNext.StartPage
     /// </summary>
     public partial class StartPagePlayNextView : UserControl
     {
+        private readonly PlayNext _plugin;
+        private const int TextHeight = 2 * 25;
+        private const int CoverMargin = 2 * 8;
         private ILogger _logger = LogManager.GetLogger(nameof(StartPagePlayNextView));
+        private int _minCoverCount;
 
-        public StartPagePlayNextView(StartPagePlayNextViewModel viewModel)
+        public StartPagePlayNextView(StartPagePlayNextViewModel viewModel, PlayNext plugin)
         {
+            _plugin = plugin;
             DataContext = viewModel;
+            UpdateMinCoverCount();
             InitializeComponent();
+        }
+
+        public void UpdateMinCoverCount()
+        {
+            var settings = _plugin.LoadPluginSettings<PlayNextSettings>();
+            _minCoverCount = settings.StartPageMinCoverCount;
+
+            UpdateCoversColumnWidth();
         }
 
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)
@@ -35,21 +50,7 @@ namespace PlayNext.StartPage
         private void Dock_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var dock = sender as FrameworkElement;
-            var column = FindName("CoverListWidth") as ColumnDefinition;
-
-            if (dock == null || column == null)
-            {
-                _logger.Warn("Dock or column is invalid");
-                return;
-            }
-
-            var coverWidth = LandingPageExtension.Instance.Settings.MaxCoverWidth;
-
-            var textHeight = 2 * 25;
-            var coverMargin = 2 * 8;
-            var newWidth = (Math.Floor((dock.ActualWidth - textHeight) / (coverWidth + coverMargin)) * (coverWidth + coverMargin));
-
-            column.Width = new GridLength(newWidth, GridUnitType.Pixel);
+            UpdateCoversColumnWidth(dock);
         }
 
         private void OnCoverListMouseWheel(object sender, MouseWheelEventArgs e)
@@ -71,6 +72,35 @@ namespace PlayNext.StartPage
                     scrollInfo.LineLeft();
                 }
             }
+        }
+
+        private void UpdateCoversColumnWidth()
+        {
+            var dock = FindName("CoversDock") as FrameworkElement;
+            UpdateCoversColumnWidth(dock);
+        }
+
+        private void UpdateCoversColumnWidth(FrameworkElement dock)
+        {
+            var column = FindName("CoverListWidth") as ColumnDefinition;
+            if (dock == null || column == null)
+            {
+                _logger.Warn("Dock or column is invalid");
+                return;
+            }
+
+            var coverWidth = LandingPageExtension.Instance.Settings.MaxCoverWidth;
+
+            var dynamicWidth = (Math.Floor((dock.ActualWidth - TextHeight) / (coverWidth + CoverMargin)) * (coverWidth + CoverMargin));
+            var minWidth = _minCoverCount * (coverWidth + CoverMargin);
+
+            var newWidth = Math.Max(minWidth, dynamicWidth);
+            if (newWidth <= 0)
+            {
+                return;
+            }
+
+            column.Width = new GridLength(newWidth, GridUnitType.Pixel);
         }
     }
 }

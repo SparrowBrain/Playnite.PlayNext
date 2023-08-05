@@ -9,7 +9,7 @@ namespace PlayNext.Settings
     {
         public const int MaxWeightValue = 100;
         public const int MinWeightValue = 0;
-        public const int CurrentVersion = 2;
+        public const int CurrentVersion = 3;
 
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
@@ -21,6 +21,7 @@ namespace PlayNext.Settings
         private bool _startPageShowLabel;
         private bool _startPageLabelIsHorizontal;
         private int _gameGameLengthHours;
+        private int _startPageMinCoverCount;
 
         public PlayNextSettings()
         {
@@ -44,6 +45,7 @@ namespace PlayNext.Settings
 
             StartPageShowLabel = true;
             StartPageLabelIsHorizontal = false;
+            StartPageMinCoverCount = 1;
         }
 
         public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
@@ -183,6 +185,12 @@ namespace PlayNext.Settings
         {
             get => _startPageLabelIsHorizontal;
             set => SetValue(ref _startPageLabelIsHorizontal, value);
+        }
+
+        public int StartPageMinCoverCount
+        {
+            get => _startPageMinCoverCount;
+            set => SetValue(ref _startPageMinCoverCount, value);
         }
 
         public int Version { get; set; }

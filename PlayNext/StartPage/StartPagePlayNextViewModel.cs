@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using PlayNext.Model.Score;
 using PlayNext.Settings;
 using PlayNext.ViewModels;
 using Playnite.SDK;
@@ -16,7 +15,6 @@ namespace PlayNext.StartPage
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNext _plugin;
-        private readonly TotalScoreCalculator _totalScoreCalculator;
 
         private ObservableCollection<GameToPlayViewModel> _games = new ObservableCollection<GameToPlayViewModel>();
         private bool _showVerticalLabel;
@@ -26,8 +24,6 @@ namespace PlayNext.StartPage
         public StartPagePlayNextViewModel(PlayNext plugin)
         {
             _plugin = plugin;
-            _totalScoreCalculator = new TotalScoreCalculator(plugin);
-
             UpdateLabelDisplay();
         }
 
