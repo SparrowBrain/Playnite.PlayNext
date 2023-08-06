@@ -155,13 +155,14 @@ namespace PlayNext
 
         public object GetStartPageView(string viewId, Guid instanceId)
         {
+            var settings = LoadPluginSettings<PlayNextSettings>();
             switch (viewId)
             {
                 case "PlayNext_TopRecommendations":
                     if (_startPagePlayNextViewModel == null || _startPageView == null)
                     {
                         _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
-                        _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, this);
+                        _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, settings);
                         RefreshPlayNextData();
                     }
 
@@ -182,8 +183,9 @@ namespace PlayNext
 
         public void OnPlayNextSettingsSaved()
         {
-            _startPagePlayNextViewModel?.UpdateLabelDisplay();
-            _startPageView?.UpdateMinCoverCount();
+            var settings = LoadPluginSettings<PlayNextSettings>();
+            _startPagePlayNextViewModel?.UpdateLabelDisplay(settings);
+            _startPageView?.UpdateMinCoverCount(settings);
             RefreshPlayNextData();
         }
 

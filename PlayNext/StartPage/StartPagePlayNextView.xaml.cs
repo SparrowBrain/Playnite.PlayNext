@@ -14,25 +14,21 @@ namespace PlayNext.StartPage
     /// </summary>
     public partial class StartPagePlayNextView : UserControl
     {
-        private readonly PlayNext _plugin;
         private const int TextHeight = 2 * 25;
         private const int CoverMargin = 2 * 8;
         private ILogger _logger = LogManager.GetLogger(nameof(StartPagePlayNextView));
         private int _minCoverCount;
 
-        public StartPagePlayNextView(StartPagePlayNextViewModel viewModel, PlayNext plugin)
+        public StartPagePlayNextView(StartPagePlayNextViewModel viewModel, PlayNextSettings settings)
         {
-            _plugin = plugin;
             DataContext = viewModel;
-            UpdateMinCoverCount();
+            UpdateMinCoverCount(settings);
             InitializeComponent();
         }
 
-        public void UpdateMinCoverCount()
+        public void UpdateMinCoverCount(PlayNextSettings settings)
         {
-            var settings = _plugin.LoadPluginSettings<PlayNextSettings>();
             _minCoverCount = settings.StartPageMinCoverCount;
-
             UpdateCoversColumnWidth();
         }
 

@@ -24,7 +24,7 @@ namespace PlayNext.StartPage
         public StartPagePlayNextViewModel(PlayNext plugin)
         {
             _plugin = plugin;
-            UpdateLabelDisplay();
+            UpdateLabelDisplay(_plugin.LoadPluginSettings<PlayNextSettings>());
         }
 
         public bool ShowVerticalLabel
@@ -88,9 +88,8 @@ namespace PlayNext.StartPage
             Games = newGames;
         }
 
-        public void UpdateLabelDisplay()
+        public void UpdateLabelDisplay(PlayNextSettings settings)
         {
-            var settings = _plugin.LoadPluginSettings<PlayNextSettings>();
             ShowVerticalLabel = !settings.StartPageLabelIsHorizontal;
             ShowHorizontalLabel = settings.StartPageLabelIsHorizontal;
             LabelText = settings.StartPageShowLabel ? ResourceProvider.GetString("LOC_PlayNext_PluginName") : string.Empty;
