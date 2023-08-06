@@ -155,12 +155,12 @@ namespace PlayNext
 
         public object GetStartPageView(string viewId, Guid instanceId)
         {
-            var settings = LoadPluginSettings<PlayNextSettings>();
             switch (viewId)
             {
                 case "PlayNext_TopRecommendations":
                     if (_startPagePlayNextViewModel == null || _startPageView == null)
                     {
+                        var settings = LoadPluginSettings<PlayNextSettings>();
                         _startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
                         _startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, settings);
                         RefreshPlayNextData();
