@@ -69,6 +69,7 @@
     <Compile Include="HowLongToBeat\Data\HltbFile.cs" />
     <Compile Include="HowLongToBeat\Data\HltbItem.cs" />
     <Compile Include="HowLongToBeat\HowLongToBeatExtension.cs" />
+    <Compile Include="HowLongToBeat\IHowLongToBeatExtension.cs" />
     <Compile Include="Model\Filters\UnplayedFilter.cs" />
     <Compile Include="Model\Score\Attribute\GameLengthCalculator.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />

@@ -10,7 +10,7 @@ namespace PlayNext.Model.Score.GameScore
 {
     public class FinalGameScoreCalculator
     {
-        private readonly HowLongToBeatExtension _howLongToBeatExtension;
+        private readonly IHowLongToBeatExtension _howLongToBeatExtension;
         private readonly GameScoreByAttributeCalculator _gameScoreByAttributeCalculator;
         private readonly CriticScoreCalculator _criticScoreCalculator;
         private readonly CommunityScoreCalculator _communityScoreCalculator;
@@ -19,7 +19,7 @@ namespace PlayNext.Model.Score.GameScore
         private readonly ScoreNormalizer _scoreNormalizer;
         private readonly Summator _summator;
 
-        public FinalGameScoreCalculator(HowLongToBeatExtension howLongToBeatExtension,
+        public FinalGameScoreCalculator(IHowLongToBeatExtension howLongToBeatExtension,
             GameScoreByAttributeCalculator gameScoreByAttributeCalculator,
             CriticScoreCalculator criticScoreCalculator,
             CommunityScoreCalculator communityScoreCalculator,

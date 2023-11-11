@@ -10,7 +10,7 @@ using Playnite.SDK.Models;
 
 namespace PlayNext.HowLongToBeat
 {
-    public class HowLongToBeatExtension
+    public class HowLongToBeatExtension : IHowLongToBeatExtension
     {
         private static Guid _extensionId = Guid.Parse("e08cd51f-9c9a-4ee3-a094-fde03b55492f");
         private readonly ILogger _logger = LogManager.GetLogger(nameof(HowLongToBeatExtension));

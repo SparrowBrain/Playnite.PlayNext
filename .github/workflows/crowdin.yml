@@ -4,6 +4,7 @@ concurrency: crowdin
 on:
   push:
     branches: [ main ]
+  workflow_dispatch
 
 jobs:
   synchronize-with-crowdin:
