@@ -1,4 +1,8 @@
 ﻿# Playnite Play Next Addon
+ ![DownloadCountTotal](https://img.shields.io/github/downloads/sparrowbrain/playnite.playnext/total?label=total%20downloads&style=for-the-badge)
+![LatestVersion](https://img.shields.io/github/v/release/SparrowBrain/Playnite.PlayNext?label=Latest%20version&style=for-the-badge)
+![DownloadCountLatest](https://img.shields.io/github/downloads/SparrowBrain/Playnite.PlayNext/latest/total?style=for-the-badge)
+
 ## What Is It?
 Play Next addon for Playnite (similar to Steam PlayNext).
 
