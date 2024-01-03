@@ -71,7 +71,7 @@
     <Compile Include="HowLongToBeat\HowLongToBeatExtension.cs" />
     <Compile Include="HowLongToBeat\IHowLongToBeatExtension.cs" />
     <Compile Include="Model\Filters\UnplayedFilter.cs" />
-    <Compile Include="Model\Score\Attribute\GameLengthCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\GameLengthCalculator.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />
     <Compile Include="Settings\Old\SettingsV1.cs" />
     <Compile Include="ViewModels\CompletionStatusItem.cs" />
@@ -89,10 +89,10 @@
     <Compile Include="Settings\PlayNextSettings.cs" />
     <Compile Include="Model\Data\ReleaseYearChoice.cs" />
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculator.cs" />
-    <Compile Include="Model\Score\Attribute\CommunityScoreCalculator.cs" />
-    <Compile Include="Model\Score\Attribute\CriticScoreCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\CommunityScoreCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\CriticScoreCalculator.cs" />
     <Compile Include="Model\Score\Attribute\FinalAttributeScoreCalculator.cs" />
-    <Compile Include="Model\Score\Attribute\ReleaseYearCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\ReleaseYearCalculator.cs" />
     <Compile Include="Model\Score\GameScore\GameScoreByAttributeCalculator.cs" />
     <Compile Include="Model\Score\GameScore\FinalGameScoreCalculator.cs" />
     <Compile Include="Model\Score\ScoreNormalizer.cs" />

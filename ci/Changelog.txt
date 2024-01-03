@@ -1,3 +1,8 @@
+v1.5.0-------------------------
+- Added Brazilian Portuguese translations (thanks ?????????!)
+----------- Series
+----------- Extract StartPage Settings
+
 v1.4.0
 - Added minimum cover count for use with start page alignments
 - Fixed Playnite crash when using start page alignment
