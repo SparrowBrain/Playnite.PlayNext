@@ -71,7 +71,9 @@
     <Compile Include="HowLongToBeat\HowLongToBeatExtension.cs" />
     <Compile Include="HowLongToBeat\IHowLongToBeatExtension.cs" />
     <Compile Include="Model\Filters\UnplayedFilter.cs" />
+    <Compile Include="Model\Score\GameScore\CalculateSeriesScoreBy.cs" />
     <Compile Include="Model\Score\GameScore\GameLengthCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\GameScoreBySeriesCalculator.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />
     <Compile Include="Settings\Old\SettingsV1.cs" />
     <Compile Include="ViewModels\CompletionStatusItem.cs" />

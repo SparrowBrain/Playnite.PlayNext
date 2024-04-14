@@ -3,6 +3,8 @@ v1.5.0-------------------------
 ----------- Series
 ----------- Extract StartPage Settings
 ----------- Improve game length algorithm (deviation by 0.5 from max length is the limit)
+----------- Allow switching off sidebar item
+----------- Fix init calculations
 
 v1.4.0
 - Added minimum cover count for use with start page alignments
