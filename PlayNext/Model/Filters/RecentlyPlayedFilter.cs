@@ -15,9 +15,9 @@ namespace PlayNext.Model.Filters
             _dateTimeProvider = dateTimeProvider;
         }
 
-        public IEnumerable<Game> Filter(IEnumerable<Game> games, int recentDayCount)
+        public IReadOnlyCollection<Game> Filter(IEnumerable<Game> games, int recentDayCount)
         {
-            return games.Where(x => x.LastActivity >= _dateTimeProvider.GetNow() - TimeSpan.FromDays(recentDayCount));
+            return games.Where(x => x.LastActivity >= _dateTimeProvider.GetNow() - TimeSpan.FromDays(recentDayCount)).ToList();
         }
     }
 }

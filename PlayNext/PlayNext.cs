@@ -204,7 +204,9 @@ namespace PlayNext
                     var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
                     var unPlayedGames = new UnplayedFilter().Filter(allGames, savedSettings).ToArray();
 
-                    var activitiesTask = _gameActivities.ParseGameActivity(recentGames);
+                    var activitiesTask = recentGames.Any()
+                        ? _gameActivities.ParseGameActivity(recentGames)
+                        : Task.CompletedTask;
                     var howLongToBeatTask = gameLengthWeight > 0
                         ? _howLongToBeatExtension.ParseFiles(unPlayedGames)
                         : Task.CompletedTask;
