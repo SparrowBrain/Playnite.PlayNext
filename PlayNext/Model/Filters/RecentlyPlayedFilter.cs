@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayNext.Services;
+using PlayNext.Infrastructure.Services;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Model.Filters

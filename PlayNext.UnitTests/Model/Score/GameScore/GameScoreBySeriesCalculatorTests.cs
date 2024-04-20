@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture.Xunit2;
+using PlayNext.Model.Data;
 using PlayNext.Model.Score.GameScore;
 using Playnite.SDK.Models;
 using Xunit;
@@ -13,7 +14,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory]
         [AutoData]
         public void Calculate_GamesListIsEmpty_ScoreListIsEmpty(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Dictionary<Guid, float> attributeScore,
             GameScoreBySeriesCalculator sut)
         {
@@ -21,7 +22,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             var games = Array.Empty<Game>();
 
             // Act
-            var result = sut.Calculate(calculateSeriesScoreBy, games, attributeScore);
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
 
             // Arrange
             Assert.Empty(result);
@@ -30,7 +31,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory]
         [AutoData]
         public void Calculate_AttributeScoreListIsEmpty_ScoreListIsEmpty(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Game[] games,
             GameScoreBySeriesCalculator sut)
         {
@@ -38,7 +39,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             var attributeScore = new Dictionary<Guid, float>();
 
             // Act
-            var result = sut.Calculate(calculateSeriesScoreBy, games, attributeScore);
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
 
             // Arrange
             Assert.Empty(result);
@@ -47,13 +48,13 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory]
         [AutoData]
         public void Calculate_NoGamesMatchSeriesWithScore_ScoreListIsEmpty(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Dictionary<Guid, float> attributeScore,
             Game[] games,
             GameScoreBySeriesCalculator sut)
         {
             // Act
-            var result = sut.Calculate(calculateSeriesScoreBy, games, attributeScore);
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
 
             // Arrange
             Assert.Empty(result);
@@ -62,7 +63,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory]
         [AutoData]
         public void Calculate_OneGameMatchesSeriesWithScore_ThatGameScoreIs100(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Dictionary<Guid, float> attributeScore,
             Game[] games,
             GameScoreBySeriesCalculator sut)
@@ -72,7 +73,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             games.Last().SeriesIds.Add(seriesAttributeScore.Key);
 
             // Act
-            var result = sut.Calculate(calculateSeriesScoreBy, games, attributeScore);
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
 
             // Arrange
             var actualGame = Assert.Single(result, x => x.Value != 0);
@@ -96,7 +97,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             newerGame.ReleaseDate = new ReleaseDate(2002, 05, 12);
 
             // Act
-            var result = sut.Calculate(CalculateSeriesScoreBy.ReleaseDate, games, attributeScore);
+            var result = sut.Calculate(OrderSeriesBy.ReleaseDate, games, attributeScore);
 
             // Arrange
             var olderGameScore = result[olderGame.Id];
@@ -125,7 +126,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             newestGame.ReleaseDate = new ReleaseDate(2002, 05, 13);
 
             // Act
-            var result = sut.Calculate(CalculateSeriesScoreBy.ReleaseDate, games, attributeScore);
+            var result = sut.Calculate(OrderSeriesBy.ReleaseDate, games, attributeScore);
 
             // Arrange
             var olderGameScore = result[olderGame.Id];
@@ -153,7 +154,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             newerGame.SortingName = "ABC2";
 
             // Act
-            var result = sut.Calculate(CalculateSeriesScoreBy.SortingName, games, attributeScore);
+            var result = sut.Calculate(OrderSeriesBy.SortingName, games, attributeScore);
 
             // Arrange
             var olderGameScore = result[olderGame.Id];
@@ -182,7 +183,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             newestGame.SortingName = "ABC3";
 
             // Act
-            var result = sut.Calculate(CalculateSeriesScoreBy.SortingName, games, attributeScore);
+            var result = sut.Calculate(OrderSeriesBy.SortingName, games, attributeScore);
 
             // Arrange
             var olderGameScore = result[olderGame.Id];
@@ -196,7 +197,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory]
         [AutoData]
         public void Calculate_OneGameWithOneSeriesOneGameWithTwoSeriesWithScoreAndScoreIsAllEqual_TwoSeriesGameIs100(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Dictionary<Guid, float> attributeScore,
             float score,
             Game[] games,
@@ -213,7 +214,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             gameWithTwoSeries.SeriesIds.Add(secondSeries.Key);
 
             // Act
-            var result = sut.Calculate(calculateSeriesScoreBy, games, attributeScore);
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
 
             // Arrange
             var gameWithOneSeriesScore = result[gameWithOneSeries.Id];

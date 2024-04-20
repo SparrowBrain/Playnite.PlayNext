@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using PlayNext.Extensions.StartPage;
 using PlayNext.Model.Data;
 using PlayNext.Settings;
-using PlayNext.StartPage;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 
@@ -183,6 +183,19 @@ namespace PlayNext.ViewModels
             }
         }
 
+        public float SeriesWeight
+        {
+            get => Settings.SeriesWeight;
+            set
+            {
+                var difference = (value - Settings.SeriesWeight) / (GameScoreWeights.Number - 1);
+                RebalanceGameScoreWeights(difference);
+                Settings.SeriesWeight = value;
+                PushGameScoreWeightsToTotal(nameof(Settings.SeriesWeight));
+                NotifyGameScoreSourcePropertiesChanged();
+            }
+        }
+
         public float CriticScoreWeight
         {
             get => Settings.CriticScoreWeight;
@@ -241,6 +254,13 @@ namespace PlayNext.ViewModels
             set => SetValue(ref _unplayedCompletionStatuses, value);
         }
 
+        public Dictionary<OrderSeriesBy, string> OrderSeriesByOptions { get; } =
+            new Dictionary<OrderSeriesBy, string>()
+            {
+                {OrderSeriesBy.ReleaseDate, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedByReleaseDate")},
+                {OrderSeriesBy.SortingName, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedBySortingName")},
+            };
+
         public void BeginEdit()
         {
             _editingClone = Serialization.GetClone(Settings);
@@ -294,6 +314,7 @@ namespace PlayNext.ViewModels
             Settings.DeveloperWeight = ContainInMinMax(Settings.DeveloperWeight - difference);
             Settings.PublisherWeight = ContainInMinMax(Settings.PublisherWeight - difference);
             Settings.TagWeight = ContainInMinMax(Settings.TagWeight - difference);
+            Settings.SeriesWeight = ContainInMinMax(Settings.SeriesWeight - difference);
             Settings.CriticScoreWeight = ContainInMinMax(Settings.CriticScoreWeight - difference);
             Settings.CommunityScoreWeight = ContainInMinMax(Settings.CommunityScoreWeight - difference);
             Settings.ReleaseYearWeight = ContainInMinMax(Settings.ReleaseYearWeight - difference);
@@ -325,6 +346,11 @@ namespace PlayNext.ViewModels
             if (ignore != nameof(Settings.TagWeight))
             {
                 Settings.TagWeight = ContainInMinMax(Settings.TagWeight + GetMissingGameWeightToTotal());
+            }
+
+            if (ignore != nameof(Settings.SeriesWeight))
+            {
+                Settings.SeriesWeight = ContainInMinMax(Settings.SeriesWeight + GetMissingGameWeightToTotal());
             }
 
             if (ignore != nameof(Settings.CriticScoreWeight))
@@ -380,6 +406,7 @@ namespace PlayNext.ViewModels
             OnPropertyChanged(nameof(DeveloperWeight));
             OnPropertyChanged(nameof(PublisherWeight));
             OnPropertyChanged(nameof(TagWeight));
+            OnPropertyChanged(nameof(SeriesWeight));
             OnPropertyChanged(nameof(CriticScoreWeight));
             OnPropertyChanged(nameof(CommunityScoreWeight));
             OnPropertyChanged(nameof(ReleaseYearWeight));
@@ -398,7 +425,17 @@ namespace PlayNext.ViewModels
 
         private float GetMissingGameWeightToTotal()
         {
-            return PlayNextSettings.MaxWeightValue - Settings.GenreWeight - Settings.FeatureWeight - Settings.DeveloperWeight - Settings.PublisherWeight - Settings.TagWeight - Settings.CriticScoreWeight - Settings.CommunityScoreWeight - Settings.ReleaseYearWeight - Settings.GameLengthWeight;
+            return PlayNextSettings.MaxWeightValue
+                   - Settings.GenreWeight
+                   - Settings.FeatureWeight
+                   - Settings.DeveloperWeight
+                   - Settings.PublisherWeight
+                   - Settings.TagWeight
+                   - Settings.SeriesWeight
+                   - Settings.CriticScoreWeight
+                   - Settings.CommunityScoreWeight
+                   - Settings.ReleaseYearWeight
+                   - Settings.GameLengthWeight;
         }
     }
 }

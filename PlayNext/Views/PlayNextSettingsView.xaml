@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:converters="clr-namespace:PlayNext.Converters"
+             xmlns:converters="clr-namespace:PlayNext.Infrastructure.Converters"
              mc:Ignorable="d"
              d:DesignHeight="800" d:DesignWidth="600">
     <UserControl.Resources>
@@ -102,7 +102,7 @@
                     <CheckBox IsChecked="{Binding Settings.StartPageLabelIsHorizontal}">
                         <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageLabelIsHorizontal}"></TextBlock>
                     </CheckBox>
-                    <Grid >
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -126,6 +126,8 @@
                 <Slider Minimum="0" Maximum="100" Value="{Binding PublisherWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsTag}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding TagWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeries}"></TextBlock>
+                <Slider Minimum="0" Maximum="100" Value="{Binding SeriesWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCriticScore}"></TextBlock>
                 <Slider Minimum="0" Maximum="100" Value="{Binding CriticScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCommunityScore}"></TextBlock>
@@ -145,6 +147,11 @@
                     <Button Grid.Column="0" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
                     <Button Grid.Column="1" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
                 </Grid>
+                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeriesOrderedByTitle}" Margin="0, 10, 0, 5"></TextBlock>
+                <ComboBox ItemsSource="{Binding Path=OrderSeriesByOptions}"
+                          DisplayMemberPath="Value"
+                          SelectedValuePath="Key"
+                          SelectedValue="{Binding Path=Settings.OrderSeriesBy, Mode=TwoWay}" />
                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYearTypeTitle}" Margin="0, 10, 0, 5"></TextBlock>
                 <Grid Margin="10,0,0,0">
                     <Grid.ColumnDefinitions>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PlayNext.HowLongToBeat;
+using PlayNext.Extensions.HowLongToBeat;
 using PlayNext.Model.Data;
 using PlayNext.Model.Score.Attribute;
 using Playnite.SDK.Models;

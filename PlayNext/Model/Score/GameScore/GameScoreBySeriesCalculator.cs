@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PlayNext.Model.Data;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Model.Score.GameScore
@@ -8,7 +9,7 @@ namespace PlayNext.Model.Score.GameScore
     public class GameScoreBySeriesCalculator
     {
         public Dictionary<Guid, float> Calculate(
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             IEnumerable<Game> games,
             Dictionary<Guid, float> attributeScore)
         {
@@ -19,7 +20,7 @@ namespace PlayNext.Model.Score.GameScore
 
             var gamesWithSeriesScores = GetGamesWithSeriesScores(games, attributeScore);
             var seriesWithGames = GetSeriesWithGames(games, gamesWithSeriesScores);
-            var gamesWithScores = GetGamesWithSummedUpScores(calculateSeriesScoreBy, gamesWithSeriesScores, seriesWithGames);
+            var gamesWithScores = GetGamesWithSummedUpScores(orderSeriesBy, gamesWithSeriesScores, seriesWithGames);
 
             var maxScore = gamesWithScores.Max(x => x.Value);
             if (maxScore == 0)
@@ -51,14 +52,14 @@ namespace PlayNext.Model.Score.GameScore
                 .ToDictionary(x => x.Key, x => x.Select(g => g.Game));
         }
 
-        private static Dictionary<Guid, float> GetGamesWithSummedUpScores(CalculateSeriesScoreBy calculateSeriesScoreBy, Dictionary<Guid, Dictionary<Guid, float>> gamesWithSeriesScores, Dictionary<Guid, IEnumerable<Game>> seriesWithGames)
+        private static Dictionary<Guid, float> GetGamesWithSummedUpScores(OrderSeriesBy orderSeriesBy, Dictionary<Guid, Dictionary<Guid, float>> gamesWithSeriesScores, Dictionary<Guid, IEnumerable<Game>> seriesWithGames)
         {
             return gamesWithSeriesScores.ToDictionary(x => x.Key, x =>
             {
                 var score = 0f;
                 foreach (var seriesScore in x.Value)
                 {
-                    var scoreMultiplier = GetScoreMultiplierByPositionInSeries(x.Key, calculateSeriesScoreBy, seriesWithGames, seriesScore);
+                    var scoreMultiplier = GetScoreMultiplierByPositionInSeries(x.Key, orderSeriesBy, seriesWithGames, seriesScore);
                     score += seriesScore.Value * scoreMultiplier;
                 }
 
@@ -73,14 +74,14 @@ namespace PlayNext.Model.Score.GameScore
 
         private static float GetScoreMultiplierByPositionInSeries(
             Guid gameId,
-            CalculateSeriesScoreBy calculateSeriesScoreBy,
+            OrderSeriesBy orderSeriesBy,
             Dictionary<Guid, IEnumerable<Game>> seriesWithGames,
             KeyValuePair<Guid, float> seriesScore)
         {
             var seriesGames = seriesWithGames[seriesScore.Key].ToList();
             seriesGames.Sort((a, b) =>
             {
-                if (calculateSeriesScoreBy == CalculateSeriesScoreBy.ReleaseDate)
+                if (orderSeriesBy == OrderSeriesBy.ReleaseDate)
                 {
                     if (a.ReleaseDate != null && b.ReleaseDate != null)
                     {
@@ -98,7 +99,7 @@ namespace PlayNext.Model.Score.GameScore
                     }
                 }
 
-                if (calculateSeriesScoreBy == CalculateSeriesScoreBy.SortingName)
+                if (orderSeriesBy == OrderSeriesBy.SortingName)
                 {
                     return string.Compare(a.SortingName, b.SortingName, StringComparison.CurrentCulture);
                 }

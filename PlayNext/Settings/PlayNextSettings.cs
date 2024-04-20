@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PlayNext.Model.Data;
+using Playnite.SDK;
 using Playnite.SDK.Data;
 
 namespace PlayNext.Settings
@@ -11,6 +12,7 @@ namespace PlayNext.Settings
         public const int MinWeightValue = 0;
         public const int CurrentVersion = 3;
 
+        private OrderSeriesBy _orderSeriesByChoice;
         private int _desiredReleaseYear;
         private bool[] _releaseYearChoices = new bool[Enum.GetValues(typeof(ReleaseYearChoice)).Length];
         private int _numberOfTopGames;
@@ -65,6 +67,14 @@ namespace PlayNext.Settings
         public float PublisherWeight { get; set; }
 
         public float TagWeight { get; set; }
+
+        public float SeriesWeight { get; set; }
+
+        public OrderSeriesBy OrderSeriesBy
+        {
+            get => _orderSeriesByChoice;
+            set => SetValue(ref _orderSeriesByChoice, value);
+        }
 
         public float CriticScoreWeight { get; set; }
 
@@ -209,6 +219,7 @@ namespace PlayNext.Settings
             DeveloperWeight = gameScoreWeights.Developer * MaxWeightValue;
             PublisherWeight = gameScoreWeights.Publisher * MaxWeightValue;
             TagWeight = gameScoreWeights.Tag * MaxWeightValue;
+            SeriesWeight = gameScoreWeights.Series * MaxWeightValue;
             CriticScoreWeight = gameScoreWeights.CriticScore * MaxWeightValue;
             CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
             ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;

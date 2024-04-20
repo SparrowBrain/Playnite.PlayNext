@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PlayNext.Infrastructure.Services;
 using PlayNext.Model.Data;
 using PlayNext.Model.Filters;
 using PlayNext.Model.Score.Attribute;
 using PlayNext.Model.Score.GameScore;
-using PlayNext.Services;
 using PlayNext.Settings;
 using PlayNext.ViewModels;
 using Playnite.SDK;

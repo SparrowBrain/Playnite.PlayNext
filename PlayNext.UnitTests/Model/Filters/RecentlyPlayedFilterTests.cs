@@ -2,8 +2,8 @@
 using System.Linq;
 using AutoFixture.Xunit2;
 using Moq;
+using PlayNext.Infrastructure.Services;
 using PlayNext.Model.Filters;
-using PlayNext.Services;
 using Playnite.SDK.Models;
 using TestTools.Shared;
 using Xunit;
