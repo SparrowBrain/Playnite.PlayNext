@@ -26,13 +26,13 @@ namespace PlayNext
         private readonly GameActivityExtension _gameActivities;
         private readonly HowLongToBeatExtension _howLongToBeatExtension;
         private readonly StartupSettingsValidator _startupSettingsValidator;
+        private readonly TotalScoreCalculator _totalScoreCalculator;
         private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
 
         private PlayNextSettingsViewModel _settings;
         private StartPagePlayNextViewModel _startPagePlayNextViewModel;
         private PlayNextMainViewModel _playNextMainViewModel;
         private PlayNextMainView _playNextMainView;
-        private TotalScoreCalculator _totalScoreCalculator;
         private StartPagePlayNextView _startPageView;
 
         public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
