@@ -141,6 +141,19 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         }
 
         [Theory]
+        [AutoData]
+        public void CalculateByPlaytime_ReturnsEmptyEnumerable_When_WeightIsZero(
+            Game[] games,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 0f;
+
+            var result = sut.CalculateByPlaytime(games, weight);
+
+            Assert.Empty(result);
+        }
+
+        [Theory]
         [InlineAutoData(nameof(Game.GenreIds))]
         [InlineAutoData(nameof(Game.CategoryIds))]
         [InlineAutoData(nameof(Game.DeveloperIds))]
@@ -196,6 +209,19 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         {
             var weight = 1f;
             var games = new Game[] { };
+
+            var result = sut.CalculateByRecentOrder(games, weight);
+
+            Assert.Empty(result);
+        }
+
+        [Theory]
+        [AutoData]
+        public void CalculateByRecentOrder_ReturnsEmptyEnumerable_When_WeightIsZero(
+            Game[] games,
+            AttributeScoreCalculator sut)
+        {
+            var weight = 0f;
 
             var result = sut.CalculateByRecentOrder(games, weight);
 

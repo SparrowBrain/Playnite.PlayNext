@@ -10,7 +10,7 @@ namespace PlayNext.Model.Score.Attribute
         public Dictionary<Guid, float> CalculateByPlaytime(IEnumerable<Game> games, float weight)
         {
             var scores = new Dictionary<Guid, float>();
-            if (!games.Any())
+            if (!games.Any() || weight == 0)
             {
                 return scores;
             }
@@ -32,9 +32,14 @@ namespace PlayNext.Model.Score.Attribute
 
         public Dictionary<Guid, float> CalculateByRecentOrder(IEnumerable<Game> games, float weight)
         {
+            var scores = new Dictionary<Guid, float>();
+            if (!games.Any() || weight == 0)
+            {
+                return scores;
+            }
+
             var orderedGames = games.OrderByDescending(x => x.LastActivity).ToArray();
             var gameCount = (ulong)orderedGames.Count();
-            var scores = new Dictionary<Guid, float>();
 
             for (ulong i = 0; i < gameCount; i++)
             {
