@@ -1,8 +1,8 @@
 v1.5.0-------------------------
-- Added Brazilian Portuguese translations (thanks ?????????!)
------------ Series
+- Added Brazilian Portuguese translations
+- Added score calculation by Series
+- Improved game score by length algorithm (deviation by 0.5 from preferred length is the score limit)
 ----------- Extract StartPage Settings
------------ Improve game length algorithm (deviation by 0.5 from preferred length is the limit)
 ----------- Allow switching off sidebar item
 ----------- Fix init calculations
 ----------- Optimize zero weight calculations

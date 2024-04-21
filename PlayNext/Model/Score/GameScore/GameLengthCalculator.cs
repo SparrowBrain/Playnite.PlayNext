@@ -14,13 +14,9 @@ namespace PlayNext.Model.Score.GameScore
             }
 
             var preferredLengthInSeconds = (int)length.TotalSeconds;
-            var maxDifference = games.Max(x => Math.Abs(x.Value - preferredLengthInSeconds));
-            if (maxDifference == 0)
-            {
-                return games.ToDictionary(x => x.Key, x => 100f);
-            }
+            var deviation = preferredLengthInSeconds == 0 ? 3600 : preferredLengthInSeconds / 2;
 
-            return games.ToDictionary(x => x.Key, x => (maxDifference - Math.Abs(x.Value - preferredLengthInSeconds)) * 100f / maxDifference);
+            return games.ToDictionary(x => x.Key, x => (deviation - Math.Min(deviation, Math.Abs(x.Value - preferredLengthInSeconds))) * 100f / deviation);
         }
     }
 }

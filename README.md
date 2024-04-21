@@ -24,6 +24,7 @@ Total Play Next score is calculated by weighting and adding up following attribu
 | Developer | Attribute score |
 | Publisher | Attribute score |
 | Tag | Attribute score |
+| Series | Attribute score weighted by order in series |
 | Critic Score | Itself |
 | Community Score | Itself |
 | Release Year | How close to preferred year it is. It can either be the current year (ie newer games are preferred), or a specific one |
@@ -57,6 +58,9 @@ In a way it's a poor man's Recent Playtime. It just orders games played within r
 #### Attribute Scores
 Adds up score to the game score using the different attribute scores calculated by playtime / recent order.
 
+#### Series Scores
+Same as attribute scores, except it's weighted by the order in the series. The first game in the series gets the maximum score, while the last one gets the smallest score. Order in series can be either release date or sorting name.
+
 #### Critic Score
 Just adds the game's critic score to the score. Zero if game has no critic score.
 
@@ -74,12 +78,14 @@ For example if our prefered year is 2000 and our biggest difference game is from
 * Year 2010 - 0;
 
 #### Game Length
-Takes the game lengths for all games and assings the scores depending on the difference from the preferred length.
+Takes the game lengths for all games and assings the scores depending on the difference from the preferred length, capping out at half the preferred length.
 For example if our preferred length is 20 hours and the biggest difference is a game of length 40 hours, then we get these scores:
 * Hours 0 - 0;
-* Hours 10 - 50;
+* Hours 10 - 0;
+* Hours 15 - 50;
 * Hours 20 - 100;
-* Hours 30 - 50;
+* Hours 25 - 50;
+* Hours 30 - 0;
 * Hours 40 - 0;
 
 ### Weighting

@@ -12,7 +12,6 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory, AutoMoqData]
         public void Calculate_ReturnsEmptyScores_WhenNoInputGames(
             int gameLength,
-
             GameLengthCalculator sut)
         {
             // Arrange
@@ -29,7 +28,6 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         [Theory, AutoMoqData]
         public void Calculate_ReturnsEmptyScores_WhenInputGamesAreNull(
             int gameLength,
-
             GameLengthCalculator sut)
         {
             // Arrange
@@ -62,14 +60,16 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         }
 
         [Theory, AutoMoqData]
-        public void Calculate_ReturnsScore0_WhenGameLengthIsTheMostFarAwayFromPreference(
+        public void Calculate_ReturnsScore0_WhenGameLengthIsFullDeviationAwayFromPreference(
             int gameLength,
             Dictionary<Guid, int> games,
             GameLengthCalculator sut)
         {
             // Arrange
-            var game = games.OrderByDescending(x => Math.Abs(x.Value - gameLength)).First();
+            var game = games.Last();
             var length = TimeSpan.FromSeconds(gameLength);
+            var halfPreferredLength = gameLength / 2;
+            games[game.Key] = gameLength - halfPreferredLength;
 
             // Act
             var result = sut.Calculate(games, length);
@@ -81,17 +81,18 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
         }
 
         [Theory, AutoMoqData]
-        public void Calculate_ReturnsScore50_WhenGameLengthHalfOfMaxFarAwayFromPreference(
-            int gameLength,
-            int halfLength,
+        public void Calculate_ReturnsScore50_WhenGameLengthHalfDeviationFromPreference(
+            int halfDeviation,
             Dictionary<Guid, int> games,
             GameLengthCalculator sut)
         {
             // Arrange
-            games = games.ToDictionary(x => x.Key, x => gameLength + halfLength * 2);
+            var deviation = halfDeviation * 2;
+            var preferredLength = deviation * 2;
+            games = games.ToDictionary(x => x.Key, x => preferredLength);
             var game = games.First();
-            games[game.Key] = gameLength + halfLength;
-            var length = TimeSpan.FromSeconds(gameLength);
+            games[game.Key] = preferredLength - halfDeviation;
+            var length = TimeSpan.FromSeconds(preferredLength);
 
             // Act
             var result = sut.Calculate(games, length);
@@ -100,6 +101,33 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             var actualGameScore = result.FirstOrDefault(x => x.Key == game.Key);
             Assert.NotNull(actualGameScore);
             Assert.Equal(50, actualGameScore.Value);
+        }
+
+        [Theory, AutoMoqData]
+        public void Calculate_DeviationIsAnHour_WhenPreferredLengthIsZero(
+            Dictionary<Guid, int> games,
+            GameLengthCalculator sut)
+        {
+            // Arrange
+            var deviation = 3600;
+            var halfDeviation = deviation / 2;
+            var length = TimeSpan.FromSeconds(0);
+
+            var halfGame = games.First();
+            var zeroGame = games.Last();
+            games[halfGame.Key] = halfDeviation;
+            games[zeroGame.Key] = deviation;
+
+            // Act
+            var result = sut.Calculate(games, length);
+
+            // Assert
+            var actualHalfGameScore = result.FirstOrDefault(x => x.Key == halfGame.Key);
+            Assert.NotNull(actualHalfGameScore);
+            Assert.Equal(50, actualHalfGameScore.Value);
+            var actualZeroGameScore = result.FirstOrDefault(x => x.Key == zeroGame.Key);
+            Assert.NotNull(actualZeroGameScore);
+            Assert.Equal(0, actualZeroGameScore.Value);
         }
     }
 }
