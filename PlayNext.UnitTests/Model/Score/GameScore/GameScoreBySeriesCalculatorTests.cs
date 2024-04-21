@@ -30,6 +30,27 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 
         [Theory]
         [AutoData]
+        public void Calculate_GamesHaveNoSeries_ScoreListIsEmpty(
+            OrderSeriesBy orderSeriesBy,
+            Game[] games,
+            Dictionary<Guid, float> attributeScore,
+            GameScoreBySeriesCalculator sut)
+        {
+            // Arrange
+            foreach (var game in games)
+            {
+                game.SeriesIds = null;
+            }
+
+            // Act
+            var result = sut.Calculate(orderSeriesBy, games, attributeScore);
+
+            // Arrange
+            Assert.Empty(result);
+        }
+
+        [Theory]
+        [AutoData]
         public void Calculate_AttributeScoreListIsEmpty_ScoreListIsEmpty(
             OrderSeriesBy orderSeriesBy,
             Game[] games,

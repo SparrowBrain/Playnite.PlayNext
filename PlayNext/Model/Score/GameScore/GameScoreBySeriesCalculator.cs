@@ -13,13 +13,14 @@ namespace PlayNext.Model.Score.GameScore
             IEnumerable<Game> games,
             Dictionary<Guid, float> attributeScore)
         {
-            if (!games.Any())
+            var gamesWithSeries = games.Where(x => x.SeriesIds != null && x.SeriesIds.Any()).ToList();
+            if (!gamesWithSeries.Any())
             {
                 return new Dictionary<Guid, float>();
             }
 
-            var gamesWithSeriesScores = GetGamesWithSeriesScores(games, attributeScore);
-            var seriesWithGames = GetSeriesWithGames(games, gamesWithSeriesScores);
+            var gamesWithSeriesScores = GetGamesWithSeriesScores(gamesWithSeries, attributeScore);
+            var seriesWithGames = GetSeriesWithGames(gamesWithSeries, gamesWithSeriesScores);
             var gamesWithScores = GetGamesWithSummedUpScores(orderSeriesBy, gamesWithSeriesScores, seriesWithGames);
 
             var maxScore = gamesWithScores.Max(x => x.Value);

@@ -24,6 +24,7 @@ namespace PlayNext.Model.Score.Attribute
                 CalculateAttributeScore(game.DeveloperIds, game.Playtime, maxTime, weight, scores);
                 CalculateAttributeScore(game.PublisherIds, game.Playtime, maxTime, weight, scores);
                 CalculateAttributeScore(game.TagIds, game.Playtime, maxTime, weight, scores);
+                CalculateAttributeScore(game.SeriesIds, game.Playtime, maxTime, weight, scores);
             }
 
             return scores;
@@ -44,6 +45,7 @@ namespace PlayNext.Model.Score.Attribute
                 CalculateAttributeScore(game.DeveloperIds, recentPosition, gameCount, weight, scores);
                 CalculateAttributeScore(game.PublisherIds, recentPosition, gameCount, weight, scores);
                 CalculateAttributeScore(game.TagIds, recentPosition, gameCount, weight, scores);
+                CalculateAttributeScore(game.SeriesIds, recentPosition, gameCount, weight, scores);
             }
 
             return scores;

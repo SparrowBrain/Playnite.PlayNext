@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PlayNext.Extensions.HowLongToBeat;
 using PlayNext.Model.Data;
-using PlayNext.Model.Score.Attribute;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Model.Score.GameScore
@@ -12,6 +11,7 @@ namespace PlayNext.Model.Score.GameScore
     {
         private readonly IHowLongToBeatExtension _howLongToBeatExtension;
         private readonly GameScoreByAttributeCalculator _gameScoreByAttributeCalculator;
+        private readonly GameScoreBySeriesCalculator _gameScoreBySeriesCalculator;
         private readonly CriticScoreCalculator _criticScoreCalculator;
         private readonly CommunityScoreCalculator _communityScoreCalculator;
         private readonly ReleaseYearCalculator _releaseYearCalculator;
@@ -21,6 +21,7 @@ namespace PlayNext.Model.Score.GameScore
 
         public FinalGameScoreCalculator(IHowLongToBeatExtension howLongToBeatExtension,
             GameScoreByAttributeCalculator gameScoreByAttributeCalculator,
+            GameScoreBySeriesCalculator gameScoreBySeriesCalculator,
             CriticScoreCalculator criticScoreCalculator,
             CommunityScoreCalculator communityScoreCalculator,
             ReleaseYearCalculator releaseYearCalculator,
@@ -30,6 +31,7 @@ namespace PlayNext.Model.Score.GameScore
         {
             _howLongToBeatExtension = howLongToBeatExtension;
             _gameScoreByAttributeCalculator = gameScoreByAttributeCalculator;
+            _gameScoreBySeriesCalculator = gameScoreBySeriesCalculator;
             _criticScoreCalculator = criticScoreCalculator;
             _communityScoreCalculator = communityScoreCalculator;
             _releaseYearCalculator = releaseYearCalculator;
@@ -42,6 +44,7 @@ namespace PlayNext.Model.Score.GameScore
             IEnumerable<Game> games,
             Dictionary<Guid, float> attributeScore,
             GameScoreWeights gameScoreCalculationWeights,
+            OrderSeriesBy orderSeriesBy,
             int desiredReleaseYear,
             TimeSpan desiredGameLength)
         {
@@ -52,6 +55,7 @@ namespace PlayNext.Model.Score.GameScore
             var weightedScoreByDeveloper = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.DeveloperIds, gameScoreCalculationWeights.Developer);
             var weightedScoreByPublisher = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.PublisherIds, gameScoreCalculationWeights.Publisher);
             var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.TagIds, gameScoreCalculationWeights.Tag);
+            var weightedScoreBySeries = _gameScoreBySeriesCalculator.Calculate(orderSeriesBy, games, attributeScore).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.Series);
             var weightedScoreByCriticsScore = _criticScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CriticScore);
             var weightedScoreByCommunityScore = _communityScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
             var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, desiredReleaseYear).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
@@ -63,6 +67,7 @@ namespace PlayNext.Model.Score.GameScore
                 weightedScoreByDeveloper,
                 weightedScoreByPublisher,
                 weightedScoreByTag,
+                weightedScoreBySeries,
                 weightedScoreByCriticsScore,
                 weightedScoreByCommunityScore,
                 weightedScoreByReleaseYear,

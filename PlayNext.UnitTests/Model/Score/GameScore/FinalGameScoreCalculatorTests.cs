@@ -30,6 +30,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             Dictionary<Guid, float> topAttributeScores,
             Dictionary<Guid, float> secondTopAttributeScores,
             Game[] games,
+            OrderSeriesBy orderSeriesBy,
             int releaseYear,
             TimeSpan gameLength,
             FinalGameScoreCalculator sut)
@@ -46,7 +47,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             var attributeScore = topAttributeScores.Concat(secondTopAttributeScores).ToDictionary(x => x.Key, x => x.Value);
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, gameLength);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, orderSeriesBy, releaseYear, gameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);
@@ -70,6 +71,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             float secondTopGameScore,
             Game[] games,
             int releaseYear,
+            OrderSeriesBy orderSeriesBy,
             TimeSpan gameLength,
             Guid topAttributeId,
             Guid secondTopAttributeId,
@@ -88,7 +90,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             var attributeScore = topAttributeScores.Concat(secondTopAttributeScores).ToDictionary(x => x.Key, x => x.Value);
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, gameLength);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, orderSeriesBy, releaseYear, gameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);
@@ -110,6 +112,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             float secondTopGameScore,
             Dictionary<Guid, float> attributeScore,
             Game[] games,
+            OrderSeriesBy orderSeriesBy,
             int releaseYear,
             TimeSpan gameLength,
             FinalGameScoreCalculator sut)
@@ -126,7 +129,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             SetAttributes(secondTopAttribute, secondTopGame, attributeScore.Keys.ToArray());
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, gameLength);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, orderSeriesBy, releaseYear, gameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);
@@ -146,6 +149,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             float secondTopGameScore,
             Dictionary<Guid, float> attributeScore,
             Game[] games,
+            OrderSeriesBy orderSeriesBy,
             int releaseYear,
             TimeSpan gameLength,
             FinalGameScoreCalculator sut)
@@ -163,7 +167,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             SetAttributes(secondTopAttribute, secondTopGame, attributeScore.Keys.ToArray());
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, gameLength);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, orderSeriesBy, releaseYear, gameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);
@@ -184,6 +188,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
             [Frozen] Mock<IHowLongToBeatExtension> howLongToBeatExtensionMock,
             Dictionary<Guid, float> attributeScore,
             Game[] games,
+            OrderSeriesBy orderSeriesBy,
             int releaseYear,
             TimeSpan preferredGameLength,
             FinalGameScoreCalculator sut)
@@ -201,7 +206,7 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
                 { { topGame.Id, (int)preferredGameLength.TotalSeconds } });
 
             // Act
-            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, releaseYear, preferredGameLength);
+            var result = sut.Calculate(games, attributeScore, gameScoreCalculationWeights, orderSeriesBy, releaseYear, preferredGameLength);
 
             // Assert
             Assert.Equal(topGame.Id, result.First().Key);

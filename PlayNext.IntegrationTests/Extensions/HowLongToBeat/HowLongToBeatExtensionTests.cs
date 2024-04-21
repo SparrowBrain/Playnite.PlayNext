@@ -12,8 +12,8 @@ namespace PlayNext.IntegrationTests.Extensions.HowLongToBeat
 {
     public class HowLongToBeatExtensionTests
     {
-        private const string TestDataPath = @"HowLongToBeat\TestData";
-        private const string ExtensionsDataPath = @"HowLongToBeat\ExtensionsData";
+        private const string TestDataPath = @"Extensions\HowLongToBeat\TestData";
+        private const string ExtensionsDataPath = @"Extensions\HowLongToBeat\ExtensionsData";
 
         public HowLongToBeatExtensionTests()
         {

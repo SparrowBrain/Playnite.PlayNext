@@ -22,6 +22,7 @@ namespace PlayNext.Model.Score
         private readonly Summator _summator = new Summator();
         private readonly FinalGameScoreCalculator _finalGameScoreCalculator;
         private readonly AttributeScoreCalculator _attributeScoreCalculator = new AttributeScoreCalculator();
+        private readonly GameScoreBySeriesCalculator _gameScoreBySeriesCalculator = new GameScoreBySeriesCalculator();
         private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
         private readonly FinalAttributeScoreCalculator _finalAttributeScoreCalculator;
         private readonly CriticScoreCalculator _criticScoreCalculator = new CriticScoreCalculator();
@@ -34,7 +35,7 @@ namespace PlayNext.Model.Score
             _plugin = plugin;
 
             _finalAttributeScoreCalculator = new FinalAttributeScoreCalculator(_attributeScoreCalculator, _summator);
-            _finalGameScoreCalculator = new FinalGameScoreCalculator(plugin.HowLongToBeatExtension, _gameScoreByAttributeCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _gameLengthCalculator, _scoreNormalizer, _summator);
+            _finalGameScoreCalculator = new FinalGameScoreCalculator(plugin.HowLongToBeatExtension, _gameScoreByAttributeCalculator, _gameScoreBySeriesCalculator, _criticScoreCalculator, _communityScoreCalculator, _releaseYearCalculator, _gameLengthCalculator, _scoreNormalizer, _summator);
         }
 
         public ICollection<GameToPlayViewModel> Calculate(PlayNextSettings savedSettings)
@@ -55,6 +56,7 @@ namespace PlayNext.Model.Score
                 Developer = savedSettings.DeveloperWeight / PlayNextSettings.MaxWeightValue,
                 Publisher = savedSettings.PublisherWeight / PlayNextSettings.MaxWeightValue,
                 Tag = savedSettings.TagWeight / PlayNextSettings.MaxWeightValue,
+                Series = savedSettings.SeriesWeight / PlayNextSettings.MaxWeightValue,
                 CriticScore = savedSettings.CriticScoreWeight / PlayNextSettings.MaxWeightValue,
                 CommunityScore = savedSettings.CommunityScoreWeight / PlayNextSettings.MaxWeightValue,
                 ReleaseYear = savedSettings.ReleaseYearWeight / PlayNextSettings.MaxWeightValue,
@@ -71,7 +73,7 @@ namespace PlayNext.Model.Score
 
             var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
             var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);
-            var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, desiredReleaseYear, desiredGameLength);
+            var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, savedSettings.OrderSeriesBy, desiredReleaseYear, desiredGameLength);
 
             return gameScore.Select(score =>
             {

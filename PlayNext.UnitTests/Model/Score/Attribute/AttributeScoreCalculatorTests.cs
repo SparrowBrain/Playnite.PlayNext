@@ -15,6 +15,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByPlaytime_Returns1AttributeWithScore100_When_1Game1AttributeWith1Weight(
             string attributeIdsName,
             Game game,
@@ -39,6 +40,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByPlaytime_Returns2AttributeWithScore50_When_1Game2AttributeWith1Weight(
             string attributeIdsName,
             Game game,
@@ -65,6 +67,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByPlaytime_Returns1AttributeWithScore25_When_1Game1AttributeWith025Weight(
             string attributeIdsName,
             Game game,
@@ -89,6 +92,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByPlaytime_ReturnsAttributeWithScore50_When_2GamesAndAttributeInGameWithHalfThePlaytimeWith1Weight(
             string attributeIdsName,
             Game maxPlaytimeGame,
@@ -142,6 +146,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByRecentOrder_Returns1AttributeWithScore100_When_1Game1AttributeWith1Weight(
             string attributeIdsName,
             Game game,
@@ -166,6 +171,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
         [InlineAutoData(nameof(Game.DeveloperIds))]
         [InlineAutoData(nameof(Game.PublisherIds))]
         [InlineAutoData(nameof(Game.TagIds))]
+        [InlineAutoData(nameof(Game.SeriesIds))]
         public void CalculateByRecentOrder_ReturnsAttributeWithScore50_When_2GamesAndAttributeInLessRecentGameWith1Weight(
             string attributeIdsName,
             Game mostRecentGame,
@@ -203,6 +209,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
             game.DeveloperIds = null;
             game.PublisherIds = null;
             game.TagIds = null;
+            game.SeriesIds = null;
         }
 
         private static void SetAttributes(string attributeIdsName, Game game, params Guid[] attributeIds)

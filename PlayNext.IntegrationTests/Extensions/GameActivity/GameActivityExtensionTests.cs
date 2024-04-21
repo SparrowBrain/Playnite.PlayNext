@@ -15,8 +15,8 @@ namespace PlayNext.IntegrationTests.Extensions.GameActivity
 {
     public class GameActivityExtensionTests
     {
-        private const string TestDataPath = @"GameActivity\TestData";
-        private const string ExtensionsDataPath = @"GameActivity\ExtensionsData";
+        private const string TestDataPath = @"Extensions\GameActivity\TestData";
+        private const string ExtensionsDataPath = @"Extensions\GameActivity\ExtensionsData";
 
         public GameActivityExtensionTests()
         {
