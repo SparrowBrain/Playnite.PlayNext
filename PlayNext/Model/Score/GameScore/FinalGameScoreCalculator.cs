@@ -55,11 +55,11 @@ namespace PlayNext.Model.Score.GameScore
             var weightedScoreByDeveloper = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.DeveloperIds, gameScoreCalculationWeights.Developer);
             var weightedScoreByPublisher = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.PublisherIds, gameScoreCalculationWeights.Publisher);
             var weightedScoreByTag = CalculateWeightedGameScoreByAttribute(games, attributeScore, x => x.TagIds, gameScoreCalculationWeights.Tag);
-            var weightedScoreBySeries = _gameScoreBySeriesCalculator.Calculate(orderSeriesBy, games, attributeScore).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.Series);
-            var weightedScoreByCriticsScore = _criticScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CriticScore);
-            var weightedScoreByCommunityScore = _communityScoreCalculator.Calculate(games).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.CommunityScore);
-            var weightedScoreByReleaseYear = _releaseYearCalculator.Calculate(games, desiredReleaseYear).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.ReleaseYear);
-            var weightedScoreByGameLength = _gameLengthCalculator.Calculate(gameLengths, desiredGameLength).ToDictionary(x => x.Key, x => x.Value * gameScoreCalculationWeights.GameLength);
+            var weightedScoreBySeries = CalculateWeightedScores(() => _gameScoreBySeriesCalculator.Calculate(orderSeriesBy, games, attributeScore), gameScoreCalculationWeights.Series);
+            var weightedScoreByCriticsScore = CalculateWeightedScores(() => _criticScoreCalculator.Calculate(games), gameScoreCalculationWeights.CriticScore);
+            var weightedScoreByCommunityScore = CalculateWeightedScores(() => _communityScoreCalculator.Calculate(games), gameScoreCalculationWeights.CommunityScore);
+            var weightedScoreByReleaseYear = CalculateWeightedScores(() => _releaseYearCalculator.Calculate(games, desiredReleaseYear), gameScoreCalculationWeights.ReleaseYear);
+            var weightedScoreByGameLength = CalculateWeightedScores(() => _gameLengthCalculator.Calculate(gameLengths, desiredGameLength), gameScoreCalculationWeights.GameLength);
 
             var sum = _summator.AddUp(
                 weightedScoreByGenre,
@@ -84,10 +84,27 @@ namespace PlayNext.Model.Score.GameScore
             Func<Game, IEnumerable<Guid>> attributeSelector,
             float weight)
         {
+            if (weight == 0)
+            {
+                return new Dictionary<Guid, float>();
+            }
+
             var scoreByAttribute = _gameScoreByAttributeCalculator.Calculate(games, attributeSelector, attributeScore);
             var normalizedScoreByAttribute = _scoreNormalizer.Normalize(scoreByAttribute);
             var weightedGameScoreByAttribute = normalizedScoreByAttribute.ToDictionary(x => x.Key, x => x.Value * weight);
             return weightedGameScoreByAttribute;
+        }
+
+        private Dictionary<Guid, float> CalculateWeightedScores(
+            Func<Dictionary<Guid, float>> scoreCalculationFunction,
+            float weight)
+        {
+            if (weight == 0)
+            {
+                return new Dictionary<Guid, float>();
+            }
+
+            return scoreCalculationFunction.Invoke().ToDictionary(x => x.Key, x => x.Value * weight);
         }
     }
 }
