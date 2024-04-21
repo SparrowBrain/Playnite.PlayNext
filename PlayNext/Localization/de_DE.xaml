@@ -29,6 +29,10 @@
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Entwickler</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Publisher</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTag">Schlagwort</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Series</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Order Series By</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Release Date</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Expertenwertung</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Communitywertung</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Erscheinungsjahr</sys:String>

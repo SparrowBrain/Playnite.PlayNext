@@ -29,6 +29,10 @@
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Kūrėjas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Leidėjas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTag">Žyma</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Serija</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Seriją rūšiuoti pagal</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Išleidimo datą</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Rūšiavimo vardą</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Kritikų įvertinimas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Žaidėjų įvertinimas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Išleidimo metai</sys:String>

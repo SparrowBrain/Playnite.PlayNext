@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_PlayNext_PluginName">Play Next</sys:String>
-    <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Score</sys:String>
-    <sys:String x:Key="LOC_PlayNext_MainNameColumn">Name</sys:String>
-    <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Details</sys:String>
+    <sys:String x:Key="LOC_PlayNext_PluginName">Играть следующую</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Счёт</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainNameColumn">Название</sys:String>
+    <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Подробности</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Attribute Calculation Weights</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Total Playtime</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Recent Playtime</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Расчёт весов атрибутов</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Общее время игры</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Недавняя игра</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Требуется расширение GameActivity</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Recent Order</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Default</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Flat</sys:String>
@@ -29,6 +29,10 @@
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Developer</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Publisher</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTag">Tag</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Series</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Order Series By</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Release Date</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Critic Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Community Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Release Year</sys:String>
