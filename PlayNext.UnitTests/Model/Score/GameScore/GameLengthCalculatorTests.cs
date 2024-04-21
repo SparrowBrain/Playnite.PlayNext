@@ -76,7 +76,6 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 
             // Assert
             var actualGameScore = result.FirstOrDefault(x => x.Key == game.Key);
-            Assert.NotNull(actualGameScore);
             Assert.Equal(0, actualGameScore.Value);
         }
 
@@ -99,7 +98,6 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 
             // Assert
             var actualGameScore = result.FirstOrDefault(x => x.Key == game.Key);
-            Assert.NotNull(actualGameScore);
             Assert.Equal(50, actualGameScore.Value);
         }
 
@@ -123,10 +121,8 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 
             // Assert
             var actualHalfGameScore = result.FirstOrDefault(x => x.Key == halfGame.Key);
-            Assert.NotNull(actualHalfGameScore);
             Assert.Equal(50, actualHalfGameScore.Value);
             var actualZeroGameScore = result.FirstOrDefault(x => x.Key == zeroGame.Key);
-            Assert.NotNull(actualZeroGameScore);
             Assert.Equal(0, actualZeroGameScore.Value);
         }
     }

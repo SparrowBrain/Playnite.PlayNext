@@ -113,7 +113,6 @@ namespace PlayNext
         {
             _startupSettingsValidator.EnsureCorrectVersionSettingsExist();
             LandingPageExtension.CreateInstance(PlayniteApi);
-            RefreshPlayNextData();
         }
 
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -220,7 +219,7 @@ namespace PlayNext
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex, "Failure while parsing activities");
+                    _logger.Error(ex, "Failure while refreshing data.");
                 }
             }).Start();
         }
