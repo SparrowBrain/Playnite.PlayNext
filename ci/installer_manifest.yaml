@@ -1,5 +1,15 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.5.0
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2024-04-22
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.5.0/SparrowBrain_PlayNext_1_5_0.pext
+    Changelog:
+      - Added Brazilian Portuguese translations (thank you The Nutellas!)
+      - Added score calculation by Series
+      - Improved game score by length algorithm (deviation by 0.5 from preferred length is the score limit)
+      - Optimized zero weight calculations
+      - Fixed unnecessary calculation on app start
   - Version: 1.4.0
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2023-08-05
