@@ -14,8 +14,8 @@ namespace PlayNext.UnitTests.Settings
             StartupSettingsValidator sut)
         {
             // Arrange
-            pluginSettingsPersistenceMock.Setup(x => x.LoadPluginSettings<PlayNextSettings>())
-                .Returns((PlayNextSettings)null);
+            pluginSettingsPersistenceMock.Setup(x => x.LoadPluginSettings<VersionedSettings>())
+                .Returns((VersionedSettings)null);
 
             // Act
             sut.EnsureCorrectVersionSettingsExist();
