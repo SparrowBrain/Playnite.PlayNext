@@ -79,14 +79,13 @@ For example if our prefered year is 2000 and our biggest difference game is from
 
 #### Game Length
 Takes the game lengths for all games and assings the scores depending on the difference from the preferred length, capping out at half the preferred length.
-For example if our preferred length is 20 hours and the biggest difference is a game of length 40 hours, then we get these scores:
+For example if our preferred length is 20 hours, then we get these scores:
 * Hours 0 - 0;
 * Hours 10 - 0;
 * Hours 15 - 50;
 * Hours 20 - 100;
 * Hours 25 - 50;
 * Hours 30 - 0;
-* Hours 40 - 0;
 
 ### Weighting
 Weighting sets a maximum amount of score a specific part of algorigthm can contribute to the end result. That means in attribute score calculation weights set how much specific types influence the attribute scores. And in game score calculation we specify how much those attribute types influence the final score for games that will get recommended.
