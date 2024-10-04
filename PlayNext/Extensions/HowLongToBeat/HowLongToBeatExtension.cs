@@ -70,23 +70,23 @@ namespace PlayNext.Extensions.HowLongToBeat
         private static int AverageTimes(GameHltbData data)
         {
             var nonZeroTimes = 0;
-            if (data.MainStory > 0)
+            if (data.MainStoryClassic > 0)
             {
                 nonZeroTimes++;
             }
 
-            if (data.MainExtra > 0)
+            if (data.MainExtraClassic > 0)
             {
                 nonZeroTimes++;
             }
 
-            if (data.Completionist > 0)
+            if (data.CompletionistClassic > 0)
             {
                 nonZeroTimes++;
             }
 
             return nonZeroTimes > 0
-                ? (data.MainStory + data.MainExtra + data.Completionist) / nonZeroTimes
+                ? (data.MainStoryClassic + data.MainExtraClassic + data.CompletionistClassic) / nonZeroTimes
                 : 0;
         }
 

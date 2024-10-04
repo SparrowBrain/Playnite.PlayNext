@@ -1,9 +1,9 @@
 ﻿namespace PlayNext.Extensions.HowLongToBeat.Data
 {
-    public class GameHltbData
-    {
-        public int MainStory { get; set; }
-        public int MainExtra { get; set; }
-        public int Completionist { get; set; }
-    }
+	public class GameHltbData
+	{
+		public int MainStoryClassic { get; set; }
+		public int MainExtraClassic { get; set; }
+		public int CompletionistClassic { get; set; }
+	}
 }

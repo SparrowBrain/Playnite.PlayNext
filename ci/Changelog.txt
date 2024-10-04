@@ -1,3 +1,6 @@
+v1.5.2
+- Fixed a failure to read HowLongToBeat extension data (HLTB v3.5 data format)
+
 v1.5.1
 - Fixed Playnite crash when StartPage settings are loaded slower than UI
 
