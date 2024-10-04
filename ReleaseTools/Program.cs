@@ -21,7 +21,7 @@ namespace ReleaseTools
             var pathToSolution = "..";
 
             var msBuild = @"""C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe""";
-            var testRunner = @"""C:\Users\Qwx\Documents\src\Playnite.PlayNext\packages\xunit.runner.console.2.4.2\tools\net462\xunit.console.exe""";
+            var testRunner = $@"""{pathToSolution}\packages\xunit.runner.console.2.4.2\tools\net462\xunit.console.exe""";
             var toolbox = @"""C:\Users\Qwx\AppData\Local\Playnite\Toolbox.exe""";
 
             await EnsureGitHubAuthentication();
@@ -55,11 +55,12 @@ namespace ReleaseTools
             var p = new Process();
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.FileName = "gh";
+            p.StartInfo.RedirectStandardOutput = true;
+			p.StartInfo.FileName = "gh";
             p.StartInfo.Arguments = "auth status";
             p.Start();
-            var output = await p.StandardError.ReadToEndAsync();
-            p.WaitForExit();
+			var output = await p.StandardOutput.ReadToEndAsync();
+			p.WaitForExit();
 
             if (!authStatusParser.IsUserLoggedIn(output))
             {
