@@ -1,5 +1,11 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.5.3
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2024-10-16
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.5.3/SparrowBrain_PlayNext_1_5_3.pext
+    Changelog:
+      - Fixed an extension crash whith Series score calculation where Series were ordered by Release Date and at least two games had no Release Date
   - Version: 1.5.2
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2024-10-04
