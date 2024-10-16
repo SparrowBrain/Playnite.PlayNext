@@ -1,3 +1,6 @@
+v1.5.3
+- Fixed an extension crash whith Series score calculation where Series were ordered by Release Date and at least two games had no Release Date
+
 v1.5.2
 - Fixed a failure to read HowLongToBeat extension data (HLTB v3.5 data format)
 

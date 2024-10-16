@@ -98,6 +98,8 @@ namespace PlayNext.Model.Score.GameScore
                     {
                         return 1;
                     }
+
+                    return 0;
                 }
 
                 if (orderSeriesBy == OrderSeriesBy.SortingName)
