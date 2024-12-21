@@ -1,3 +1,6 @@
+v1.5.4
+- Added argument validation in series score calculator
+
 v1.5.3
 - Fixed an extension crash whith Series score calculation where Series were ordered by Release Date and at least two games had no Release Date
 

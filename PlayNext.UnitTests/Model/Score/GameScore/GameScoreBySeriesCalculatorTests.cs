@@ -269,5 +269,50 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 			// Arrange
 			Assert.Equal(100, result[gameWithReleaseDate.Id]);
 		}
+
+		[Theory]
+		[AutoData]
+		public void Calculate_TwoGamesHaveSameId_ThrowsArgumentException(
+			Game[] games,
+			OrderSeriesBy orderBy,
+			Dictionary<Guid, float> attributeScore,
+			GameScoreBySeriesCalculator sut)
+		{
+			// Arrange
+			games.First().Id = games.Last().Id;
+
+			// Act
+			var exception = Record.Exception(() => sut.Calculate(orderBy, games, attributeScore));
+
+			// Arrange
+			Assert.NotNull(exception);
+			Assert.IsType<ArgumentException>(exception);
+			Assert.Contains(games.First().Id.ToString(), exception.Message);
+			Assert.Contains(games.First().Name, exception.Message);
+			Assert.Contains(games.Last().Name, exception.Message);
+		}
+
+		[Theory]
+		[AutoData]
+		public void Calculate_AGamesHasSameSeriesIdTwice_ThrowsArgumentException(
+			Game[] games,
+			OrderSeriesBy orderBy,
+			Dictionary<Guid, float> attributeScore,
+			GameScoreBySeriesCalculator sut)
+		{
+			// Arrange
+			var gameWithDuplicateSeries = games.Last();
+			var duplicatedSeriesId = gameWithDuplicateSeries.SeriesIds.Last();
+			gameWithDuplicateSeries.SeriesIds.Add(duplicatedSeriesId);
+
+			// Act
+			var exception = Record.Exception(() => sut.Calculate(orderBy, games, attributeScore));
+
+			// Arrange
+			Assert.NotNull(exception);
+			Assert.IsType<ArgumentException>(exception);
+			Assert.Contains(gameWithDuplicateSeries.Id.ToString(), exception.Message);
+			Assert.Contains(duplicatedSeriesId.ToString(), exception.Message);
+		}
 	}
 }
