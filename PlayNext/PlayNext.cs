@@ -192,7 +192,7 @@ namespace PlayNext
 		private void LandingPageExtension_InstanceCreated()
 		{
 			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
-			_startPageView?.UpdateCoversColumnWidth();
+			PlayniteApi.MainView.UIDispatcher.Invoke(() => _startPageView?.UpdateCoversColumnWidth());
 		}
 
 		private void RefreshPlayNextData()

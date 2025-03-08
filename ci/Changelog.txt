@@ -1,3 +1,6 @@
+v1.5.6
+- Better fix for StartPage cover width not setting sometimes on startup
+
 v1.5.5
 - Fixed PlayNext crash when a game would have same series attached multiple times
 - Fixed StartPage cover width not setting sometimes on startup
