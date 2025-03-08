@@ -103,6 +103,26 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 
 		[Theory]
 		[AutoData]
+		public void Calculate_OneGameHasSameSeriesTwice_NoCrash(
+			OrderSeriesBy orderSeriesBy,
+			Dictionary<Guid, float> attributeScore,
+			Game[] games,
+			GameScoreBySeriesCalculator sut)
+		{
+			// Arrange
+			var seriesAttributeScore = attributeScore.Last();
+			games.Last().SeriesIds.Add(seriesAttributeScore.Key);
+			games.Last().SeriesIds.Add(seriesAttributeScore.Key);
+
+			// Act
+			var exception = Record.Exception(() => sut.Calculate(orderSeriesBy, games, attributeScore));
+
+			// Arrange
+			Assert.Null(exception);
+		}
+
+		[Theory]
+		[AutoData]
 		public void Calculate_TwoGamesMatchesSeriesWithScoreAndCalculatingByReleaseDate_OlderReleaseDateGameIs100NewerOneIs50Score(
 			Dictionary<Guid, float> attributeScore,
 			Game[] games,

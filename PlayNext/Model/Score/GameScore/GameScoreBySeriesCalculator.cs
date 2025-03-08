@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayNext.Model.Data;
+using Playnite.SDK;
 using Playnite.SDK.Models;
 
 namespace PlayNext.Model.Score.GameScore
 {
 	public class GameScoreBySeriesCalculator
 	{
+		private readonly ILogger _logger = LogManager.GetLogger();
+
 		public Dictionary<Guid, float> Calculate(
 		OrderSeriesBy orderSeriesBy,
 		IEnumerable<Game> games,
@@ -34,7 +37,7 @@ namespace PlayNext.Model.Score.GameScore
 			return CalculateGamesWithNormalizedScores(gamesWithScores, maxScore);
 		}
 
-		private static void ValidateArguments(List<Game> gamesWithSeries)
+		private void ValidateArguments(List<Game> gamesWithSeries)
 		{
 			ValidateDuplicateGameIds(gamesWithSeries);
 			ValidateDuplicateSeriesIdsOnGame(gamesWithSeries);
@@ -42,7 +45,7 @@ namespace PlayNext.Model.Score.GameScore
 
 		private static Dictionary<Guid, Dictionary<Guid, float>> GetGamesWithSeriesScores(IEnumerable<Game> games, Dictionary<Guid, float> attributeScore)
 		{
-			return games.ToDictionary(x => x.Id, x => x.SeriesIds.ToDictionary(s => s, s =>
+			return games.ToDictionary(x => x.Id, x => x.SeriesIds.Distinct().ToDictionary(s => s, s =>
 			{
 				if (!attributeScore.TryGetValue(s, out var value))
 				{
@@ -94,7 +97,7 @@ namespace PlayNext.Model.Score.GameScore
 			}
 		}
 
-		private static void ValidateDuplicateSeriesIdsOnGame(List<Game> gamesWithSeries)
+		private void ValidateDuplicateSeriesIdsOnGame(List<Game> gamesWithSeries)
 		{
 			var gamesWithDuplicateSeries = gamesWithSeries
 				.SelectMany(g => g.SeriesIds.GroupBy(s => s)
@@ -105,7 +108,8 @@ namespace PlayNext.Model.Score.GameScore
 			if (gamesWithDuplicateSeries.Any())
 			{
 				var duplicateSeriesList = string.Join(", ", gamesWithDuplicateSeries.Select(g => $"{g.Name} (ID: {g.Id}, SeriesID: {g.SeriesId})"));
-				throw new ArgumentException($"One or more games have the same SeriesID attached multiple times: {duplicateSeriesList}");
+				_logger.Warn($"One or more games have the same SeriesID attached multiple times: {duplicateSeriesList}");
+				
 			}
 		}
 
