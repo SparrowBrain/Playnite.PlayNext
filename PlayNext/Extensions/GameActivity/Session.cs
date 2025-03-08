@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace PlayNext.Extensions.GameActivity
@@ -16,7 +18,14 @@ namespace PlayNext.Extensions.GameActivity
         public Guid PlatfromId { get => _platformId; set => SetValue(ref _platformId, value); }
         public List<Guid> PlatformIDs { get => _platformIDs; set => SetValue(ref _platformIDs, value); }
         public int IdConfiguration { get => _idConfiguration; set => SetValue(ref _idConfiguration, value); }
-        public DateTime DateSession { get => _dateSession; set => SetValue(ref _dateSession, value); }
-        public ulong ElapsedSeconds { get => _elapsedSeconds; set => SetValue(ref _elapsedSeconds, value); }
+
+        [JsonConverter(typeof(IsoDateTimeConverter))]
+		public DateTime DateSession
+		{
+			get => _dateSession;
+			set => SetValue(ref _dateSession, value.Kind == DateTimeKind.Utc ? value.ToLocalTime() : value);
+		}
+
+		public ulong ElapsedSeconds { get => _elapsedSeconds; set => SetValue(ref _elapsedSeconds, value); }
     }
 }

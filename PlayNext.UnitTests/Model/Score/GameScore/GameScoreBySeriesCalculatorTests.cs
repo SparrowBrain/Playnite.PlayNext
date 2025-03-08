@@ -311,28 +311,5 @@ namespace PlayNext.UnitTests.Model.Score.GameScore
 			Assert.Contains(games.First().Name, exception.Message);
 			Assert.Contains(games.Last().Name, exception.Message);
 		}
-
-		[Theory]
-		[AutoData]
-		public void Calculate_AGamesHasSameSeriesIdTwice_ThrowsArgumentException(
-			Game[] games,
-			OrderSeriesBy orderBy,
-			Dictionary<Guid, float> attributeScore,
-			GameScoreBySeriesCalculator sut)
-		{
-			// Arrange
-			var gameWithDuplicateSeries = games.Last();
-			var duplicatedSeriesId = gameWithDuplicateSeries.SeriesIds.Last();
-			gameWithDuplicateSeries.SeriesIds.Add(duplicatedSeriesId);
-
-			// Act
-			var exception = Record.Exception(() => sut.Calculate(orderBy, games, attributeScore));
-
-			// Arrange
-			Assert.NotNull(exception);
-			Assert.IsType<ArgumentException>(exception);
-			Assert.Contains(gameWithDuplicateSeries.Id.ToString(), exception.Message);
-			Assert.Contains(duplicatedSeriesId.ToString(), exception.Message);
-		}
 	}
 }

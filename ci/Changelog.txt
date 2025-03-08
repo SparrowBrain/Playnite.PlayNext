@@ -1,6 +1,7 @@
-v1.5.4
+----v1.5.5
 - Fixed PlayNext crash when a game would have same series attached multiple times
 - Fixed StartPage cover width not setting sometimes on startup
+- Fixed GameActivity data to use local time zone instead of UTC
 
 v1.5.4
 - Added argument validation in series score calculator
