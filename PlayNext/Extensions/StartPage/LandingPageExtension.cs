@@ -19,6 +19,8 @@ namespace PlayNext.Extensions.StartPage
 
 		public static LandingPageExtension Instance { get; set; }
 
+		public static event Action InstanceCreated;
+
 		public static void CreateInstance(IPlayniteAPI api)
 		{
 			new Task(() =>
@@ -39,12 +41,18 @@ namespace PlayNext.Extensions.StartPage
 					var landingPageExtension = new LandingPageExtension(settings);
 					Instance = landingPageExtension;
 					Logger.Debug("Settings loaded: " + settings);
+					OnInstanceCreated();
 				}
 				catch (Exception ex)
 				{
 					Logger.Error(ex, "Error loading start page settings");
 				}
 			}).Start();
+		}
+
+		private static void OnInstanceCreated()
+		{
+			InstanceCreated?.Invoke();
 		}
 	}
 }

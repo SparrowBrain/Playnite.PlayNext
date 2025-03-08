@@ -112,6 +112,7 @@ namespace PlayNext
 		public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
 		{
 			_startupSettingsValidator.EnsureCorrectVersionSettingsExist();
+			LandingPageExtension.InstanceCreated += LandingPageExtension_InstanceCreated;
 			LandingPageExtension.CreateInstance(PlayniteApi);
 		}
 
@@ -186,6 +187,12 @@ namespace PlayNext
 			_startPagePlayNextViewModel?.UpdateLabelDisplay(settings);
 			_startPageView?.UpdateMinCoverCount(settings);
 			RefreshPlayNextData();
+		}
+
+		private void LandingPageExtension_InstanceCreated()
+		{
+			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
+			_startPageView?.UpdateCoversColumnWidth();
 		}
 
 		private void RefreshPlayNextData()

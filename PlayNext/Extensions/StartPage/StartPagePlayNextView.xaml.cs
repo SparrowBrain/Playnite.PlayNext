@@ -16,7 +16,7 @@ namespace PlayNext.Extensions.StartPage
 	{
 		private const int TextHeight = 2 * 25;
 		private const int CoverMargin = 2 * 8;
-		private ILogger _logger = LogManager.GetLogger(nameof(StartPagePlayNextView));
+		private readonly ILogger _logger = LogManager.GetLogger(nameof(StartPagePlayNextView));
 		private int _minCoverCount;
 
 		public StartPagePlayNextView(StartPagePlayNextViewModel viewModel, PlayNextSettings settings)
@@ -30,6 +30,12 @@ namespace PlayNext.Extensions.StartPage
 		{
 			_minCoverCount = settings.StartPageMinCoverCount;
 			UpdateCoversColumnWidth();
+		}
+
+		public void UpdateCoversColumnWidth()
+		{
+			var dock = FindName("CoversDock") as FrameworkElement;
+			UpdateCoversColumnWidth(dock);
 		}
 
 		private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)
@@ -68,12 +74,6 @@ namespace PlayNext.Extensions.StartPage
 					scrollInfo.LineLeft();
 				}
 			}
-		}
-
-		private void UpdateCoversColumnWidth()
-		{
-			var dock = FindName("CoversDock") as FrameworkElement;
-			UpdateCoversColumnWidth(dock);
 		}
 
 		private void UpdateCoversColumnWidth(FrameworkElement dock)
