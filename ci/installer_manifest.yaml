@@ -1,5 +1,11 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.5.6
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2025-03-08
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.5.6/SparrowBrain_PlayNext_1_5_6.pext
+    Changelog:
+      - Better fix for StartPage cover width not setting sometimes on startup
   - Version: 1.5.5
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2025-03-08
