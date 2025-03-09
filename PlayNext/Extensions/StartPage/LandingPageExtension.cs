@@ -39,7 +39,7 @@ namespace PlayNext.Extensions.StartPage
 					var settings = plugin.LoadPluginSettings<LandingPageSettings>();
 
 					var landingPageExtension = new LandingPageExtension(settings);
-					Instance = landingPageExtension;
+					api.MainView.UIDispatcher.Invoke(() => Instance = landingPageExtension);
 					Logger.Debug("Settings loaded: " + settings);
 					OnInstanceCreated();
 				}
