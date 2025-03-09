@@ -23,30 +23,43 @@ namespace PlayNext.Extensions.StartPage
 
 		public static void CreateInstance(IPlayniteAPI api)
 		{
-			new Task(() =>
+			try
 			{
-				try
-				{
-					var plugin = api.Addons.Plugins.FirstOrDefault(x =>
-						x.Id == Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"));
+				var plugin = api.Addons.Plugins.FirstOrDefault(x =>
+					x.Id == Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"));
 
-					if (plugin == null)
+				if (plugin == null)
+				{
+					Logger.Debug("Did not find start page plugin");
+					return;
+				}
+
+				var settings = plugin.LoadPluginSettings<LandingPageSettings>();
+
+				var landingPageExtension = new LandingPageExtension(settings);
+				api.MainView.UIDispatcher.Invoke(() =>
+				{
+					if (Instance != null)
 					{
-						Logger.Debug("Did not find start page plugin");
 						return;
 					}
 
-					var settings = plugin.LoadPluginSettings<LandingPageSettings>();
-
-					var landingPageExtension = new LandingPageExtension(settings);
-					api.MainView.UIDispatcher.Invoke(() => Instance = landingPageExtension);
+					Instance = landingPageExtension;
 					Logger.Debug("Settings loaded: " + settings);
 					OnInstanceCreated();
-				}
-				catch (Exception ex)
-				{
-					Logger.Error(ex, "Error loading start page settings");
-				}
+				});
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex, "Error loading start page settings");
+			}
+		}
+
+		public static void CreateInstanceInBackground(IPlayniteAPI api)
+		{
+			new Task(() =>
+			{
+				CreateInstance(api);
 			}).Start();
 		}
 

@@ -113,7 +113,7 @@ namespace PlayNext
 		{
 			_startupSettingsValidator.EnsureCorrectVersionSettingsExist();
 			LandingPageExtension.InstanceCreated += LandingPageExtension_InstanceCreated;
-			LandingPageExtension.CreateInstance(PlayniteApi);
+			LandingPageExtension.CreateInstanceInBackground(PlayniteApi);
 		}
 
 		public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -162,6 +162,11 @@ namespace PlayNext
 					{
 						var settings = LoadPluginSettings<PlayNextSettings>();
 						_startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
+						if (LandingPageExtension.Instance == null)
+						{
+							LandingPageExtension.CreateInstance(PlayniteApi);
+						}
+
 						_startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, settings);
 						RefreshPlayNextData();
 					}
@@ -192,7 +197,10 @@ namespace PlayNext
 		private void LandingPageExtension_InstanceCreated()
 		{
 			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
-			PlayniteApi.MainView.UIDispatcher.Invoke(() => _startPageView?.UpdateCoversColumnWidth());
+			PlayniteApi.MainView.UIDispatcher.Invoke(() =>
+			{
+				_startPageView?.UpdateCoversColumnWidth();
+			});
 		}
 
 		private void RefreshPlayNextData()
