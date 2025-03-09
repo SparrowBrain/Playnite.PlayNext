@@ -1,5 +1,5 @@
 v1.5.7
-- Fix StartPage cover sizing by loading settins on main thread for StartPage view
+- Fix StartPage cover sizing by loading settings on main thread for StartPage view
 
 v1.5.6
 - Better fix for StartPage cover width not setting sometimes on startup
