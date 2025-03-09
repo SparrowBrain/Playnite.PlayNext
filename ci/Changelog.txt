@@ -1,3 +1,6 @@
+v1.5.7
+- Fix StartPage cover sizing by setting instance on the main thread
+
 v1.5.6
 - Better fix for StartPage cover width not setting sometimes on startup
 
