@@ -1,3 +1,6 @@
+-----v1.6.0
+- Added PlayNext refresh when games change
+
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view
 

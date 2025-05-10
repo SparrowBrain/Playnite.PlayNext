@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -28,6 +29,7 @@ namespace PlayNext
 		private readonly StartupSettingsValidator _startupSettingsValidator;
 		private readonly TotalScoreCalculator _totalScoreCalculator;
 		private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
+		private readonly Timer _gameUpdatedTimer = new Timer(5000);
 
 		private PlayNextSettingsViewModel _settings;
 		private StartPagePlayNextViewModel _startPagePlayNextViewModel;
@@ -55,6 +57,9 @@ namespace PlayNext
 
 			var pluginSettingsPersistence = new PluginSettingsPersistence(this);
 			_startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, new SettingsMigrator(pluginSettingsPersistence));
+			_gameUpdatedTimer.Elapsed += (o, e) => RefreshPlayNextData();
+			_gameUpdatedTimer.AutoReset = false;
+			_gameUpdatedTimer.Enabled = false;
 		}
 
 		public static IPlayniteAPI Api { get; private set; }
@@ -114,6 +119,8 @@ namespace PlayNext
 			_startupSettingsValidator.EnsureCorrectVersionSettingsExist();
 			LandingPageExtension.InstanceCreated += LandingPageExtension_InstanceCreated;
 			LandingPageExtension.CreateInstanceInBackground(PlayniteApi);
+
+			PlayniteApi.Database.Games.ItemUpdated += Games_ItemUpdated;
 		}
 
 		public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -203,8 +210,18 @@ namespace PlayNext
 			});
 		}
 
+		private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Playnite.SDK.Models.Game> e)
+		{
+			_gameUpdatedTimer.Start();
+		}
+
 		private void RefreshPlayNextData()
 		{
+			if (_playNextMainViewModel == null && _startPagePlayNextViewModel == null)
+			{
+				return;
+			}
+
 			new Task<Task>(async () =>
 			{
 				try
@@ -231,6 +248,11 @@ namespace PlayNext
 
 					_playNextMainViewModel?.LoadData(games);
 					_startPagePlayNextViewModel?.LoadData(games);
+
+					if (!_gameUpdatedTimer.Enabled)
+					{
+						_gameUpdatedTimer.Enabled = true;
+					}
 				}
 				catch (Exception ex)
 				{
