@@ -248,11 +248,6 @@ namespace PlayNext
 
 					_playNextMainViewModel?.LoadData(games);
 					_startPagePlayNextViewModel?.LoadData(games);
-
-					if (!_gameUpdatedTimer.Enabled)
-					{
-						_gameUpdatedTimer.Enabled = true;
-					}
 				}
 				catch (Exception ex)
 				{
