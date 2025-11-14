@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Media;
+using PlayNext.Extensions.StartPage.Settings.PlayNextAddon;
 
 namespace PlayNext
 {
@@ -154,7 +155,8 @@ namespace PlayNext
 					{
 						ViewId = "PlayNext_TopRecommendations",
 						Name = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsViewName"),
-						Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription")
+						Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription"),
+						HasSettings = true,
 					}
 				}
 			};
@@ -186,6 +188,17 @@ namespace PlayNext
 
 		public Control GetStartPageViewSettings(string viewId, Guid instanceId)
 		{
+			switch (viewId)
+			{
+				case "PlayNext_TopRecommendations":
+					if (_settings == null)
+					{
+						GetSettings(false);
+					}
+
+					return new StartPageSettingsView(new StartPageSettingsViewModel(_settings));
+			}
+
 			return null;
 		}
 

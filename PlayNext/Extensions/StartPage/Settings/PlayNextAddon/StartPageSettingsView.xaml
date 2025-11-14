@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="PlayNext.Extensions.StartPage.Settings.PlayNextAddon.StartPageSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="Margin" Value="0,5,5,0" />
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin" Value="5,0,5,0"></Setter>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="2.5,2.5,2.5,2.5"></Setter>
+        </Style>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Setter Property="Margin" Value="0,2.5,0,2.5"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <CheckBox IsChecked="{Binding StartPageShowLabel}">
+            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageShowLabel}"></TextBlock>
+        </CheckBox>
+        <CheckBox IsChecked="{Binding StartPageLabelIsHorizontal}">
+            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsStartPageLabelIsHorizontal}"></TextBlock>
+        </CheckBox>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsStartPageMinCoverCount}"></TextBlock>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding StartPageMinCoverCount}"></TextBox>
+        </Grid>
+    </StackPanel>
+</UserControl>
