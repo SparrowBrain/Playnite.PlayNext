@@ -12,7 +12,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requer extensão do GameActivity</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Ordem recente</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Padrão</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Flat</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Reto</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Outros</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Quantidade de jogos</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Dias Recentes</sys:String>
@@ -22,32 +22,32 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Página inicial</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Mostrar rótulo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Rótulo horizontal</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Contagem mínima da capa</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Contagem mínima de capa</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Peso de cálculo de pontuação de jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Gênero</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Recurso</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Desenvolvedor</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Distribuidora</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsTag">Tag</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Series</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Order Series By</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Release Date</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTag">Etiqueta</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Série</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Ordenar Série por</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Data de Lançamento</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Nome de classificação</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Avaliação da crítica</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Avaliação da comunidade</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Ano de lançamento</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Ano de Lançamento Deveria ser</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Ano de Lançamento deveria ser</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Atual</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Específico</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Duração do Jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Requer a extensão HowLongToBeat</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Duração do Jogo Deve Ser</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Duração do Jogo deve ser</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Horas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reinicializar todas as configurações para o padrão</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reiniciar todas as configurações para o padrão</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Não foi possível analisar o ano</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Principais recomendações</sys:String>
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Exibe jogos recomendados mais para jogar com base nas suas preferências.</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Exibir jogos recomendados para jogar com base nas suas preferências.</sys:String>
 
 </ResourceDictionary>
