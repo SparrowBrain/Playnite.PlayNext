@@ -1,6 +1,7 @@
 ﻿using PlayNext.Extensions.GameActivity;
 using PlayNext.Extensions.HowLongToBeat;
 using PlayNext.Extensions.StartPage;
+using PlayNext.Extensions.StartPage.Settings.PlayNextAddon;
 using PlayNext.Infrastructure.Services;
 using PlayNext.Model.Filters;
 using PlayNext.Model.Score;
@@ -18,7 +19,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Media;
-using PlayNext.Extensions.StartPage.Settings.PlayNextAddon;
 
 namespace PlayNext
 {
@@ -225,7 +225,15 @@ namespace PlayNext
 
 		private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Playnite.SDK.Models.Game> e)
 		{
-			_gameUpdatedTimer.Start();
+			if (_settings == null)
+			{
+				GetSettings(false);
+			}
+
+			if (_settings?.Settings.RefreshOnGameUpdates == true)
+			{
+				_gameUpdatedTimer.Start();
+			}
 		}
 
 		private void RefreshPlayNextData()

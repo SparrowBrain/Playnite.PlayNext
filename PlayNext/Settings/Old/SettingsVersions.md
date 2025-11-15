@@ -2,3 +2,4 @@
 - StartPageMinCoverCount
 - SeriesWeight
 - OrderSeriesBy
+- RefreshOnGameUpdates
