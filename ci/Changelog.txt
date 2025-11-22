@@ -1,6 +1,18 @@
 -----v1.6.0
 - Added PlayNext refresh when games change
 - StartPage settings moved to StartPage edit mode
+- Fix completion statuses combo box text
+--- Exclude by Category
+--- Exclude by Tag
+--- Exclude by Platform
+--- Exclude by Library
+--- Multiple presets
+--- Multiple start page instances (presets)
+--- Add data to list view
+--- Added an option to hide sidebar item
+--- Refresh button
+--- Random weighting
+--- Added user score weighting
 
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view

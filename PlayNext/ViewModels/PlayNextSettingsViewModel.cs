@@ -250,9 +250,20 @@ namespace PlayNext.ViewModels
 
         public ObservableCollection<CompletionStatusItem> UnplayedCompletionStatuses
         {
-            get => _unplayedCompletionStatuses;
-            set => SetValue(ref _unplayedCompletionStatuses, value);
+	        get => _unplayedCompletionStatuses;
+	        set
+	        {
+		        SetValue(ref _unplayedCompletionStatuses, value);
+                OnPropertyChanged(nameof(SelectedCompletionStatusesText));
+	        }
         }
+
+        public string SelectedCompletionStatusesText
+        {
+	        get => string.Join(", ", UnplayedCompletionStatuses?.Where(x => x.IsChecked).Select(x => x.Name) ?? Enumerable.Empty<string>());
+	        set => OnPropertyChanged();
+        }
+
 
         public Dictionary<OrderSeriesBy, string> OrderSeriesByOptions { get; } =
             new Dictionary<OrderSeriesBy, string>()
