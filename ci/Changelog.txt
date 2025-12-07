@@ -2,6 +2,7 @@
 - Added PlayNext refresh when games change
 - StartPage settings moved to StartPage edit mode
 - Fix completion statuses combo box text
+- Additional Brazilian Portuguese translations (thank you The Nutellas!)
 --- Exclude by Category
 --- Exclude by Tag
 --- Exclude by Platform
