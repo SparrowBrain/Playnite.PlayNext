@@ -58,7 +58,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Top Recommendations</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Active Settings</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Display top recommended games to play based on your preferences.</sys:String>
 
 </ResourceDictionary>

@@ -45,14 +45,13 @@ namespace PlayNext.Extensions.StartPage
             set => SetValue(ref _labelText, value);
         }
 
-        public void LoadData(ICollection<GameToPlayViewModel> games)
+        public void LoadData(ICollection<GameToPlayViewModel> games, PlayNextSettings settings)
         {
             new Task(() =>
             {
                 try
                 {
-                    var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
-                    var numberOfGames = savedSettings.NumberOfTopGames;
+                    var numberOfGames = settings.NumberOfTopGames;
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {

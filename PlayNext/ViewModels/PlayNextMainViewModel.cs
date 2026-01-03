@@ -52,14 +52,13 @@ namespace PlayNext.ViewModels
         // ReSharper disable once UnusedMember.Global
         public ICommand SwitchToList => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.List; });
 
-        public void LoadData(ICollection<GameToPlayViewModel> games)
+        public void LoadData(ICollection<GameToPlayViewModel> games, PlayNextSettings settings)
         {
             new Task(() =>
             {
                 try
                 {
-                    var savedSettings = _plugin.LoadPluginSettings<PlayNextSettings>();
-                    _numberOfGames = savedSettings.NumberOfTopGames;
+                    _numberOfGames = settings.NumberOfTopGames;
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {

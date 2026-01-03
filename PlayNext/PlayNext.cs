@@ -34,12 +34,12 @@ namespace PlayNext
 		private readonly TotalScoreCalculator _totalScoreCalculator;
 		private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
 		private readonly Timer _gameUpdatedTimer = new Timer(5000);
+		private readonly Dictionary<string, StartPagePlayNextViewModel> _startPagePlayNextViewModels = new Dictionary<string, StartPagePlayNextViewModel>();
+		private readonly Dictionary<string, StartPagePlayNextView> _startPageViews = new Dictionary<string, StartPagePlayNextView>();
 
 		private PlayNextSettingsViewModel _settings;
-		private StartPagePlayNextViewModel _startPagePlayNextViewModel;
 		private PlayNextMainViewModel _playNextMainViewModel;
 		private PlayNextMainView _playNextMainView;
-		private StartPagePlayNextView _startPageView;
 
 		public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
 
@@ -97,7 +97,7 @@ namespace PlayNext
 
 		public override void OnGameInstalled(OnGameInstalledEventArgs args)
 		{
-			_startPagePlayNextViewModel?.UpdateGame(args.Game);
+			_startPagePlayNextViewModels.ForEach(x => x.Value.UpdateGame(args.Game));
 		}
 
 		public override void OnGameStarted(OnGameStartedEventArgs args)
@@ -117,7 +117,7 @@ namespace PlayNext
 
 		public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
 		{
-			_startPagePlayNextViewModel?.UpdateGame(args.Game);
+			_startPagePlayNextViewModels.ForEach(x => x.Value.UpdateGame(args.Game));
 		}
 
 		public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
@@ -152,41 +152,65 @@ namespace PlayNext
 
 		public StartPageExtensionArgs GetAvailableStartPageViews()
 		{
+			var presets = _settingsPresetManager.GetPersistedPresets();
+			var views = presets.Select(x => new StartPageViewArgsBase()
+			{
+				ViewId = GetPresetName(x),
+				Name = x.Name,
+				Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription"),
+				HasSettings = true,
+			}).ToList();
+			views.Insert(0, new StartPageViewArgsBase
+			{
+				ViewId = "PlayNext_TopRecommendations",
+				Name = ResourceProvider.GetString("LOC_PlayNext_StartPageActiveSettingsViewName"),
+				Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription"),
+				HasSettings = true,
+			});
+
 			return new StartPageExtensionArgs()
 			{
 				ExtensionName = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
-				Views = new[]
-				{
-					new StartPageViewArgsBase
-					{
-						ViewId = "PlayNext_TopRecommendations",
-						Name = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsViewName"),
-						Description = ResourceProvider.GetString("LOC_PlayNext_StartPageTopRecommendationsDescription"),
-						HasSettings = true,
-					}
-				}
+				Views = views,
 			};
 		}
 
 		public object GetStartPageView(string viewId, Guid instanceId)
 		{
+			if (LandingPageExtension.Instance == null)
+			{
+				LandingPageExtension.CreateInstance(PlayniteApi);
+			}
+
 			switch (viewId)
 			{
 				case "PlayNext_TopRecommendations":
-					if (_startPagePlayNextViewModel == null || _startPageView == null)
+					if (!_startPagePlayNextViewModels.TryGetValue("PlayNext_TopRecommendations", out var viewModel)
+					   || !_startPageViews.TryGetValue("PlayNext_TopRecommendations", out var view))
 					{
 						var settings = LoadPluginSettings<PlayNextSettings>();
-						_startPagePlayNextViewModel = new StartPagePlayNextViewModel(this);
-						if (LandingPageExtension.Instance == null)
-						{
-							LandingPageExtension.CreateInstance(PlayniteApi);
-						}
+						viewModel = new StartPagePlayNextViewModel(this);
 
-						_startPageView = new StartPagePlayNextView(_startPagePlayNextViewModel, settings);
+						view = new StartPagePlayNextView(viewModel, settings);
+						_startPagePlayNextViewModels["PlayNext_TopRecommendations"] = viewModel;
+						_startPageViews["PlayNext_TopRecommendations"] = view;
+
 						RefreshPlayNextData();
 					}
 
-					return _startPageView;
+					return _startPageViews["PlayNext_TopRecommendations"];
+			}
+
+			var presets = _settingsPresetManager.GetPersistedPresets();
+			var preset = presets.FirstOrDefault(x => GetPresetName(x) == viewId);
+			if (preset != null)
+			{
+				var presetViewModel = new StartPagePlayNextViewModel(this);
+				var presetView = new StartPagePlayNextView(presetViewModel, preset.Settings);
+				_startPagePlayNextViewModels[GetPresetName(preset)] = presetViewModel;
+				_startPageViews[GetPresetName(preset)] = presetView;
+				RefreshPlayNextData();
+				return presetView;
 			}
 
 			return null;
@@ -205,6 +229,13 @@ namespace PlayNext
 					return new StartPageSettingsView(new StartPageSettingsViewModel(_settings));
 			}
 
+			//var presets = _settingsPresetManager.GetPersistedPresets();
+			//var preset = presets.FirstOrDefault(x => x.Id == Guid.Parse(viewId));
+			//if (preset != null)
+			//{
+			//	return new StartPageSettingsView(new StartPageSettingsViewModel());
+			//}
+
 			return null;
 		}
 
@@ -214,9 +245,19 @@ namespace PlayNext
 
 		public void OnPlayNextSettingsSaved()
 		{
-			var settings = LoadPluginSettings<PlayNextSettings>();
-			_startPagePlayNextViewModel?.UpdateLabelDisplay(settings);
-			_startPageView?.UpdateMinCoverCount(settings);
+			var activeSettings = LoadPluginSettings<PlayNextSettings>();
+			var presets = _settingsPresetManager.GetPersistedPresets();
+			_startPagePlayNextViewModels.ForEach(x =>
+			{
+				var settings = presets.FirstOrDefault(p => GetPresetName(p) == x.Key)?.Settings ?? activeSettings;
+				x.Value.UpdateLabelDisplay(settings);
+			});
+			_startPageViews.ForEach(x =>
+			{
+				var settings = presets.FirstOrDefault(p => GetPresetName(p) == x.Key)?.Settings ?? activeSettings;
+				x.Value.UpdateMinCoverCount(settings);
+			});
+
 			RefreshPlayNextData();
 		}
 
@@ -225,7 +266,7 @@ namespace PlayNext
 			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
 			PlayniteApi.MainView.UIDispatcher.Invoke(() =>
 			{
-				_startPageView?.UpdateCoversColumnWidth();
+				_startPageViews.ForEach(x => x.Value.UpdateCoversColumnWidth());
 			});
 		}
 
@@ -244,7 +285,7 @@ namespace PlayNext
 
 		private void RefreshPlayNextData()
 		{
-			if (_playNextMainViewModel == null && _startPagePlayNextViewModel == null)
+			if (_playNextMainViewModel == null && _startPagePlayNextViewModels.Count == 0)
 			{
 				return;
 			}
@@ -253,34 +294,58 @@ namespace PlayNext
 			{
 				try
 				{
-					var savedSettings = LoadPluginSettings<PlayNextSettings>();
-					var recentDayCount = savedSettings.RecentDays;
-					var gameLengthWeight = savedSettings.GameLengthWeight;
+					var presets = _settingsPresetManager.GetPersistedPresets();
+					var activeSettings = LoadPluginSettings<PlayNextSettings>();
+					var games = await CalculatePlayNextData(activeSettings);
 
-					var allGames = PlayniteApi.Database.Games.ToArray();
-					var playedGames = new WithPlaytimeFilter().Filter(allGames);
-					var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
-					var unPlayedGames = new UnplayedFilter().Filter(allGames, savedSettings).ToArray();
-
-					var activitiesTask = recentGames.Any()
-						? _gameActivities.ParseGameActivity(recentGames)
-						: Task.CompletedTask;
-					var howLongToBeatTask = gameLengthWeight > 0
-						? _howLongToBeatExtension.ParseFiles(unPlayedGames)
-						: Task.CompletedTask;
-
-					await Task.WhenAll(activitiesTask, howLongToBeatTask);
-
-					var games = _totalScoreCalculator.Calculate(savedSettings);
-
-					_playNextMainViewModel?.LoadData(games);
-					_startPagePlayNextViewModel?.LoadData(games);
+					_playNextMainViewModel?.LoadData(games, activeSettings);
+					foreach (var startPageViewModel in _startPagePlayNextViewModels)
+					{
+						var presetSettings = presets.FirstOrDefault(p => GetPresetName(p) == startPageViewModel.Key)?.Settings;
+						if (presetSettings != null)
+						{
+							var presetGames = await CalculatePlayNextData(presetSettings);
+							startPageViewModel.Value.LoadData(presetGames, presetSettings);
+						}
+						else
+						{
+							startPageViewModel.Value.LoadData(games, activeSettings);
+						}
+					}
 				}
 				catch (Exception ex)
 				{
 					_logger.Error(ex, "Failure while refreshing data.");
 				}
 			}).Start();
+		}
+
+		private static string GetPresetName(SettingsPreset<PlayNextSettings> preset)
+		{
+			return $"PlayNext_Preset_{preset.Id}".Replace('-', '_');
+		}
+
+		private async Task<ICollection<GameToPlayViewModel>> CalculatePlayNextData(PlayNextSettings settings)
+		{
+			var recentDayCount = settings.RecentDays;
+			var gameLengthWeight = settings.GameLengthWeight;
+
+			var allGames = PlayniteApi.Database.Games.ToArray();
+			var playedGames = new WithPlaytimeFilter().Filter(allGames);
+			var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
+			var unPlayedGames = new UnplayedFilter().Filter(allGames, settings).ToArray();
+
+			var activitiesTask = recentGames.Any()
+				? _gameActivities.ParseGameActivity(recentGames)
+				: Task.CompletedTask;
+			var howLongToBeatTask = gameLengthWeight > 0
+				? _howLongToBeatExtension.ParseFiles(unPlayedGames)
+				: Task.CompletedTask;
+
+			await Task.WhenAll(activitiesTask, howLongToBeatTask);
+
+			var games = _totalScoreCalculator.Calculate(settings);
+			return games;
 		}
 	}
 }
