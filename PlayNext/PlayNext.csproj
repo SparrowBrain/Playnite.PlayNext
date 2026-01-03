@@ -80,6 +80,8 @@
     <Compile Include="Model\Score\GameScore\GameScoreBySeriesCalculator.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />
     <Compile Include="Settings\Old\SettingsV1.cs" />
+    <Compile Include="Settings\Presets\SettingsPreset.cs" />
+    <Compile Include="Settings\Presets\SettingsPresetManager.cs" />
     <Compile Include="ViewModels\CompletionStatusItem.cs" />
     <Compile Include="Model\Data\UnplayedGameChoice.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilter.cs" />

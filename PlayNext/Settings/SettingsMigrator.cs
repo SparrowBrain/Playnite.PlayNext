@@ -31,27 +31,33 @@ namespace PlayNext.Settings
                     throw new ArgumentException($"Version v{version} not configured in the migrator");
             }
 
-            while (true)
-            {
-                if (versionedSettings is PlayNextSettings newestSettings)
-                {
-                    return newestSettings;
-                }
-
-                var oldSettings = versionedSettings as IMigratableSettings;
-                if (oldSettings == null)
-                {
-                    throw new Exception($"Somehow v{oldSettings.Version} settings are not migratable. This should have never happened. What have you done?");
-                }
-
-                var newSettings = oldSettings.Migrate();
-                if (newSettings.Version != oldSettings.Version + 1)
-                {
-                    throw new Exception($"Invalid migration in v{oldSettings.Version} - version changed to v{newSettings.Version}, but only allowed to increment by one.");
-                }
-
-                versionedSettings = newSettings;
-            }
+            return MigrateToNewest(versionedSettings);
         }
-    }
+
+        public PlayNextSettings MigrateToNewest(IVersionedSettings versionedSettings)
+        {
+	        while (true)
+	        {
+		        if (versionedSettings is PlayNextSettings newestSettings)
+		        {
+			        return newestSettings;
+		        }
+
+		        var oldSettings = versionedSettings as IMigratableSettings;
+		        if (oldSettings == null)
+		        {
+			        throw new Exception($"Somehow v{oldSettings.Version} settings are not migratable. This should have never happened. What have you done?");
+		        }
+
+		        var newSettings = oldSettings.Migrate();
+		        if (newSettings.Version != oldSettings.Version + 1)
+		        {
+			        throw new Exception($"Invalid migration in v{oldSettings.Version} - version changed to v{newSettings.Version}, but only allowed to increment by one.");
+		        }
+
+		        versionedSettings = newSettings;
+	        }
+		}
+
+	}
 }

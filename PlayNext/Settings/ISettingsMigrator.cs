@@ -3,5 +3,6 @@
     public interface ISettingsMigrator
     {
         PlayNextSettings LoadAndMigrateToNewest(int version);
+        PlayNextSettings MigrateToNewest(IVersionedSettings versionedSettings);
     }
 }
