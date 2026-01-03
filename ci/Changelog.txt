@@ -1,14 +1,15 @@
 -----v1.6.0
 - Added PlayNext refresh when games change
+- Added settings presets
+- Added multiple start page instances (instance per preset)
 - StartPage settings moved to StartPage edit mode
-- Fix completion statuses combo box text
+- Fixed completion statuses combo box text
 - Additional Brazilian Portuguese translations (thank you The Nutellas!)
+- Additional German translations (thank you juliuscaesr!)
 --- Exclude by Category
 --- Exclude by Tag
 --- Exclude by Platform
 --- Exclude by Library
---- Multiple presets
---- Multiple start page instances (presets)
 --- Add data to list view
 --- Added an option to hide sidebar item
 --- Refresh button
