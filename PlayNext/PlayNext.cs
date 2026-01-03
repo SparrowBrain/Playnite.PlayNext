@@ -189,7 +189,7 @@ namespace PlayNext
 					   || !_startPageViews.TryGetValue("PlayNext_TopRecommendations", out var view))
 					{
 						var settings = LoadPluginSettings<PlayNextSettings>();
-						viewModel = new StartPagePlayNextViewModel(this);
+						viewModel = new StartPagePlayNextViewModel(this, ResourceProvider.GetString("LOC_PlayNext_PluginName"));
 
 						view = new StartPagePlayNextView(viewModel, settings);
 						_startPagePlayNextViewModels["PlayNext_TopRecommendations"] = viewModel;
@@ -205,7 +205,7 @@ namespace PlayNext
 			var preset = presets.FirstOrDefault(x => GetPresetName(x) == viewId);
 			if (preset != null)
 			{
-				var presetViewModel = new StartPagePlayNextViewModel(this);
+				var presetViewModel = new StartPagePlayNextViewModel(this, preset.Name);
 				var presetView = new StartPagePlayNextView(presetViewModel, preset.Settings);
 				_startPagePlayNextViewModels[GetPresetName(preset)] = presetViewModel;
 				_startPageViews[GetPresetName(preset)] = presetView;

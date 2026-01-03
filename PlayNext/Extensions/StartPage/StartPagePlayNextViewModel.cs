@@ -15,15 +15,17 @@ namespace PlayNext.Extensions.StartPage
     {
         private readonly ILogger _logger = LogManager.GetLogger();
         private readonly PlayNext _plugin;
+        private readonly string _labelTextValue;
 
         private ObservableCollection<GameToPlayViewModel> _games = new ObservableCollection<GameToPlayViewModel>();
         private bool _showVerticalLabel;
         private bool _showHorizontalLabel;
         private string _labelText;
 
-        public StartPagePlayNextViewModel(PlayNext plugin)
+        public StartPagePlayNextViewModel(PlayNext plugin, string labelTextValue)
         {
             _plugin = plugin;
+            _labelTextValue = labelTextValue;
             UpdateLabelDisplay(_plugin.LoadPluginSettings<PlayNextSettings>());
         }
 
@@ -91,7 +93,7 @@ namespace PlayNext.Extensions.StartPage
         {
             ShowVerticalLabel = !settings.StartPageLabelIsHorizontal;
             ShowHorizontalLabel = settings.StartPageLabelIsHorizontal;
-            LabelText = settings.StartPageShowLabel ? ResourceProvider.GetString("LOC_PlayNext_PluginName") : string.Empty;
+            LabelText = settings.StartPageShowLabel ? _labelTextValue : string.Empty;
         }
     }
 }
