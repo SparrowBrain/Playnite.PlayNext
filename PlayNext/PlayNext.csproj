@@ -117,11 +117,15 @@
       <DependentUpon>StartPagePlayNextView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\StartPage\StartPagePlayNextViewModel.cs" />
+    <Compile Include="ViewModels\CreatePresetViewModel.cs" />
     <Compile Include="ViewModels\GameToPlayViewModel.cs" />
     <Compile Include="Infrastructure\Services\DateTimeProvider.cs" />
     <Compile Include="ViewModels\PlayNextMainViewModel.cs" />
     <Compile Include="ViewModels\PlayNextSettingsViewModel.cs" />
     <Compile Include="Model\Data\ShowcaseType.cs" />
+    <Compile Include="Views\CreatePresetView.xaml.cs">
+      <DependentUpon>CreatePresetView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlayNextMainView.xaml.cs">
       <DependentUpon>PlayNextMainView.xaml</DependentUpon>
     </Compile>
@@ -153,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Extensions\StartPage\StartPagePlayNextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreatePresetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,6 +15,7 @@ using Playnite.SDK.Plugins;
 using StartPage.SDK;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -61,7 +62,7 @@ namespace PlayNext
 			var pluginSettingsPersistence = new PluginSettingsPersistence(this);
 			var settingsMigrator = new SettingsMigrator(pluginSettingsPersistence);
 			_startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, settingsMigrator);
-			_settingsPresetManager = new SettingsPresetManager(api.Paths.ExtensionsDataPath, settingsMigrator);
+			_settingsPresetManager = new SettingsPresetManager(Path.Combine(api.Paths.ExtensionsDataPath, Id.ToString()), settingsMigrator);
 			_gameUpdatedTimer.Elapsed += (o, e) => RefreshPlayNextData();
 			_gameUpdatedTimer.AutoReset = false;
 			_gameUpdatedTimer.Enabled = false;
@@ -141,7 +142,7 @@ namespace PlayNext
 
 		public override ISettings GetSettings(bool firstRunSettings)
 		{
-			return _settings ?? (_settings = new PlayNextSettingsViewModel(this));
+			return _settings ?? (_settings = new PlayNextSettingsViewModel(this, _settingsPresetManager));
 		}
 
 		public override UserControl GetSettingsView(bool firstRunSettings)

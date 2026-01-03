@@ -2,14 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <sys:String x:Key="LOC_PlayNextGenericCancel">Cancel</sys:String>
+    <sys:String x:Key="LOC_PlayNextGenericOk">Ok</sys:String>
     <sys:String x:Key="LOC_PlayNext_PluginName">Play Next</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Details</sys:String>
 
-
-
+    <sys:String x:Key="LOC_PlayNext_SettingsAlgorithmHeader">Algorithm</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGeneralHeader">General</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetsGroupTitle">Presets</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetNew">Create New</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetRemove">Remove</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetSave">Save</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Attribute Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Total Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Recent Playtime</sys:String>
@@ -39,6 +44,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Critic Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Community Score</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetName">Preset Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Release Year</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Release Year Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Current</sys:String>

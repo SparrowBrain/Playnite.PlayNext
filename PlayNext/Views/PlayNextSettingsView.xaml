@@ -28,6 +28,29 @@
         <TabItem Header="{DynamicResource LOC_PlayNext_SettingsGeneralHeader}">
             <ScrollViewer>
                 <StackPanel>
+                    <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsPresetsGroupTitle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0" SelectedItem="{Binding SelectedPreset}" ItemsSource="{Binding Presets}" Margin="2"
+                                      IsSynchronizedWithCurrentItem="False"
+                                      IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                      TextSearch.TextPath="Name">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button Command="{Binding SavePreset}" Content="{DynamicResource LOC_PlayNext_SettingsPresetSave}"></Button>
+                                <Button Command="{Binding RemovePreset}" Content="{DynamicResource LOC_PlayNext_SettingsPresetRemove}"></Button>
+                                <Button Command="{Binding AddPreset}" Content="{DynamicResource LOC_PlayNext_SettingsPresetNew}"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
                     <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsOtherGroupTitle}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -85,7 +108,7 @@
                 </StackPanel>
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="{DynamicResource LOC_PlayNext_SettingsGeneralHeader}">
+        <TabItem Header="{DynamicResource LOC_PlayNext_SettingsAlgorithmHeader}">
             <ScrollViewer>
                 <Grid Margin="0,0,5,0">
                     <Grid.ColumnDefinitions>

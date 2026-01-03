@@ -54,6 +54,8 @@ namespace PlayNext.Settings
 
 		public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
+		public Guid? SelectedPresetId { get; set; }
+
 		public float TotalPlaytimeWeight { get; set; }
 
 		public float RecentPlaytimeWeight { get; set; }

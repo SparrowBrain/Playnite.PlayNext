@@ -3,3 +3,4 @@
 - SeriesWeight
 - OrderSeriesBy
 - RefreshOnGameUpdates
+- SelectedPresetId

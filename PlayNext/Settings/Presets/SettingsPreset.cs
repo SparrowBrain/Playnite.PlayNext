@@ -6,6 +6,8 @@ namespace PlayNext.Settings.Presets
 	{
 		public Guid Id { get; set; }
 
+		public string Name { get; set; }
+
 		public T Settings { get; set; }
 
 		public SettingsPreset<PlayNextSettings> ToNew(PlayNextSettings settings)
