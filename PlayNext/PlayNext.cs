@@ -226,15 +226,22 @@ namespace PlayNext
 						GetSettings(false);
 					}
 
-					return new StartPageSettingsView(new StartPageSettingsViewModel(_settings));
+					return new StartPageSettingsView(new StartPageSettingsViewModel(_settings.Settings, settings =>
+					{
+						_settings.EndEdit();
+					}));
 			}
 
-			//var presets = _settingsPresetManager.GetPersistedPresets();
-			//var preset = presets.FirstOrDefault(x => x.Id == Guid.Parse(viewId));
-			//if (preset != null)
-			//{
-			//	return new StartPageSettingsView(new StartPageSettingsViewModel());
-			//}
+			var presets = _settingsPresetManager.GetPersistedPresets();
+			var preset = presets.FirstOrDefault(x => GetPresetName(x) == viewId);
+			if (preset != null)
+			{
+				return new StartPageSettingsView(new StartPageSettingsViewModel(preset.Settings, settings =>
+				{
+					_settingsPresetManager.WritePreset(preset);
+					OnPlayNextSettingsSaved();
+				}));
+			}
 
 			return null;
 		}

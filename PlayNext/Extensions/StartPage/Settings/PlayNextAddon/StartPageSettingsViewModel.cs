@@ -1,69 +1,66 @@
-﻿using System.Collections.Generic;
-using PlayNext.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using PlayNext.Settings;
 
 namespace PlayNext.Extensions.StartPage.Settings.PlayNextAddon
 {
 	public class StartPageSettingsViewModel : ObservableObject
 	{
-		private readonly PlayNextSettingsViewModel _mainSettingsViewModel;
+		private readonly PlayNextSettings _settings;
+		private readonly Action<PlayNextSettings> _saveSettingsAction;
 
-
-		public StartPageSettingsViewModel(PlayNextSettingsViewModel mainSettingsViewModel)
+		public StartPageSettingsViewModel(PlayNextSettings settings, Action<PlayNextSettings> saveSettingsAction)
 		{
-			_mainSettingsViewModel = mainSettingsViewModel;
+			_settings = settings;
+			_saveSettingsAction = saveSettingsAction;
 		}
 
 		public bool StartPageShowLabel
 		{
-			get => _mainSettingsViewModel.Settings.StartPageShowLabel;
+			get => _settings.StartPageShowLabel;
 			set
 			{
-				if (value == _mainSettingsViewModel.Settings.StartPageShowLabel)
+				if (value == _settings.StartPageShowLabel)
 				{
 					return;
 				}
-				
-				_mainSettingsViewModel.BeginEdit();
-				_mainSettingsViewModel.Settings.StartPageShowLabel = value;
+
+				_settings.StartPageShowLabel = value;
 				OnPropertyChanged();
-				_mainSettingsViewModel.EndEdit();
+				_saveSettingsAction(_settings);
 			}
 		}
 
 		public bool StartPageLabelIsHorizontal
 		{
-			get => _mainSettingsViewModel.Settings.StartPageLabelIsHorizontal;
+			get => _settings.StartPageLabelIsHorizontal;
 			set
 			{
-				if (value == _mainSettingsViewModel.Settings.StartPageLabelIsHorizontal)
+				if (value == _settings.StartPageLabelIsHorizontal)
 				{
 					return;
 				}
 
-				_mainSettingsViewModel.BeginEdit();
-				_mainSettingsViewModel.Settings.StartPageLabelIsHorizontal = value;
+				_settings.StartPageLabelIsHorizontal = value;
 				OnPropertyChanged();
-				_mainSettingsViewModel.EndEdit();
+				_saveSettingsAction(_settings);
 			}
 		}
 
 		public int StartPageMinCoverCount
 		{
-			get => _mainSettingsViewModel.Settings.StartPageMinCoverCount;
+			get => _settings.StartPageMinCoverCount;
 			set
 			{
-				if (value == _mainSettingsViewModel.Settings.StartPageMinCoverCount)
+				if (value == _settings.StartPageMinCoverCount)
 				{
 					return;
 				}
 
-				_mainSettingsViewModel.BeginEdit();
-				_mainSettingsViewModel.Settings.StartPageMinCoverCount = value;
+				_settings.StartPageMinCoverCount = value;
 				OnPropertyChanged();
-				_mainSettingsViewModel.EndEdit();
+				_saveSettingsAction(_settings);
 			}
-			}
-
-
+		}
 	}
 }
