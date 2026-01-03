@@ -3,13 +3,12 @@ using AutoFixture.Xunit2;
 using Moq;
 using Newtonsoft.Json;
 using PlayNext.Settings;
+using PlayNext.Settings.Presets;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using PlayNext.Settings.Presets;
 using TestTools.Shared;
 using Xunit;
 
@@ -31,13 +30,13 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 		}
 
 		[Fact]
-		public async Task Initialize_IgnoresNonValidFiles()
+		public void Initialize_IgnoresNonValidFiles()
 		{
 			// Arrange
 			File.WriteAllText(Path.Combine(_presetPath, $"{Guid.NewGuid()}.json"), "123");
 
 			// Act
-			var exception = await Record.ExceptionAsync(() => _sut.Initialize());
+			var exception = Record.Exception(() => _sut.Initialize());
 
 			// Assert
 			Assert.Null(exception);
@@ -45,7 +44,7 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[MemberAutoMoqData(nameof(GetOldPresets))]
 		[Theory]
-		public async Task Initialize_MigratesAndWritesPresets_WhenPresetsAreNonCurrentSettings(Guid id, string json, PlayNextSettings currentSettings)
+		public void Initialize_MigratesAndWritesPresets_WhenPresetsAreNonCurrentSettings(Guid id, string json, PlayNextSettings currentSettings)
 		{
 			// Arrange
 			var presetFile = Path.Combine(_presetPath, $"{id}.json");
@@ -53,7 +52,7 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 			_settingsMigrator.Setup(x => x.MigrateToNewest(It.IsAny<IVersionedSettings>())).Returns(currentSettings);
 
 			// Act
-			await _sut.Initialize();
+			_sut.Initialize();
 
 			// Assert
 			var actualJson = File.ReadAllText(presetFile);
@@ -63,7 +62,7 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[Theory]
 		[AutoData]
-		public async Task Initialize_DoesNotMigrate_WhenPresetsAreCurrentSettings(SettingsPreset<PlayNextSettings> preset)
+		public void Initialize_DoesNotMigrate_WhenPresetsAreCurrentSettings(SettingsPreset<PlayNextSettings> preset)
 		{
 			// Arrange
 			preset.Settings.Version = PlayNextSettings.CurrentVersion;
@@ -71,20 +70,20 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 			File.WriteAllText(presetFile, JsonConvert.SerializeObject(preset));
 
 			// Act
-			await _sut.Initialize();
+			_sut.Initialize();
 
 			// Assert
 			_settingsMigrator.Verify(x => x.MigrateToNewest(It.IsAny<IVersionedSettings>()), Times.Never());
 		}
 
 		[Fact]
-		public async Task GetPersistedPresets_ReturnsEmptyList_WhenDirectoryDoesNotExist()
+		public void GetPersistedPresets_ReturnsEmptyList_WhenDirectoryDoesNotExist()
 		{
 			// Arrange
 			EnsurePathDoesNotExist();
 
 			// Act
-			var result = await _sut.GetPersistedPresets();
+			var result = _sut.GetPersistedPresets();
 
 			// Assert
 			Assert.Empty(result);
@@ -92,7 +91,7 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[Theory]
 		[AutoMoqData]
-		public async Task GetPersistedPresets_ReturnsPresetsOnDisk_WhenFilesExist(
+		public void GetPersistedPresets_ReturnsPresetsOnDisk_WhenFilesExist(
 			List<SettingsPreset<PlayNextSettings>> settingsPresets)
 		{
 			// Arrange
@@ -102,7 +101,7 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 			}
 
 			// Act
-			var result = await _sut.GetPersistedPresets();
+			var result = _sut.GetPersistedPresets();
 
 			// Assert
 			Assert.Equal(settingsPresets.Count, result.Count);
@@ -110,13 +109,13 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 		}
 
 		[Fact]
-		public async Task GetPersistedPresets_SkipsFile_WhenFileIsNotInCorrectFormat()
+		public void GetPersistedPresets_SkipsFile_WhenFileIsNotInCorrectFormat()
 		{
 			// Arrange
 			File.WriteAllText(Path.Combine(_presetPath, $"{Guid.NewGuid()}.json"), "123");
 
 			// Act
-			var result = await _sut.GetPersistedPresets();
+			var result = _sut.GetPersistedPresets();
 
 			// Assert
 			Assert.Empty(result);
@@ -124,10 +123,10 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[Theory]
 		[AutoData]
-		public async Task WritePreset_WritesToDisk_WhenNoFilesExist(SettingsPreset<PlayNextSettings> preset)
+		public void WritePreset_WritesToDisk_WhenNoFilesExist(SettingsPreset<PlayNextSettings> preset)
 		{
 			// Act
-			await _sut.WritePreset(preset);
+			_sut.WritePreset(preset);
 
 			// Assert
 			var actualJson = File.ReadAllText(Path.Combine(_presetPath, $"{preset.Id}.json"));
@@ -136,13 +135,13 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[Theory]
 		[AutoData]
-		public async Task WritePreset_OverwritesFile_WhenFileExists(SettingsPreset<PlayNextSettings> old, SettingsPreset<PlayNextSettings> expected)
+		public void WritePreset_OverwritesFile_WhenFileExists(SettingsPreset<PlayNextSettings> old, SettingsPreset<PlayNextSettings> expected)
 		{
 			// Arrange
 			File.WriteAllText(Path.Combine(_presetPath, $"{expected.Id}.json"), JsonConvert.SerializeObject(old));
 
 			// Act
-			await _sut.WritePreset(expected);
+			_sut.WritePreset(expected);
 
 			// Assert
 			var actualJson = File.ReadAllText(Path.Combine(_presetPath, $"{expected.Id}.json"));
@@ -151,13 +150,13 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 
 		[Theory]
 		[AutoData]
-		public async Task WritePreset_CreatesPath_WhenPathDoesNotExist(SettingsPreset<PlayNextSettings> preset)
+		public void WritePreset_CreatesPath_WhenPathDoesNotExist(SettingsPreset<PlayNextSettings> preset)
 		{
 			// Arrange
 			EnsurePathDoesNotExist();
 
 			// Act
-			await _sut.WritePreset(preset);
+			_sut.WritePreset(preset);
 
 			// Assert
 			var actualJson = File.ReadAllText(Path.Combine(_presetPath, $"{preset.Id}.json"));

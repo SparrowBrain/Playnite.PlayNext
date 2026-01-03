@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PlayNext.Settings.Old;
 using Playnite.SDK;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace PlayNext.Settings.Presets
 {
@@ -20,9 +19,9 @@ namespace PlayNext.Settings.Presets
 			_presetPath = Path.Combine(extensionDataPath, "Presets");
 		}
 
-		public async Task Initialize()
+		public void Initialize()
 		{
-			var presets = await ReadPresets<VersionedSettings>();
+			var presets = ReadPresets<VersionedSettings>();
 
 			foreach (var preset in presets)
 			{
@@ -31,28 +30,28 @@ namespace PlayNext.Settings.Presets
 					continue;
 				}
 
-				await MigratePreset(preset);
+				MigratePreset(preset);
 			}
 		}
 
-		public async Task<IReadOnlyCollection<SettingsPreset<PlayNextSettings>>> GetPersistedPresets()
+		public IReadOnlyCollection<SettingsPreset<PlayNextSettings>> GetPersistedPresets()
 		{
 			if (!Directory.Exists(_presetPath))
 			{
 				return new List<SettingsPreset<PlayNextSettings>>();
 			}
 
-			var presets = await ReadPresets<PlayNextSettings>();
+			var presets = ReadPresets<PlayNextSettings>();
 
 			return presets;
 		}
 
-		public async Task WritePreset(SettingsPreset<PlayNextSettings> preset)
+		public void WritePreset(SettingsPreset<PlayNextSettings> preset)
 		{
-			await Write(preset);
+			Write(preset);
 		}
 
-		private async Task<List<SettingsPreset<T>>> ReadPresets<T>() where T : IVersionedSettings
+		private List<SettingsPreset<T>> ReadPresets<T>() where T : IVersionedSettings
 		{
 			var files = Directory.GetFiles(_presetPath);
 			var presets = new List<SettingsPreset<T>>();
@@ -60,7 +59,7 @@ namespace PlayNext.Settings.Presets
 			{
 				try
 				{
-					var preset = await ReadPreset<T>(file);
+					var preset = ReadPreset<T>(file);
 					presets.Add(preset);
 				}
 				catch (Exception ex)
@@ -72,35 +71,35 @@ namespace PlayNext.Settings.Presets
 			return presets;
 		}
 
-		private async Task<SettingsPreset<T>> ReadPreset<T>(string file) where T : IVersionedSettings
+		private SettingsPreset<T> ReadPreset<T>(string file) where T : IVersionedSettings
 		{
 			using (var fileStream = new FileStream(file, FileMode.Open, FileAccess.Read))
 			using (var streamReader = new StreamReader(fileStream))
 			{
-				var json = await streamReader.ReadToEndAsync();
+				var json = streamReader.ReadToEnd();
 
 				var preset = JsonConvert.DeserializeObject<SettingsPreset<T>>(json);
 				return preset;
 			}
 		}
 
-		private async Task MigratePreset(SettingsPreset<VersionedSettings> preset)
+		private void MigratePreset(SettingsPreset<VersionedSettings> preset)
 		{
 			IVersionedSettings oldSettings;
 			switch (preset.Settings.Version)
 			{
 				case 0:
-					var oldPresetV0 = await ReadPreset<SettingsV0>(Path.Combine(_presetPath, $"{preset.Id}.json"));
+					var oldPresetV0 = ReadPreset<SettingsV0>(Path.Combine(_presetPath, $"{preset.Id}.json"));
 					oldSettings = oldPresetV0.Settings;
 					break;
 
 				case 1:
-					var oldPresetV1 = await ReadPreset<SettingsV1>(Path.Combine(_presetPath, $"{preset.Id}.json"));
+					var oldPresetV1 = ReadPreset<SettingsV1>(Path.Combine(_presetPath, $"{preset.Id}.json"));
 					oldSettings = oldPresetV1.Settings;
 					break;
 
 				case 2:
-					var oldPresetV2 = await ReadPreset<SettingsV2>(Path.Combine(_presetPath, $"{preset.Id}.json"));
+					var oldPresetV2 = ReadPreset<SettingsV2>(Path.Combine(_presetPath, $"{preset.Id}.json"));
 					oldSettings = oldPresetV2.Settings;
 					break;
 
@@ -111,10 +110,10 @@ namespace PlayNext.Settings.Presets
 			var updatedSettings = _settingsMigrator.MigrateToNewest(oldSettings);
 			var newPreset = preset.ToNew(updatedSettings);
 
-			await Write(newPreset);
+			Write(newPreset);
 		}
 
-		public async Task Write<T>(SettingsPreset<T> preset) where T : IVersionedSettings
+		public void Write<T>(SettingsPreset<T> preset) where T : IVersionedSettings
 		{
 			if (!Directory.Exists(_presetPath))
 			{
@@ -126,7 +125,7 @@ namespace PlayNext.Settings.Presets
 			using (var fileStream = new FileStream(file, FileMode.Create, FileAccess.Write))
 			using (var streamWriter = new StreamWriter(fileStream))
 			{
-				await streamWriter.WriteAsync(json);
+				streamWriter.Write(json);
 			}
 		}
 	}

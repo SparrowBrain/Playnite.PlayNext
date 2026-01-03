@@ -6,6 +6,7 @@ using PlayNext.Infrastructure.Services;
 using PlayNext.Model.Filters;
 using PlayNext.Model.Score;
 using PlayNext.Settings;
+using PlayNext.Settings.Presets;
 using PlayNext.ViewModels;
 using PlayNext.Views;
 using Playnite.SDK;
@@ -28,6 +29,7 @@ namespace PlayNext
 		private readonly GameActivityExtension _gameActivities;
 		private readonly HowLongToBeatExtension _howLongToBeatExtension;
 		private readonly StartupSettingsValidator _startupSettingsValidator;
+		private readonly SettingsPresetManager _settingsPresetManager;
 		private readonly TotalScoreCalculator _totalScoreCalculator;
 		private readonly DateTimeProvider _dateTimeProvider = new DateTimeProvider();
 		private readonly Timer _gameUpdatedTimer = new Timer(5000);
@@ -57,7 +59,9 @@ namespace PlayNext
 			_totalScoreCalculator = new TotalScoreCalculator(this);
 
 			var pluginSettingsPersistence = new PluginSettingsPersistence(this);
-			_startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, new SettingsMigrator(pluginSettingsPersistence));
+			var settingsMigrator = new SettingsMigrator(pluginSettingsPersistence);
+			_startupSettingsValidator = new StartupSettingsValidator(pluginSettingsPersistence, settingsMigrator);
+			_settingsPresetManager = new SettingsPresetManager(api.Paths.ExtensionsDataPath, settingsMigrator);
 			_gameUpdatedTimer.Elapsed += (o, e) => RefreshPlayNextData();
 			_gameUpdatedTimer.AutoReset = false;
 			_gameUpdatedTimer.Enabled = false;
@@ -118,6 +122,7 @@ namespace PlayNext
 		public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
 		{
 			_startupSettingsValidator.EnsureCorrectVersionSettingsExist();
+			_settingsPresetManager.Initialize();
 			LandingPageExtension.InstanceCreated += LandingPageExtension_InstanceCreated;
 			LandingPageExtension.CreateInstanceInBackground(PlayniteApi);
 
