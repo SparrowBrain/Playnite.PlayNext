@@ -56,6 +56,9 @@
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Refresh on Game Updates</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSourcesHeader">Libraries</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPlatformsHeader">Platforms</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCategoriesHeader">Categories</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Tags</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Allowed</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>

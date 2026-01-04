@@ -70,14 +70,15 @@ namespace PlayNext.Model.Score
             var playedGames = new WithPlaytimeFilter().Filter(allGames);
             var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
             var unPlayedGames = new UnplayedFilter().Filter(allGames, savedSettings).ToArray();
+            var filteredGames = new ExclusionListFilter().Filter(unPlayedGames, savedSettings);
 
             var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
             var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);
-            var gameScore = _finalGameScoreCalculator.Calculate(unPlayedGames, attributeScore, gameScoreCalculationWeights, savedSettings.OrderSeriesBy, desiredReleaseYear, desiredGameLength);
+            var gameScore = _finalGameScoreCalculator.Calculate(filteredGames, attributeScore, gameScoreCalculationWeights, savedSettings.OrderSeriesBy, desiredReleaseYear, desiredGameLength);
 
             return gameScore.Select(score =>
             {
-                var game = unPlayedGames.First(x => x.Id == score.Key);
+                var game = filteredGames.First(x => x.Id == score.Key);
                 return new GameToPlayViewModel(_plugin, game, score.Value);
             }).ToArray();
         }

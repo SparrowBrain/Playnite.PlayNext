@@ -9,7 +9,6 @@ using Playnite.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -32,9 +31,20 @@ namespace PlayNext.ViewModels
 			_plugin = plugin;
 			_settingsPresetManager = settingsPresetManager;
 
+
+			Sources = new ExclusionList<GameSource>(
+				() => _plugin.PlayniteApi.Database.Sources.ToList(),
+				s => s.ExcludedSourceIds);
+			Platforms = new ExclusionList<Platform>(
+				() => _plugin.PlayniteApi.Database.Platforms.ToList(),
+				s => s.ExcludedPlatformIds);
+			Categories = new ExclusionList<Category>(
+				() => _plugin.PlayniteApi.Database.Categories.ToList(),
+				s => s.ExcludedCategoryIds);
 			Tags = new ExclusionList<Tag>(
 				() => _plugin.PlayniteApi.Database.Tags.ToList(),
 				s => s.ExcludedTagIds);
+
 
 			var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
 			Settings = savedSettings ?? PlayNextSettings.Default;
@@ -44,7 +54,6 @@ namespace PlayNext.ViewModels
 
 			InitializePresets();
 			InitializeUnplayedCompletionStatuses();
-			
 		}
 
 		public PlayNextSettings Settings
@@ -53,6 +62,9 @@ namespace PlayNext.ViewModels
 			set
 			{
 				_settings = value;
+				Sources.Settings = value;
+				Platforms.Settings = value;
+				Categories.Settings = value;
 				Tags.Settings = value;
 				OnPropertyChanged(string.Empty);
 			}
@@ -326,6 +338,13 @@ namespace PlayNext.ViewModels
 				{OrderSeriesBy.ReleaseDate, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedByReleaseDate")},
 				{OrderSeriesBy.SortingName, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedBySortingName")},
 			};
+		
+		public ExclusionList<GameSource> Sources { get; }
+
+
+		public ExclusionList<Platform> Platforms { get; }
+
+		public ExclusionList<Category> Categories { get; }
 
 		public ExclusionList<Tag> Tags { get; }
 

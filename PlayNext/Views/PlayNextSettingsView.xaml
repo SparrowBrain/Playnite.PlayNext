@@ -215,6 +215,189 @@
                 </Grid>
             </ScrollViewer>
         </TabItem>
+        <TabItem Header="{DynamicResource LOC_PlayNext_SettingsSourcesHeader}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="75"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsAllowed}"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsExcluded}"></TextBlock>
+                <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Sources.AllowedItems}" SelectedItem="{Binding Sources.SelectedAllowedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Column="1" Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content="&gt;" Command="{Binding Sources.ExcludeItemCommand}"></Button>
+                    <Button Grid.Row="3" Content="&lt;" Command="{Binding Sources.AllowItemCommand}"></Button>
+                </Grid>
+                <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Sources.ExcludedItems}" SelectedItem="{Binding Sources.SelectedExcludedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Sources.AllowedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Sources.ClearAllowedItemsFilter}"></Button>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Sources.ExcludedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Sources.ClearExcludedItemsFilter}"></Button>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{DynamicResource LOC_PlayNext_SettingsPlatformsHeader}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="75"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsAllowed}"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsExcluded}"></TextBlock>
+                <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Platforms.AllowedItems}" SelectedItem="{Binding Platforms.SelectedAllowedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Column="1" Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content="&gt;" Command="{Binding Platforms.ExcludeItemCommand}"></Button>
+                    <Button Grid.Row="3" Content="&lt;" Command="{Binding Platforms.AllowItemCommand}"></Button>
+                </Grid>
+                <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Platforms.ExcludedItems}" SelectedItem="{Binding Platforms.SelectedExcludedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Platforms.AllowedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Platforms.ClearAllowedItemsFilter}"></Button>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Platforms.ExcludedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Platforms.ClearExcludedItemsFilter}"></Button>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{DynamicResource LOC_PlayNext_SettingsCategoriesHeader}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="75"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsAllowed}"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsExcluded}"></TextBlock>
+                <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories.AllowedItems}" SelectedItem="{Binding Categories.SelectedAllowedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Column="1" Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content="&gt;" Command="{Binding Categories.ExcludeItemCommand}"></Button>
+                    <Button Grid.Row="3" Content="&lt;" Command="{Binding Categories.AllowItemCommand}"></Button>
+                </Grid>
+                <ListBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Categories.ExcludedItems}" SelectedItem="{Binding Categories.SelectedExcludedItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Grid Grid.Column="0" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Categories.AllowedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Categories.ClearAllowedItemsFilter}"></Button>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsFilter}"></TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding Categories.ExcludedItemsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Button Grid.Column="2" Content="X" Command="{Binding Categories.ClearExcludedItemsFilter}"></Button>
+                </Grid>
+            </Grid>
+        </TabItem>
         <TabItem Header="{DynamicResource LOC_PlayNext_SettingsTagsHeader}">
             <Grid>
                 <Grid.ColumnDefinitions>

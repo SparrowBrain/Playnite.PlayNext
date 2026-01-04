@@ -74,6 +74,7 @@
     <Compile Include="Extensions\HowLongToBeat\Data\HltbItem.cs" />
     <Compile Include="Extensions\HowLongToBeat\HowLongToBeatExtension.cs" />
     <Compile Include="Extensions\HowLongToBeat\IHowLongToBeatExtension.cs" />
+    <Compile Include="Model\Filters\ExclusionListFilter.cs" />
     <Compile Include="Model\Filters\UnplayedFilter.cs" />
     <Compile Include="Model\Data\OrderSeriesBy.cs" />
     <Compile Include="Model\Score\GameScore\GameLengthCalculator.cs" />

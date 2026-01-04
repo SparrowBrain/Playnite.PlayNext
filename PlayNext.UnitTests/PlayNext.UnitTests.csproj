@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Filters\ExclusionListFilterTests.cs" />
     <Compile Include="Model\Filters\UnplayedFilterTests.cs" />
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculatorTests.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilterTests.cs" />
