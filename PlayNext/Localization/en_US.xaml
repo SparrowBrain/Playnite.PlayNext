@@ -56,6 +56,10 @@
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Refresh on Game Updates</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Tags</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Allowed</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filter</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Active Settings</sys:String>

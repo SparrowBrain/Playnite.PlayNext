@@ -195,6 +195,8 @@ namespace PlayNext.Settings
 			set => SetValue(ref _refreshOnGameUpdates, value);
 		}
 
+		public HashSet<Guid> ExcludedTagIds { get; set; } = new HashSet<Guid>();
+
 		public bool StartPageShowLabel
 		{
 			get => _startPageShowLabel;
