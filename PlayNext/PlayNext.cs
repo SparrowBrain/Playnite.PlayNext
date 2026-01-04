@@ -341,12 +341,13 @@ namespace PlayNext
 			var playedGames = new WithPlaytimeFilter().Filter(allGames);
 			var recentGames = new RecentlyPlayedFilter(_dateTimeProvider).Filter(playedGames, recentDayCount);
 			var unPlayedGames = new UnplayedFilter().Filter(allGames, settings).ToArray();
+			var filteredGames = new ExclusionListFilter().Filter(unPlayedGames, settings);
 
 			var activitiesTask = recentGames.Any()
 				? _gameActivities.ParseGameActivity(recentGames)
 				: Task.CompletedTask;
 			var howLongToBeatTask = gameLengthWeight > 0
-				? _howLongToBeatExtension.ParseFiles(unPlayedGames)
+				? _howLongToBeatExtension.ParseFiles(filteredGames)
 				: Task.CompletedTask;
 
 			await Task.WhenAll(activitiesTask, howLongToBeatTask);
