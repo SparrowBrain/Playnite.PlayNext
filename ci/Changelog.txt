@@ -3,13 +3,13 @@
 - Added settings presets
 - Added multiple start page instances (instance per preset)
 - StartPage settings moved to StartPage edit mode
+- Added ability to exclude by Library
+- Added ability to exclude by Platform
+- Added ability to exclude by Category
+- Added ability to exclude by Tag
 - Fixed completion statuses combo box text
 - Additional Brazilian Portuguese translations (thank you The Nutellas!)
 - Additional German translations (thank you juliuscaesr!)
---- Exclude by Category
---- Exclude by Tag
---- Exclude by Platform
---- Exclude by Library
 --- Add data to list view
 --- Added an option to hide sidebar item
 --- Refresh button
