@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Extensions\StartPage\StartPagePlayNextViewModel.cs" />
     <Compile Include="ViewModels\CreatePresetViewModel.cs" />
+    <Compile Include="ViewModels\ExclusionList.cs" />
     <Compile Include="ViewModels\GameToPlayViewModel.cs" />
     <Compile Include="Infrastructure\Services\DateTimeProvider.cs" />
     <Compile Include="ViewModels\PlayNextMainViewModel.cs" />

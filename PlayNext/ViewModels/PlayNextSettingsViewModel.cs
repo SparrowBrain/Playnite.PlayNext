@@ -26,17 +26,16 @@ namespace PlayNext.ViewModels
 		private ObservableCollection<CompletionStatusItem> _unplayedCompletionStatuses;
 		private ObservableCollection<SettingsPreset<PlayNextSettings>> _presets;
 		private SettingsPreset<PlayNextSettings> _selectedPreset;
-		private ObservableCollection<Tag> _allowedTags = new ObservableCollection<Tag>();
-		private ObservableCollection<Tag> _excludedTags = new ObservableCollection<Tag>();
-		private Tag _selectedAllowedTag;
-		private Tag _selectedExcludedTag;
-		private string _allowedTagsFilter;
-		private string _excludedTagsFilter;
 
 		public PlayNextSettingsViewModel(PlayNext plugin, SettingsPresetManager settingsPresetManager)
 		{
 			_plugin = plugin;
 			_settingsPresetManager = settingsPresetManager;
+
+			Tags = new ExclusionList<Tag>(
+				() => _plugin.PlayniteApi.Database.Tags.ToList(),
+				s => s.ExcludedTagIds);
+
 			var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
 			Settings = savedSettings ?? PlayNextSettings.Default;
 			GameActivityExtensionFound = _plugin.GameActivityExtension.GameActivityPathExists();
@@ -45,7 +44,7 @@ namespace PlayNext.ViewModels
 
 			InitializePresets();
 			InitializeUnplayedCompletionStatuses();
-			InitializeTags();
+			
 		}
 
 		public PlayNextSettings Settings
@@ -54,6 +53,7 @@ namespace PlayNext.ViewModels
 			set
 			{
 				_settings = value;
+				Tags.Settings = value;
 				OnPropertyChanged(string.Empty);
 			}
 		}
@@ -327,73 +327,7 @@ namespace PlayNext.ViewModels
 				{OrderSeriesBy.SortingName, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedBySortingName")},
 			};
 
-		public ObservableCollection<Tag> AllowedTags
-		{
-			get => _allowedTags;
-			set => SetValue(ref _allowedTags, value);
-		}
-
-		public Tag SelectedAllowedTag
-		{
-			get => _selectedAllowedTag;
-			set => SetValue(ref _selectedAllowedTag, value);
-		}
-
-		public string AllowedTagsFilter
-		{
-			get => _allowedTagsFilter;
-			set
-			{
-				SetValue(ref _allowedTagsFilter, value);
-				InitializeTags();
-			}
-		}
-
-		public ICommand ClearAllowedTagsFilter => new RelayCommand(() => AllowedTagsFilter = string.Empty);
-
-		public ObservableCollection<Tag> ExcludedTags
-		{
-			get => _excludedTags;
-			set => SetValue(ref _excludedTags, value);
-		}
-
-		public Tag SelectedExcludedTag
-		{
-			get => _selectedExcludedTag;
-			set => SetValue(ref _selectedExcludedTag, value);
-		}
-
-		public string ExcludedTagsFilter
-		{
-			get => _excludedTagsFilter;
-			set
-			{
-				SetValue(ref _excludedTagsFilter, value);
-				InitializeTags();
-			}
-		}
-
-		public ICommand ClearExcludedTagsFilter => new RelayCommand(() => ExcludedTagsFilter = string.Empty);
-
-		public ICommand ExcludeTagCommand => new RelayCommand(() =>
-		{
-			if (SelectedAllowedTag != null)
-			{
-				Settings.ExcludedTagIds.Add(SelectedAllowedTag.Id);
-				InitializeTags();
-				SelectedAllowedTag = null;
-			}
-		});
-
-		public ICommand AllowTagCommand => new RelayCommand(() =>
-		{
-			if (SelectedExcludedTag != null)
-			{
-				Settings.ExcludedTagIds.Remove(SelectedExcludedTag.Id);
-				InitializeTags();
-				SelectedExcludedTag = null;
-			}
-		});
+		public ExclusionList<Tag> Tags { get; }
 
 		public void BeginEdit()
 		{
@@ -618,22 +552,6 @@ namespace PlayNext.ViewModels
 			window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
 			window.ShowDialog();
-		}
-
-		private void InitializeTags()
-		{
-			var allTags = _plugin.PlayniteApi.Database.Tags.ToList();
-
-			ExcludedTags = allTags
-				.Where(x => Settings.ExcludedTagIds.Contains(x.Id)
-							&& (string.IsNullOrEmpty(ExcludedTagsFilter) || x.Name.ToLower().Contains(ExcludedTagsFilter.ToLower())))
-				.OrderBy(x => x.Name)
-				.ToObservable();
-
-			AllowedTags = allTags.Where(x => !Settings.ExcludedTagIds.Contains(x.Id)
-											 && (string.IsNullOrEmpty(AllowedTagsFilter) || x.Name.ToLower().Contains(AllowedTagsFilter.ToLower())))
-				.OrderBy(x => x.Name)
-				.ToObservable();
 		}
 	}
 }
