@@ -1,23 +1,26 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_PlayNext_PluginName">Nächstes Spiel</sys:String>
+    <sys:String x:Key="LOC_PlayNext_PluginName">Spiele als Nächstes</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Punktzahl</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Details</sys:String>
 
+
+
+    <sys:String x:Key="LOC_PlayNext_SettingsGeneralHeader">Allgemein</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Gewichtung der Attribute</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Gesamte Spielzeit</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Letzte Spielzeit</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Erfordert GameActivity-Erweiterung</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Erfordert Spiel Aktivität-Erweiterung</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Neueste zuerst</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Standard</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFlatButton">Flach</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Andere</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Anzahl der Spiele</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Letzte Tage</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">&quot;ungespieltes Spiel&quot; bedeutet</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">keine Spielzeit</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Ungespieltes Spiel bedeutet</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Keine Spielzeit</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Spielfortschritt</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageGroupTitle">Startseite</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageShowLabel">Bezeichnung anzeigen</sys:String>
@@ -27,14 +30,14 @@
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genre</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Feature</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Entwickler</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Publisher</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPublisher">Veröffentlicher</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTag">Schlagwort</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Series</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Order Series By</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Release Date</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeries">Reihenfolge</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByTitle">Sortier Reihenfolge mit</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedByReleaseDate">Veröffentlichungsdatum</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sortier Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Expertenwertung</sys:String>
-    <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Communitywertung</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Gemeinschaftswertung</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Erscheinungsjahr</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Erscheinungsjahr sollte sein</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Aktuell</sys:String>
@@ -44,10 +47,11 @@
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Spieldauer sollte sein</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Stunden</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Aktualisieren nach Spiel Update</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Alle Einstellungen auf Standard zurücksetzen</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Konnte das Jahr nicht analysieren</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Top-Empfehlungen</sys:String>
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Die besten empfohlenen Spiele anzeigen, um nach deinen Vorlieben zu spielen.</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Die besten empfohlenen Spiele anhand deiner Vorlieben spielen.</sys:String>
 
 </ResourceDictionary>
