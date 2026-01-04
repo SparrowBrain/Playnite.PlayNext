@@ -4,3 +4,7 @@
 - OrderSeriesBy
 - RefreshOnGameUpdates
 - SelectedPresetId
+- ExcludedSourceIds
+- ExcludedPlatformIds 
+- ExcludedCategoryIds 
+- ExcludedTagIds

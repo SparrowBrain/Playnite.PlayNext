@@ -142,74 +142,74 @@
                                 </Grid>
                             </StackPanel>
                         </GroupBox>
-                        <GroupBox  Header="{DynamicResource LOC_PlayNext_SettingsGameGroupTitle}">
+                        <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsGameParametersGroupTitle}">
                             <StackPanel>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsGenre}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding GenreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsFeature}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding FeatureWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsDeveloper}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding DeveloperWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPublisher}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding PublisherWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsTag}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding TagWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeries}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding SeriesWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCriticScore}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding CriticScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCommunityScore}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding CommunityScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYear}"></TextBlock>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding ReleaseYearWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLength}"></TextBlock>
-                                    <TextBlock Text="⚠️" FontSize="10" VerticalAlignment="Center" Visibility="{Binding HowLongToBeatExtensionFound, Converter={converters:InvertedBooleanToCollapsedVisibilityConverter}}" ToolTip="{DynamicResource LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound}"></TextBlock>
-                                </StackPanel>
-                                <Slider Minimum="0" Maximum="100" Value="{Binding GameLengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
-                                <Grid Margin="0,10,0,0">
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeriesOrderedByTitle}" Margin="0, 10, 0, 5"></TextBlock>
+                                <ComboBox ItemsSource="{Binding Path=OrderSeriesByOptions}"
+                                           DisplayMemberPath="Value"
+                                           SelectedValuePath="Key"
+                                           SelectedValue="{Binding Path=Settings.OrderSeriesBy, Mode=TwoWay}" />
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYearTypeTitle}" Margin="0, 10, 0, 5"></TextBlock>
+                                <Grid Margin="10,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
-                                    <Button Grid.Column="1" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <RadioButton IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
+                                    <RadioButton Grid.Row="1" Grid.Column="0" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
+                                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.DesiredReleaseYear}" ></TextBox>
                                 </Grid>
+                                <StackPanel Orientation="Vertical" Margin="0, 5, 0, 0" Visibility="{Binding HowLongToBeatExtensionFound, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
+                                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLengthTitle}"></TextBlock>
+                                    <Grid Margin="10,0, 0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding Settings.GameLengthHours}" ></TextBox>
+                                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsLengthHours}" Margin="5"></TextBlock>
+                                    </Grid>
+                                </StackPanel>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
-                    <GroupBox Grid.Row="0" Grid.Column="1" Header="{DynamicResource LOC_PlayNext_SettingsGameGroupTitle}">
+                    <GroupBox Grid.Row="0" Grid.Column="1"  Header="{DynamicResource LOC_PlayNext_SettingsGameGroupTitle}">
                         <StackPanel>
-                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeriesOrderedByTitle}" Margin="0, 10, 0, 5"></TextBlock>
-                            <ComboBox ItemsSource="{Binding Path=OrderSeriesByOptions}"
-                      DisplayMemberPath="Value"
-                      SelectedValuePath="Key"
-                      SelectedValue="{Binding Path=Settings.OrderSeriesBy, Mode=TwoWay}" />
-                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYearTypeTitle}" Margin="0, 10, 0, 5"></TextBlock>
-                            <Grid Margin="10,0,0,0">
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsGenre}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding GenreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsFeature}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding FeatureWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsDeveloper}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding DeveloperWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPublisher}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding PublisherWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsTag}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding TagWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsSeries}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding SeriesWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCriticScore}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding CriticScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsCommunityScore}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding CommunityScoreWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsReleaseYear}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding ReleaseYearWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLength}"></TextBlock>
+                                <TextBlock Text="⚠️" FontSize="10" VerticalAlignment="Center" Visibility="{Binding HowLongToBeatExtensionFound, Converter={converters:InvertedBooleanToCollapsedVisibilityConverter}}" ToolTip="{DynamicResource LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound}"></TextBlock>
+                            </StackPanel>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding GameLengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <Grid Margin="0,10,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <RadioButton IsChecked="{Binding Settings.ReleaseYearChoices[0]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearCurrent}" ></RadioButton>
-                                <RadioButton Grid.Row="1" Grid.Column="0" IsChecked="{Binding Settings.ReleaseYearChoices[1]}" Content="{DynamicResource LOC_PlayNext_SettingsReleaseYearSpecific}" ></RadioButton>
-                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Settings.DesiredReleaseYear}" ></TextBox>
+                                <Button Grid.Column="0" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsDefaultButton}" Command="{Binding SetGameWeightsToDefault}"></Button>
+                                <Button Grid.Column="1" Height="27" Content="{DynamicResource LOC_PlayNext_SettingsFlatButton}" Command="{Binding SetGameWeightsToFlat}"></Button>
                             </Grid>
-                            <StackPanel Orientation="Vertical" Margin="0, 5, 0, 0" Visibility="{Binding HowLongToBeatExtensionFound, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
-                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsLengthTitle}"></TextBlock>
-                                <Grid Margin="10,0, 0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding Settings.GameLengthHours}" ></TextBox>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{DynamicResource LOC_PlayNext_SettingsLengthHours}" Margin="5"></TextBlock>
-                                </Grid>
-                            </StackPanel>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
