@@ -19,6 +19,7 @@ namespace PlayNext.ViewModels
 	{
 		private readonly PlayNext _plugin;
 		private readonly SettingsPresetManager _settingsPresetManager;
+		private readonly ILogger _logger = LogManager.GetLogger();
 
 		private PlayNextSettings _editingClone;
 		private PlayNextSettings _settings;
@@ -30,7 +31,6 @@ namespace PlayNext.ViewModels
 		{
 			_plugin = plugin;
 			_settingsPresetManager = settingsPresetManager;
-
 
 			Sources = new ExclusionList<GameSource>(
 				() => _plugin.PlayniteApi.Database.Sources.ToList(),
@@ -44,7 +44,6 @@ namespace PlayNext.ViewModels
 			Tags = new ExclusionList<Tag>(
 				() => _plugin.PlayniteApi.Database.Tags.ToList(),
 				s => s.ExcludedTagIds);
-
 
 			var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
 			Settings = savedSettings ?? PlayNextSettings.Default;
@@ -100,6 +99,26 @@ namespace PlayNext.ViewModels
 
 		public ICommand RemovePreset => new RelayCommand(() =>
 		{
+			if (Settings.SelectedPresetId == null)
+			{
+				return;
+			}
+
+			try
+			{
+				_settingsPresetManager.DeletePreset(Settings.SelectedPresetId.Value);
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex, "Could not delete preset file");
+				_plugin.PlayniteApi.Dialogs.ShowErrorMessage($"Could not delete preset file. Error: {ex.Message}.");
+			}
+
+			Presets = _settingsPresetManager.GetPersistedPresets().ToObservable();
+			SelectedPreset = null;
+
+			Settings.SelectedPresetId = null;
+			EndEdit();
 		});
 
 		public ICommand SavePreset => new RelayCommand(() =>
@@ -112,7 +131,16 @@ namespace PlayNext.ViewModels
 			}
 
 			preset.Settings = Settings;
-			_settingsPresetManager.WritePreset(preset);
+
+			try
+			{
+				_settingsPresetManager.WritePreset(preset);
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex, "Could not write preset file");
+				_plugin.PlayniteApi.Dialogs.ShowErrorMessage($"Could not write preset file. Error: {ex.Message}.");
+			}
 		});
 
 		public ICommand SetAttributeWeightsToFlat => new RelayCommand(() =>
@@ -338,9 +366,8 @@ namespace PlayNext.ViewModels
 				{OrderSeriesBy.ReleaseDate, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedByReleaseDate")},
 				{OrderSeriesBy.SortingName, ResourceProvider.GetString("LOC_PlayNext_SettingsSeriesOrderedBySortingName")},
 			};
-		
-		public ExclusionList<GameSource> Sources { get; }
 
+		public ExclusionList<GameSource> Sources { get; }
 
 		public ExclusionList<Platform> Platforms { get; }
 
@@ -543,7 +570,16 @@ namespace PlayNext.ViewModels
 				Settings = Settings,
 			};
 
-			_settingsPresetManager.WritePreset(preset);
+			try
+			{
+				_settingsPresetManager.WritePreset(preset);
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex, "Could not write preset file");
+				_plugin.PlayniteApi.Dialogs.ShowErrorMessage($"Could not write preset file. Error: {ex.Message}.");
+			}
+
 			Presets = _settingsPresetManager.GetPersistedPresets().ToObservable();
 			SelectedPreset = Presets.FirstOrDefault(x => x.Id == presetId);
 			EndEdit();

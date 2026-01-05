@@ -51,6 +51,17 @@ namespace PlayNext.Settings.Presets
 			Write(preset);
 		}
 
+		public void DeletePreset(Guid id)
+		{
+			if (!Directory.Exists(_presetPath))
+			{
+				_logger.Warn($"Could not delete preset {id}. Directory '{_presetPath}' does not exist.");
+				return;
+			}
+
+			File.Delete(GetPresetFilePath(id));
+		}
+
 		private List<SettingsPreset<T>> ReadPresets<T>() where T : IVersionedSettings
 		{
 			var files = Directory.GetFiles(_presetPath);
@@ -113,7 +124,7 @@ namespace PlayNext.Settings.Presets
 			Write(newPreset);
 		}
 
-		public void Write<T>(SettingsPreset<T> preset) where T : IVersionedSettings
+		private void Write<T>(SettingsPreset<T> preset) where T : IVersionedSettings
 		{
 			if (!Directory.Exists(_presetPath))
 			{
@@ -121,12 +132,17 @@ namespace PlayNext.Settings.Presets
 			}
 
 			var json = JsonConvert.SerializeObject(preset);
-			var file = Path.Combine(_presetPath, $"{preset.Id}.json");
+			var file = GetPresetFilePath(preset.Id);
 			using (var fileStream = new FileStream(file, FileMode.Create, FileAccess.Write))
 			using (var streamWriter = new StreamWriter(fileStream))
 			{
 				streamWriter.Write(json);
 			}
+		}
+
+		private string GetPresetFilePath(Guid id)
+		{
+			return Path.Combine(_presetPath, $"{id}.json");
 		}
 	}
 }

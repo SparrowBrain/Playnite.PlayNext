@@ -163,6 +163,50 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 			Assert.Equal(JsonConvert.SerializeObject(preset), actualJson);
 		}
 
+		[Theory]
+		[AutoData]
+		public void DeletePreset_DeletesFile_WhenFileExists(SettingsPreset<PlayNextSettings> preset)
+		{
+			// Arrange
+			var presetFile = Path.Combine(_presetPath, $"{preset.Id}.json");
+			File.WriteAllText(presetFile, JsonConvert.SerializeObject(preset));
+
+			// Act
+			_sut.DeletePreset(preset.Id);
+
+			// Assert
+			Assert.False(File.Exists(presetFile));
+		}
+
+		[Theory]
+		[AutoData]
+		public void DeletePreset_NothingHappens_WhenFileDoesNotExist(SettingsPreset<PlayNextSettings> preset)
+		{
+			// Arrange
+			var presetFile = Path.Combine(_presetPath, $"{preset.Id}.json");
+
+			// Act
+			_sut.DeletePreset(preset.Id);
+
+			// Assert
+			Assert.False(File.Exists(presetFile));
+		}
+
+		[Theory]
+		[AutoData]
+		public void DeletePreset_NothingHappens_WhenDirectoryNotExist(SettingsPreset<PlayNextSettings> preset)
+		{
+			// Arrange
+			EnsurePathDoesNotExist();
+			var presetFile = Path.Combine(_presetPath, $"{preset.Id}.json");
+
+			// Act
+			_sut.DeletePreset(preset.Id);
+
+			// Assert
+			Assert.False(File.Exists(presetFile));
+		}
+
 		public void Dispose()
 		{
 			if (Directory.Exists(_presetPath))
