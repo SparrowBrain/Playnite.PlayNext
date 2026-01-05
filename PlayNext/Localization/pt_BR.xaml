@@ -1,11 +1,19 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <sys:String x:Key="LOC_PlayNextGenericCancel">Cancelar</sys:String>
+    <sys:String x:Key="LOC_PlayNextGenericOk">Ok</sys:String>
     <sys:String x:Key="LOC_PlayNext_PluginName">Jogar em seguida</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Pontuação</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Nome</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Detalhes</sys:String>
 
+    <sys:String x:Key="LOC_PlayNext_SettingsAlgorithmHeader">Algoritmo</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGeneralHeader">Geral</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetsGroupTitle">Presets</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetNew">Criar novo</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetRemove">Remover</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetSave">Salvar</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Atribua pesos de cálculo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Tempo de jogo total</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Tempo de jogo recente</sys:String>
@@ -24,6 +32,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Rótulo horizontal</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Contagem mínima de capa</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Peso de cálculo de pontuação de jogo</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameParametersGroupTitle">Parâmetros de cálculo de pontuação de jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Gênero</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Recurso</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Desenvolvedor</sys:String>
@@ -35,6 +44,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Nome de classificação</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Avaliação da crítica</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Avaliação da comunidade</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetName">Nome da predefinição</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Ano de lançamento</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Ano de Lançamento deveria ser</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Atual</sys:String>
@@ -44,10 +54,18 @@
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Duração do Jogo deve ser</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Horas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Recarregar na atualização de jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reiniciar todas as configurações para o padrão</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSourcesHeader">Bibliotecas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPlatformsHeader">Plataformas</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCategoriesHeader">Categorias</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Marcadores</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Permitido</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluído</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filtro</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Não foi possível analisar o ano</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Principais recomendações</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Configurações ativas</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Exibir jogos recomendados para jogar com base nas suas preferências.</sys:String>
 
 </ResourceDictionary>
