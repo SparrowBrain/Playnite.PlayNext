@@ -96,6 +96,8 @@
     <Compile Include="Settings\Old\SettingsV0Tests.cs" />
     <Compile Include="Settings\Old\SettingsV2Tests.cs" />
     <Compile Include="Settings\Old\SettingsV1Tests.cs" />
+    <Compile Include="Settings\Old\SettingsV3Tests.cs" />
+    <Compile Include="Settings\Preset\SettingsPresetTests.cs" />
     <Compile Include="Settings\SettingsMigratorTests.cs" />
     <Compile Include="Settings\StartupSettingsValidatorTests.cs" />
   </ItemGroup>

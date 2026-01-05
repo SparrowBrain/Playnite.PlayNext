@@ -40,6 +40,7 @@ namespace PlayNext
 		private PlayNextSettingsViewModel _settings;
 		private PlayNextMainViewModel _playNextMainViewModel;
 		private PlayNextMainView _playNextMainView;
+		private SidebarItem _sidebarItem;
 
 		public override Guid Id { get; } = Guid.Parse("05234f92-39d3-4432-98c1-6f37a3e4b870");
 
@@ -72,27 +73,32 @@ namespace PlayNext
 
 		public override IEnumerable<SidebarItem> GetSidebarItems()
 		{
-			yield return new SidebarItem
+			if (_sidebarItem == null)
 			{
-				Title = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
-				Icon = new TextBlock()
+				_sidebarItem = new SidebarItem
 				{
-					Text = "\u23ED",
-					FontFamily = ResourceProvider.GetResource("FontIcoFont") as FontFamily
-				},
-				Type = SiderbarItemType.View,
-				Opened = () =>
-				{
-					if (_playNextMainView == null || _playNextMainViewModel == null)
+					Title = ResourceProvider.GetString("LOC_PlayNext_PluginName"),
+					Icon = new TextBlock()
 					{
-						_playNextMainViewModel = new PlayNextMainViewModel(this);
-						_playNextMainView = new PlayNextMainView(_playNextMainViewModel);
-						RefreshPlayNextData();
-					}
+						Text = "\u23ED",
+						FontFamily = ResourceProvider.GetResource("FontIcoFont") as FontFamily
+					},
+					Type = SiderbarItemType.View,
+					Opened = () =>
+					{
+						if (_playNextMainView == null || _playNextMainViewModel == null)
+						{
+							_playNextMainViewModel = new PlayNextMainViewModel(this);
+							_playNextMainView = new PlayNextMainView(_playNextMainViewModel);
+							RefreshPlayNextData();
+						}
 
-					return _playNextMainView;
-				}
-			};
+						return _playNextMainView;
+					}
+				};
+			}
+
+			yield return _sidebarItem;
 		}
 
 		public override void OnGameInstalled(OnGameInstalledEventArgs args)
@@ -128,6 +134,8 @@ namespace PlayNext
 			LandingPageExtension.CreateInstanceInBackground(PlayniteApi);
 
 			PlayniteApi.Database.Games.ItemUpdated += Games_ItemUpdated;
+
+			UpdateSidebarItemVisibility();
 		}
 
 		public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -266,6 +274,7 @@ namespace PlayNext
 			});
 
 			RefreshPlayNextData();
+			UpdateSidebarItemVisibility();
 		}
 
 		private void LandingPageExtension_InstanceCreated()
@@ -288,6 +297,12 @@ namespace PlayNext
 			{
 				_gameUpdatedTimer.Start();
 			}
+		}
+
+		private void UpdateSidebarItemVisibility()
+		{
+			var settings = GetSettings(false) as PlayNextSettingsViewModel;
+			_sidebarItem.Visible = settings?.Settings.ShowSidebarItem ?? true;
 		}
 
 		private void RefreshPlayNextData()

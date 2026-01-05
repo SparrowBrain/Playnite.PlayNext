@@ -8,3 +8,6 @@
 - ExcludedPlatformIds 
 - ExcludedCategoryIds 
 - ExcludedTagIds
+
+V4
+- ShowSidebarItem

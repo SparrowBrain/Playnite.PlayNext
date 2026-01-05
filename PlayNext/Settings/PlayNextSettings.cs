@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using PlayNext.Model.Data;
-using Playnite.SDK;
+﻿using PlayNext.Model.Data;
 using Playnite.SDK.Data;
+using System;
+using System.Collections.Generic;
 
 namespace PlayNext.Settings
 {
@@ -10,7 +9,7 @@ namespace PlayNext.Settings
 	{
 		public const int MaxWeightValue = 100;
 		public const int MinWeightValue = 0;
-		public const int CurrentVersion = 3;
+		public const int CurrentVersion = 4;
 
 		private OrderSeriesBy _orderSeriesByChoice;
 		private int _desiredReleaseYear;
@@ -25,6 +24,7 @@ namespace PlayNext.Settings
 		private int _gameGameLengthHours;
 		private int _startPageMinCoverCount;
 		private bool _refreshOnGameUpdates;
+		private bool _showSidebarItem;
 
 		public PlayNextSettings()
 		{
@@ -41,6 +41,7 @@ namespace PlayNext.Settings
 
 			GameLengthHours = 0;
 
+			ShowSidebarItem = true;
 			NumberOfTopGames = 30;
 			RecentDays = 14;
 			UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
@@ -55,6 +56,12 @@ namespace PlayNext.Settings
 		public static PlayNextSettings Default => new PlayNextSettings(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
 		public Guid? SelectedPresetId { get; set; }
+
+		public bool ShowSidebarItem
+		{
+			get => _showSidebarItem;
+			set => SetValue(ref _showSidebarItem, value);
+		}
 
 		public float TotalPlaytimeWeight { get; set; }
 
@@ -198,9 +205,9 @@ namespace PlayNext.Settings
 		public HashSet<Guid> ExcludedSourceIds { get; set; } = new HashSet<Guid>();
 
 		public HashSet<Guid> ExcludedPlatformIds { get; set; } = new HashSet<Guid>();
-		
+
 		public HashSet<Guid> ExcludedCategoryIds { get; set; } = new HashSet<Guid>();
-		
+
 		public HashSet<Guid> ExcludedTagIds { get; set; } = new HashSet<Guid>();
 
 		public bool StartPageShowLabel

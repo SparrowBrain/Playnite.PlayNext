@@ -12,7 +12,7 @@ namespace PlayNext.UnitTests.Settings.Old
             SettingsV2 oldSettings)
         {
             // Act
-            var result = oldSettings.Migrate() as PlayNextSettings;
+            var result = oldSettings.Migrate() as SettingsV3;
 
             // Assert
             Assert.NotNull(result);

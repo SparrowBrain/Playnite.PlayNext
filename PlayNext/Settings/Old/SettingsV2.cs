@@ -80,7 +80,7 @@ namespace PlayNext.Settings.Old
 
         public IVersionedSettings Migrate()
         {
-            var settings = PlayNextSettings.Default;
+            var settings = SettingsV3.Default;
             settings.TotalPlaytimeWeight = TotalPlaytimeWeight;
             settings.RecentPlaytimeWeight = RecentPlaytimeWeight;
             settings.RecentOrderWeight = RecentOrderWeight;

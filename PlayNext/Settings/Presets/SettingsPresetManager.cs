@@ -114,6 +114,11 @@ namespace PlayNext.Settings.Presets
 					oldSettings = oldPresetV2.Settings;
 					break;
 
+				case 3:
+					var oldPresetV3 = ReadPreset<SettingsV3>(Path.Combine(_presetPath, $"{preset.Id}.json"));
+					oldSettings = oldPresetV3.Settings;
+					break;
+
 				default:
 					throw new NotImplementedException($"No implementation for preset v{preset.Settings.Version} migration");
 			}

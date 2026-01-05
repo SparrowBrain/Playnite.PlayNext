@@ -15,6 +15,7 @@ namespace PlayNext.Settings.Presets
 			return new SettingsPreset<PlayNextSettings>()
 			{
 				Id = Id,
+				Name = Name,
 				Settings = settings,
 			};
 		}
