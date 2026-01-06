@@ -51,6 +51,14 @@
                 Margin="0,0,10,0"
                 Width="50"
                 Height="30"
+                Command="{Binding Refresh}"
+                Visibility="{Binding IsRefreshAvailable, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
+                <TextBlock FontFamily="{DynamicResource FontIcoFont}" Text="&#xefd1;"></TextBlock>
+            </Button>
+            <Button
+                Margin="0,0,10,0"
+                Width="50"
+                Height="30"
                 Command="{Binding SwitchToCovers}"
                 IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
                 ▋ ▋

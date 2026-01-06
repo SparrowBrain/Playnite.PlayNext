@@ -79,6 +79,8 @@
     <Compile Include="Model\Data\OrderSeriesBy.cs" />
     <Compile Include="Model\Score\GameScore\GameLengthCalculator.cs" />
     <Compile Include="Model\Score\GameScore\GameScoreBySeriesCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\IRandomScoreCalculator.cs" />
+    <Compile Include="Model\Score\GameScore\RandomScoreCalculator.cs" />
     <Compile Include="Settings\Old\SettingsV3.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />
     <Compile Include="Settings\Old\SettingsV1.cs" />

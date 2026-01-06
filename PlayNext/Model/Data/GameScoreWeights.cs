@@ -2,7 +2,7 @@
 {
     public class GameScoreWeights
     {
-        public const float Number = 10;
+        public const float Number = 11;
 
         public float Genre { get; set; }
         public float Feature { get; set; }
@@ -14,6 +14,7 @@
         public float CommunityScore { get; set; }
         public float ReleaseYear { get; set; }
         public float GameLength { get; set; }
+        public float Random { get; set; }
 
         public static GameScoreWeights Flat { get; } = new GameScoreWeights()
         {
@@ -27,6 +28,7 @@
             CommunityScore = 1 / Number,
             ReleaseYear = 1 / Number,
             GameLength = 1 / Number,
+            Random = 1 / Number,
         };
 
         public static GameScoreWeights Default { get; } = new GameScoreWeights()
@@ -41,6 +43,7 @@
             CommunityScore = 0.2f,
             ReleaseYear = 0.1f,
             GameLength = 0f,
+            Random = 0f,
         };
 
         private static float DistributeRemainderEqually()

@@ -16,16 +16,19 @@ namespace PlayNext.Model.Score.GameScore
 		private readonly CommunityScoreCalculator _communityScoreCalculator;
 		private readonly ReleaseYearCalculator _releaseYearCalculator;
 		private readonly GameLengthCalculator _gameLengthCalculator;
+		private readonly IRandomScoreCalculator _randomScoreCalculator;
 		private readonly ScoreNormalizer _scoreNormalizer;
 		private readonly Summator _summator;
 
-		public FinalGameScoreCalculator(IHowLongToBeatExtension howLongToBeatExtension,
+		public FinalGameScoreCalculator(
+			IHowLongToBeatExtension howLongToBeatExtension,
 			GameScoreByAttributeCalculator gameScoreByAttributeCalculator,
 			GameScoreBySeriesCalculator gameScoreBySeriesCalculator,
 			CriticScoreCalculator criticScoreCalculator,
 			CommunityScoreCalculator communityScoreCalculator,
 			ReleaseYearCalculator releaseYearCalculator,
 			GameLengthCalculator gameLengthCalculator,
+			IRandomScoreCalculator randomScoreCalculator,
 			ScoreNormalizer scoreNormalizer,
 			Summator summator)
 		{
@@ -36,12 +39,13 @@ namespace PlayNext.Model.Score.GameScore
 			_communityScoreCalculator = communityScoreCalculator;
 			_releaseYearCalculator = releaseYearCalculator;
 			_gameLengthCalculator = gameLengthCalculator;
+			_randomScoreCalculator = randomScoreCalculator;
 			_scoreNormalizer = scoreNormalizer;
 			_summator = summator;
 		}
 
 		public IDictionary<Guid, float> Calculate(
-			IEnumerable<Game> games,
+			IReadOnlyCollection<Game> games,
 			Dictionary<Guid, float> attributeScore,
 			GameScoreWeights gameScoreCalculationWeights,
 			OrderSeriesBy orderSeriesBy,
@@ -62,6 +66,7 @@ namespace PlayNext.Model.Score.GameScore
 			var weightedScoreByCommunityScore = CalculateWeightedScores(() => _communityScoreCalculator.Calculate(games), gameScoreCalculationWeights.CommunityScore);
 			var weightedScoreByReleaseYear = CalculateWeightedScores(() => _releaseYearCalculator.Calculate(games, desiredReleaseYear), gameScoreCalculationWeights.ReleaseYear);
 			var weightedScoreByGameLength = CalculateWeightedScores(() => _gameLengthCalculator.Calculate(gameLengths, desiredGameLength), gameScoreCalculationWeights.GameLength);
+			var weightedScoreByRandom = CalculateWeightedScores(() => _randomScoreCalculator.Calculate(games), gameScoreCalculationWeights.Random);
 
 			var sum = _summator.AddUp(
 				weightedScoreByGenre,
@@ -73,7 +78,8 @@ namespace PlayNext.Model.Score.GameScore
 				weightedScoreByCriticsScore,
 				weightedScoreByCommunityScore,
 				weightedScoreByReleaseYear,
-				weightedScoreByGameLength);
+				weightedScoreByGameLength,
+				weightedScoreByRandom);
 
 			var normalizedSum = _scoreNormalizer.Normalize(sum);
 			var ordered = normalizedSum.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);

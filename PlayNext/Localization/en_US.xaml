@@ -51,6 +51,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Current</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Specific</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Game Length</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRandom">Random</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Requires HowLongToBeat extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Game Length Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Hours</sys:String>

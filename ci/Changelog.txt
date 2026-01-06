@@ -1,6 +1,6 @@
 -----v1.6.0
 - Added an option to hide sidebar item
-- Added PlayNext refresh when games change
+- Added optional PlayNext refresh when games change
 - Added settings presets
 - Added multiple start page instances (instance per preset)
 - StartPage settings moved to StartPage edit mode
@@ -11,10 +11,11 @@
 - Fixed completion statuses combo box text
 - Additional Brazilian Portuguese translations (thank you The Nutellas!)
 - Additional German translations (thank you juliuscaesr!)
+- Added random in score calculations
+- Added Refresh button (works with random weighting)
 --- Add data to list view
---- Refresh button
---- Random weighting
 --- Added user score weighting
+--- What to do when I update the settings? Do I save the preset, or remove selected preset?
 
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view

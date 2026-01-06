@@ -204,6 +204,8 @@
                                 <TextBlock Text="⚠️" FontSize="10" VerticalAlignment="Center" Visibility="{Binding HowLongToBeatExtensionFound, Converter={converters:InvertedBooleanToCollapsedVisibilityConverter}}" ToolTip="{DynamicResource LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound}"></TextBlock>
                             </StackPanel>
                             <Slider Minimum="0" Maximum="100" Value="{Binding GameLengthWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                            <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRandom}"></TextBlock>
+                            <Slider Minimum="0" Maximum="100" Value="{Binding RandomWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                             <Grid Margin="0,10,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>

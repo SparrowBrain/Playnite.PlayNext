@@ -344,6 +344,19 @@ namespace PlayNext.ViewModels
 			}
 		}
 
+		public float RandomWeight
+		{
+			get => Settings.RandomWeight;
+			set
+			{
+				var difference = (value - Settings.RandomWeight) / (GameScoreWeights.Number - 1);
+				RebalanceGameScoreWeights(difference);
+				Settings.RandomWeight = value;
+				PushGameScoreWeightsToTotal(nameof(Settings.RandomWeight));
+				NotifyGameScoreSourcePropertiesChanged();
+			}
+		}
+
 		public ObservableCollection<CompletionStatusItem> UnplayedCompletionStatuses
 		{
 			get => _unplayedCompletionStatuses;
@@ -433,6 +446,7 @@ namespace PlayNext.ViewModels
 			Settings.CommunityScoreWeight = ContainInMinMax(Settings.CommunityScoreWeight - difference);
 			Settings.ReleaseYearWeight = ContainInMinMax(Settings.ReleaseYearWeight - difference);
 			Settings.GameLengthWeight = ContainInMinMax(Settings.GameLengthWeight - difference);
+			Settings.RandomWeight = ContainInMinMax(Settings.RandomWeight - difference);
 		}
 
 		private void PushGameScoreWeightsToTotal(string ignore)
@@ -486,6 +500,11 @@ namespace PlayNext.ViewModels
 			{
 				Settings.GameLengthWeight = ContainInMinMax(Settings.GameLengthWeight + GetMissingGameWeightToTotal());
 			}
+			
+			if (ignore != nameof(Settings.RandomWeight))
+			{
+				Settings.RandomWeight = ContainInMinMax(Settings.RandomWeight + GetMissingGameWeightToTotal());
+			}
 		}
 
 		private void PushAttributeWeightsToTotal(string ignore)
@@ -525,6 +544,7 @@ namespace PlayNext.ViewModels
 			OnPropertyChanged(nameof(CommunityScoreWeight));
 			OnPropertyChanged(nameof(ReleaseYearWeight));
 			OnPropertyChanged(nameof(GameLengthWeight));
+			OnPropertyChanged(nameof(RandomWeight));
 		}
 
 		private float ContainInMinMax(float newValue)
@@ -549,7 +569,8 @@ namespace PlayNext.ViewModels
 				   - Settings.CriticScoreWeight
 				   - Settings.CommunityScoreWeight
 				   - Settings.ReleaseYearWeight
-				   - Settings.GameLengthWeight;
+				   - Settings.GameLengthWeight
+				   - Settings.RandomWeight;
 		}
 
 		private void InitializePresets()

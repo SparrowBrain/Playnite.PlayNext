@@ -275,37 +275,10 @@ namespace PlayNext
 
 			RefreshPlayNextData();
 			UpdateSidebarItemVisibility();
+			_playNextMainViewModel?.SetIsRefreshAvailable(activeSettings);
 		}
 
-		private void LandingPageExtension_InstanceCreated()
-		{
-			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
-			PlayniteApi.MainView.UIDispatcher.Invoke(() =>
-			{
-				_startPageViews.ForEach(x => x.Value.UpdateCoversColumnWidth());
-			});
-		}
-
-		private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Playnite.SDK.Models.Game> e)
-		{
-			if (_settings == null)
-			{
-				GetSettings(false);
-			}
-
-			if (_settings?.Settings.RefreshOnGameUpdates == true)
-			{
-				_gameUpdatedTimer.Start();
-			}
-		}
-
-		private void UpdateSidebarItemVisibility()
-		{
-			var settings = GetSettings(false) as PlayNextSettingsViewModel;
-			_sidebarItem.Visible = settings?.Settings.ShowSidebarItem ?? true;
-		}
-
-		private void RefreshPlayNextData()
+		public void RefreshPlayNextData()
 		{
 			if (_playNextMainViewModel == null && _startPagePlayNextViewModels.Count == 0)
 			{
@@ -340,6 +313,34 @@ namespace PlayNext
 					_logger.Error(ex, "Failure while refreshing data.");
 				}
 			}).Start();
+		}
+
+		private void LandingPageExtension_InstanceCreated()
+		{
+			LandingPageExtension.InstanceCreated -= LandingPageExtension_InstanceCreated;
+			PlayniteApi.MainView.UIDispatcher.Invoke(() =>
+			{
+				_startPageViews.ForEach(x => x.Value.UpdateCoversColumnWidth());
+			});
+		}
+
+		private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Playnite.SDK.Models.Game> e)
+		{
+			if (_settings == null)
+			{
+				GetSettings(false);
+			}
+
+			if (_settings?.Settings.RefreshOnGameUpdates == true)
+			{
+				_gameUpdatedTimer.Start();
+			}
+		}
+
+		private void UpdateSidebarItemVisibility()
+		{
+			var settings = GetSettings(false) as PlayNextSettingsViewModel;
+			_sidebarItem.Visible = settings?.Settings.ShowSidebarItem ?? true;
 		}
 
 		private static string GetPresetName(SettingsPreset<PlayNextSettings> preset)

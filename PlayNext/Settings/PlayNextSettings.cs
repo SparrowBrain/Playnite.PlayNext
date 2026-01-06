@@ -134,6 +134,8 @@ namespace PlayNext.Settings
 			set => SetValue(ref _gameGameLengthHours, value);
 		}
 
+		public float RandomWeight { get; set; }
+
 		public int NumberOfTopGames
 		{
 			get => _numberOfTopGames;
@@ -249,6 +251,7 @@ namespace PlayNext.Settings
 			CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
 			ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
 			GameLengthWeight = gameScoreWeights.GameLength * MaxWeightValue;
+			RandomWeight = gameScoreWeights.Random * MaxWeightValue;
 		}
 	}
 }
