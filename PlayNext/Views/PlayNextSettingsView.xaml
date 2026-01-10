@@ -34,7 +34,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <ComboBox Grid.Column="0" SelectedItem="{Binding SelectedPreset}" ItemsSource="{Binding Presets}" Margin="2"
+                            <ComboBox Grid.Column="0" SelectedItem="{Binding SelectedPreset, Mode=TwoWay}" ItemsSource="{Binding Presets}" Margin="2"
                                       IsSynchronizedWithCurrentItem="False"
                                       IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
                                       TextSearch.TextPath="Name">

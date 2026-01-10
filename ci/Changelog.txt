@@ -16,7 +16,6 @@
 - Fixed completion statuses combo box text
 --- Add data to list view
 --- Added attribute score calculation by user score
---- What to do when I update the settings? Do I save the preset, or remove selected preset?
 
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view

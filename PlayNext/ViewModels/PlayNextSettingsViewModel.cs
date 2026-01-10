@@ -1,4 +1,5 @@
-﻿using PlayNext.Extensions.StartPage;
+﻿using Newtonsoft.Json;
+using PlayNext.Extensions.StartPage;
 using PlayNext.Model.Data;
 using PlayNext.Settings;
 using PlayNext.Settings.Presets;
@@ -414,6 +415,12 @@ namespace PlayNext.ViewModels
 
 		public void EndEdit()
 		{
+			var selectedPreset = Presets.FirstOrDefault(p =>
+				JsonConvert.SerializeObject(p.Settings) == JsonConvert.SerializeObject(Settings));
+
+			SelectedPreset = selectedPreset;
+			Settings.SelectedPresetId = selectedPreset?.Id;
+
 			_plugin.SavePluginSettings(Settings);
 			_plugin.OnPlayNextSettingsSaved();
 		}
