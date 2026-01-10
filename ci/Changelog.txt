@@ -4,18 +4,18 @@
 - Added settings presets
 - Added multiple start page instances (instance per preset)
 - StartPage settings moved to StartPage edit mode
+- Added attribute score calculation by favourites
+- Added attribute score calculation by user score
+- Added random in game score calculations
+- Added Refresh button (works with random weighting)
 - Added ability to exclude by Library
 - Added ability to exclude by Platform
 - Added ability to exclude by Category
 - Added ability to exclude by Tag
-- Added random in score calculations
-- Added Refresh button (works with random weighting)
-- Added attribute score calculation by favourites
 - Additional Brazilian Portuguese translations (thank you The Nutellas!)
 - Additional German translations (thank you juliuscaesr!)
 - Fixed completion statuses combo box text
 --- Add data to list view
---- Added attribute score calculation by user score
 
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view
