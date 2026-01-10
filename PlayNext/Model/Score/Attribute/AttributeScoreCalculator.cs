@@ -66,6 +66,40 @@ namespace PlayNext.Model.Score.Attribute
 			return score;
 		}
 
+		public Dictionary<Guid, float> CalculateByUserScore(IReadOnlyCollection<Game> games, int averageScore, float weight)
+		{
+			var score = new Dictionary<Guid, float>();
+			if (!games.Any() || weight == 0)
+			{
+				return score;
+			}
+
+			var attributeCounts = new Dictionary<Guid, int>();
+			foreach (var game in games)
+			{
+				CountAttributes(game.GenreIds, attributeCounts);
+				CountAttributes(game.CategoryIds, attributeCounts);
+				CountAttributes(game.DeveloperIds, attributeCounts);
+				CountAttributes(game.PublisherIds, attributeCounts);
+				CountAttributes(game.TagIds, attributeCounts);
+				CountAttributes(game.SeriesIds, attributeCounts);
+			}
+
+			foreach (var game in games)
+			{
+				var userScore = game.UserScore ?? averageScore;
+				var adjustedUserScore = userScore == 0
+					? 0
+					: userScore <= averageScore
+						? (ulong)(userScore * 50.0 / averageScore)
+						: (ulong)(50 + (userScore - averageScore) * 50.0 / (100 - averageScore));
+				CalculateAllAttributeScores(game, adjustedUserScore, 100, weight, score);
+			}
+
+			score = score.ToDictionary(x => x.Key, x => x.Value / attributeCounts[x.Key]);
+			return score;
+		}
+
 		private static void CalculateAllAttributeScores(Game game, ulong valueInGame, ulong maxValue, float weight, Dictionary<Guid, float> scores)
 		{
 			CalculateAttributeScore(game.GenreIds, valueInGame, maxValue, weight, scores);
@@ -96,6 +130,26 @@ namespace PlayNext.Model.Score.Attribute
 				else
 				{
 					scores[attributeId] = attributeScore;
+				}
+			}
+		}
+
+		private static void CountAttributes(List<Guid> attributeIds, Dictionary<Guid, int> attributeCounts)
+		{
+			if (attributeIds == null)
+			{
+				return;
+			}
+
+			foreach (var attributeId in attributeIds)
+			{
+				if (attributeCounts.ContainsKey(attributeId))
+				{
+					attributeCounts[attributeId] += 1;
+				}
+				else
+				{
+					attributeCounts[attributeId] = 1;
 				}
 			}
 		}

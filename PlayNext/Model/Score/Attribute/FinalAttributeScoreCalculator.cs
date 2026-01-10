@@ -16,18 +16,20 @@ namespace PlayNext.Model.Score.Attribute
 			_summator = summator;
 		}
 
-		public Dictionary<Guid, float> Calculate(IReadOnlyCollection<Game> allGames, IEnumerable<Game> gamesWithRecentPlaytime, IEnumerable<Game> recentGames, AttributeCalculationWeights attributeCalculationWeights)
+		public Dictionary<Guid, float> Calculate(IReadOnlyCollection<Game> allGames, IReadOnlyCollection<Game> playedGames, IEnumerable<Game> gamesWithRecentPlaytime, IEnumerable<Game> recentGames, int averageUserScore, AttributeCalculationWeights attributeCalculationWeights)
 		{
-			var weightedTotalPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(allGames, attributeCalculationWeights.TotalPlaytime);
+			var weightedTotalPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(playedGames, attributeCalculationWeights.TotalPlaytime);
 			var weightedRecentPlaytimeScore = _attributeScoreCalculator.CalculateByPlaytime(gamesWithRecentPlaytime, attributeCalculationWeights.RecentPlaytime);
 			var weightedRecentOrderScore = _attributeScoreCalculator.CalculateByRecentOrder(recentGames, attributeCalculationWeights.RecentOrder);
 			var weightedUserFavouritesScore = _attributeScoreCalculator.CalculateByFavourite(allGames, attributeCalculationWeights.UserFavourites);
+			var weightedUserUserScore = _attributeScoreCalculator.CalculateByUserScore(allGames, averageUserScore, attributeCalculationWeights.UserScore);
 
 			var sum = _summator.AddUp(
 				weightedTotalPlaytimeScore,
 				weightedRecentPlaytimeScore,
 				weightedRecentOrderScore,
-				weightedUserFavouritesScore);
+				weightedUserFavouritesScore,
+				weightedUserUserScore);
 
 			return sum;
 		}

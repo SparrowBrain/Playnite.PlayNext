@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using PlayNext.Model.Score.Attribute;
 using Playnite.SDK.Models;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace PlayNext.UnitTests.Model.Score.Attribute
@@ -364,6 +364,130 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 			var result = sut.CalculateByFavourite(games, weight);
 
 			Assert.Equal(100, result[attributeId]);
+		}
+
+		[Theory]
+		[AutoData]
+		public void CalculateByUserScore_ReturnsEmpty_When_WeightIs0(
+			List<Game> games,
+			AttributeScoreCalculator sut)
+		{
+			var weight = 0f;
+			var averageScore = 50;
+
+			var result = sut.CalculateByUserScore(games, averageScore, weight);
+
+			Assert.NotNull(result);
+			Assert.Empty(result);
+		}
+
+		[Theory]
+		[InlineAutoData(nameof(Game.GenreIds))]
+		[InlineAutoData(nameof(Game.CategoryIds))]
+		[InlineAutoData(nameof(Game.DeveloperIds))]
+		[InlineAutoData(nameof(Game.PublisherIds))]
+		[InlineAutoData(nameof(Game.TagIds))]
+		[InlineAutoData(nameof(Game.SeriesIds))]
+		public void CalculateByUserScore_Returns1AttributeWithScore50_When_1Game1AttributeWith1WeightAndNoUserScore(
+			string attributeIdsName,
+			Game game,
+			Guid attributeId,
+			AttributeScoreCalculator sut)
+		{
+			var weight = 1f;
+			var averageScore = 61;
+			game.UserScore = null;
+			var games = new[] { game };
+			ClearAttributes(game);
+			SetAttributes(attributeIdsName, game, attributeId);
+
+			var result = sut.CalculateByUserScore(games, averageScore, weight);
+
+			Assert.NotNull(result);
+			Assert.Single(result.Keys);
+			Assert.Equal(50, result[attributeId]);
+		}
+
+		[Theory]
+		[InlineAutoData(nameof(Game.GenreIds))]
+		[InlineAutoData(nameof(Game.CategoryIds))]
+		[InlineAutoData(nameof(Game.DeveloperIds))]
+		[InlineAutoData(nameof(Game.PublisherIds))]
+		[InlineAutoData(nameof(Game.TagIds))]
+		[InlineAutoData(nameof(Game.SeriesIds))]
+		public void CalculateByUserScore_Returns1AttributeWithScore100_When_1Game1AttributeWith1WeightAndUserScore100(
+			string attributeIdsName,
+			Game game,
+			Guid attributeId,
+			AttributeScoreCalculator sut)
+		{
+			var weight = 1f;
+			var averageScore = 61;
+			game.UserScore = 100;
+			var games = new[] { game };
+			ClearAttributes(game);
+			SetAttributes(attributeIdsName, game, attributeId);
+
+			var result = sut.CalculateByUserScore(games, averageScore, weight);
+
+			Assert.NotNull(result);
+			Assert.Single(result.Keys);
+			Assert.Equal(100, result[attributeId]);
+		}
+
+
+		[Theory]
+		[InlineAutoData(nameof(Game.GenreIds))]
+		[InlineAutoData(nameof(Game.CategoryIds))]
+		[InlineAutoData(nameof(Game.DeveloperIds))]
+		[InlineAutoData(nameof(Game.PublisherIds))]
+		[InlineAutoData(nameof(Game.TagIds))]
+		[InlineAutoData(nameof(Game.SeriesIds))]
+		public void CalculateByUserScore_Returns1AttributeWithScore50_When_1Game1AttributeWith1WeightAndUserAverageScore(
+			string attributeIdsName,
+			Game game,
+			Guid attributeId,
+			AttributeScoreCalculator sut)
+		{
+			var weight = 1f;
+			var averageScore = 72;
+			game.UserScore = averageScore;
+			var games = new[] { game };
+			ClearAttributes(game);
+			SetAttributes(attributeIdsName, game, attributeId);
+
+			var result = sut.CalculateByUserScore(games, averageScore, weight);
+
+			Assert.NotNull(result);
+			Assert.Single(result.Keys);
+			Assert.Equal(50, result[attributeId]);
+		}
+
+		[Theory]
+		[InlineAutoData(nameof(Game.GenreIds))]
+		[InlineAutoData(nameof(Game.CategoryIds))]
+		[InlineAutoData(nameof(Game.DeveloperIds))]
+		[InlineAutoData(nameof(Game.PublisherIds))]
+		[InlineAutoData(nameof(Game.TagIds))]
+		[InlineAutoData(nameof(Game.SeriesIds))]
+		public void CalculateByUserScore_Returns1AttributeWithScore16_When_1Game1AttributeWith1WeightAndScore25AndAverage75(
+			string attributeIdsName,
+			Game game,
+			Guid attributeId,
+			AttributeScoreCalculator sut)
+		{
+			var weight = 1f;
+			var averageScore = 75;
+			game.UserScore = 25;
+			var games = new[] { game };
+			ClearAttributes(game);
+			SetAttributes(attributeIdsName, game, attributeId);
+
+			var result = sut.CalculateByUserScore(games, averageScore, weight);
+
+			Assert.NotNull(result);
+			Assert.Single(result.Keys);
+			Assert.Equal(16, result[attributeId]);
 		}
 
 		private static void ClearAttributes(Game game)

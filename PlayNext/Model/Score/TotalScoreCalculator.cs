@@ -49,6 +49,7 @@ namespace PlayNext.Model.Score
 				RecentPlaytime = savedSettings.RecentPlaytimeWeight / PlayNextSettings.MaxWeightValue,
 				RecentOrder = savedSettings.RecentOrderWeight / PlayNextSettings.MaxWeightValue,
 				UserFavourites = savedSettings.UserFavouritesWeight / PlayNextSettings.MaxWeightValue,
+				UserScore = savedSettings.UserScoreWeight / PlayNextSettings.MaxWeightValue,
 			};
 
 			var gameScoreCalculationWeights = new GameScoreWeights()
@@ -76,7 +77,7 @@ namespace PlayNext.Model.Score
 			var filteredGames = new ExclusionListFilter().Filter(unPlayedGames, savedSettings);
 
 			var gamesWithRecentPlaytime = _plugin.GameActivityExtension.GetRecentPlaytime(recentGames, savedSettings);
-			var attributeScore = _finalAttributeScoreCalculator.Calculate(playedGames, gamesWithRecentPlaytime, recentGames, attributeCalculationWeights);
+			var attributeScore = _finalAttributeScoreCalculator.Calculate(allGames, playedGames, gamesWithRecentPlaytime, recentGames, savedSettings.AverageUserScore, attributeCalculationWeights);
 			var gameScore = _finalGameScoreCalculator.Calculate(filteredGames, attributeScore, gameScoreCalculationWeights, savedSettings.OrderSeriesBy, desiredReleaseYear, desiredGameLength);
 
 			return gameScore.Select(score =>

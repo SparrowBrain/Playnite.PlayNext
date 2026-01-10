@@ -19,6 +19,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Total Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Recent Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFavourites">Favourites</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUserScore">User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Recent Order</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Default</sys:String>
@@ -26,6 +27,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Other</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Games Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Recent Days</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAverageUserScore">Average User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Unplayed Game Means</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion Status</sys:String>
@@ -68,6 +70,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filter</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureAverageUserScore">Average Game User Score must be between 0 and 100</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Active Settings</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Display top recommended games to play based on your preferences.</sys:String>

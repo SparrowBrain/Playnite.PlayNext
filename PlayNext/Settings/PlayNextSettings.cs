@@ -25,6 +25,7 @@ namespace PlayNext.Settings
 		private int _startPageMinCoverCount;
 		private bool _refreshOnGameUpdates;
 		private bool _showSidebarItem;
+		private int _averageUserScore;
 
 		public PlayNextSettings()
 		{
@@ -44,6 +45,7 @@ namespace PlayNext.Settings
 			ShowSidebarItem = true;
 			NumberOfTopGames = 30;
 			RecentDays = 14;
+			AverageUserScore = 70;
 			UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
 			UnplayedCompletionStatuses = Array.Empty<Guid>();
 			RefreshOnGameUpdates = false;
@@ -70,6 +72,8 @@ namespace PlayNext.Settings
 		public float RecentOrderWeight { get; set; }
 
 		public float UserFavouritesWeight { get; set; }
+
+		public float UserScoreWeight { get; set; }
 
 		public float GenreWeight { get; set; }
 
@@ -148,6 +152,12 @@ namespace PlayNext.Settings
 		{
 			get => _recentDays;
 			set => SetValue(ref _recentDays, value);
+		}
+
+		public int AverageUserScore
+		{
+			get => _averageUserScore;
+			set => SetValue(ref _averageUserScore, value);
 		}
 
 		[DontSerialize]
@@ -239,7 +249,8 @@ namespace PlayNext.Settings
 			TotalPlaytimeWeight = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
 			RecentPlaytimeWeight = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
 			RecentOrderWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
-			UserFavouritesWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+			UserFavouritesWeight = attributeCalculationWeights.UserFavourites * MaxWeightValue;
+			UserScoreWeight = attributeCalculationWeights.UserScore * MaxWeightValue;
 		}
 
 		public void SetGameWeights(GameScoreWeights gameScoreWeights)

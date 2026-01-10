@@ -13,3 +13,5 @@ V4
 - ShowSidebarItem
 - RandomWeight
 - UserFavouritesWeight
+- UserScoreWeight
+- AverageUserScore
