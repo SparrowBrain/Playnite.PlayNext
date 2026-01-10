@@ -8,13 +8,14 @@
 - Added ability to exclude by Platform
 - Added ability to exclude by Category
 - Added ability to exclude by Tag
-- Fixed completion statuses combo box text
-- Additional Brazilian Portuguese translations (thank you The Nutellas!)
-- Additional German translations (thank you juliuscaesr!)
 - Added random in score calculations
 - Added Refresh button (works with random weighting)
+- Added attribute score calculation by favourites
+- Additional Brazilian Portuguese translations (thank you The Nutellas!)
+- Additional German translations (thank you juliuscaesr!)
+- Fixed completion statuses combo box text
 --- Add data to list view
---- Added user score weighting
+--- Added attribute score calculation by user score
 --- What to do when I update the settings? Do I save the preset, or remove selected preset?
 
 v1.5.7

@@ -48,6 +48,7 @@ namespace PlayNext.Model.Score
 				TotalPlaytime = savedSettings.TotalPlaytimeWeight / PlayNextSettings.MaxWeightValue,
 				RecentPlaytime = savedSettings.RecentPlaytimeWeight / PlayNextSettings.MaxWeightValue,
 				RecentOrder = savedSettings.RecentOrderWeight / PlayNextSettings.MaxWeightValue,
+				UserFavourites = savedSettings.UserFavouritesWeight / PlayNextSettings.MaxWeightValue,
 			};
 
 			var gameScoreCalculationWeights = new GameScoreWeights()

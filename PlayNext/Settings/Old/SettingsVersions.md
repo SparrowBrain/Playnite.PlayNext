@@ -11,3 +11,5 @@
 
 V4
 - ShowSidebarItem
+- RandomWeight
+- UserFavouritesWeight

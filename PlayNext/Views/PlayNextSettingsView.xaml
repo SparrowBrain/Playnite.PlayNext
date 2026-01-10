@@ -134,6 +134,8 @@
                                 <Slider Minimum="0" Maximum="100" Value="{Binding RecentPlaytimeWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                                 <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsRecentOrder}"></TextBlock>
                                 <Slider Minimum="0" Maximum="100" Value="{Binding RecentOrderWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsFavourites}"></TextBlock>
+                                <Slider Minimum="0" Maximum="100" Value="{Binding UserFavouritesWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></Slider>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>

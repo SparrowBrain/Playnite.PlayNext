@@ -214,6 +214,19 @@ namespace PlayNext.ViewModels
 			}
 		}
 
+		public float UserFavouritesWeight
+		{
+			get => Settings.UserFavouritesWeight;
+			set
+			{
+				var difference = (value - Settings.UserFavouritesWeight) / (AttributeCalculationWeights.Number - 1);
+				RebalanceAttributeScoreSourceWeights(difference);
+				Settings.UserFavouritesWeight = value;
+				PushAttributeWeightsToTotal(nameof(Settings.UserFavouritesWeight));
+				NotifyAttributeScoreSourcePropertiesChanged();
+			}
+		}
+
 		public float GenreWeight
 		{
 			get => Settings.GenreWeight;
@@ -432,6 +445,7 @@ namespace PlayNext.ViewModels
 			Settings.TotalPlaytimeWeight = ContainInMinMax(Settings.TotalPlaytimeWeight - difference);
 			Settings.RecentPlaytimeWeight = ContainInMinMax(Settings.RecentPlaytimeWeight - difference);
 			Settings.RecentOrderWeight = ContainInMinMax(Settings.RecentOrderWeight - difference);
+			Settings.UserFavouritesWeight = ContainInMinMax(Settings.UserFavouritesWeight - difference);
 		}
 
 		private void RebalanceGameScoreWeights(float difference)
@@ -500,7 +514,7 @@ namespace PlayNext.ViewModels
 			{
 				Settings.GameLengthWeight = ContainInMinMax(Settings.GameLengthWeight + GetMissingGameWeightToTotal());
 			}
-			
+
 			if (ignore != nameof(Settings.RandomWeight))
 			{
 				Settings.RandomWeight = ContainInMinMax(Settings.RandomWeight + GetMissingGameWeightToTotal());
@@ -523,6 +537,11 @@ namespace PlayNext.ViewModels
 			{
 				Settings.RecentPlaytimeWeight = ContainInMinMax(Settings.RecentPlaytimeWeight + GetMissingAttributeWeightToTotal());
 			}
+
+			if (ignore != nameof(Settings.UserFavouritesWeight))
+			{
+				Settings.UserFavouritesWeight = ContainInMinMax(Settings.UserFavouritesWeight + GetMissingAttributeWeightToTotal());
+			}
 		}
 
 		private void NotifyAttributeScoreSourcePropertiesChanged()
@@ -530,6 +549,7 @@ namespace PlayNext.ViewModels
 			OnPropertyChanged(nameof(TotalPlaytimeWeight));
 			OnPropertyChanged(nameof(RecentPlaytimeWeight));
 			OnPropertyChanged(nameof(RecentOrderWeight));
+			OnPropertyChanged(nameof(UserFavouritesWeight));
 		}
 
 		private void NotifyGameScoreSourcePropertiesChanged()
@@ -554,7 +574,11 @@ namespace PlayNext.ViewModels
 
 		private float GetMissingAttributeWeightToTotal()
 		{
-			return PlayNextSettings.MaxWeightValue - Settings.TotalPlaytimeWeight - Settings.RecentPlaytimeWeight - Settings.RecentOrderWeight;
+			return PlayNextSettings.MaxWeightValue
+				   - Settings.TotalPlaytimeWeight
+				   - Settings.RecentPlaytimeWeight
+				   - Settings.RecentOrderWeight
+				   - Settings.UserFavouritesWeight;
 		}
 
 		private float GetMissingGameWeightToTotal()

@@ -1,5 +1,4 @@
 ﻿using PlayNext.Model.Data;
-using PlayNext.Model.Score;
 using PlayNext.Settings;
 using Playnite.SDK;
 using System;

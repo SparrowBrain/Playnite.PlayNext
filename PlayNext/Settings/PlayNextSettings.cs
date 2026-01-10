@@ -69,6 +69,8 @@ namespace PlayNext.Settings
 
 		public float RecentOrderWeight { get; set; }
 
+		public float UserFavouritesWeight { get; set; }
+
 		public float GenreWeight { get; set; }
 
 		public float FeatureWeight { get; set; }
@@ -237,6 +239,7 @@ namespace PlayNext.Settings
 			TotalPlaytimeWeight = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
 			RecentPlaytimeWeight = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
 			RecentOrderWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+			UserFavouritesWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
 		}
 
 		public void SetGameWeights(GameScoreWeights gameScoreWeights)
