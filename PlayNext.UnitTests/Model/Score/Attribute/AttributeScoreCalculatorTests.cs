@@ -388,7 +388,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 		[InlineAutoData(nameof(Game.PublisherIds))]
 		[InlineAutoData(nameof(Game.TagIds))]
 		[InlineAutoData(nameof(Game.SeriesIds))]
-		public void CalculateByUserScore_Returns1AttributeWithScore50_When_1Game1AttributeWith1WeightAndNoUserScore(
+		public void CalculateByUserScore_ReturnsEmpty_When_NoUserScore(
 			string attributeIdsName,
 			Game game,
 			Guid attributeId,
@@ -404,8 +404,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 			var result = sut.CalculateByUserScore(games, averageScore, weight);
 
 			Assert.NotNull(result);
-			Assert.Single(result.Keys);
-			Assert.Equal(50, result[attributeId]);
+			Assert.Empty(result);
 		}
 
 		[Theory]
@@ -434,7 +433,6 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 			Assert.Single(result.Keys);
 			Assert.Equal(100, result[attributeId]);
 		}
-
 
 		[Theory]
 		[InlineAutoData(nameof(Game.GenreIds))]
@@ -470,7 +468,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 		[InlineAutoData(nameof(Game.PublisherIds))]
 		[InlineAutoData(nameof(Game.TagIds))]
 		[InlineAutoData(nameof(Game.SeriesIds))]
-		public void CalculateByUserScore_Returns1AttributeWithScore16_When_1Game1AttributeWith1WeightAndScore25AndAverage75(
+		public void CalculateByUserScore_Returns1AttributeWithScoreNegative16_When_1Game1AttributeWith1WeightAndScore25AndAverage75(
 			string attributeIdsName,
 			Game game,
 			Guid attributeId,
@@ -487,7 +485,7 @@ namespace PlayNext.UnitTests.Model.Score.Attribute
 
 			Assert.NotNull(result);
 			Assert.Single(result.Keys);
-			Assert.Equal(16, result[attributeId]);
+			Assert.Equal(-16, result[attributeId]);
 		}
 
 		private static void ClearAttributes(Game game)
