@@ -29,6 +29,8 @@ namespace PlayNext.UnitTests.Settings.Old
 			Assert.Equal(oldSettings.TotalPlaytimeWeight, result.TotalPlaytimeWeight);
 			Assert.Equal(oldSettings.RecentPlaytimeWeight, result.RecentPlaytimeWeight);
 			Assert.Equal(oldSettings.RecentOrderWeight, result.RecentOrderWeight);
+			Assert.Equal(0, result.UserFavouritesWeight);
+			Assert.Equal(0, result.UserScoreWeight);
 
 			Assert.Equal(oldSettings.GenreWeight, result.GenreWeight);
 			Assert.Equal(oldSettings.FeatureWeight, result.FeatureWeight);

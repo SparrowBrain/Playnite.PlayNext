@@ -107,6 +107,8 @@ namespace PlayNext.Settings.Old
 			settings.TotalPlaytimeWeight = TotalPlaytimeWeight;
 			settings.RecentPlaytimeWeight = RecentPlaytimeWeight;
 			settings.RecentOrderWeight = RecentOrderWeight;
+			settings.UserFavouritesWeight = 0;
+			settings.UserScoreWeight = 0;
 
 			settings.GenreWeight = GenreWeight;
 			settings.FeatureWeight = FeatureWeight;
