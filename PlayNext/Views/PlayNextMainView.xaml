@@ -74,53 +74,56 @@
         </StackPanel>
 
         <Grid Grid.Row="2" Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,0,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="75" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="1" Text="{DynamicResource LOC_PlayNext_MainScoreColumn}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <TextBlock Grid.Column="2" Text="{DynamicResource LOC_PlayNext_MainNameColumn}" VerticalAlignment="Center" />
-            </Grid>
-            <ListBox Grid.Row="1" ItemsSource="{Binding Games}" Margin="0,0,0,0" Background="Transparent">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        <Setter Property="Focusable" Value="False" />
-                        <Setter Property="Padding" Value="0"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,2.5,0,2.5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="75" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="2*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Width="25" Source="{Binding Icon,
-                                Converter={StaticResource UriToBitmapImageConverter},
-                                ConverterParameter=25,
-                                Mode=OneWay,
-                                FallbackValue={StaticResource DefaultGameIcon},
-                                TargetNullValue={StaticResource DefaultGameIcon}}">
-                            </Image>
-                            <TextBlock Grid.Column="1" Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Name}" VerticalAlignment="Center" />
-                            <Button Grid.Column="3" Command="{Binding OpenDetails}"  Content="{DynamicResource LOC_PlayNext_MainDetailsButton}"></Button>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListBox>
+            <ListView Grid.Row="0"
+                      ItemsSource="{Binding Games}"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      Background="Transparent">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="25" Source="{Binding Icon,
+                                            Converter={StaticResource UriToBitmapImageConverter},
+                                            ConverterParameter=25,
+                                            Mode=OneWay,
+                                            FallbackValue={StaticResource DefaultGameIcon},
+                                            TargetNullValue={StaticResource DefaultGameIcon}}">
+                                    </Image>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader>
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_MainScoreColumn}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Score, StringFormat=#0.00}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader>
+                                <TextBlock Text="{DynamicResource LOC_PlayNext_MainNameColumn}" VerticalAlignment="Center" />
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding OpenDetails}"  Content="{DynamicResource LOC_PlayNext_MainDetailsButton}"></Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="2"  Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
