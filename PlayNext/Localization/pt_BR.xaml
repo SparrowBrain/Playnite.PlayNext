@@ -17,6 +17,8 @@
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Atribua pesos de cálculo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Tempo de jogo total</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Tempo de jogo recente</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFavourites">Favoritos</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUserScore">Avaliação do usuário</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requer extensão do GameActivity</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Ordem recente</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Padrão</sys:String>
@@ -24,6 +26,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Outros</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Quantidade de jogos</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Dias Recentes</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAverageUserScore">Pontuação média do usuário</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Meios de jogos não jogados</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Nenhum tempo de jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Status de Conclusão</sys:String>
@@ -50,10 +53,12 @@
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Atual</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Específico</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Duração do Jogo</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRandom">Aleatório</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Requer a extensão HowLongToBeat</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Duração do Jogo deve ser</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Horas</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsShowSidebarItem">Mostrar item da barra lateral</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Recarregar na atualização de jogo</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reiniciar todas as configurações para o padrão</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsSourcesHeader">Bibliotecas</sys:String>
@@ -64,6 +69,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluído</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filtro</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Não foi possível analisar o ano</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureAverageUserScore">Pontuação média do jogo deve estar entre 0 e 100</sys:String>
 
     <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Configurações ativas</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Exibir jogos recomendados para jogar com base nas suas preferências.</sys:String>
