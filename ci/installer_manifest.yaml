@@ -1,5 +1,26 @@
 AddonId: SparrowBrain_PlayNext
 Packages:
+  - Version: 1.6.0
+    RequiredApiVersion: 6.8.0
+    ReleaseDate: 2026-01-19
+    PackageUrl: https://github.com/SparrowBrain/Playnite.PlayNext/releases/download/v1.6.0/SparrowBrain_PlayNext_1_6_0.pext
+    Changelog:
+      - Added an option to hide sidebar item
+      - Added optional PlayNext refresh when games change
+      - Added settings presets
+      - Added multiple start page instances (instance per preset)
+      - StartPage settings moved to StartPage edit mode
+      - Added attribute score calculation by favourites
+      - Added attribute score calculation by user score
+      - Added random in game score calculations
+      - Added Refresh button (works with random weighting)
+      - Added ability to exclude by Library
+      - Added ability to exclude by Platform
+      - Added ability to exclude by Category
+      - Added ability to exclude by Tag
+      - Additional Brazilian Portuguese translations (thank you The Nutellas!)
+      - Additional German translations (thank you juliuscaesr!)
+      - Fixed completion statuses combo box text
   - Version: 1.5.7
     RequiredApiVersion: 6.8.0
     ReleaseDate: 2025-03-09
