@@ -1,14 +1,24 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <sys:String x:Key="LOC_PlayNextGenericCancel">Cancel</sys:String>
+    <sys:String x:Key="LOC_PlayNextGenericOk">Ok</sys:String>
     <sys:String x:Key="LOC_PlayNext_PluginName">Play Next</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Details</sys:String>
 
+    <sys:String x:Key="LOC_PlayNext_SettingsAlgorithmHeader">Algorithm</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGeneralHeader">General</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetsGroupTitle">Presets</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetNew">Create New</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetRemove">Remove</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetSave">Save</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Attribute Calculation Weights</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Total Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Recent Playtime</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFavourites">Favourites</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUserScore">User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Requires GameActivity extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Recent Order</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Default</sys:String>
@@ -16,6 +26,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Other</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Games Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Recent Days</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAverageUserScore">Average User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Unplayed Game Means</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Zero Playtime</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Completion Status</sys:String>
@@ -24,6 +35,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Horizontal Label</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Min Cover Count</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Game Score Calculation Weights</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameParametersGroupTitle">Game Score Calculation Parameters</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genre</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Feature</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Developer</sys:String>
@@ -35,19 +47,31 @@
     <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Critic Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Community Score</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetName">Preset Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Release Year</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Release Year Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Current</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Specific</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Game Length</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRandom">Random</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Requires HowLongToBeat extension</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Game Length Should Be</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Hours</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Global</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsShowSidebarItem">Show Sidebar Item</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Refresh on Game Updates</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Reset all settings to default</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSourcesHeader">Libraries</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPlatformsHeader">Platforms</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCategoriesHeader">Categories</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Tags</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Allowed</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filter</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Could not parse the year</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureAverageUserScore">Average Game User Score must be between 0 and 100</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Top Recommendations</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Active Settings</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Display top recommended games to play based on your preferences.</sys:String>
 
 </ResourceDictionary>

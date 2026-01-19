@@ -1,14 +1,24 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <sys:String x:Key="LOC_PlayNextGenericCancel">Cancel</sys:String>
+    <sys:String x:Key="LOC_PlayNextGenericOk">Ok</sys:String>
     <sys:String x:Key="LOC_PlayNext_PluginName">Prossimo Gioco</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainScoreColumn">Voto</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainNameColumn">Nome</sys:String>
     <sys:String x:Key="LOC_PlayNext_MainDetailsButton">Dettagli</sys:String>
 
+    <sys:String x:Key="LOC_PlayNext_SettingsAlgorithmHeader">Algorithm</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGeneralHeader">General</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetsGroupTitle">Presets</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetNew">Create New</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetRemove">Remove</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetSave">Save</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAttributeGroupTitle">Pesi per il calcolo degli attributi</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTotalPlaytime">Tempo di Gioco Totale</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentPlaytime">Ultimi Tempi di Gioco</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFavourites">Favourites</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsUserScore">User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameActivityExtensionNotFound">Richiede l'estensione GameActivity</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentOrder">Ordine Recente</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDefaultButton">Predefinito</sys:String>
@@ -16,6 +26,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsOtherGroupTitle">Altro</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsNumberOfTopGames">Conteggio Giochi</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsRecentDays">Ultimi Giorni</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAverageUserScore">Average User Score</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameTypeTitle">Media Giochi non Giocati</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameZeroPlaytime">Nessun Tempo Di Gioco</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses">Stato di Completamento</sys:String>
@@ -24,6 +35,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageLabelIsHorizontal">Etichetta Orizzontale</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsStartPageMinCoverCount">Numero Minimo di Copertine</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGameGroupTitle">Pesi per il Calcolo del Voto del Gioco</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGameParametersGroupTitle">Game Score Calculation Parameters</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGenre">Genere</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFeature">Funzionalità</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsDeveloper">Sviluppatore</sys:String>
@@ -35,19 +47,31 @@
     <sys:String x:Key="LOC_PlayNext_SettingsSeriesOrderedBySortingName">Sorting Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCriticScore">Voto della Critica</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCommunityScore">Voto della Community</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPresetName">Preset Name</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYear">Anno di Pubblicazione</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearTypeTitle">Anno di Rilascio Presunto</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearCurrent">Corrente</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsReleaseYearSpecific">Specifico</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLength">Durata del Gioco</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRandom">Random</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsHowLongToBeatExtensionNotFound">Richiede l'estensione HowLongToBeat</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthTitle">Durata di Gioco Richiesta</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsLengthHours">Ore</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsGlobalGroupTitle">Globale</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsShowSidebarItem">Show Sidebar Item</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsRefreshOnGameUpdates">Refresh on Game Updates</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsResetAllToDefault">Ripristina tutte le impostazioni predefinite</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsSourcesHeader">Libraries</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsPlatformsHeader">Platforms</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsCategoriesHeader">Categories</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Tags</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Allowed</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filter</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureToParseYear">Non è stato possibile leggere l'anno</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsValidationFailureAverageUserScore">Average Game User Score must be between 0 and 100</sys:String>
 
-    <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsViewName">Consigliati</sys:String>
+    <sys:String x:Key="LOC_PlayNext_StartPageActiveSettingsViewName">Active Settings</sys:String>
     <sys:String x:Key="LOC_PlayNext_StartPageTopRecommendationsDescription">Visualizza i migliori giochi consigliati in base alle tue preferenze.</sys:String>
 
 </ResourceDictionary>
