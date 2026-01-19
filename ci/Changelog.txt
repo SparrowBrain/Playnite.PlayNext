@@ -1,4 +1,4 @@
------v1.6.0
+v1.6.0
 - Added an option to hide sidebar item
 - Added optional PlayNext refresh when games change
 - Added settings presets
@@ -15,7 +15,6 @@
 - Additional Brazilian Portuguese translations (thank you The Nutellas!)
 - Additional German translations (thank you juliuscaesr!)
 - Fixed completion statuses combo box text
---- Add data to list view
 
 v1.5.7
 - Fix StartPage cover sizing by loading settings on main thread for StartPage view
