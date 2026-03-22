@@ -29,6 +29,7 @@ Total Play Next score is calculated by weighting and adding up following attribu
 | Community Score | Itself |
 | Release Year | How close to preferred year it is. It can either be the current year (ie newer games are preferred), or a specific one |
 | Game Length | How close to preferred length it is. The length can be specified in hours. Requires HowLongToBeat addon ⚠️  |
+| Random | Random score |
 
 Attribute score depends on your activity:
 
@@ -37,6 +38,8 @@ Attribute score depends on your activity:
 | Total Playtime | All playtime |
 | Recent Playtime | Playtime within recent days, requires GameActivity addon ⚠️ |
 | Recent Order | Order of games played in recent days |
+| Favourites | Games favourited by the user |
+| User Score | Score given by the user to the game |
 
 ## Algorithm
 Algorithm works in two steps:
@@ -53,6 +56,17 @@ Same as Total Playtime, except we use recent playtime withing configured recent 
 #### Recent Order
 In a way it's a poor man's Recent Playtime. It just orders games played within recent days and assigns the highest score to most recent game's attributes, giving proportionally smaller scores to older game's attributes, ending with zero for the last one.
 
+#### Favourites
+We iterate through all games favourited by the user. All attributes in any such game get the maximum value.
+
+#### User Score
+We iterate through all games. Any attributes of games that have been assigned user score higher than Average User Score (defined in settings) get proportionally spread score above 50. Any games below said average get a negative scores for their attributes.
+
+Breakdown:
+* Score of 0 → mapped to 0 (neutral, not penalized).
+* Below average → linearly mapped from 0 to -50. A score just above 0 approaches -50, a score just below average approaches 0.
+* At or above average → linearly mapped from 50 to 100. A score equal to averageScore gives exactly 50, a score of 100 gives exactly 100.
+
 ### Game Score Calculation
 
 #### Attribute Scores
@@ -62,10 +76,10 @@ Adds up score to the game score using the different attribute scores calculated 
 Same as attribute scores, except it's weighted by the order in the series. The first game in the series gets the maximum score, while the last one gets the smallest score. Order in series can be either release date or sorting name.
 
 #### Critic Score
-Just adds the game's critic score to the score. Zero if game has no critic score.
+Just adds the game's critic score to the score. Skipped if game has no critic score.
 
 #### Community Score
-Just adds the game's community score to the score. Zero if game has no community score.
+Just adds the game's community score to the score. Skipped if game has no community score.
 
 #### Release Year
 Takes release years for all games and then assigns the scores depending on the difference from the preferred year. If the game's release year matches, the game gets maximum score. The other release years earn proportionally less score, depending on the difference from preferred release year. The biggest difference will earn zero score.
@@ -87,10 +101,27 @@ For example if our preferred length is 20 hours, then we get these scores:
 * Hours 25 - 50;
 * Hours 30 - 0;
 
+#### Random
+Random assigns a random score between 0 anmd 100. This is useful if you want the recommended games to keep changing.
+
+Also, if this is non-zero, it makes a Refresh button to appear. You can then regerenate the suggestion the list at any point.
+
 ### Weighting
 Weighting sets a maximum amount of score a specific part of algorigthm can contribute to the end result. That means in attribute score calculation weights set how much specific types influence the attribute scores. And in game score calculation we specify how much those attribute types influence the final score for games that will get recommended.
 
 This lets us fine tune algorithm to get the games we prefer. For example we can aim for games with the same genre we played a lot and games with high critic scores.
+
+## Presets
+PlayNext settings support presets. You can save multiple different setting options and switch between them using the preset drop-down.
+
+This also enables showing multiple PlayNext game shelves in StartPage extension with different recommendation algorithm parameters.
+
+## Exclusion lists
+You can exclude certain games to not be recommended by using these exclusion lists:
+* Libraries
+* Platforms
+* Categories
+* Tags
 
 ## Installation
 You can install it either from Playnite's addon browser, or from [the web addon browser](https://playnite.link/addons.html#SparrowBrain_PlayNext).
