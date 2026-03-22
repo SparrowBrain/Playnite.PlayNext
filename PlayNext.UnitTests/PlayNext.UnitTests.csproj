@@ -84,6 +84,8 @@
     <Compile Include="Model\Score\Attribute\AttributeScoreCalculatorTests.cs" />
     <Compile Include="Model\Filters\RecentlyPlayedFilterTests.cs" />
     <Compile Include="Model\Filters\WithPlaytimeFilterTests.cs" />
+    <Compile Include="Model\Score\GameScore\CommunityScoreCalculatorTests.cs" />
+    <Compile Include="Model\Score\GameScore\CriticScoreCalculatorTests.cs" />
     <Compile Include="Model\Score\GameScore\GameLengthCalculatorTests.cs" />
     <Compile Include="Model\Score\GameScore\GameScoreBySeriesCalculatorTests.cs" />
     <Compile Include="Model\Score\GameScore\RandomScoreCalculatorTests.cs" />

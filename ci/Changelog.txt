@@ -1,3 +1,6 @@
+v1.6.1
+- Community and Critic score calculations no longer punish games without them
+
 v1.6.0
 - Added an option to hide sidebar item
 - Added optional PlayNext refresh when games change
