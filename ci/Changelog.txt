@@ -1,3 +1,6 @@
+v1.6.2
+- Fixed PresetManager crashing Playnite, when directory does not exist
+
 v1.6.1
 - Community and Critic score calculations no longer punish games without them
 

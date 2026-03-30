@@ -14,6 +14,7 @@ using Xunit;
 
 namespace PlayNext.IntegrationTests.Settings.Presets
 {
+	[CollectionDefinition("SettingsPresetManager", DisableParallelization = true)]
 	public class SettingsPresetManagerTests : IDisposable
 	{
 		private const string ExtensionDataPath = @"Tests\SettingsPresetManagerTests";
@@ -27,6 +28,19 @@ namespace PlayNext.IntegrationTests.Settings.Presets
 			_settingsMigrator = new Mock<ISettingsMigrator>();
 			_sut = new SettingsPresetManager(ExtensionDataPath, _settingsMigrator.Object);
 			EnsurePathExists();
+		}
+
+		[Fact]
+		public void Initialize_DoesNotCrash_WhenDirectoryDoesNotExist()
+		{
+			// Arrange
+			EnsurePathDoesNotExist();
+
+			// Act
+			var exception = Record.Exception(() => _sut.Initialize());
+
+			// Assert
+			Assert.Null(exception);
 		}
 
 		[Fact]

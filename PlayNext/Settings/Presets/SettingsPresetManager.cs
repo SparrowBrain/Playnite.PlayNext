@@ -36,11 +36,6 @@ namespace PlayNext.Settings.Presets
 
 		public IReadOnlyCollection<SettingsPreset<PlayNextSettings>> GetPersistedPresets()
 		{
-			if (!Directory.Exists(_presetPath))
-			{
-				return new List<SettingsPreset<PlayNextSettings>>();
-			}
-
 			var presets = ReadPresets<PlayNextSettings>();
 
 			return presets;
@@ -64,6 +59,11 @@ namespace PlayNext.Settings.Presets
 
 		private List<SettingsPreset<T>> ReadPresets<T>() where T : IVersionedSettings
 		{
+			if (!Directory.Exists(_presetPath))
+			{
+				return new List<SettingsPreset<T>>();
+			}
+
 			var files = Directory.GetFiles(_presetPath);
 			var presets = new List<SettingsPreset<T>>();
 			foreach (var file in files)
