@@ -41,6 +41,15 @@
 
     <DockPanel>
         <StackPanel Orientation="Horizontal" Margin="10,10,0,0" DockPanel.Dock="Top">
+            <TextBlock VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
+                <Hyperlink Command="{Binding NavigateBackCommand}">
+                    <TextBlock 
+                        Text="&#xea5c;" 
+                        FontFamily="{DynamicResource FontIcoFont}"
+                        FontSize="26" 
+                        Style="{x:Null}" />
+                </Hyperlink>
+            </TextBlock>
             <TextBlock 
                 Text="{DynamicResource LOC_PlayNext_PluginName}" 
                 Style="{StaticResource BaseTextBlockStyle}"
