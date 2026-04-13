@@ -40,9 +40,11 @@
     </PluginUserControl.Resources>
 
     <DockPanel>
+        <!--Header-->
         <StackPanel Orientation="Horizontal" Margin="10,10,10,10" DockPanel.Dock="Top">
-
+            
             <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                <!--Back Button-->
                 <TextBlock VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
                     <Hyperlink Command="{Binding NavigateBackCommand}">
                         <TextBlock 
@@ -52,6 +54,8 @@
                             Style="{x:Null}" />
                     </Hyperlink>
                 </TextBlock>
+
+                <!--Plugin Name Title-->
                 <TextBlock 
                     Text="{DynamicResource LOC_PlayNext_PluginName}" 
                     Style="{StaticResource BaseTextBlockStyle}"
@@ -60,7 +64,7 @@
                     VerticalAlignment="Center" />
             </StackPanel>
 
-            
+            <!--Refresh Button-->
             <Button Margin="0,0,10,0"
                 Width="50"
                 Height="30"
@@ -70,6 +74,7 @@
                 <TextBlock FontFamily="{DynamicResource FontIcoFont}" Text="&#xefd1;"></TextBlock>
             </Button>
 
+            <!--Showcase Type Toggle Buttons-->
             <StackPanel Orientation="Horizontal" Margin="10,0,20,0">
                 <ToggleButton
                     Margin="0,0,10,0"
@@ -92,7 +97,9 @@
  
         </StackPanel>
 
+        <!--Content-->
         <Grid>
+            <!--List Showcase Type-->
             <Grid Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
                 <ListView ItemsSource="{Binding Games}"
                           HorizontalContentAlignment="Stretch"
@@ -146,6 +153,7 @@
                 </ListView>
             </Grid>
 
+            <!--Covers Showcase Type-->
             <Grid Visibility="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToCollapsedVisibilityConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
