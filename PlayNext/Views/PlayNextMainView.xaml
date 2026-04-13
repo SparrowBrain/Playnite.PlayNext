@@ -71,23 +71,23 @@
             </Button>
 
             <StackPanel Orientation="Horizontal" Margin="10,0,20,0">
-                <Button
+                <ToggleButton
                     Margin="0,0,10,0"
                     Width="50"
                     Height="30"
                     WindowChrome.IsHitTestVisibleInChrome="True"
                     Command="{Binding SwitchToCovers}"
-                    IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
+                    IsChecked="{Binding ActiveShowcaseType, Mode=OneWay, Converter={converters:ShowcaseTypeToBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
                     ▋ ▋
-                </Button>
-                <Button
+                </ToggleButton>
+                <ToggleButton
                     Width="50"
                     Height="30"
                     WindowChrome.IsHitTestVisibleInChrome="True"
                     Command="{Binding SwitchToList}"
-                    IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+                    IsChecked="{Binding ActiveShowcaseType, Mode=OneWay, Converter={converters:ShowcaseTypeToBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
                     ≡
-                </Button>
+                </ToggleButton>
             </StackPanel>
  
         </StackPanel>
