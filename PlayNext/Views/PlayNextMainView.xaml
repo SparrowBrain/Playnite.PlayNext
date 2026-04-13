@@ -40,49 +40,56 @@
     </PluginUserControl.Resources>
 
     <DockPanel>
-        <StackPanel Orientation="Horizontal" Margin="10,10,0,0" DockPanel.Dock="Top">
-            <TextBlock VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
-                <Hyperlink Command="{Binding NavigateBackCommand}">
-                    <TextBlock 
-                        Text="&#xea5c;" 
-                        FontFamily="{DynamicResource FontIcoFont}"
-                        FontSize="26" 
-                        Style="{x:Null}" />
-                </Hyperlink>
-            </TextBlock>
-            <TextBlock 
-                Text="{DynamicResource LOC_PlayNext_PluginName}" 
-                Style="{StaticResource BaseTextBlockStyle}"
-                FontSize="18"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center" />
-        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,10,10,10" DockPanel.Dock="Top">
 
-        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right" DockPanel.Dock="Top">
-            <Button
-                Margin="0,0,10,0"
+            <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                <TextBlock VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Hyperlink Command="{Binding NavigateBackCommand}">
+                        <TextBlock 
+                            Text="&#xea5c;" 
+                            FontFamily="{DynamicResource FontIcoFont}"
+                            FontSize="26" 
+                            Style="{x:Null}" />
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock 
+                    Text="{DynamicResource LOC_PlayNext_PluginName}" 
+                    Style="{StaticResource BaseTextBlockStyle}"
+                    FontSize="18"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+
+            
+            <Button Margin="0,0,10,0"
                 Width="50"
                 Height="30"
+                WindowChrome.IsHitTestVisibleInChrome="True"
                 Command="{Binding Refresh}"
                 Visibility="{Binding IsRefreshAvailable, Converter={converters:BooleanToCollapsedVisibilityConverter}}">
                 <TextBlock FontFamily="{DynamicResource FontIcoFont}" Text="&#xefd1;"></TextBlock>
             </Button>
-            <Button
-                Margin="0,0,10,0"
-                Width="50"
-                Height="30"
-                Command="{Binding SwitchToCovers}"
-                IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
-                ▋ ▋
-            </Button>
-            <Button
-                Margin="0,0,50,0"
-                Width="50"
-                Height="30"
-                Command="{Binding SwitchToList}"
-                IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
-                ≡
-            </Button>
+
+            <StackPanel Orientation="Horizontal" Margin="10,0,20,0">
+                <Button
+                    Margin="0,0,10,0"
+                    Width="50"
+                    Height="30"
+                    WindowChrome.IsHitTestVisibleInChrome="True"
+                    Command="{Binding SwitchToCovers}"
+                    IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.Covers}}">
+                    ▋ ▋
+                </Button>
+                <Button
+                    Width="50"
+                    Height="30"
+                    WindowChrome.IsHitTestVisibleInChrome="True"
+                    Command="{Binding SwitchToList}"
+                    IsEnabled="{Binding ActiveShowcaseType, Converter={converters:ShowcaseTypeToInvertedBooleanConverter}, ConverterParameter={x:Static model:ShowcaseType.List}}">
+                    ≡
+                </Button>
+            </StackPanel>
+ 
         </StackPanel>
 
         <Grid>
