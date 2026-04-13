@@ -97,7 +97,8 @@
                 <ListView ItemsSource="{Binding Games}"
                           HorizontalContentAlignment="Stretch"
                           VerticalContentAlignment="Stretch"
-                          Background="Transparent">
+                          Background="Transparent"
+                          BorderThickness="0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
@@ -152,7 +153,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent">
+                <ListBox Grid.Row="1"  ItemsSource="{Binding TopGames}" Background="Transparent" BorderThickness="0">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                             <Setter Property="Focusable" Value="False" />
@@ -236,7 +237,7 @@
                                     </EventTrigger>
                                 </Grid.Triggers>
 
-                                <Button Command="{Binding OpenDetails}" Background="Transparent">
+                                <Button Command="{Binding OpenDetails}" Background="Transparent" BorderThickness="0">
                                     <Image Height="400" Source="{Binding CoverImage,
                                         Converter={StaticResource UriToBitmapImageConverter},
                                         ConverterParameter=400,
