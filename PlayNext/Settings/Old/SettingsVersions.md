@@ -15,3 +15,5 @@ V4
 - UserFavouritesWeight
 - UserScoreWeight
 - AverageUserScore
+
+V5

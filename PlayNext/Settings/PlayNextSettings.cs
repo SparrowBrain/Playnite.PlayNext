@@ -9,7 +9,7 @@ namespace PlayNext.Settings
 	{
 		public const int MaxWeightValue = 100;
 		public const int MinWeightValue = 0;
-		public const int CurrentVersion = 4;
+		public const int CurrentVersion = 5;
 
 		private OrderSeriesBy _orderSeriesByChoice;
 		private int _desiredReleaseYear;

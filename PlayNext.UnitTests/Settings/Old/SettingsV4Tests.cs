@@ -1,36 +1,33 @@
-﻿using AutoFixture.Xunit2;
+using AutoFixture.Xunit2;
 using PlayNext.Settings;
 using PlayNext.Settings.Old;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PlayNext.UnitTests.Settings.Old
 {
-	public class SettingsV3Tests
+	public class SettingsV4Tests
 	{
 		[Theory, AutoData]
-		public void Migrate_MigratesToV4(
-			SettingsV3 oldSettings)
+		public void Migrate_MigratesToV5(
+			SettingsV4 oldSettings)
 		{
 			// Act
-			var result = oldSettings.Migrate() as SettingsV4;
+			var result = oldSettings.Migrate() as PlayNextSettings;
 
 			// Assert
 			Assert.NotNull(result);
 			Assert.Equal(oldSettings.SelectedPresetId, result.SelectedPresetId);
+			Assert.Equal(oldSettings.ShowSidebarItem, result.ShowSidebarItem);
 			Assert.Equal(oldSettings.RecentDays, result.RecentDays);
 			Assert.Equal(oldSettings.NumberOfTopGames, result.NumberOfTopGames);
+			Assert.Equal(oldSettings.AverageUserScore, result.AverageUserScore);
 			Assert.Equal(oldSettings.RefreshOnGameUpdates, result.RefreshOnGameUpdates);
 
 			Assert.Equal(oldSettings.TotalPlaytimeWeight, result.TotalPlaytimeWeight);
 			Assert.Equal(oldSettings.RecentPlaytimeWeight, result.RecentPlaytimeWeight);
 			Assert.Equal(oldSettings.RecentOrderWeight, result.RecentOrderWeight);
-			Assert.Equal(0, result.UserFavouritesWeight);
-			Assert.Equal(0, result.UserScoreWeight);
+			Assert.Equal(oldSettings.UserFavouritesWeight, result.UserFavouritesWeight);
+			Assert.Equal(oldSettings.UserScoreWeight, result.UserScoreWeight);
 
 			Assert.Equal(oldSettings.GenreWeight, result.GenreWeight);
 			Assert.Equal(oldSettings.FeatureWeight, result.FeatureWeight);
@@ -46,6 +43,7 @@ namespace PlayNext.UnitTests.Settings.Old
 			Assert.Equal(oldSettings.GameLengthHours, result.GameLengthHours);
 			Assert.Equal(oldSettings.SeriesWeight, result.SeriesWeight);
 			Assert.Equal(oldSettings.OrderSeriesBy, result.OrderSeriesBy);
+			Assert.Equal(oldSettings.RandomWeight, result.RandomWeight);
 
 			Assert.Equal(oldSettings.UnplayedGameDefinition, result.UnplayedGameDefinition);
 			Assert.Equal(oldSettings.UnplayedCompletionStatuses, result.UnplayedCompletionStatuses);
@@ -59,7 +57,7 @@ namespace PlayNext.UnitTests.Settings.Old
 			Assert.Equal(oldSettings.StartPageLabelIsHorizontal, result.StartPageLabelIsHorizontal);
 			Assert.Equal(oldSettings.StartPageMinCoverCount, result.StartPageMinCoverCount);
 
-			Assert.Equal(4, result.Version);
+			Assert.Equal(5, result.Version);
 		}
 	}
 }
