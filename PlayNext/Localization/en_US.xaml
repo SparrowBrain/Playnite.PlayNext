@@ -66,6 +66,7 @@
     <sys:String x:Key="LOC_PlayNext_SettingsPlatformsHeader">Platforms</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsCategoriesHeader">Categories</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsTagsHeader">Tags</sys:String>
+    <sys:String x:Key="LOC_PlayNext_SettingsGamesHeader">Games</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsAllowed">Allowed</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsExcluded">Excluded</sys:String>
     <sys:String x:Key="LOC_PlayNext_SettingsFilter">Filter</sys:String>

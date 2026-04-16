@@ -17,3 +17,4 @@ V4
 - AverageUserScore
 
 V5
+- ExcludedGameIds

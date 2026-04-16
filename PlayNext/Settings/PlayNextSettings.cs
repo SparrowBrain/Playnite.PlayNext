@@ -224,6 +224,8 @@ namespace PlayNext.Settings
 
 		public HashSet<Guid> ExcludedTagIds { get; set; } = new HashSet<Guid>();
 
+		public HashSet<Guid> ExcludedGameIds { get; set; } = new HashSet<Guid>();
+
 		public bool StartPageShowLabel
 		{
 			get => _startPageShowLabel;
