@@ -148,6 +148,15 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding ExcludeGame}" ToolTip="Exclude from recommendations">
+                                            <TextBlock Text="✕" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

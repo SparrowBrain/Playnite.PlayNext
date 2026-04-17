@@ -39,6 +39,12 @@ namespace PlayNext.ViewModels
 				_plugin.PlayniteApi.MainView.SwitchToLibraryView();
 			});
 
+		public ICommand ExcludeGame =>
+			new RelayCommand(() =>
+			{
+				_plugin.ExcludeGame(Id);
+			});
+
 		public ICommand RunGame =>
 			new RelayCommand(() =>
 			{
