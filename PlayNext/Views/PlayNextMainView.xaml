@@ -231,6 +231,10 @@
                                                         Storyboard.TargetName="HoverTransform"
                                                         Storyboard.TargetProperty="ScaleY"
                                                         From="1" To="1.05" Duration="0:0:0.1" />
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetName="ExcludeButton"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        From="0" To="1" Duration="0:0:0.1" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </EventTrigger.Actions>
@@ -248,6 +252,10 @@
                                                         Storyboard.TargetName="HoverTransform"
                                                         Storyboard.TargetProperty="ScaleY"
                                                         From="1.05" To="1" Duration="0:0:0.05" />
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetName="ExcludeButton"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        From="1" To="0" Duration="0:0:0.05" />
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </EventTrigger.Actions>
@@ -262,6 +270,10 @@
                                         FallbackValue={StaticResource DefaultGameCover},
                                         TargetNullValue={StaticResource DefaultGameCover}}">
                                     </Image>
+                                </Button>
+                            
+                                <Button x:Name="ExcludeButton" Command="{Binding ExcludeGame}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,8,0" Width="28" Height="28" Padding="0" ToolTip="Exclude from recommendations" Opacity="0">
+                                    <TextBlock Text="✕" FontSize="18" Foreground="White" FontWeight="Bold" />
                                 </Button>
                             </Grid>
                         </DataTemplate>
