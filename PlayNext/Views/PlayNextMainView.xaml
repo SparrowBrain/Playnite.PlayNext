@@ -212,10 +212,7 @@
                     </ListBox.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.RenderTransform>
-                                    <ScaleTransform  x:Name="HoverTransform" CenterX="150" CenterY="200" ScaleX="1" ScaleY="1" />
-                                </Grid.RenderTransform>
+                            <Grid Margin="8,0,0,8">
                                 <Grid.Triggers>
                                     <EventTrigger RoutedEvent="Grid.MouseEnter">
 
@@ -262,18 +259,32 @@
                                     </EventTrigger>
                                 </Grid.Triggers>
 
-                                <Button Command="{Binding OpenDetails}" Background="Transparent" BorderThickness="0">
-                                    <Image Height="400" Source="{Binding CoverImage,
-                                        Converter={StaticResource UriToBitmapImageConverter},
-                                        ConverterParameter=400,
-                                        Mode=OneWay,
-                                        FallbackValue={StaticResource DefaultGameCover},
-                                        TargetNullValue={StaticResource DefaultGameCover}}">
-                                    </Image>
-                                </Button>
-                            
-                                <Button x:Name="ExcludeButton" Command="{Binding ExcludeGame}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,8,0" Width="28" Height="28" Padding="0" ToolTip="Exclude from recommendations" Opacity="0">
-                                    <TextBlock Text="✕" FontSize="18" Foreground="White" FontWeight="Bold" />
+                                
+                                <Border RenderTransformOrigin="0.5,0.5" Margin="0,12,12,0"> <!-- inset for exclude button -->
+                                    <Border.RenderTransform>
+                                        <ScaleTransform x:Name="HoverTransform" ScaleX="1" ScaleY="1" />
+                                    </Border.RenderTransform>
+                                    <Button Command="{Binding OpenDetails}" Background="Transparent" BorderThickness="0"
+                                            Padding="0" MinWidth="0" MinHeight="0" FocusVisualStyle="{x:Null}"
+                                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                            Margin="0">
+                                        <Image Height="400" Source="{Binding CoverImage,
+                                            Converter={StaticResource UriToBitmapImageConverter},
+                                            ConverterParameter=400,
+                                            Mode=OneWay,
+                                            FallbackValue={StaticResource DefaultGameCover},
+                                            TargetNullValue={StaticResource DefaultGameCover}}">
+                                        </Image>
+                                    </Button>
+                                </Border>
+
+                                <Button x:Name="ExcludeButton" Command="{Binding ExcludeGame}"
+                                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                                        Width="24" Height="24" Padding="0"
+                                        ToolTip="Exclude from recommendations"
+                                        Opacity="0" Panel.ZIndex="10">
+                                    <TextBlock Text="✕" FontSize="16" Foreground="White" FontWeight="Bold"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Button>
                             </Grid>
                         </DataTemplate>
