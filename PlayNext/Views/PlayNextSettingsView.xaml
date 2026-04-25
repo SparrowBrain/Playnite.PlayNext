@@ -77,9 +77,10 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <RadioButton IsChecked="{Binding Settings.UnplayedGameIsWithZeroTime}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" ></RadioButton>
-                                <RadioButton Grid.Row="1" IsChecked="{Binding Settings.UnplayedGameIsWithCompletionStatus}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" ></RadioButton>
+                                <RadioButton IsChecked="{Binding Settings.UnplayedGameIsWithZeroTime}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" GroupName="UnplayedDefinition"></RadioButton>
+                                <RadioButton Grid.Row="1" IsChecked="{Binding Settings.UnplayedGameIsWithCompletionStatus}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" GroupName="UnplayedDefinition"></RadioButton>
                                 <ComboBox Grid.Row="2" Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
                   IsEnabled="{Binding Path=Settings.UnplayedGameIsWithCompletionStatus}"
                   StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
@@ -91,6 +92,10 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
+                                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                    <RadioButton IsChecked="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}" GroupName="UnplayedDefinition" VerticalAlignment="Center"></RadioButton>
+                                    <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="5,0,0,0"></TextBox>
+                                </StackPanel>
                             </Grid>
                         </Grid>
                     </GroupBox>
