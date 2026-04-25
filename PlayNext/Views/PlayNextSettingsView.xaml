@@ -89,8 +89,21 @@
                                     }"
                                     Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}"
                                     GroupName="UnplayedDefinition" />
+                                <RadioButton
+                                    Grid.Row="1"
+                                    IsChecked="{
+                                        Binding Settings.UnplayedGameDefinition,
+                                        Converter={converters:EqualityToBooleanConverter},
+                                        ConverterParameter={x:Static data:UnplayedGameDefinition.PlaytimeLessThan}
+                                    }"
+                                    Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
+                                    GroupName="UnplayedDefinition" />
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="0,0,5,0"></TextBox>
+                                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPlaytimeMinutes}"/>
+                                </StackPanel>
                                 <RadioButton 
-                                    Grid.Row="1" 
+                                    Grid.Row="3" 
                                     IsChecked="{
                                         Binding Settings.UnplayedGameDefinition,
                                         Converter={converters:EqualityToBooleanConverter},
@@ -98,7 +111,7 @@
                                     }"
                                     Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" 
                                     GroupName="UnplayedDefinition" />
-                                <ComboBox Grid.Row="2" Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
+                                <ComboBox Grid.Row="4" Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
                   IsEnabled="{Binding Path=Settings.UnplayedGameIsWithCompletionStatus}"
                   StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
                   IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
@@ -109,19 +122,6 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <RadioButton
-                                    Grid.Row="3"
-                                    IsChecked="{
-                                        Binding Settings.UnplayedGameDefinition,
-                                        Converter={converters:EqualityToBooleanConverter},
-                                        ConverterParameter={x:Static data:UnplayedGameDefinition.PlaytimeLessThan}
-                                    }"
-                                    Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
-                                    GroupName="UnplayedDefinition"/>
-                                <StackPanel Grid.Row="4" Orientation="Horizontal">
-                                    <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="0,0,5,0"></TextBox>
-                                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPlaytimeMinutes}"/>
-                                </StackPanel>
                             </Grid>
                         </Grid>
                     </GroupBox>
