@@ -60,6 +60,7 @@
     <Compile Include="Extensions\StartPage\Settings\PlayNextAddon\StartPageSettingsViewModel.cs" />
     <Compile Include="Infrastructure\Converters\BaseConverter.cs" />
     <Compile Include="Infrastructure\Converters\BooleanToCollapsedVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\EqualityToBooleanConverter.cs" />
     <Compile Include="Infrastructure\Converters\InvertedBooleanToCollapsedVisibilityConverter.cs" />
     <Compile Include="Infrastructure\Converters\ShowcaseTypeToBooleanConverter.cs" />
     <Compile Include="Infrastructure\Converters\ShowcaseTypeToCollapsedVisibilityConverter.cs" />
