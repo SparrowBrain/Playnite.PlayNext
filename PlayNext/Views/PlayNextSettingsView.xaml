@@ -79,6 +79,7 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <RadioButton 
                                     IsChecked="{
@@ -108,16 +109,18 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                                    <RadioButton
-                                        IsChecked="{
-                                            Binding Settings.UnplayedGameDefinition,
-                                            Converter={converters:EqualityToBooleanConverter},
-                                            ConverterParameter={x:Static data:UnplayedGameDefinition.PlaytimeLessThan}
-                                        }"
-                                        Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
-                                        GroupName="UnplayedDefinition" VerticalAlignment="Center" />
-                                    <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="5,0,0,0"></TextBox>
+                                <RadioButton
+                                    Grid.Row="3"
+                                    IsChecked="{
+                                        Binding Settings.UnplayedGameDefinition,
+                                        Converter={converters:EqualityToBooleanConverter},
+                                        ConverterParameter={x:Static data:UnplayedGameDefinition.PlaytimeLessThan}
+                                    }"
+                                    Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
+                                    GroupName="UnplayedDefinition"/>
+                                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                    <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="0,0,5,0"></TextBox>
+                                    <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPlaytimeMinutes}"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
