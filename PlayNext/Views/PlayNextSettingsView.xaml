@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:PlayNext.Infrastructure.Converters"
+             xmlns:data="clr-namespace:PlayNext.Model.Data"
              mc:Ignorable="d"
              d:DesignHeight="800" d:DesignWidth="600">
     <UserControl.Resources>
@@ -79,8 +80,23 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <RadioButton IsChecked="{Binding Settings.UnplayedGameIsWithZeroTime}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}" GroupName="UnplayedDefinition"></RadioButton>
-                                <RadioButton Grid.Row="1" IsChecked="{Binding Settings.UnplayedGameIsWithCompletionStatus}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" GroupName="UnplayedDefinition"></RadioButton>
+                                <RadioButton 
+                                    IsChecked="{
+                                        Binding Settings.UnplayedGameDefinition,
+                                        Converter={converters:EqualityToBooleanConverter},
+                                        ConverterParameter={x:Static data:UnplayedGameDefinition.ZeroPlaytime}
+                                    }"
+                                    Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}"
+                                    GroupName="UnplayedDefinition" />
+                                <RadioButton 
+                                    Grid.Row="1" 
+                                    IsChecked="{
+                                        Binding Settings.UnplayedGameDefinition,
+                                        Converter={converters:EqualityToBooleanConverter},
+                                        ConverterParameter={x:Static data:UnplayedGameDefinition.SelectedCompletionStatuses}
+                                    }"
+                                    Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" 
+                                    GroupName="UnplayedDefinition" />
                                 <ComboBox Grid.Row="2" Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
                   IsEnabled="{Binding Path=Settings.UnplayedGameIsWithCompletionStatus}"
                   StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
@@ -93,7 +109,14 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                                    <RadioButton IsChecked="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}" GroupName="UnplayedDefinition" VerticalAlignment="Center"></RadioButton>
+                                    <RadioButton
+                                        IsChecked="{
+                                            Binding Settings.UnplayedGameDefinition,
+                                            Converter={converters:EqualityToBooleanConverter},
+                                            ConverterParameter={x:Static data:UnplayedGameDefinition.PlaytimeLessThan}
+                                        }"
+                                        Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
+                                        GroupName="UnplayedDefinition" VerticalAlignment="Center" />
                                     <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="5,0,0,0"></TextBox>
                                 </StackPanel>
                             </Grid>
