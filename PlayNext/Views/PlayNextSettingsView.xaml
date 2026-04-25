@@ -70,17 +70,12 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource LOC_PlayNext_SettingsNumberOfTopGames}"></TextBlock>
                             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Settings.NumberOfTopGames}"></TextBox>
                             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource LOC_PlayNext_SettingsUnplayedGameTypeTitle}" Margin="0,10,0,5"></TextBlock>
-                            <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
+                            <StackPanel 
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Orientation="Vertical"
+                                Margin="10,0,0,0">
                                 <RadioButton 
                                     IsChecked="{
                                         Binding Settings.UnplayedGameDefinition,
@@ -90,7 +85,7 @@
                                     Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameZeroPlaytime}"
                                     GroupName="UnplayedDefinition" />
                                 <RadioButton
-                                    Grid.Row="1"
+                                    Margin="0,10,0,0"
                                     IsChecked="{
                                         Binding Settings.UnplayedGameDefinition,
                                         Converter={converters:EqualityToBooleanConverter},
@@ -98,12 +93,12 @@
                                     }"
                                     Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGamePlaytimeLessThan}"
                                     GroupName="UnplayedDefinition" />
-                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="2">
                                     <TextBox Text="{Binding Settings.PlaytimeLessThanMinutes}" IsEnabled="{Binding Settings.UnplayedGameIsPlaytimeLessThan}" Width="60" Margin="0,0,5,0"></TextBox>
                                     <TextBlock Text="{DynamicResource LOC_PlayNext_SettingsPlaytimeMinutes}"/>
                                 </StackPanel>
                                 <RadioButton 
-                                    Grid.Row="3" 
+                                    Margin="0,10,0,0"
                                     IsChecked="{
                                         Binding Settings.UnplayedGameDefinition,
                                         Converter={converters:EqualityToBooleanConverter},
@@ -111,7 +106,7 @@
                                     }"
                                     Content="{DynamicResource LOC_PlayNext_SettingsUnplayedGameSelectedCompletionStatuses}" 
                                     GroupName="UnplayedDefinition" />
-                                <ComboBox Grid.Row="4" Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
+                                <ComboBox Text="{Binding SelectedCompletionStatusesText}" ItemsSource="{Binding UnplayedCompletionStatuses}" Margin="2"
                   IsEnabled="{Binding Path=Settings.UnplayedGameIsWithCompletionStatus}"
                   StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
                   IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
@@ -122,7 +117,7 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                            </Grid>
+                            </StackPanel>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="{DynamicResource LOC_PlayNext_SettingsGlobalGroupTitle}">
