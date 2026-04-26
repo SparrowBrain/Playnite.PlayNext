@@ -15,3 +15,7 @@ V4
 - UserFavouritesWeight
 - UserScoreWeight
 - AverageUserScore
+
+V5
+- UnplayedGameIsPlaytimeLessThan
+- PlaytimeLessThanMinutes

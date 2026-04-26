@@ -4,5 +4,6 @@
     {
         ZeroPlaytime,
         SelectedCompletionStatuses,
+        PlaytimeLessThan,
     }
 }

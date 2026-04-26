@@ -16,6 +16,9 @@ namespace PlayNext.Model.Filters
                 case UnplayedGameDefinition.ZeroPlaytime:
                     return games.Where(x => !x.Hidden && x.Playtime == 0);
 
+                case UnplayedGameDefinition.PlaytimeLessThan:
+                    return games.Where(x => !x.Hidden && x.Playtime < settings.PlaytimeLessThanMinutes * 60UL);
+
                 case UnplayedGameDefinition.SelectedCompletionStatuses:
                     return games.Where(game => !game.Hidden && settings.UnplayedCompletionStatuses.Any(x => x == game.CompletionStatusId));
 

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
 using PlayNext.Model.Data;
+using System;
+using System.Collections.Generic;
 
 namespace PlayNext.Settings.Old
 {
-	public class SettingsV3 : ObservableObject, IMigratableSettings
+	public class SettingsV4 : ObservableObject, IMigratableSettings
 	{
 		public const int MaxWeightValue = 100;
 
-		public SettingsV3()
+		public SettingsV4()
 		{
-			Version = 3;
+			Version = 4;
 		}
 
-		private SettingsV3(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights) : this()
+		private SettingsV4(AttributeCalculationWeights attributeCalculationWeights, GameScoreWeights gameScoreWeights) : this()
 		{
 			SetAttributeWeights(attributeCalculationWeights);
 			SetGameWeights(gameScoreWeights);
@@ -23,8 +23,10 @@ namespace PlayNext.Settings.Old
 
 			GameLengthHours = 0;
 
+			ShowSidebarItem = true;
 			NumberOfTopGames = 30;
 			RecentDays = 14;
+			AverageUserScore = 70;
 			UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
 			UnplayedCompletionStatuses = Array.Empty<Guid>();
 			RefreshOnGameUpdates = false;
@@ -34,15 +36,21 @@ namespace PlayNext.Settings.Old
 			StartPageMinCoverCount = 1;
 		}
 
-		public static SettingsV3 Default => new SettingsV3(AttributeCalculationWeights.Default, GameScoreWeights.Default);
+		public static SettingsV4 Default => new SettingsV4(AttributeCalculationWeights.Default, GameScoreWeights.Default);
 
 		public Guid? SelectedPresetId { get; set; }
+
+		public bool ShowSidebarItem { get; set; }
 
 		public float TotalPlaytimeWeight { get; set; }
 
 		public float RecentPlaytimeWeight { get; set; }
 
 		public float RecentOrderWeight { get; set; }
+
+		public float UserFavouritesWeight { get; set; }
+
+		public float UserScoreWeight { get; set; }
 
 		public float GenreWeight { get; set; }
 
@@ -72,9 +80,13 @@ namespace PlayNext.Settings.Old
 
 		public int GameLengthHours { get; set; }
 
+		public float RandomWeight { get; set; }
+
 		public int NumberOfTopGames { get; set; }
 
 		public int RecentDays { get; set; }
+
+		public int AverageUserScore { get; set; }
 
 		public UnplayedGameDefinition UnplayedGameDefinition { get; set; }
 
@@ -100,15 +112,16 @@ namespace PlayNext.Settings.Old
 
 		public IVersionedSettings Migrate()
 		{
-			var settings = SettingsV4.Default;
+			var settings = PlayNextSettings.Default;
 
 			settings.SelectedPresetId = SelectedPresetId;
+			settings.ShowSidebarItem = ShowSidebarItem;
 
 			settings.TotalPlaytimeWeight = TotalPlaytimeWeight;
 			settings.RecentPlaytimeWeight = RecentPlaytimeWeight;
 			settings.RecentOrderWeight = RecentOrderWeight;
-			settings.UserFavouritesWeight = 0;
-			settings.UserScoreWeight = 0;
+			settings.UserFavouritesWeight = UserFavouritesWeight;
+			settings.UserScoreWeight = UserScoreWeight;
 
 			settings.GenreWeight = GenreWeight;
 			settings.FeatureWeight = FeatureWeight;
@@ -124,9 +137,11 @@ namespace PlayNext.Settings.Old
 			settings.GameLengthHours = GameLengthHours;
 			settings.SeriesWeight = SeriesWeight;
 			settings.OrderSeriesBy = OrderSeriesBy;
+			settings.RandomWeight = RandomWeight;
 
 			settings.RecentDays = RecentDays;
 			settings.NumberOfTopGames = NumberOfTopGames;
+			settings.AverageUserScore = AverageUserScore;
 			settings.RefreshOnGameUpdates = RefreshOnGameUpdates;
 
 			settings.UnplayedGameDefinition = UnplayedGameDefinition;
@@ -149,6 +164,8 @@ namespace PlayNext.Settings.Old
 			TotalPlaytimeWeight = attributeCalculationWeights.TotalPlaytime * MaxWeightValue;
 			RecentPlaytimeWeight = attributeCalculationWeights.RecentPlaytime * MaxWeightValue;
 			RecentOrderWeight = attributeCalculationWeights.RecentOrder * MaxWeightValue;
+			UserFavouritesWeight = attributeCalculationWeights.UserFavourites * MaxWeightValue;
+			UserScoreWeight = attributeCalculationWeights.UserScore * MaxWeightValue;
 		}
 
 		public void SetGameWeights(GameScoreWeights gameScoreWeights)
@@ -163,6 +180,7 @@ namespace PlayNext.Settings.Old
 			CommunityScoreWeight = gameScoreWeights.CommunityScore * MaxWeightValue;
 			ReleaseYearWeight = gameScoreWeights.ReleaseYear * MaxWeightValue;
 			GameLengthWeight = gameScoreWeights.GameLength * MaxWeightValue;
+			RandomWeight = gameScoreWeights.Random * MaxWeightValue;
 		}
 	}
 }

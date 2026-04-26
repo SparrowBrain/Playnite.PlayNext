@@ -12,7 +12,7 @@ namespace PlayNext.UnitTests.Model.Filters
     public class UnplayedFilterTests
     {
         [Theory, AutoMoqData]
-        public void Filter_ReturnsOneGame_When_FilteringByPlaytimeAndOneGameHasZeroPlaytime(
+        public void Filter_ReturnsOneGame_When_FilteringByZeroPlaytimeAndOneGameHasZeroPlaytime(
             Game[] games,
             PlayNextSettings settings,
             UnplayedFilter sut)
@@ -26,6 +26,32 @@ namespace PlayNext.UnitTests.Model.Filters
             var expectedGame = games.Last();
             expectedGame.Playtime = 0;
             settings.UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
+
+            // Act
+            var result = sut.Filter(games, settings);
+
+            // Assert
+            var single = Assert.Single(result);
+            Assert.Equal(expectedGame.Id, single.Id);
+        }
+
+        [Theory, AutoMoqData]
+        public void Filter_ReturnsOneGame_When_FilteringByPlaytimeLessThanAndOneGameHasPlaytimeLessThanSetValue(
+            Game[] games,
+            PlayNextSettings settings,
+            UnplayedFilter sut)
+        {
+            // Arrange
+            foreach (var game in games)
+            {
+                game.Hidden = false;
+                game.Playtime = 120; // 2 minutes
+            }
+
+            var expectedGame = games.Last();
+            expectedGame.Playtime = 0;
+            settings.UnplayedGameDefinition = UnplayedGameDefinition.PlaytimeLessThan;
+            settings.PlaytimeLessThanMinutes = 1UL; // 1 minute
 
             // Act
             var result = sut.Filter(games, settings);

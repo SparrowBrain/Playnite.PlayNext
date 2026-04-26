@@ -60,7 +60,9 @@
     <Compile Include="Extensions\StartPage\Settings\PlayNextAddon\StartPageSettingsViewModel.cs" />
     <Compile Include="Infrastructure\Converters\BaseConverter.cs" />
     <Compile Include="Infrastructure\Converters\BooleanToCollapsedVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\EqualityToBooleanConverter.cs" />
     <Compile Include="Infrastructure\Converters\InvertedBooleanToCollapsedVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Converters\ShowcaseTypeToBooleanConverter.cs" />
     <Compile Include="Infrastructure\Converters\ShowcaseTypeToCollapsedVisibilityConverter.cs" />
     <Compile Include="Infrastructure\Converters\ShowcaseTypeToInvertedBooleanConverter.cs" />
     <Compile Include="Infrastructure\Converters\UriToBitmapImageConverter.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Settings\Old\SettingsV3.cs" />
     <Compile Include="Settings\Old\SettingsV2.cs" />
     <Compile Include="Settings\Old\SettingsV1.cs" />
+    <Compile Include="Settings\Old\SettingsV4.cs" />
     <Compile Include="Settings\Presets\SettingsPreset.cs" />
     <Compile Include="Settings\Presets\SettingsPresetManager.cs" />
     <Compile Include="ViewModels\CompletionStatusItem.cs" />

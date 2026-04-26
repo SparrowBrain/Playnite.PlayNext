@@ -60,7 +60,9 @@ namespace PlayNext.ViewModels
 		// ReSharper disable once UnusedMember.Global
 		public ICommand SwitchToList => new RelayCommand(() => { ActiveShowcaseType = ShowcaseType.List; });
 
-		public void LoadData(ICollection<GameToPlayViewModel> games, PlayNextSettings settings)
+        public ICommand NavigateBackCommand => new RelayCommand(() => { API.Instance.MainView.SwitchToLibraryView(); });
+
+        public void LoadData(ICollection<GameToPlayViewModel> games, PlayNextSettings settings)
 		{
 			new Task(() =>
 			{

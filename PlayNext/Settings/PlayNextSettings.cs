@@ -9,7 +9,7 @@ namespace PlayNext.Settings
 	{
 		public const int MaxWeightValue = 100;
 		public const int MinWeightValue = 0;
-		public const int CurrentVersion = 4;
+		public const int CurrentVersion = 5;
 
 		private OrderSeriesBy _orderSeriesByChoice;
 		private int _desiredReleaseYear;
@@ -19,6 +19,8 @@ namespace PlayNext.Settings
 		private int _recentDays;
 		private bool _unplayedGameIsWithCompletionStatus;
 		private bool _unplayedGameIsWithZeroTime;
+		private bool _unplayedGameIsPlaytimeLessThan;
+		private ulong _playtimeLessThanMinutes;
 		private bool _startPageShowLabel;
 		private bool _startPageLabelIsHorizontal;
 		private int _gameGameLengthHours;
@@ -48,6 +50,7 @@ namespace PlayNext.Settings
 			AverageUserScore = 70;
 			UnplayedGameDefinition = UnplayedGameDefinition.ZeroPlaytime;
 			UnplayedCompletionStatuses = Array.Empty<Guid>();
+			PlaytimeLessThanMinutes = 60UL;
 			RefreshOnGameUpdates = false;
 
 			StartPageShowLabel = true;
@@ -174,6 +177,19 @@ namespace PlayNext.Settings
 			set => SetValue(ref _unplayedGameIsWithCompletionStatus, value);
 		}
 
+		[DontSerialize]
+		public bool UnplayedGameIsPlaytimeLessThan
+		{
+			get => _unplayedGameIsPlaytimeLessThan;
+			set => SetValue(ref _unplayedGameIsPlaytimeLessThan, value);
+		}
+
+		public ulong PlaytimeLessThanMinutes
+		{
+			get => _playtimeLessThanMinutes;
+			set => SetValue(ref _playtimeLessThanMinutes, value);
+		}
+
 		public UnplayedGameDefinition UnplayedGameDefinition
 		{
 			get
@@ -188,6 +204,11 @@ namespace PlayNext.Settings
 					return UnplayedGameDefinition.SelectedCompletionStatuses;
 				}
 
+				if (UnplayedGameIsPlaytimeLessThan)
+				{
+					return UnplayedGameDefinition.PlaytimeLessThan;
+				}
+
 				return UnplayedGameDefinition.ZeroPlaytime;
 			}
 			set
@@ -197,12 +218,20 @@ namespace PlayNext.Settings
 					case UnplayedGameDefinition.SelectedCompletionStatuses:
 						UnplayedGameIsWithZeroTime = false;
 						UnplayedGameIsWithCompletionStatus = true;
+						UnplayedGameIsPlaytimeLessThan = false;
+						break;
+
+					case UnplayedGameDefinition.PlaytimeLessThan:
+						UnplayedGameIsWithZeroTime = false;
+						UnplayedGameIsWithCompletionStatus = false;
+						UnplayedGameIsPlaytimeLessThan = true;
 						break;
 
 					case UnplayedGameDefinition.ZeroPlaytime:
 					default:
 						UnplayedGameIsWithZeroTime = true;
 						UnplayedGameIsWithCompletionStatus = false;
+						UnplayedGameIsPlaytimeLessThan = false;
 						break;
 				}
 			}
