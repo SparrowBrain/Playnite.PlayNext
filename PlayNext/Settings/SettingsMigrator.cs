@@ -33,6 +33,10 @@ namespace PlayNext.Settings
 					versionedSettings = _pluginSettingsPersistence.LoadPluginSettings<SettingsV3>();
 					break;
 
+				case 4:
+					versionedSettings = _pluginSettingsPersistence.LoadPluginSettings<SettingsV4>();
+					break;
+
 				default:
 					throw new ArgumentException($"Version v{version} not configured in the migrator");
 			}

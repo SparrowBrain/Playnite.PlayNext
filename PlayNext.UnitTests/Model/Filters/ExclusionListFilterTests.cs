@@ -139,5 +139,24 @@ namespace PlayNext.UnitTests.Model.Filters
 			// Assert
 			Assert.Equal(games.Count, result.Count);
 		}
+
+		[Theory]
+		[AutoData]
+		public void Filter_ExcludesGame_ThatHasExcludedGameId(
+			List<Game> games,
+			PlayNextSettings settings,
+			ExclusionListFilter sut)
+		{
+			// Arrange
+			var filteredOutGame = games.Last();
+			settings.ExcludedGameIds.Add(filteredOutGame.Id);
+
+			// Act
+			var result = sut.Filter(games, settings);
+
+			// Assert
+			Assert.Equal(games.Count - 1, result.Count);
+			Assert.DoesNotContain(result, x => x.Id == filteredOutGame.Id);
+		}
 	}
 }

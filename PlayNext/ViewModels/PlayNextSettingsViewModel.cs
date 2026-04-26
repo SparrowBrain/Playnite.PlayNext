@@ -45,6 +45,9 @@ namespace PlayNext.ViewModels
 			Tags = new ExclusionList<Tag>(
 				() => _plugin.PlayniteApi.Database.Tags.ToList(),
 				s => s.ExcludedTagIds);
+			Games = new ExclusionList<Game>(
+				() => _plugin.PlayniteApi.Database.Games.ToList(),
+				s => s.ExcludedGameIds);
 
 			var savedSettings = plugin.LoadPluginSettings<PlayNextSettings>();
 			Settings = savedSettings ?? PlayNextSettings.Default;
@@ -66,6 +69,7 @@ namespace PlayNext.ViewModels
 				Platforms.Settings = value;
 				Categories.Settings = value;
 				Tags.Settings = value;
+				Games.Settings = value;
 				OnPropertyChanged(string.Empty);
 			}
 		}
@@ -414,6 +418,8 @@ namespace PlayNext.ViewModels
 		public ExclusionList<Category> Categories { get; }
 
 		public ExclusionList<Tag> Tags { get; }
+
+		public ExclusionList<Game> Games { get; }
 
 		public void BeginEdit()
 		{

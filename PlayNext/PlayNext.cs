@@ -258,6 +258,25 @@ namespace PlayNext
 		{
 		}
 
+		public void ExcludeGame(Guid gameId)
+		{
+			var settings = LoadPluginSettings<PlayNextSettings>() ?? PlayNextSettings.Default;
+			if (!settings.ExcludedGameIds.Add(gameId))
+			{
+				return;
+			}
+
+			SavePluginSettings(settings);
+
+			if (_settings?.Settings != null)
+			{
+				_settings.Settings.ExcludedGameIds.Add(gameId);
+				_settings.Games.Settings = _settings.Settings;
+			}
+
+			OnPlayNextSettingsSaved();
+		}
+
 		public void OnPlayNextSettingsSaved()
 		{
 			var activeSettings = LoadPluginSettings<PlayNextSettings>();

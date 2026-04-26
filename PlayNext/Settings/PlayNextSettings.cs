@@ -9,7 +9,7 @@ namespace PlayNext.Settings
 	{
 		public const int MaxWeightValue = 100;
 		public const int MinWeightValue = 0;
-		public const int CurrentVersion = 4;
+		public const int CurrentVersion = 5;
 
 		private OrderSeriesBy _orderSeriesByChoice;
 		private int _desiredReleaseYear;
@@ -223,6 +223,8 @@ namespace PlayNext.Settings
 		public HashSet<Guid> ExcludedCategoryIds { get; set; } = new HashSet<Guid>();
 
 		public HashSet<Guid> ExcludedTagIds { get; set; } = new HashSet<Guid>();
+
+		public HashSet<Guid> ExcludedGameIds { get; set; } = new HashSet<Guid>();
 
 		public bool StartPageShowLabel
 		{
